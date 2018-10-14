@@ -38,20 +38,33 @@ RUN cd Python-3.6.3 && make install
 COPY ./requirements.txt /home/docker/requirements.txt
 RUN pip3 install -r /home/docker/requirements.txt
 
-RUN cd /home/docker/workspace
+WORKDIR /home/docker
 RUN git clone https://github.com/lsst-ts/ts_sal.git
-RUN cd /home/docker/workspace/ts_sal 
+WORKDIR /home/docker/ts_sal 
 RUN git checkout 58e32660e16121f115bf239e95cd8f1333bdeeea
 
-RUN cd /home/docker/workspace
+WORKDIR /home/docker
+RUN git clone https://github.com/lsst-ts/salobj.git -b tickets/TSS-3149
+RUN git clone https://github.com/lsst-ts/ts_xml.git -b develop
+
+WORKDIR /home/docker
 RUN git clone https://github.com/lsst-ts/ts_opensplice.git
 
-ENV LSST_SDK_INSTALL=/home/docker/workspace/ts_sal
-ENV OSPL_HOME=/home/docker/workspace/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
+ENV LSST_SDK_INSTALL=/home/docker/ts_sal
+ENV OSPL_HOME=/home/docker/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
 ENV PYTHON_BUILD_VERSION=3.6m
 ENV PYTHON_BUILD_LOCATION=/usr/local
 ENV LSST_DDS_DOMAIN=citest
 
+WORKDIR /home/docker/ts_sal/test
+RUN cp /home/docker/ts_xml/sal_interfaces/Test/Test_* .
+
+#RUN source /home/docker/ts_sal/setup.env
+#WORKDIR /home/docker/ts_sal/test
+#RUN salgenerator Test validate
+#RUN salgenerator Test sal cpp
+#RUN salgenerator Test sal python
+
 # entrypoint
-# ENTRYPOINT source /home/docker/workspace/ts_visit_simulator/setup.env && \
-# xvfb-run sh /home/docker/workspace/run.sh
+#ENTRYPOINT source /home/docker/ts_sal/setup.env && \
+#cd /home/docker/ts_sal/test \
