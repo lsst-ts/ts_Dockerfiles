@@ -3,8 +3,8 @@
 source /opt/lsst/software/stack/loadLSST.bash
 setup lsst_distrib
 
-cd /home/docker/repos/salobj
-setup salobj git
+cd /home/lsst/repos/salobj
+setup -r .
 scons
 
-cd /home/opsim
+cd /home/lsst/repos/

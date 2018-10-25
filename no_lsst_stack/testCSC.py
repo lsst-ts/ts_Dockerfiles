@@ -5,4 +5,10 @@ import asyncio
 csc = salobj.test_utils.TestCsc(1, salobj.State.STANDBY)
 
 loop = asyncio.get_event_loop()
-loop.run_forever()
+
+try:
+    loop.run_forever()
+except KeyboardInterrupt as e:
+    print('Stopping CSC.')
+finally:
+    loop.close()

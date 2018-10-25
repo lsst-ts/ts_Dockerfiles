@@ -36,8 +36,12 @@ WORKDIR /home/lsst/
 
 ADD --chown=lsst:lsst ./environment.env /home/lsst/repos/environment.env
 ADD --chown=lsst:lsst ./salgenerate.sh /home/lsst/repos/salgenerate.sh
+ADD --chown=lsst:lsst ./testCSC.py /home/lsst/repos/testCSC.py 
+ADD --chown=lsst:lsst ./startup.sh /home/lsst/repos/startup.sh 
 RUN chmod u+x /home/lsst/repos/environment.env
 RUN chmod u+x /home/lsst/repos/salgenerate.sh
+RUN chmod u+x /home/lsst/repos/testCSC.py
+RUN chmod u+x /home/lsst/repos/startup.sh 
 
 ENV LSST_SDK_INSTALL=/home/lsst/repos/ts_sal
 ENV OSPL_HOME=/home/lsst/repos/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
