@@ -14,3 +14,4 @@ salgenerator ATDome sal cpp
 salgenerator ATDome html
 salgenerator ATDome sal python
 salgenerator ATDome lib
+echo "source ${LSST_SDK_INSTALL}/lsstsal/scripts/gengenericefd.tcl ; updateefdschema" | tclsh

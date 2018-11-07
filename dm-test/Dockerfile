@@ -31,6 +31,8 @@ RUN yum -y --enablerepo=extras install epel-release \
   gnome-terminal \
   python36-devel \
   python36-setuptools \
+  mariadb \
+  mariadb-devel \
   nano && \
   yum clean all
 RUN yum groupinstall -y "Development Tools" "Development Libraries" && \
