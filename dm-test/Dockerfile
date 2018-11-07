@@ -69,7 +69,7 @@ CMD source /home/lsst/repos/ts_sal/setup.env
 
 WORKDIR /home/lsst/repos/ts_sal/test
 RUN cp /home/lsst/repos/ts_xml/sal_interfaces/Test/Test_* .
-RUN cp /home/lsst/repos/ts_xml/sal_interfaces/Test/ATDome_* .
+RUN cp /home/lsst/repos/ts_xml/sal_interfaces/ATDome/ATDome_* .
 RUN cp /home/lsst/repos/ts_xml/sal_interfaces/SALSubsystems.xml .
 
 WORKDIR /home/lsst/
