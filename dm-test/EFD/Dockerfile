@@ -66,6 +66,7 @@ ENV OSPL_HOME=/home/lsst/repos/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.lin
 ENV PYTHON_BUILD_VERSION=3.6m
 ENV PYTHON_BUILD_LOCATION=/usr/local
 ENV LSST_DDS_DOMAIN=citest
+ENV LSST_EFD_HOST=0.0.0.0
 
 CMD source /home/lsst/repos/ts_sal/setup.env
 
