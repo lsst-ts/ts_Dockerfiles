@@ -25,9 +25,14 @@ salgenerator ScriptQueue sal cpp
 salgenerator ScriptQueue sal python
 salgenerator ScriptQueue lib
 
+salgenerator CBP validate
+salgenerator CBP sal cpp
+salgenerator CBP sal python
+salgenerator CBP lib
+
 cd /home/saluser/repos/salobj
-eups declare -r . salobj -t $USER
-setup salobj -t $USER
+eups declare -r . ts_salobj -t $USER
+setup ts_salobj -t $USER
 scons
 
 cd /home/saluser/repos/ts_scriptqueue

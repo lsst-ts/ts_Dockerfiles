@@ -8,7 +8,7 @@ ENV HOME /home/saluser
 USER root
 
 # Create user and group
-RUN adduser -m -g lsst -s /bin/bash saluser
+RUN adduser -u 1004 -m -g lsst -s /bin/bash saluser
 
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 
@@ -53,11 +53,12 @@ RUN git checkout "tags/v3.8.31" -b "v3.8.31"
 WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/salobj.git
 WORKDIR /home/saluser/repos/salobj
-RUN git checkout "tags/2.3.0" -b "2.3.0"
+RUN git fetch && git checkout "tags/3.0.0" -b "3.0.0"
 
 WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/ts_scriptqueue.git
 WORKDIR /home/saluser/repos/ts_scriptqueue
+RUN git checkout "tags/0.2.0" -b "0.2.0"
 
 WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/ts_xml.git
@@ -68,7 +69,8 @@ RUN cp sal_interfaces/SALGenerics.xml /home/saluser/repos/ts_sal/test/ && \
 cp sal_interfaces/SALSubsystems.xml /home/saluser/repos/ts_sal/test/ && \
 cp sal_interfaces/Test/*.xml /home/saluser/repos/ts_sal/test/ && \
 cp sal_interfaces/Script/*.xml /home/saluser/repos/ts_sal/test/ && \
-cp sal_interfaces/ScriptQueue/*.xml /home/saluser/repos/ts_sal/test/
+cp sal_interfaces/ScriptQueue/*.xml /home/saluser/repos/ts_sal/test/ && \
+cp sal_interfaces/CBP/*.xml /home/saluser/repos/ts_sal/test/
 
 WORKDIR /home/saluser
 
@@ -82,7 +84,7 @@ COPY setup.sh /home/saluser/setup.sh
 COPY setup_and_build.sh /home/saluser/.setup_and_build.sh
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y ipython jupyter tornado=4.5.3 jinja2 scipy ephem gitpython && \
+    conda install -y ipython jupyter jupyterlab tornado=4.5.3 jinja2 scipy ephem gitpython && \
     conda update -y pyqt fontconfig sqlalchemy && \
     cd ../ && \
     python -c 'import matplotlib.pyplot' && \

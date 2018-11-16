@@ -12,5 +12,5 @@ echo "# Loading sal environment"
 echo "#"
 echo "# Setting up salobj and queue"
 
-setup salobj -t $USER
+setup ts_salobj -t $USER
 setup ts_scriptqueue -t $USER
