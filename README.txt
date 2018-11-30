@@ -1,3 +1,5 @@
+## Docker Environment for salobj
+
 #There are 2 versions of the docker file to use salobj. 
 #1-no_lsst_stack: Doesn't use the lsst-stack
 #2-with_lsst_stack: Uses the lsst-stack
@@ -35,3 +37,6 @@ source /home/lsst/repos/salgenerate.sh
 
 #You can test an example CSC using:
 python3.6 testCSC.py
+
+## Docker Environment for AOS
+
