@@ -18,6 +18,8 @@ RUN yum -y --enablerepo=extras install java-1.8.0-openjdk-devel \
 
 RUN ln -s /usr/include/python3.6m/ /usr/local/include/python3.6m
 
+RUN yum install -y mariadb-devel
+
 USER lsst
 
 WORKDIR /home/lsst
@@ -25,12 +27,12 @@ RUN mkdir repos
 WORKDIR /home/lsst/repos
 
 RUN git clone https://github.com/lsst-ts/ts_opensplice.git
-RUN git clone https://github.com/lsst-ts/ts_sal.git -b "v3.8.13"
-RUN git clone https://github.com/lsst-ts/salobj.git -b develop
-RUN git clone https://github.com/lsst-ts/ts_xml.git
+RUN git clone https://github.com/lsst-ts/ts_sal.git -b "master"
+RUN git clone https://github.com/lsst-ts/salobj.git -b "master"
+RUN git clone https://github.com/lsst-ts/ts_xml.git -b "develop"
 
-WORKDIR /home/lsst/repos/ts_xml
-RUN git checkout "f8163fcc782a03980e6580d7b08ace22e586d4c6"
+#WORKDIR /home/lsst/repos/ts_xml
+#RUN git checkout "2e84393d341753ebb9588b2fd92f564d9351ec6e"
 
 WORKDIR /home/lsst/
 

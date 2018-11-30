@@ -11,11 +11,13 @@ cd ~/repos/ts_sal/test
 
 cp /home/lsst/repos/ts_xml/sal_interfaces/Test/Test_* .
 cp /home/lsst/repos/ts_xml/sal_interfaces/SALSubsystems.xml .
+cp /home/lsst/repos/ts_xml/sal_interfaces/SALGenerics.xml .
 
 cd ~/repos/ts_sal/test
 salgenerator Test validate
 salgenerator Test sal cpp
 salgenerator Test sal python
+salgenerator Test sal html
 salgenerator Test lib
 
 cd ~/repos/salobj
