@@ -9,7 +9,6 @@ ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst
 ARG GIT_INSTALL_URL=http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-1.noarch.rpm
 ARG NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/master/scripts/newinstall.sh
-# ARG NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/16.0/scripts/newinstall.sh
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
