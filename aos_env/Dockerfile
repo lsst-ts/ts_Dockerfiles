@@ -8,8 +8,7 @@ ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst
 ARG GIT_INSTALL_URL=http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-1.noarch.rpm
-# ARG NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/master/scripts/newinstall.sh
-ARG NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/16.0/scripts/newinstall.sh
+ARG NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/master/scripts/newinstall.sh
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
@@ -36,8 +35,8 @@ RUN curl -sSL $NEWINSTALL_URL | bash -s -- -cbtS
 
 # Install the lsst_sims and lsst_distrib packages
 RUN source $LSST_DIR/loadLSST.bash \
-    && eups distrib install lsst_sims -t sims \
-    && eups distrib install lsst_distrib -t sims \
+    && eups distrib install lsst_sims -t sims_w_2018_47 \
+    && eups distrib install lsst_distrib -t w_2018_47 \
     && curl -sSL $SHEBANGTRON_URL | python
 
 # Source the scientific pipeline automatically
