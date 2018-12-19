@@ -96,6 +96,6 @@ WORKDIR /home/docker/ts_pointing_common
 RUN mkdir -p build
 WORKDIR /home/docker/ts_pointing_common/build
 RUN cmake -DAT=ON ..
-RUN make
-RUN make install
+RUN source /home/docker/ts_sal/setup.env; make
+RUN source /home/docker/ts_sal/setup.env; make install
 
