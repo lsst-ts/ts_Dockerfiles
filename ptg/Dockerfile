@@ -98,4 +98,5 @@ WORKDIR /home/docker/ts_pointing_common/build
 RUN cmake -DAT=ON ..
 RUN source /home/docker/ts_sal/setup.env; make
 RUN source /home/docker/ts_sal/setup.env; make install
+RUN dbus-uuidgen >/etc/machine-id
 

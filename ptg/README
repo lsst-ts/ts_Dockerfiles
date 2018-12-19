@@ -4,3 +4,10 @@ To create the docker image you will need to have access and clone the following 
 -https://github.com/lsst-ts/slalib_source_lsst_161203.git
 
 This are not included here as they are private and may have licenses issues
+
+To use the grafical interface is necessary to use the following options in Docker:
+-e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --pid=host
+
+e.g. 
+sudo docker build -t atptgtest .
+sudo docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --pid=host -it atptgtest bash
