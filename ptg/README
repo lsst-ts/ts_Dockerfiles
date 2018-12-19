@@ -1,0 +1,6 @@
+To create the docker image you will need to have access and clone the following packages into this folder:
+-https://github.com/lsst-ts/ts_pointing_common.git
+-https://github.com/lsst-ts/tcspk_source_lsst_161203.git
+-https://github.com/lsst-ts/slalib_source_lsst_161203.git
+
+This are not included here as they are private and may have licenses issues
