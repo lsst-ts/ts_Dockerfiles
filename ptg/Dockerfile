@@ -82,16 +82,15 @@ RUN git checkout d804a898a5cc0420b9b2ac42b1b42416efe3d749
 
 ADD ./ts_pointing_common /home/docker/ts_pointing_common
 
-RUN git clone https://github.com/lsst-ts/ts_sal.git 
-WORKDIR /home/docker/ts_sal
-RUN git checkout 35be0d9341173fbd2b6a2076af118b3a9ce20c54
+WORKDIR /home/docker/
+RUN git clone https://github.com/lsst-ts/ts_sal.git -b Release-V3.7.1
 
 COPY run.sh /home/docker/run.sh
 
 RUN sed -i 's/ATPtg/ATPtg ATMCS/g' /home/docker/ts_sal/lsstsal/scripts/add_system_dictionary.tcl
-RUN /home/saluser/develop/ts_pointing_common/scripts/start_controller_AT
 RUN easy_install-3.6 pip
 RUN pip3 install -r /home/docker/requirements.txt
+RUN source /home/docker/ts_sal/setup.env; /home/docker/ts_pointing_common/scripts/generate_interface_AT
 
 WORKDIR /home/docker/ts_pointing_common
 RUN mkdir -p build
