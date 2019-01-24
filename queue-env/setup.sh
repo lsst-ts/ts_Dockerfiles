@@ -10,7 +10,11 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up salobj and queue"
+echo "# Setting up sal, salobj and scriptqueue"
 
+setup ts_xml -t $USER
+setup ts_sal -t $USER
 setup ts_salobj -t $USER
 setup ts_scriptqueue -t $USER
+
+/bin/bash --rcfile /home/saluser/.bashrc
