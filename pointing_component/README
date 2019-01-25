@@ -1,0 +1,5 @@
+
+This Dockerfile (and accompanying files) are designed to generate a docker images to run the pointing components
+for LSST.
+
+This image contain proprietary software and is not for public distribution.
