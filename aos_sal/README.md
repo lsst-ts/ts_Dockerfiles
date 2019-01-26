@@ -4,7 +4,7 @@
 
 ## Overview
 
-*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The ts_sal, ts_xml, and ts_opensplice are in the **/home/lsst/sal_repos** directory. The SAL API libraries of **MTWEP**, **MTOFC**, and **MTM1M3** are build in the **/home/lsst/sal_repos/test** already.*
+*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The ts_sal, ts_xml, and ts_opensplice are in the **/home/lsst/sal_repos** directory. The SAL API libraries of **MTWEP**, **MTOFC**, and **MTM1M3** are build in the **/home/lsst/sal_repos/ts_sal/test** already.*
 
 ## Tag List
 
