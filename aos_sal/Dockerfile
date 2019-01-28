@@ -45,6 +45,7 @@ RUN mkdir -p $SAL_REPOS \
     && git checkout d0661fb \
     && cd .. \
     && git clone -b develop https://github.com/lsst-ts/ts_m1m3support.git \
+    &7 cd ts_m1m3support/ \
     &7 git checkout 27ce004
 
 # Set the needed environment variables of SAL
