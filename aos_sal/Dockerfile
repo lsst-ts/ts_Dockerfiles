@@ -1,5 +1,5 @@
 # Dockerfile to execute a base machine with all set to test active optics
-# system software wit the SAL environment
+# system software with the SAL environment
 
 FROM lsstts/aos:w_2019_02
 
