@@ -111,9 +111,9 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
     ./scripts/generate_interface
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
-    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+#    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
+#    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
 
 WORKDIR /home/saluser/
 #COPY setup.sh /home/saluser/.setup.sh

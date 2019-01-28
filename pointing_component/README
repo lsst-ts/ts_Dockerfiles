@@ -2,4 +2,7 @@
 This Dockerfile (and accompanying files) are designed to generate a docker images to run the pointing components
 for LSST.
 
-This image contain proprietary software and is not for public distribution.
+This image contain proprietary software and is not for public distribution. To build it you need to add a
+ssh key named id_rsa with access to github and your user must have read-access permission to the pointing component
+code.
+
