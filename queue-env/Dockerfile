@@ -58,20 +58,13 @@ WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git fetch && git checkout "tags/v3.6.1" -b "v3.6.1"
+RUN git fetch && git checkout "tags/v3.7.1" -b "v3.7.1"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN git fetch && git checkout "tags/v1.0.1" -b "v1.0.1"
 
 WORKDIR /home/saluser/repos/ts_xml
-# RUN git checkout "tags/v3.8.31" -b "v3.8.31"
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
-#RUN cp sal_interfaces/SALGenerics.xml /home/saluser/repos/ts_sal/test/ && \
-#cp sal_interfaces/SALSubsystems.xml /home/saluser/repos/ts_sal/test/ && \
-#cp sal_interfaces/Test/*.xml /home/saluser/repos/ts_sal/test/ && \
-#cp sal_interfaces/Script/*.xml /home/saluser/repos/ts_sal/test/ && \
-#cp sal_interfaces/ScriptQueue/*.xml /home/saluser/repos/ts_sal/test/ && \
-#cp sal_interfaces/CBP/*.xml /home/saluser/repos/ts_sal/test/
 
 WORKDIR /home/saluser
 
@@ -94,8 +87,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib &&\
     scons && \
-    make_salpy_libs.py Script && \
-    make_salpy_libs.py ScriptQueue
+    make_salpy_libs.py Script ScriptQueue
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -109,18 +101,9 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_sal -t $USER && \
     setup ts_salobj -t $USER && \
     eups declare -r . ts_scriptqueue -t $USER && setup ts_scriptqueue -t $USER
-    #scons || echo "ts_scriptqueue: Failed scons"
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
-
-#COPY setup_and_build.sh /home/saluser/.setup_and_build.sh
-#COPY setup2.sh /home/saluser/setup_alternative.sh
-#COPY setup_dds.env /home/saluser/setup_dds.env
-
-#RUN pip install ipython
-#RUN pip install jupyter
-#RUN echo "echo source setup.sh to startupt" >> ~/.bashrc
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]
