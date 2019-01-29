@@ -8,7 +8,7 @@ LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG SAL_REPOS=$LSST_USER_HOME/sal_repos
-ARG M1M3_SUPPORT_DIR = /usr/ts_M1M3Support
+ARG M1M3_SUPPORT_DIR=/usr/ts_M1M3Support
 
 USER root
 
