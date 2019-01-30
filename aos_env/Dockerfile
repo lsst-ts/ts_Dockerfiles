@@ -16,7 +16,7 @@ USER root
 
 # Install the required packages
 RUN yum install -y $GIT_INSTALL_URL \
-    && yum install -y git \
+    && yum install -y git csh\
     && yum clean all \
     && rm -rf /var/cache/yum
 
