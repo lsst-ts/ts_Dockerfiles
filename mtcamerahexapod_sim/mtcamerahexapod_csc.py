@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-__all__ = ["HexapodCsc"]
+__all__ = ["MTCameraHexapodCsc"]
 
 import asyncio
 
@@ -27,7 +27,7 @@ from lsst.ts import salobj
 import SALPY_Hexapod
 
 
-class HexapodCsc(salobj.BaseCsc):
+class MTCameraHexapodCsc(salobj.BaseCsc):
     def __init__(self, initial_state=salobj.State.STANDBY, initial_simulation_mode=0):
         super().__init__(SALPY_Hexapod, index=1, initial_state=initial_state,
                          initial_simulation_mode=initial_simulation_mode)
@@ -100,5 +100,5 @@ class HexapodCsc(salobj.BaseCsc):
 
 
 if __name__ == '__main__':
-    csc = HexapodCsc(initial_state=salobj.State.ENABLED)
+    csc = MTCameraHexapodCsc(initial_state=salobj.State.ENABLED)
     asyncio.get_event_loop().run_until_complete(csc.done_task)

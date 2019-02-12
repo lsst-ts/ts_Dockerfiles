@@ -19,45 +19,61 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-__all__ = ["MTM2Csc"]
+__all__ = ["MTM2HexapodCsc"]
 
 import asyncio
 
 from lsst.ts import salobj
-import SALPY_MTM2
+import SALPY_Hexapod
 
 
-class MTM2Csc(salobj.BaseCsc):
+class MTM2HexapodCsc(salobj.BaseCsc):
     def __init__(self, initial_state=salobj.State.STANDBY, initial_simulation_mode=0):
-        super().__init__(SALPY_MTM2, index=0, initial_state=initial_state,
+        super().__init__(SALPY_Hexapod, index=2, initial_state=initial_state,
                          initial_simulation_mode=initial_simulation_mode)
         self.telemetry_period = 0.05
-        self.axialForceMeasured = [0.0] * 72
         self.position = [0.0] * 6
         self.salinfo.manager.setDebugLevel(0)
 
-    def do_applyBendingMode(self, id_data):
-        pass
-    
-    def do_applyForce(self, id_data):
-        self.assert_enabled("applyForce")
-        print(f"Applying force starting with {id_data.data.forceSetPoint[:6]}.")
-        self.axialForceMeasured = [x for x in id_data.data.forceSetPoint]
-
-    def do_moveAxialActuator(self, id_data):
+    def do_configureAcceleration(self, id_data):
         pass
 
-    def do_positionMirror(self, id_data):
-        self.assert_enabled("positionMirror")
-        xTilt = id_data.data.xTilt
-        yTilt = id_data.data.yTilt
-        z = id_data.data.piston
-        self.position[2] = z
-        self.position[3] = xTilt
-        self.position[4] = yTilt
-        print(f"Moving M2 to {self.position}.")
+    def do_configureAzimuthRawLUT(self, id_data):
+        pass
 
-    def do_setCorrectionMode(self, id_data):
+    def do_configureElevationRawLUT(self, id_data):
+        pass
+
+    def do_configureLimits(self, id_data):
+        pass
+
+    def do_configureTemperatureRawLUT(self, id_data):
+        pass
+
+    def do_configureVelocity(self, id_data):
+        pass
+
+    def do_move(self, id_data):
+        pass
+
+    def do_moveLUT(self, id_data):
+        pass
+
+    def do_offset(self, id_data):
+        self.assert_enabled("offset")
+        self.position = [id_data.data.x, id_data.data.y, id_data.data.z, id_data.data.u, id_data.data.v, id_data.data.w]
+        print(f"New position is now {self.position}.")
+
+    def do_pivot(self, id_data):
+        pass
+
+    def do_positionSet(self, id_data):
+        pass
+
+    def do_test(self, id_data):
+        pass
+
+    def do_clearError(self, id_data):
         pass
 
     def report_summary_state(self):
@@ -67,13 +83,7 @@ class MTM2Csc(salobj.BaseCsc):
 
     async def telemetry_loop(self):
         while self.summary_state in (salobj.State.DISABLED, salobj.State.ENABLED):
-            self.tel_axialForcesMeasured.set_put(axialForceMeasured=self.axialForceMeasured)
-            self.tel_mirrorPositionMeasured.set_put(xTilt=self.position[3],
-                                                    yTilt=self.position[4],
-                                                    piston=self.position[2],
-                                                    xPosition=self.position[0],
-                                                    yPosition=self.position[1],
-                                                    thetaZPosition=self.position[5])
+            self.tel_Application.set_put(Demand=self.position, Error=[0.0]*6, Position=self.position)
             await asyncio.sleep(self.telemetry_period)
 
     async def _heartbeat_loop(self):
@@ -90,5 +100,5 @@ class MTM2Csc(salobj.BaseCsc):
 
 
 if __name__ == '__main__':
-    csc = MTM2Csc(initial_state=salobj.State.ENABLED)
+    csc = MTM2HexapodCsc(initial_state=salobj.State.ENABLED)
     asyncio.get_event_loop().run_until_complete(csc.done_task)

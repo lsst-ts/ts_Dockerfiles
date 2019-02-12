@@ -46,13 +46,13 @@ WORKDIR $LSST_USER_HOME
 # Download the required repos and checkout correct versions
 RUN    mkdir -p $REPOS \
     && cd $REPOS\
-    && git clone -b master https://github.com/lsst-ts/ts_sal.git \
+    && git clone -b develop https://github.com/lsst-ts/ts_sal.git \
     && cd ts_sal/ \
-    && git checkout c473240 \
+    && git checkout 18cd34ecc0fd484550c8de78b06d0301863eaabd \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_xml.git \
+    && git clone -b develop https://github.com/lsst-ts/ts_xml.git \
     && cd ts_xml/ \
-    && git checkout 601b64e \
+    && git checkout c51f11fa8a60d55879d1cebc970b7eedc37876eb \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_opensplice.git \
     && cd ts_opensplice/ \

@@ -19,7 +19,7 @@ the container is started.
 - *v1.6*
     - *centos* - (tag: 7.6.1810)
     - *python* - (ver: 3.6.7)
-    - *ts_sal* - master branch (commit: c473240)
-    - *ts_xml* - master branch (commit: 601b64e)
+    - *ts_sal* - develop branch (commit: 18cd34ecc0fd484550c8de78b06d0301863eaabd)
+    - *ts_xml* - develop branch (commit: c51f11fa8a60d55879d1cebc970b7eedc37876eb)
     - *ts_opensplice* - master branch (commit: d0661fb) using OpenSpliceDDS v6.4.1
     - *ts_m1m3support* - develop branch (commit: 27ce004)
