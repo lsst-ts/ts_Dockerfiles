@@ -41,7 +41,7 @@ RUN mkdir -p $AOS_REPOS \
     && cd .. \
     && git clone -b develop https://github.com/lsst-ts/ts_tcs_wep.git \
     && cd ts_tcs_wep/ \
-    && git checkout d59002a \
+    && git checkout 5e8ccf2 \
     && cd .. \
     && git clone -b develop https://github.com/lsst-ts/ts_tcs_wep_phosim.git \
     && cd ts_tcs_wep_phosim/ \
@@ -49,7 +49,7 @@ RUN mkdir -p $AOS_REPOS \
     && cd .. \
     && git clone -b develop https://github.com/lsst-ts/ts_tcs_ofcPython.git \
     && cd ts_tcs_ofcPython/ \
-    && git checkout 107811e
+    && git checkout df653cd
 
 # Set the AOS environment variables
 ENV PYTHONPATH "${PYTHONPATH}:$AOS_REPOS/ts_tcs_wep/python:$AOS_REPOS/ts_tcs_wep_phosim/python:$AOS_REPOS/ts_tcs_ofcPython/python"
