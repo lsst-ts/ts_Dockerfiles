@@ -13,6 +13,6 @@
     - *lsst_sims (tag: sims_w_2019_02)*
     - *obs_lsst - master branch (commit: 69b4a98)*
     - *phosim_utils - master branch (commit: b8d87d9)*
-    - *ts_tcs_wep - develop branch (commit: 5e8ccf2)*
+    - *ts_tcs_wep - develop branch (commit: f7f476e)*
     - *ts_tcs_wep_phosim - develop branch (commit: 6e4d997)*
-    - *ts_tcs_ofcPython - develop branch (commit: df653cd)*
+    - *ts_tcs_ofcPython - develop branch (commit: 53ee625)*
