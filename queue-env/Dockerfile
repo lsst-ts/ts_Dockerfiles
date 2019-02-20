@@ -58,10 +58,10 @@ WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git fetch && git checkout "tags/v3.7.1" -b "v3.7.1"
+RUN git fetch && git checkout "tags/v3.7.1" -b "v3.8.0"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
-RUN git fetch && git checkout "tags/v1.0.1" -b "v1.0.1"
+RUN git fetch && git checkout "tags/v1.1.0" -b "v1.1.0"
 
 WORKDIR /home/saluser/repos/ts_xml
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
@@ -87,7 +87,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib &&\
     scons && \
-    make_salpy_libs.py Script ScriptQueue
+    make_salpy_libs.py Script ScriptQueue LinearStage TunableLaser Electrometer ATCamera
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

@@ -111,17 +111,12 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
     ./scripts/generate_interface
 
-USER root
-    RUN yum -y install devtoolset-4 devtoolset-3
-USER saluser
-RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
-RUN source scl_source enable devtoolset-3 && \
-    source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
-    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+#    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
+#    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
 
 WORKDIR /home/saluser/
-COPY setup.sh /home/saluser/.setup.sh
+#COPY setup.sh /home/saluser/.setup.sh
 
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]
+#ENTRYPOINT ["/bin/bash", "--"]
+#CMD ["/home/saluser/.setup.sh"]
