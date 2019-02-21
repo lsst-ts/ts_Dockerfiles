@@ -58,13 +58,13 @@ WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git fetch && git checkout "tags/v3.7.1" -b "v3.8.0"
+RUN git fetch && git checkout "tags/v3.8.0" -b "v3.8.0"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
-RUN git fetch && git checkout "tags/v1.1.0" -b "v1.1.0"
+RUN git fetch && git checkout "tags/v1.1.1" -b "v1.1.1"
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
+RUN git fetch && git checkout "develop" && git pull
 
 WORKDIR /home/saluser
 
@@ -77,13 +77,13 @@ ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.3.21/
 ENV LSST_DDS_DOMAIN=citest
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && eups declare -r . ts_xml -t $USER
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && eups declare -r . ts_xml -t current
 
 WORKDIR /home/saluser/repos/ts_sal
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . ts_sal -t $USER && \
-    setup ts_sal -t $USER && \
+    eups declare -r . ts_sal -t current && \
+    setup ts_sal -t current && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib &&\
     scons && \
@@ -92,15 +92,16 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t $USER && \
-    eups declare -r . ts_salobj -t $USER && setup ts_salobj -t $USER && scons
+    setup ts_sal -t current && \
+    eups declare -r . ts_salobj -t current && setup ts_salobj -t current && scons
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t $USER && \
-    setup ts_salobj -t $USER && \
-    eups declare -r . ts_scriptqueue -t $USER && setup ts_scriptqueue -t $USER
+    setup ts_sal -t current && \
+    setup ts_salobj -t current && \
+    eups declare -r . ts_scriptqueue -t current && setup ts_scriptqueue -t current && \
+    scons || echo Building scriptqueue failed. IGNORING...
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh

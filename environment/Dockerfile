@@ -31,6 +31,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
+ENV STATION_INDEX=1
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]

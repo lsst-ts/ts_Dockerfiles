@@ -15,4 +15,7 @@ echo "# Setting up ts_environment."
 setup ts_salobj -t $USER
 setup ts_environment -t $USER
 
-/bin/bash --rcfile /home/saluser/.bashrc
+echo "#"
+echo "# Running environment CSC with index" $STATION_INDEX
+
+python /home/saluser/repos/ts_environment/bin.src/environment_csc.py $STATION_INDEX

@@ -12,9 +12,9 @@ echo "# Loading sal environment"
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 
-setup ts_xml -t $USER
-setup ts_sal -t $USER
-setup ts_salobj -t $USER
-setup ts_scriptqueue -t $USER
+setup ts_xml -t current
+setup ts_sal -t current
+setup ts_salobj -t current
+setup ts_scriptqueue -t current
 
 /bin/bash --rcfile /home/saluser/.bashrc
