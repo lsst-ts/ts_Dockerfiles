@@ -39,15 +39,15 @@ RUN mkdir -p $AOS_REPOS \
     && cd phosim_utils/ \
     && git checkout b8d87d9 \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_tcs_wep.git \
+    && git clone -b master https://github.com/lsst-ts/ts_tcs_wep.git \
     && cd ts_tcs_wep/ \
-    && git checkout f7f476e \
+    && git checkout 00a021b \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_tcs_wep_phosim.git \
+    && git clone -b master https://github.com/lsst-ts/ts_tcs_wep_phosim.git \
     && cd ts_tcs_wep_phosim/ \
     && git checkout 6e4d997 \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_tcs_ofcPython.git \
+    && git clone -b master https://github.com/lsst-ts/ts_tcs_ofcPython.git \
     && cd ts_tcs_ofcPython/ \
     && git checkout 53ee625
 
