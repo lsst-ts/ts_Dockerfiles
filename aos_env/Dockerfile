@@ -7,7 +7,7 @@ LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
-ARG LSST_DIR=opt/lsst/software/stack
+ARG LSST_DIR=/opt/lsst/software/stack
 ARG SIMS_VERSION=sims_w_2019_08
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
