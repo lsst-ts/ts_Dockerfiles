@@ -41,8 +41,8 @@ RUN curl -sSL $NEWINSTALL_URL | bash -s -- -cbtS
 
 # Install the lsst_sims and lsst_distrib packages
 RUN source $LSST_DIR/loadLSST.bash \
-    && eups distrib install lsst_sims -t sims_w_2019_05 \
-    && eups distrib install lsst_distrib -t w_2019_05 \
+    && eups distrib install lsst_sims -t sims_w_2019_08 \
+    && eups distrib install lsst_distrib -t w_2019_08 \
     && curl -sSL $SHEBANGTRON_URL | python
 
 # Source the scientific pipeline automatically

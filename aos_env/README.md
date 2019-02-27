@@ -8,6 +8,9 @@
 
 ## Tag List
 
+- *w_2019_08*
+    - *lsst_distrib (tag: w_2019_08)*
+    - *lsst_sims (tag: sims_w_2019_08)*
 - *w_2019_05*
     - *lsst_distrib (tag: w_2019_05)*
     - *lsst_sims (tag: sims_w_2019_05)*
