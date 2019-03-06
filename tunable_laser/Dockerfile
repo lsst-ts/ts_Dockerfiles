@@ -15,9 +15,9 @@ SHELL ["/bin/bash","-c"]
 USER root
 RUN yum -y install curl-devel expat-devel gettext-devel gcc openssl-devel zlib-devel make && yum -y install perl-ExtUtils-MakeMaker && yum -y clean all && rm -rf /var/cache/yum 
 WORKDIR /usr/src
-RUN curl -O https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz && tar -xzf git-${GIT_VERSION}.tar.gz
+RUN curl -O https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz && chown -R root:root /usr/src/ && tar -xzf git-${GIT_VERSION}.tar.gz
 WORKDIR /usr/src/git-${GIT_VERSION}
-RUN make prefix=/usr/local all && make prefix=/usr/local install && rm -rf /usr/src/git-${GIT_VERSION} /usr/src/git-${GIT_VERSION}.tar.gz
+RUN make prefix=/usr/local all && make prefix=/usr/local install && rm -rf /usr/src/git-${GIT_VERSION}.tar.gz /usr/src/git-${GIT_VERSION}
 RUN yum -y install bison blas bzip2 bzip2-devel cmake curl flex fontconfig freetype-devel gawk gcc-c++ gcc-gfortrangettext glib2-devel java-1.8.0-openjdk libcurl-devel libuuid-devel libXext libXrender libXt-devel make mes-libGL ncurses-devel openssl-devel patch perl perl-ExtUtils-MakeMaker readline-devel sed tar which zlib-devel && yum -y install centos-release-scl && yum -y install devtoolset-6-gcc-gfortran devtoolset-6-gcc devtoolset-6-gcc-c++ && yum -y clean all && rm -rf /var/cache/yum 
 RUN yum -y install ncurses-libs xterm xorg-x11-fonts-misc java-1.7.0-openjdk-devel maven python-devel swig git tk-devel && yum -y clean all && rm -rf /var/cache/yum 
 RUN groupadd $LSST_USER && useradd -g $LSST_USER -m $LSST_USER -s /bin/bash
