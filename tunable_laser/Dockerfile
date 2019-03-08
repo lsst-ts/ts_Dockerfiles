@@ -5,7 +5,7 @@ ENV LSST_USER_HOME=/home/$LSST_USER
 ENV LSST_DIR=/opt/lsst
 ENV NEWINSTALL_URL=https://raw.githubusercontent.com/lsst/lsst/${STACK_VERSION}/scripts/newinstall.sh
 ENV SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
-ENV GIT_VERSION=2.19.1
+ENV GIT_VERSION=2.19.2
 ENV LSST_SDK_INSTALL=$LSST_USER_HOME/gitrepo/ts_sal
 ENV OSPL_HOME=$LSST_USER_HOME/gitrepo/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
 ENV PYTHON_BUILD_VERSION=3.6m
@@ -15,7 +15,7 @@ SHELL ["/bin/bash","-c"]
 USER root
 RUN yum -y install curl-devel expat-devel gettext-devel gcc openssl-devel zlib-devel make && yum -y install perl-ExtUtils-MakeMaker && yum -y clean all && rm -rf /var/cache/yum 
 WORKDIR /usr/src
-RUN chown -R root:root /root && curl -O https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz && tar -xzf git-${GIT_VERSION}.tar.gz
+RUN curl -O https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz && tar -xzf git-${GIT_VERSION}.tar.gz && chown -R root:root git-${GIT_VERSION}/
 WORKDIR /usr/src/git-${GIT_VERSION}
 RUN make prefix=/usr/local all && make prefix=/usr/local install && rm -rf /usr/src/git-${GIT_VERSION}.tar.gz /usr/src/git-${GIT_VERSION}
 RUN yum -y install bison blas bzip2 bzip2-devel cmake curl flex fontconfig freetype-devel gawk gcc-c++ gcc-gfortrangettext glib2-devel java-1.8.0-openjdk libcurl-devel libuuid-devel libXext libXrender libXt-devel make mes-libGL ncurses-devel openssl-devel patch perl perl-ExtUtils-MakeMaker readline-devel sed tar which zlib-devel && yum -y install centos-release-scl && yum -y install devtoolset-6-gcc-gfortran devtoolset-6-gcc devtoolset-6-gcc-c++ && yum -y clean all && rm -rf /var/cache/yum 
