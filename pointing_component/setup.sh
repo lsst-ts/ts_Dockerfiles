@@ -13,3 +13,4 @@ source $LSST_SDK_INSTALL/setup.env
 setup ts_sal -t $USER
 
 /home/saluser/repos/ts_pointing_common/build/bin/ATPtgController
+# /bin/bash --rcfile /home/saluser/.bashrc

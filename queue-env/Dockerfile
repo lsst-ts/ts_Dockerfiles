@@ -1,4 +1,4 @@
-FROM lsstsqre/centos:7-stack-lsst_distrib-v16_0
+FROM lsstsqre/centos:7-stack-lsst_distrib-w_2019_08
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -24,26 +24,30 @@ RUN yum -y --enablerepo=extras install epel-release \
   xterm \
   xorg-x11-fonts-misc \
   java-1.8.0-openjdk-devel \
-  boost-python \
-  boost-python-devel \
   maven \
   which \
   gnome-terminal \
   mariadb \
   mariadb-devel \
   nano \
-  emacs && \
+  emacs \
+  ifconfig \
+  gdb \
+  ltrace\
+  strace \
+  net-tools \
+  tcpdump && \
   yum clean all
 
 USER saluser
 WORKDIR /home/saluser
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y ipython jupyter jupyterlab tornado=4.5.3 jinja2 scipy ephem gitpython && \
+    conda install -y ipython jupyter jupyterlab tornado=4.5.3 jinja2 scipy ephem gitpython jsonschema && \
     conda update -y pyqt fontconfig sqlalchemy && \
     cd ../ && \
     python -c 'import matplotlib.pyplot' && \
-    conda clean -ay && pip install "documenteer[pipelines]==0.4.2"
+    conda clean -ay && pip install "documenteer[pipelines]==0.4.2" && pip install cmd2 && pip install asynccmd
 
 RUN mkdir repos
 
@@ -58,10 +62,10 @@ WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git fetch && git checkout "tags/v3.8.0" -b "v3.8.0"
+RUN git fetch && git checkout "tags/v3.9.2" -b "v3.9.2"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
-RUN git fetch && git checkout "tags/v1.1.1" -b "v1.1.1"
+RUN git fetch && git checkout "tags/v1.2.1" -b "v1.2.1"
 
 WORKDIR /home/saluser/repos/ts_xml
 RUN git fetch && git checkout "develop" && git pull
@@ -73,7 +77,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycod
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/home/saluser/repos/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
 ENV PYTHON_BUILD_VERSION=3.6m
-ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.3.21/
+ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.5.4/
 ENV LSST_DDS_DOMAIN=citest
 
 WORKDIR /home/saluser/repos/ts_xml
@@ -87,7 +91,12 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib &&\
     scons && \
-    make_salpy_libs.py Script ScriptQueue LinearStage TunableLaser Electrometer ATCamera
+    make_salpy_libs.py Script ScriptQueue LinearStage TunableLaser \
+    Electrometer ATMonochromator FiberSpectrograph \
+    ATPtg \
+    Environment \
+    ATCamera ATArchiver ATHeaderService ATSpectrograph
+
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

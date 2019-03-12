@@ -115,6 +115,19 @@ USER root
     RUN yum -y install devtoolset-4 devtoolset-3
 USER saluser
 RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
+WORKDIR /home/saluser/repos/ts_xml
+RUN git checkout develop && git pull && \
+    cp -v sal_interfaces/ATMCS/ATMCS_*xml /home/saluser/repos/ts_sal/test
+WORKDIR /home/saluser/repos/ts_sal/test
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_sal -t $USER && \
+    salgenerator ATMCS validate && \
+    salgenerator ATMCS html && \
+    salgenerator ATMCS sal cpp && \
+    salgenerator ATMCS sal python && \
+    salgenerator ATMCS lib
+WORKDIR /home/saluser/repos/ts_pointing_common
 RUN source scl_source enable devtoolset-3 && \
     source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
