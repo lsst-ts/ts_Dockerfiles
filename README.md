@@ -20,9 +20,6 @@ docker run -it --net=host --name salobjImage salobj bash
 #Setup the packages by running. This will build the Test topics, setup salobj and run unit tests.
 source /home/lsst/environment.env
 
-#You can test an example CSC using:
-python3.6 testCSC.py
-
 2.- 
 #The following instructions are for the Dockerfile in ./with_lsst_stack folder.
 #First build the Dockerfile
@@ -34,6 +31,3 @@ docker run -it --net=host --name salobjImage salobj bash
 
 #Setup the packages by running. This will build the Test topics, setup salobj and run unit tests.
 source /home/lsst/repos/salgenerate.sh
-
-#You can test an example CSC using:
-python3.6 testCSC.py
