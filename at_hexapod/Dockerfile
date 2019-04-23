@@ -9,7 +9,7 @@ ENV TSREPOS=/home/saluser/repos
 
 RUN git clone https://github.com/lsst-ts/pythonFileReader.git -b develop
 RUN git clone https://github.com/lsst-ts/pythonCommunicator.git -b develop
-RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git -b develop
+RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git -b tickets/DM-18642
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     cd ${TSREPOS}/pythonFileReader && \
