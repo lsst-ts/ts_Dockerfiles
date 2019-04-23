@@ -19,4 +19,3 @@ setup ts_scriptqueue -t current
 setup ts_salobjATHexapod -t current
 
 /bin/bash --rcfile /home/saluser/.bashrc
-
