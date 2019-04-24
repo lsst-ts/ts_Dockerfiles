@@ -19,6 +19,8 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_xml -t current && \
     setup ts_sal -t current && \
     cd ${TSREPOS}/ts_salobjATHexapod && \
+    conda install -y -c conda pyqt && \
+    conda install -y -c conda pyqtgraph && \
     eups declare -r ${TSREPOS}/ts_salobjATHexapod ts_salobjATHexapod git -t current && \
     source ${TSREPOS}/ts_sal/setup.env && \
     make_salpy_libs.py ATHexapod
