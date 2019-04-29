@@ -1,4 +1,4 @@
-FROM lsstsqre/centos:7-stack-lsst_distrib-w_2019_08
+FROM lsstsqre/centos:7-stack-lsst_distrib-w_latest
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -9,6 +9,8 @@ USER root
 
 # Create user and group
 RUN adduser -u 1004 -m -g lsst -s /bin/bash saluser
+
+RUN chmod g+w -R /opt/lsst/
 
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 
@@ -36,7 +38,6 @@ RUN yum -y --enablerepo=extras install epel-release \
   ltrace\
   strace \
   net-tools \
-  ntp \
   tcpdump && \
   yum clean all
 
@@ -44,7 +45,7 @@ USER saluser
 WORKDIR /home/saluser
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y ipython jupyter jupyterlab tornado=4.5.3 jinja2 scipy ephem gitpython jsonschema=3.0.1 && \
+    conda install -y ipython jupyter jupyterlab tornado=4.5.3 jinja2 scipy ephem gitpython jsonschema && \
     conda update -y pyqt fontconfig sqlalchemy && \
     cd ../ && \
     python -c 'import matplotlib.pyplot' && \
@@ -79,8 +80,8 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycod
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/home/saluser/repos/ts_opensplice/OpenSpliceDDS/V6.4.1/HDE/x86_64.linux
-ENV PYTHON_BUILD_VERSION=3.6m
-ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.5.4/
+ENV PYTHON_BUILD_VERSION=3.7m
+ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.5.12/
 ENV LSST_DDS_DOMAIN=citest
 
 WORKDIR /home/saluser/repos/ts_xml

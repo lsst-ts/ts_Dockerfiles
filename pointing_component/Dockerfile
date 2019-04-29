@@ -33,7 +33,9 @@ RUN yum -y --enablerepo=extras install epel-release \
   mariadb-devel \
   nano \
   emacs \
-  cmake && \
+  cmake \
+  devtoolset-4 \
+  devtoolset-3 && \
   yum clean all
 
 RUN mkdir /home/saluser/.ssh/ && chown saluser:lsst /home/saluser/.ssh/ && chmod 700 /home/saluser/.ssh/
@@ -60,14 +62,14 @@ RUN git clone https://github.com/lsst-ts/ts_opensplice.git && \
  git clone https://github.com/lsst-ts/ts_sal.git && \
  git clone https://github.com/lsst-ts/ts_xml.git && \
  git clone git@github.com:lsst-ts/tcspk_source_lsst_161203.git && \
- git clone  git@github.com:lsst-ts/slalib_source_lsst_161203.git && \
+ git clone git@github.com:lsst-ts/slalib_source_lsst_161203.git && \
  git clone git@github.com:lsst-ts/ts_pointing_common.git
 
 WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/v3.8.41" -b "v3.8.41"
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch && git checkout "origin/develop"
+RUN git fetch && git checkout "tags/v3.9" -b "v3.9"
 
 WORKDIR /home/saluser
 
@@ -106,27 +108,26 @@ WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
 RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git fetch && git checkout "origin/feature/AY/SAL_v3.8" -b "feature/AY/SAL_v3.8"
+RUN git checkout "tags/RC_v0.3" -b "RC_v0.3"
+
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
     ./scripts/generate_interface
 
-USER root
-    RUN yum -y install devtoolset-4 devtoolset-3
-USER saluser
 RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
-WORKDIR /home/saluser/repos/ts_xml
-RUN git checkout develop && git pull && \
-    cp -v sal_interfaces/ATMCS/ATMCS_*xml /home/saluser/repos/ts_sal/test
-WORKDIR /home/saluser/repos/ts_sal/test
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t $USER && \
-    salgenerator ATMCS validate && \
-    salgenerator ATMCS html && \
-    salgenerator ATMCS sal cpp && \
-    salgenerator ATMCS sal python && \
-    salgenerator ATMCS lib
+#WORKDIR /home/saluser/repos/ts_xml
+#RUN git checkout develop && git pull && \
+#    cp -v sal_interfaces/ATMCS/ATMCS_*xml /home/saluser/repos/ts_sal/test
+#WORKDIR /home/saluser/repos/ts_sal/test
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+#    source /home/saluser/repos/ts_sal/setup.env && \
+#    setup ts_sal -t $USER && \
+#    salgenerator ATMCS validate && \
+#    salgenerator ATMCS html && \
+#    salgenerator ATMCS sal cpp && \
+#    salgenerator ATMCS sal python && \
+#    salgenerator ATMCS lib
+
 WORKDIR /home/saluser/repos/ts_pointing_common
 RUN source scl_source enable devtoolset-3 && \
     source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
