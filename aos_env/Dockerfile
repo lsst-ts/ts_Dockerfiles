@@ -14,7 +14,7 @@ ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/sh
 USER root
 
 # Install the required packages
-RUN yum install -y csh\
+RUN yum install -y csh graphviz\
     && yum clean all \
     && rm -rf /var/cache/yum
 
@@ -30,6 +30,15 @@ USER $LSST_USER
 RUN source $LSST_DIR/loadLSST.bash \
     && eups distrib install lsst_sims -t ${SIMS_VERSION} \
     && curl -sSL $SHEBANGTRON_URL | python
+
+# Install the documenteer and plantUML
+WORKDIR $LSST_USER_HOME
+RUN source $LSST_DIR/loadLSST.bash \
+    && wget https://newcontinuum.dl.sourceforge.net/project/plantuml/plantuml.jar \
+    && pip install sphinxcontrib-plantuml\
+    && git clone https://github.com/lsst-sqre/documenteer.git \
+    && cd documenteer \
+    && pip install documenteer[pipelines]
 
 # Source the scientific pipeline automatically
 RUN echo "" >> $LSST_USER_HOME/.bashrc \
