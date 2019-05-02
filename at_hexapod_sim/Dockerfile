@@ -1,4 +1,0 @@
-FROM lsstts/develop-env:develop 
-WORKDIR /home/saluser/repos
-RUN source /opt/lsst/software/stack/loadLSST.bash && git clone https://github.com/lsst-ts/pythonCommunicator -b develop && cd pythonCommunicator && eups declare -r . -t $USER ts_pythonCommunicator && cd .. && git clone https://github.com/lsst-ts/pythonFileReader -b develop && cd pythonFileReader && eups declare -r . -t $USER pythonFileReader && cd .. && git clone https://github.com/lsst-ts/ts_salobjATHexapod.git && cd ts_salobjATHexapod && cd ../ts_xml && cd ../ts_salobj && git fetch && source /home/saluser/repos/ts_sal/setup.env && setup ts_sal -t current && setup ts_salobj -t current && setup sconsUtils 16.0 && make_salpy_libs.py ATHexapod && cd ../ts_salobjATHexapod && eups declare -r . ts_salobjATHexapod -t $USER && setup ts_salobjATHexapod -t $USER
-WORKDIR /home/saluser
