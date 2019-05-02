@@ -8,6 +8,8 @@ services:
     volumes:
       - /home/saluser/efd/mysql/:/var/lib/mysql/
       - /home/saluser/develop/ts_Dockerfiles/efd/my.cfg:/etc/mysql/my.cnf
+    stdin_open: true
+    tty: true
 
   efd_writers:
     image: lsstts/efd_writers:DM-19541
@@ -33,9 +35,11 @@ services:
     container_name: ptkernel
     environment:
       - LSST_DDS_DOMAIN=citest
+    stdin_open: true
+    tty: true
 
   atmcs:
-    image: lsstts/at_mcs_sim
+    image: lsstts/at_mcs_sim:3.9-0.4
     container_name: atmcs
     environment:
       - LSST_DDS_DOMAIN=citest
