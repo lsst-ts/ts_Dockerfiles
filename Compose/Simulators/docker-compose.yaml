@@ -2,48 +2,54 @@ version: '3.6'
 
 services:
 
-    atmcssimulator:
+    atmcs-sim:
         image: lsstts/at_mcs_sim
+        container_name: atmcs-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
   
-    atdomesim:
+    atdome-sim:
         image: lsstts/at_dome_sim
+        container_name: atdome-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
-    atdometrajectorysim:
+    atdometrajectory-sim:
         image: lsstts/at_dome_trajectory_sim
+        container_name: atdometrajectory-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
-    atpneumaticssim:
+    atpneumatics-sim:
         image: lsstts/at_pneumatics_sim
+        container_name: atpneumatics-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
-    ataos_sim:
+    ataos-sim:
         image: lsstts/ataos:sim
+        container_name: ataos-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
   
-    atptg_sim:
+    atptg-sim:
         image: tiagorib/ptkernel:new_xml
+        container_name: atptg-sim
         environment:
             - LSST_DDS_DOMAIN=atinttest1
         network_mode: "bridge"
