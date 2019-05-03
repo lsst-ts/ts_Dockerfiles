@@ -10,8 +10,11 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up sal, salobj and ataos"
 
-setup ts_ataos -t $USER
+setup ts_salobj -t current
+setup ts_ataos -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+echo "# Starting ATAOS CSC"
+
+ataos_csc.py
