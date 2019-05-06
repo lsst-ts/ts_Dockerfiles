@@ -15,6 +15,7 @@ echo "# Setting up sal, salobj and ataos"
 setup ts_salobj -t current
 setup ts_ataos -t current
 
+cd /home/saluser/repos/ts_ataos/bin/
 echo "# Starting ATAOS CSC"
 
-ataos_csc.py
+python ./ataos_csc.py

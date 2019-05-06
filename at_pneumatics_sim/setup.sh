@@ -21,5 +21,5 @@ setup ts_ATPneumaticsSimulator -t $USER
 
 cd /home/saluser/repos/ts_ATPneumaticsSimulator/bin/
 
-echo "# Starting ATPneumatics CSC Simulator"
+echo "# Starting ATPneumatics Simulator CSC"
 python ./run_atpneumatics_simulator.py
