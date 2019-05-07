@@ -40,6 +40,9 @@ Check Containers:
  
  // View the details of docker network
  $ docker network inspect <my-bridge-network>
+ 
+ // View container of cpu, memory, etc.
+ $ docker stats $(docker ps --format={{.Names}})
 ```
 
 Manipulate Containers:
