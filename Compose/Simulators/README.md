@@ -34,6 +34,12 @@ Check Containers:
  
  // Check All Logs
  $ docker-compose logs
+ 
+ // Grab the IP address of a running container
+ $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-name OR id>
+ 
+ // View the details of docker network
+ $ docker network inspect <my-bridge-network>
 ```
 
 Manipulate Containers:
