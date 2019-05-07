@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
     atmcs-sim:
-        image: lsstts/at_mcs_sim:0.4
+        image: lsstts/at_mcs_sim:3.9-0.4
         container_name: atmcs-sim
         environment:
             - LSST_DDS_DOMAIN=atintsims
