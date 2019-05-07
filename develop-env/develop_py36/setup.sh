@@ -16,5 +16,9 @@ setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
 setup ts_scriptqueue -t current
+setup ts_ATDome -t current
+setup ts_ATDomeTrajectory -t current
+setup ts_standardscripts -t current
+setup ts_externalscripts -t current
 
 /bin/bash --rcfile /home/saluser/.bashrc

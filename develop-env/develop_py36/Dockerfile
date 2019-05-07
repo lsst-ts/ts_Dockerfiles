@@ -62,7 +62,7 @@ RUN mkdir repos
 
 WORKDIR /home/saluser/repos
 RUN  git clone https://github.com/lsst-ts/ts_config_ocs.git && \
-     git clone https://github.com/lsst-ts/o.git && \
+     git clone https://github.com/lsst-ts/ts_config_attcs.git && \
      git clone https://github.com/lsst-ts/ts_sal.git && \
      git clone https://github.com/lsst-ts/ts_salobj.git && \
      git clone https://github.com/lsst-ts/ts_scriptqueue.git && \
@@ -76,13 +76,19 @@ WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/V3.9.0-5" -b "v3.9.0"
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git fetch && git checkout "tags/v3.11.0" -b "v3.11.0"
+RUN git fetch && git checkout "tags/v3.12.0" -b "v3.12.0"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN git fetch && git checkout "tags/v1.4.0" -b "v1.4.0"
 
 WORKDIR /home/saluser/repos/ts_xml
 RUN git fetch && git checkout "tags/v3.9" -b "v3.9"
+
+WORKDIR /home/saluser/repos/ts_config_ocs
+RUN git fetch && git checkout "develop"
+
+WORKDIR /home/saluser/repos/ts_config_attcs
+RUN git fetch && git checkout "develop"
 
 WORKDIR /home/saluser
 
@@ -130,39 +136,57 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_salobj -t current && \
     make_salpy_libs.py ScriptQueue && \
     eups declare -r . ts_scriptqueue -t current && setup ts_scriptqueue -t current && \
-    scons || echo Building scriptqueue failed. IGNORING...
+    scons
 
-#WORKDIR /home/saluser/repos/ts_ATDome
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source /home/saluser/repos/ts_sal/setup.env && \
-#    setup ts_salobj -t current && \
-#    make_salpy_libs.py ATDome && \
-#    eups declare -r . ts_ATDome -t current && setup ts_ATDome -t current && scons
-#
-#WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source /home/saluser/repos/ts_sal/setup.env && \
-#    setup ts_salobj -t current && \
-#    make_salpy_libs.py ATMCS ATDomeTrajectory && \
-#    setup ts_config_attcs -t current && \
-#    eups declare -r . ts_ATDomeTrajectory -t current && setup ts_ATDomeTrajectory -t current && scons
-#
-#WORKDIR /home/saluser/repos/ts_standardscripts
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source /home/saluser/repos/ts_sal/setup.env && \
-#    setup ts_sal -t current && \
-#    setup ts_salobj -t current && \
-#    setup ts_scriptqueue -t current && \
-#    eups declare -r . ts_standardscripts -t current
-#
-#WORKDIR /home/saluser/repos/ts_externalscripts
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source /home/saluser/repos/ts_sal/setup.env && \
-#    setup ts_sal -t current && \
-#    setup ts_salobj -t current && \
-#    setup ts_scriptqueue -t current && \
-#    setup ts_standardscripts -t current && \
-#    eups declare -r . ts_externalscripts -t current
+# || echo Building scriptqueue failed. IGNORING...
+
+WORKDIR /home/saluser/repos/ts_ATDome
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_salobj -t current && \
+    setup ts_config_attcs -t current && \
+    make_salpy_libs.py ATDome && \
+    eups declare -r . ts_ATDome -t current && setup ts_ATDome -t current && scons
+
+WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_salobj -t current && \
+    make_salpy_libs.py ATMCS ATDomeTrajectory && \
+    setup ts_config_attcs -t current && \
+    eups declare -r . ts_ATDomeTrajectory -t current && setup ts_ATDomeTrajectory -t current && scons
+
+WORKDIR /home/saluser/repos/
+RUN git clone https://github.com/lsst-ts/ts_ATMCSSimulator.git
+
+WORKDIR /home/saluser/repos/ts_ATMCSSimulator
+RUN git fetch && git checkout "v0.4.0" -b "v0.4.0"
+
+WORKDIR /home/saluser/repos/ts_ATMCSSimulator
+RUN  source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_salobj -t current && \
+    setup ts_config_attcs -t current && \
+    eups declare -r . ts_ATMCSSimulator -t current && \
+    setup ts_ATMCSSimulator -t current && \
+    scons
+
+WORKDIR /home/saluser/repos/ts_standardscripts
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_sal -t current && \
+    setup ts_salobj -t current && \
+    setup ts_scriptqueue -t current && \
+    eups declare -r . ts_standardscripts -t current
+
+WORKDIR /home/saluser/repos/ts_externalscripts
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_sal -t current && \
+    setup ts_salobj -t current && \
+    setup ts_scriptqueue -t current && \
+    setup ts_standardscripts -t current && \
+    eups declare -r . ts_externalscripts -t current
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
