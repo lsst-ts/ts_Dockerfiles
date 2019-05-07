@@ -6,7 +6,7 @@ services:
         image: lsstts/at_mcs_sim:3.9-0.4
         container_name: atmcs-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
@@ -15,7 +15,7 @@ services:
         image: lsstts/at_dome_sim:3.9-0.5
         container_name: atdome-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
@@ -24,7 +24,7 @@ services:
         image: lsstts/at_dome_trajectory_sim:3.9-0.6a
         container_name: atdometrajectory-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
@@ -33,7 +33,7 @@ services:
         image: lsstts/at_pneumatics_sim:3.9-0.2
         container_name: atpneumatics-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
@@ -42,7 +42,7 @@ services:
         image: lsstts/ataos:v0.2.1
         container_name: ataos-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
         entrypoint: ["/home/saluser/.setup.sh"]
@@ -51,5 +51,5 @@ services:
         image: tiagorib/ptkernel:new_xml
         container_name: atptg-sim
         environment:
-            - LSST_DDS_DOMAIN=atintsims
+            - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
