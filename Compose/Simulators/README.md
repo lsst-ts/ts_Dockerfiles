@@ -88,6 +88,14 @@ python ~/scripts/atptgatmcsintegration.py
 python ~/scripts/dometrajectorymcs.py
 ```
 
+If successful, logs will indicate that the script state was complete.
+Else, there may be intermittent failures, due to timeouts.
+In that case, try running the script again.
+
+```sh
+<SCRIPT_STATE:Complete>
+```
+
 # License
  
 LSST Data Management System Software
