@@ -5,7 +5,7 @@ A docker compose file (in yaml format) that invokes the T&S simulators required 
 
 Clone the ts_Dockefiles repository:
 ```sh
- $ git clone -b feature/couger01/dm-18753 https://github.com/lsst-ts/tsDockerfiles.git
+ $ git clone -b feature/couger01/dm-18753 https://github.com/lsst-ts/ts_Dockerfiles.git
 ```
 
 Navigate to the Compose/Simulators directory:
