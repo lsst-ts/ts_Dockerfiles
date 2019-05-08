@@ -48,8 +48,15 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atptg-sim:
-        image: tiagorib/ptkernel:new_xml
+        image: tiagorib/ptkernel:develop
         container_name: atptg-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
+
+    simulation-tests:
+      image: lsstts/simulation_tests:latest
+      container_name: simulation-tests
+      environment:
+        - LSST_DDS_DOMAIN=atsimulatorcsc
+      network_mode: "bridge"

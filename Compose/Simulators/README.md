@@ -80,6 +80,14 @@ Manipulate Containers:
 
 ---
 
+## Running Integration Tests
+
+```sh
+docker-compose run --rm simulation-tests
+python ~/scripts/atptgatmcsintegration.py
+python ~/scripts/dometrajectorymcs.py
+```
+
 # License
  
 LSST Data Management System Software
