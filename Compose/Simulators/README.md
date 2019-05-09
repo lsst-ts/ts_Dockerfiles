@@ -78,8 +78,6 @@ Manipulate Containers:
  $ docker-compose down 
  ```
 
----
-
 ## Running Integration Tests
 
 ```sh
@@ -95,6 +93,9 @@ In that case, try running the script again.
 ```sh
 <SCRIPT_STATE:Complete>
 ```
+
+---
+
 
 # License
  
