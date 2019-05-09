@@ -10,11 +10,9 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up ts_atspectrograph."
 
-setup ts_xml -t current
-setup ts_sal -t current
-setup ts_salobj -t current
-setup ts_scriptqueue -t current
+setup ts_salobj -t $USER
+setup ts_atspectrograph -t $USER
 
 /bin/bash --rcfile /home/saluser/.bashrc

@@ -1,0 +1,47 @@
+version: '0'
+services:
+  efd:
+    image: mariadb:latest
+    container_name: efd
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+    volumes:
+      - /home/saluser/efd/mysql/:/var/lib/mysql/
+      - /home/saluser/develop/ts_Dockerfiles/efd/my.cfg:/etc/mysql/my.cnf
+    stdin_open: true
+    tty: true
+
+  efd_writers:
+    image: lsstts/efd_writers:DM-19541
+    container_name: efd_writter_atptg
+    environment:
+      - LSST_EFD_HOST=172.17.0.2
+      - LSST_DDS_DOMAIN=citest
+    stdin_open: true
+    tty: true
+
+  script:
+    image: lsstts/develop-env:develop
+    container_name: script
+    environment:
+      - LSST_DDS_DOMAIN=citest
+    ports:
+      - "8886:8886"
+    stdin_open: true
+    tty: true
+
+  ptkernel:
+    image: tiagorib/ptkernel:develop
+    container_name: ptkernel
+    environment:
+      - LSST_DDS_DOMAIN=citest
+    stdin_open: true
+    tty: true
+
+  atmcs:
+    image: lsstts/at_mcs_sim:3.9-0.4
+    container_name: atmcs
+    environment:
+      - LSST_DDS_DOMAIN=citest
+    stdin_open: true
+    tty: true

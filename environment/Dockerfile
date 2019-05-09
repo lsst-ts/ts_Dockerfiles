@@ -5,32 +5,33 @@ LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 USER saluser
 
 WORKDIR /home/saluser/repos
-RUN git clone https://github.com/lsst-ts/ts_ataos.git
+RUN git clone https://github.com/lsst-ts/ts_environment.git
 
 WORKDIR /home/saluser
+
+WORKDIR /home/saluser/repos/ts_xml
+RUN git fetch && git checkout "origin/tickets/DM-17666" -b "tickets/DM-17666"
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t $USER && \
-    make_salpy_libs.py ATAOS ATPtg ATPneumatics ATHexapod ATCamera
+    make_salpy_libs.py Environment
 
-#USER root
-#RUN yum install -y "http://10.0.100.1/lsstrepo/ATAOS-3.9.0-1el7.centos.x86_64.rpm"
+WORKDIR /home/saluser/repos/ts_environment
+RUN git fetch && git checkout "tags/v0.1.1" -b "v0.1.1"
 
-USER saluser
-
-
-WORKDIR /home/saluser/repos/ts_ataos
-RUN git fetch && git checkout "tags/v0.2" -b "v0.2"
+WORKDIR /home/saluser/repos/ts_environment
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_salobj -t $USER && \
-    eups declare -r . ts_ataos -t $USER && setup ts_ataos -t $USER && \
+    setup ts_sal -t $USER && \
+    eups declare -r . ts_environment -t $USER && setup ts_environment -t $USER && \
     scons
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
+ENV STATION_INDEX=1
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]
