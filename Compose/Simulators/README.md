@@ -96,7 +96,7 @@ In that case, try running the script again.
 
 ---
 
-# License
+## License
  
 LSST Data Management System Software
 Copyright © 2008-2019 AURA/LSST.
