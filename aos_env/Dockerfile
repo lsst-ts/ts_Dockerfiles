@@ -1,20 +1,20 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstsqre/centos:7-stack-lsst_distrib-w_2019_12
+FROM lsstsqre/centos:7-stack-lsst_distrib-w_2019_18
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst/software/stack
-ARG SIMS_VERSION=sims_w_2019_12
+ARG SIMS_VERSION=sims_w_2019_18
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
 
 # Install the required packages
-RUN yum install -y csh\
+RUN yum install -y csh graphviz\
     && yum clean all \
     && rm -rf /var/cache/yum
 
@@ -30,6 +30,15 @@ USER $LSST_USER
 RUN source $LSST_DIR/loadLSST.bash \
     && eups distrib install lsst_sims -t ${SIMS_VERSION} \
     && curl -sSL $SHEBANGTRON_URL | python
+
+# Install the documenteer and plantUML
+WORKDIR $LSST_USER_HOME
+RUN source $LSST_DIR/loadLSST.bash \
+    && wget https://newcontinuum.dl.sourceforge.net/project/plantuml/plantuml.jar \
+    && pip install sphinxcontrib-plantuml\
+    && git clone https://github.com/lsst-sqre/documenteer.git \
+    && cd documenteer \
+    && pip install documenteer[pipelines]
 
 # Source the scientific pipeline automatically
 RUN echo "" >> $LSST_USER_HOME/.bashrc \

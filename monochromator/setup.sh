@@ -10,11 +10,10 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Starting monochromator CSC"
 
-setup ts_xml -t current
-setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_scriptqueue -t current
+setup ts_monochromator -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+ /bin/bash --rcfile /home/saluser/.bashrc
+#python /home/saluser/repos/ts_atmonochromator/bin/atmonochromator_csc.py

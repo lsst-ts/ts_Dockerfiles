@@ -10,11 +10,12 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up ts_environment."
 
-setup ts_xml -t current
-setup ts_sal -t current
-setup ts_salobj -t current
-setup ts_scriptqueue -t current
+setup ts_salobj -t $USER
+setup ts_environment -t $USER
 
-/bin/bash --rcfile /home/saluser/.bashrc
+echo "#"
+echo "# Running environment CSC with index" $STATION_INDEX
+
+python /home/saluser/repos/ts_environment/bin.src/environment_csc.py $STATION_INDEX
