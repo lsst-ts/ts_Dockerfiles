@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:develop
+FROM lsstts/develop-env:20190418
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 

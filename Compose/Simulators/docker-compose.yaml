@@ -54,6 +54,18 @@ services:
             - LSST_DDS_DOMAIN=atsimulatorcsc
         network_mode: "bridge"
 
+    athexapod-sim:
+      image: lsstts/ts_athexapod
+      container_name: athexapod-sim
+      environment:
+        - LSST_DDS_DOMAIN=atsimulatorcsc
+      network_mode: "bridge"
+
+    hexapod-sim:
+      image: couger01/hexapod_simulator
+      container_name: hexapod-sim
+      network_mode: "bridge"
+
     simulation-tests:
       image: lsstts/simulation_tests:latest
       container_name: simulation-tests
