@@ -1,0 +1,74 @@
+version: '3.6'
+
+services:
+
+    atmcs-sim:
+        image: lsstts/at_mcs_sim:3.9-0.4
+        container_name: atmcs-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+        entrypoint: ["/home/saluser/.setup.sh"]
+  
+    atdome-sim:
+        image: lsstts/at_dome_sim:3.9-0.5
+        container_name: atdome-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+        entrypoint: ["/home/saluser/.setup.sh"]
+
+    atdometrajectory-sim:
+        image: lsstts/at_dome_trajectory_sim:3.9-0.6a
+        container_name: atdometrajectory-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+        entrypoint: ["/home/saluser/.setup.sh"]
+
+    atpneumatics-sim:
+        image: lsstts/at_pneumatics_sim:3.9-0.2
+        container_name: atpneumatics-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+        entrypoint: ["/home/saluser/.setup.sh"]
+
+    ataos-sim:
+        image: lsstts/ataos:v0.2.1
+        container_name: ataos-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+        entrypoint: ["/home/saluser/.setup.sh"]
+  
+    atptg-sim:
+        image: tiagorib/ptkernel:develop
+        container_name: atptg-sim
+        environment:
+            - LSST_DDS_DOMAIN=atsimulatorcsc
+        network_mode: "bridge"
+
+    athexapod-sim:
+      image: lsstts/ts_athexapod
+      container_name: athexapod-sim
+      environment:
+        - LSST_DDS_DOMAIN=atsimulatorcsc
+      network_mode: "bridge"
+
+    hexapod-sim:
+      image: couger01/hexapod_simulator
+      container_name: hexapod-sim
+      network_mode: "bridge"
+
+    simulation-tests:
+      image: lsstts/simulation_tests:latest
+      container_name: simulation-tests
+      environment:
+        - LSST_DDS_DOMAIN=atsimulatorcsc
+      network_mode: "bridge"
