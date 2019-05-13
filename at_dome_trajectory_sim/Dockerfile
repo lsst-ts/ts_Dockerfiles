@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:develop
+FROM lsstts/develop-env:20190508
 
 USER saluser
 WORKDIR /home/saluser/repos
