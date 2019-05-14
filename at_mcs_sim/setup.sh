@@ -10,12 +10,14 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and ataos"
+echo "# Setting up sal, salobj and ATMCSSimulator"
 
+setup ts_xml -t current
+setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_ataos -t current
 
-cd /home/saluser/repos/ts_ataos/bin/
-echo "# Starting ATAOS CSC"
+setup ts_ATMCSSimulator -t $USER
 
-python ./ataos_csc.py
+echo "# Starting ATMCSSimulator CSC"
+
+/home/saluser/repos/ts_ATMCSSimulator/bin/run_atmcs_simulator.py
