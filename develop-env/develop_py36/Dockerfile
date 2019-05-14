@@ -47,6 +47,12 @@ RUN yum install -y OpenSpliceDDS-6.9.0-1
 
 #RUN ln -s /opt/OpenSpliceDDS/ /opt/OpenSpliceDDS/V6.9
 
+RUN yum install -y tzdata
+
+WORKDIR /usr/share/zoneinfo
+
+RUN wget http://www.ietf.org/timezones/data/leap-seconds.list
+
 USER saluser
 WORKDIR /home/saluser
 
@@ -70,7 +76,8 @@ RUN  git clone https://github.com/lsst-ts/ts_config_ocs.git && \
      git clone https://github.com/lsst-ts/ts_standardscripts.git && \
      git clone https://github.com/lsst-ts/ts_externalscripts.git && \
      git clone https://github.com/lsst-ts/ts_ATDome.git && \
-     git clone https://github.com/lsst-ts/ts_ATDomeTrajectory.git
+     git clone https://github.com/lsst-ts/ts_ATDomeTrajectory.git && \
+     git clone https://github.com/lsst-ts/ts_idl.git
 
 WORKDIR /home/saluser/repos/ts_sal
 RUN git fetch && git checkout "tags/V3.9.0-5" -b "v3.9.0"
@@ -79,7 +86,7 @@ WORKDIR /home/saluser/repos/ts_salobj
 RUN git fetch && git checkout "tags/v3.12.0" -b "v3.12.0"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
-RUN git fetch && git checkout "tags/v1.4.0" -b "v1.4.0"
+RUN git fetch && git checkout "tags/v1.4.1" -b "v1.4.1"
 
 WORKDIR /home/saluser/repos/ts_xml
 RUN git fetch && git checkout "tags/v3.9" -b "v3.9"
@@ -100,8 +107,27 @@ ENV PYTHON_BUILD_VERSION=3.6m
 ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.5.4/
 ENV LSST_DDS_DOMAIN=citest
 
+WORKDIR /home/saluser/repos/ts_idl
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    setup lsst_distrib && \
+    eups declare -r . -t current && \
+    setup ts_idl -t current && \
+    scons
+
+WORKDIR /home/saluser/repos
+RUN mkdir dds
+WORKDIR /home/saluser/repos/dds/
+RUN tar zxvf /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/tools/python-support.tgz
+WORKDIR /home/saluser/repos/dds/python/src/
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    setup ts_idl -t current && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    python setup.py install
+
 WORKDIR /home/saluser/repos/ts_xml
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && eups declare -r . ts_xml -t current
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    setup lsst_distrib && \
+    eups declare -r . ts_xml -t current
 
 USER saluser
 
@@ -177,7 +203,13 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_sal -t current && \
     setup ts_salobj -t current && \
     setup ts_scriptqueue -t current && \
-    eups declare -r . ts_standardscripts -t current
+    make_salpy_libs.py Electrometer ATPtg ATCamera ATMonochromator ATSpectrograph FiberSpectrograph&& \
+    eups declare -r . ts_standardscripts -t current && \
+    setup ts_config_attcs -t current && \
+    setup ts_config_ocs -t current && \
+    setup ts_ATMCSSimulator -t current && \
+    setup ts_standardscripts -t current && \
+    scons || echo Building standard script failed. IGNORING...
 
 WORKDIR /home/saluser/repos/ts_externalscripts
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -186,7 +218,11 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_salobj -t current && \
     setup ts_scriptqueue -t current && \
     setup ts_standardscripts -t current && \
-    eups declare -r . ts_externalscripts -t current
+    setup ts_config_attcs -t current && \
+    setup ts_config_ocs -t current && \
+    eups declare -r . ts_externalscripts -t current && \
+    setup ts_externalscripts -t current && \
+    scons || echo Building external script failed. IGNORING...
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
