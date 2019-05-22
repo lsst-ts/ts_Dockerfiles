@@ -8,7 +8,7 @@ WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/ts_ataos.git
 
 WORKDIR /home/saluser/repos/ts_ataos
-RUN git fetch && git checkout "tags/v0.2.1" -b "v0.2.1"
+RUN git fetch && git checkout "tags/v0.2.2" -b "v0.2.2"
 WORKDIR /home/saluser
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
