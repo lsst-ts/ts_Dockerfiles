@@ -80,6 +80,8 @@ services:
       networks:
         simulation-network:
           ipv4_address: 172.18.0.8
+      stdin_open: true
+      tty: true
 
     simulation-tests:
       image: lsstts/simulation_tests:latest
@@ -88,6 +90,10 @@ services:
         - LSST_DDS_DOMAIN=atsimulatorcsc
       networks:
         - simulation-network
+      ports:
+        - "8886:8886"
+      stdin_open: true
+      tty: true
 
 networks:
   simulation-network:
