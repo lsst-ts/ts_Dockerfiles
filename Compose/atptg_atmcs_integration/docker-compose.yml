@@ -23,6 +23,8 @@ services:
   script:
     image: lsstts/develop-env:develop
     container_name: script
+    volumes:
+      - /Users/tribeiro/Develop:/home/saluser/develop
     environment:
       - LSST_DDS_DOMAIN=citest
     ports:
