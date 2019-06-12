@@ -32,7 +32,7 @@ WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
 RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git checkout "tags/RC_v0.3" -b "RC_v0.3"
+RUN git fetch && git checkout "tickets/DM-19890"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
@@ -67,6 +67,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
 
 WORKDIR /home/saluser/
+COPY ATPtg.info /home/saluser/repos/ts_pointing_common/install/data/ATPtg.info
 COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]
