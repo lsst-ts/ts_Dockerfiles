@@ -7,7 +7,8 @@ services:
         container_name: atmcs-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
         entrypoint: ["/home/saluser/.setup.sh"]
   
@@ -16,7 +17,8 @@ services:
         container_name: atdome-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
@@ -25,25 +27,28 @@ services:
         container_name: atdometrajectory-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atpneumatics-sim:
-        image: lsstts/at_pneumatics_sim:3.9-0.2
+        image: lsstts/at_pneumatics_sim:3.9-0.2-3.11
         container_name: atpneumatics-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
         entrypoint: ["/home/saluser/.setup.sh"]
 
     ataos-sim:
-        image: lsstts/ataos:v0.2.1
+        image: lsstts/ataos:0.2.2
         container_name: ataos-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
         entrypoint: ["/home/saluser/.setup.sh"]
   
@@ -52,23 +57,44 @@ services:
         container_name: atptg-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
-        network_mode: "bridge"
+        networks:
+          - simulation-network
 
     athexapod-sim:
-      image: lsstts/ts_athexapod
+      image: lsstts/ts_athexapod:3.9-dm-19762
       container_name: athexapod-sim
       environment:
         - LSST_DDS_DOMAIN=atsimulatorcsc
-      network_mode: "bridge"
+      volumes:
+        - ./startCSC.sh:/home/saluser/startCSC.sh
+        - ./tcpConfiguration.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
+      networks:
+        - simulation-network
+      entrypoint: ["/home/saluser/startCSC.sh"]
+      depends_on:
+        - hexapod-sim
 
     hexapod-sim:
       image: couger01/hexapod_simulator
       container_name: hexapod-sim
-      network_mode: "bridge"
+      networks:
+        simulation-network:
+          ipv4_address: 172.18.0.8
+      stdin_open: true
+      tty: true
 
     simulation-tests:
       image: lsstts/simulation_tests:latest
       container_name: simulation-tests
       environment:
         - LSST_DDS_DOMAIN=atsimulatorcsc
-      network_mode: "bridge"
+      networks:
+        - simulation-network
+      ports:
+        - "8886:8886"
+      stdin_open: true
+      tty: true
+
+networks:
+  simulation-network:
+    external: true
