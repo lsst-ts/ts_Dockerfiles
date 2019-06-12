@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   patrickingraham:
-    image: lsstts/develop-env:latest
+    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
     container_name: atdiag03
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -21,7 +21,7 @@ services:
         ipv4_address: "10.0.100.219"
 
   ecoughlin:
-    image: lsstts/develop-env:latest
+    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
     container_name: atdiag04
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -39,7 +39,7 @@ services:
         ipv4_address: "10.0.100.220"
 
   tribeiro:
-    image: lsstts/develop-env:latest
+    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
     container_name: atdiag05
     environment:
       - LSST_DDS_DOMAIN=auxtelpath

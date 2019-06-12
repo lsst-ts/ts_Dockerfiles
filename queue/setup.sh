@@ -10,11 +10,16 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up sal, salobj and ataos"
 
-setup ts_xml -t current
-setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_scriptqueue -t current
+setup ts_dimm -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+echo "# Starting DIMM CSC"
+
+while :
+    do
+        dimm_csc.py $CSC_INDEX
+        echo "# CSC exited. Restarting..."
+done
+

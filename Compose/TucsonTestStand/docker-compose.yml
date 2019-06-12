@@ -1,0 +1,38 @@
+version: "3.4"
+
+services:
+
+  queue:
+    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    container_name: queue
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/develop:/home/saluser/develop
+      - ./queue_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.201"
+
+  script:
+    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    container_name: script
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/develop:/home/saluser/develop
+      - ./request_script_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.202"
+
+networks:
+  default:
+    external:
+      name: lab-priv-network
+  lab-priv-network:
+    external: true
