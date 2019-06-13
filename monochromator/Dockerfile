@@ -1,4 +1,4 @@
-FROM lsst/queue:latest
+FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -10,13 +10,14 @@ RUN git clone https://github.com/lsst-ts/ts_atmonochromator.git
 WORKDIR /home/saluser
 
 WORKDIR /home/saluser/repos/ts_salobj
+RUN git checkout "tags/v3.11.1" -b "v3.11.1"
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     make_salpy_libs.py ATMonochromator
 
 WORKDIR /home/saluser/repos/ts_atmonochromator
-RUN git fetch && git checkout "tickets/DM-17985"
+RUN git fetch --tags && git checkout "tags/v0.1.1" -b "v0.1.1"
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_salobj -t current && \

@@ -15,5 +15,10 @@ echo "# Starting monochromator CSC"
 setup ts_salobj -t current
 setup ts_monochromator -t current
 
- /bin/bash --rcfile /home/saluser/.bashrc
-#python /home/saluser/repos/ts_atmonochromator/bin/atmonochromator_csc.py
+# /bin/bash --rcfile /home/saluser/.bashrc
+while :
+    do
+        python /home/saluser/repos/ts_atmonochromator/bin/atmonochromator_csc.py
+        echo "# CSC exited. Restarting..."
+done
+
