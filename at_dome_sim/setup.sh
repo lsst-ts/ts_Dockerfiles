@@ -10,17 +10,17 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up ATDome"
 
 setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_scriptqueue -t current
-setup ts_config_attcs -t current
+setup ts_ATDome -t current
 
-setup ts_ATDome -t $USER 
+echo "# Starting CSC"
 
-cd /home/saluser/repos/ts_ATDome/bin/
-
-echo "# Starting ATDome Simulator CSC"
-python ./run_atdome.py -s
+while :
+    do
+        run_atdome.py -s
+        echo "# CSC exited. Restarting..."
+done
