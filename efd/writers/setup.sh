@@ -25,5 +25,9 @@ setup ts_scriptqueue -t current
 /repos/ts_sal/test/ATMCS/cpp/src/sacpp_ATMCS_event_efdwriter &> /dev/null &
 /repos/ts_sal/test/ATMCS/cpp/src/sacpp_ATMCS_telemetry_efdwriter &> /dev/null &
 
+/repos/ts_sal/test/DIMM/cpp/src/sacpp_DIMM_command_efdwriter &> /dev/null &
+/repos/ts_sal/test/DIMM/cpp/src/sacpp_DIMM_event_efdwriter &> /dev/null &
+/repos/ts_sal/test/DIMM/cpp/src/sacpp_DIMM_telemetry_efdwriter &> /dev/null &
+
 
 /bin/bash --rcfile /home/saluser/.bashrc

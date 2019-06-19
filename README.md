@@ -31,3 +31,16 @@ docker run -it --net=host --name salobjImage salobj bash
 
 #Setup the packages by running. This will build the Test topics, setup salobj and run unit tests.
 source /home/lsst/repos/salgenerate.sh
+
+## Documentation
+Installing requirements.
+```
+cd docs
+pip install -r requirements.txt
+```
+Building and serving documentation.
+```
+cd docs
+mkdocs serve
+```
+
