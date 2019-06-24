@@ -9,7 +9,7 @@ services:
       args:
         image_tag: 7-stack-lsst_distrib-w_2019_08
   develop-env_py36_salobj4:
-    image: lsstts/develop-env:20190624_salobj4
+    image: lsstts/develop-env:salobj4_b${BUILD_NUMBER}
     depends_on:
       - base
     build:
@@ -30,7 +30,7 @@ services:
         standardscripts_v: "tags/v0.4.0"
         externalscripts_v: "tags/v0.1.0"
   develop-env_py36_salobj3:
-    image: lsstts/develop-env:20190624_salobj3
+    image: lsstts/develop-env:salobj3_b${BUILD_NUMBER}
     depends_on:
       - base
     build:

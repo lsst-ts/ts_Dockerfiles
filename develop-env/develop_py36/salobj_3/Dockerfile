@@ -261,7 +261,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_ATMCSSimulator -t current && \
     eups declare -r . -t current && \
     setup ts_standardscripts -t current && \
-    scons
+    scons || echo Building standard script failed. IGNORING...
 
 WORKDIR /home/saluser/repos/ts_externalscripts
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -279,7 +279,6 @@ WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
-    setup ts_idl -t current && \
     setup ts_salobj -t current && \
     eups declare -r . -t current && \
     setup ts_scriptqueue -t current && \

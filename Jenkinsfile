@@ -1,10 +1,12 @@
 node('docker') {
 
-    stage 'Checkout'
+    stage('Checkout') {
         checkout scm
+    }
 
-    stage 'Build & UnitTest'
-    sh "docker-compose build develop-env_py36_salobj4"
+    stage('Build & UnitTest') {
+        sh "docker-compose build develop-env_py36_salobj4"
+    }
 
     //stage 'Pusblish UT Reports'
     //
