@@ -5,7 +5,15 @@ node('docker') {
     }
 
     stage('Build & UnitTest') {
-        sh "docker-compose build develop-env_py36_salobj4"
+        sh "docker-compose build --build-arg sal_v=${env.sal_v} --build-arg salobj_v=${env.salobj_v} --build-arg xml_v=${env.xml_v} --build-arg idl_v=${env.idl_v} --build-arg scriptqueue_v=${env.scriptqueue_v} --build-arg config_attcs_v=${env.config_attcs_v} --build-arg atmcs_v=${env.atmcs_v} --build-arg atdome_v=${env.atdome_v} --build-arg atdometraj_v=${env.atdometraj_v} --build-arg standardscripts_v=${env.standardscripts_v} --build-arg externalscripts_v=${env.externalscripts_v} develop-env_py36_salobj4"
+    }
+
+    stage('Push container') {
+        script {
+          docker.withRegistry("", "docker-hub") {
+            sh "docker push lsstts/develop-env:salobj4_b${BUILD_NUMBER}"
+          }
+        }
     }
 
     //stage 'Pusblish UT Reports'
