@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:20190514
+FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -8,8 +8,7 @@ WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/ts_ataos.git
 
 WORKDIR /home/saluser/repos/ts_ataos
-#RUN git fetch && git checkout "tags/v1.0.0" -b "v1.0.0"
-RUN git pull && git checkout "tickets/DM-19890"
+RUN git fetch && git checkout "tags/v1.1.0" -b "v1.1.0"
 
 WORKDIR /home/saluser/repos/ts_config_attcs
 RUN git fetch && git checkout "tags/v0.1-alpha.4" -b "v0.1-alpha.4"
