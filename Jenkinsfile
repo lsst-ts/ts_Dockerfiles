@@ -31,7 +31,7 @@ node('docker') {
         if (env.build_master.toString()=='true') {
             echo "Pushing master container"
             script {
-                docker.withRegistry("", "docker-hub") {
+                docker.withRegistry("", "dockerhub-lsstsadmin") {
                     sh "docker push lsstts/develop-env:salobj4_master"
                 }
             }
@@ -40,7 +40,7 @@ node('docker') {
         if (env.build_develop.toString()=='true') {
             echo "Pushing develop container"
             script {
-                docker.withRegistry("", "docker-hub") {
+                docker.withRegistry("", "dockerhub-lsstsadmin") {
                     sh "docker push lsstts/develop-env:salobj4_develop"
                 }
             }
@@ -51,7 +51,7 @@ node('docker') {
         if (push_tag.toString()=='true') {
             echo "Pushing build tags"
             script {
-                docker.withRegistry("", "docker-hub") {
+                docker.withRegistry("", "dockerhub-lsstsadmin") {
                     sh "docker push lsstts/develop-env:salobj4_b${BUILD_NUMBER}"
                 }
             }
