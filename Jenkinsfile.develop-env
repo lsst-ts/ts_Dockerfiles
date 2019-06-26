@@ -1,0 +1,95 @@
+pipeline {
+    agent any
+    environment {
+        registryCredential = "dockerhub-lsstsadmin"
+        dockerImageNameMaster = "lsstts/develop-env:salobj4_master"
+        dockerImageNameDevelop = "lsstts/develop-env:salobj4_develop"
+        dockerImageNameBuild = "lsstts/develop-env:salobj4_b${BUILD_NUMBER}"
+        dockerImageMaster = ""
+        dockerImageDevelop = ""
+        dockerImageBuild = ""
+    }
+
+    stages {
+        stage("Build Docker image (master)") {
+            when {
+                expression { return env.build_master.toBoolean() }
+            }
+            steps {
+                script {
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --build-arg scriptqueue_v=master --build-arg config_attcs_v=master --build-arg atmcs_v=master --build-arg atdome_v=master --build-arg atdometraj_v=master --build-arg standardscripts_v=master --build-arg externalscripts_v=master --build-arg base_image_tag=master ./develop-env/develop_py36/salobj_4/")
+                }
+            }
+        }
+        stage("Build Docker image (develop)") {
+            when {
+                expression { return env.build_develop.toBoolean() }
+            }
+            steps {
+                script {
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --build-arg scriptqueue_v=develop --build-arg config_attcs_v=develop --build-arg atmcs_v=develop --build-arg atdome_v=develop --build-arg atdometraj_v=develop --build-arg standardscripts_v=develop --build-arg externalscripts_v=develop --build-arg base_image_tag=develop ./develop-env/develop_py36/salobj_4/")
+                }
+            }
+        }
+        stage("Build Docker image (tag/branch)") {
+            when {
+                not{
+                    anyOf {
+                        expression { return env.build_develop.toBoolean() }
+                        expression { return env.build_master.toBoolean() }
+                    }
+                }
+            }
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg scriptqueue_v=${env.scriptqueue_v} --build-arg config_attcs_v=${env.config_attcs_v} --build-arg atmcs_v=${env.atmcs_v} --build-arg atdome_v=${env.atdome_v} --build-arg atdometraj_v=${env.atdometraj_v} --build-arg standardscripts_v=${env.standardscripts_v} --build-arg externalscripts_v=${env.externalscripts_v} --build-arg base_image_tag=${env.base_image_tag} ./develop-env/develop_py36/salobj_4/")
+                }
+            }
+        }
+
+        stage("Push Docker image (master)") {
+            when {
+                expression { return env.build_master.toBoolean() }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageMaster.push()
+                    }
+                }
+            }
+        }
+        stage("Push Docker image (develop)") {
+            when {
+                expression { return env.build_develop.toBoolean() }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageDevelop.push()
+                    }
+                }
+            }
+        }
+        stage("Push Docker image (tag/branch)") {
+            when {
+                allOf {
+                    expression { return env.push_tag.toBoolean() }
+                    not{
+                        anyOf {
+                            expression { return env.build_develop.toBoolean() }
+                            expression { return env.build_master.toBoolean() }
+                        }
+                    }
+                }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageBuild.push()
+                    }
+                }
+            }
+        }
+    }
+}
