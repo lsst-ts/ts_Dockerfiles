@@ -21,88 +21,25 @@ ARG standardscripts_v="tags/v0.4.0"
 ARG externalscripts_v="tags/v0.1.0"
 
 WORKDIR /home/saluser/repos/ts_scriptqueue
-RUN git_v=${scriptqueue_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${scriptqueue_v}
 
 WORKDIR /home/saluser/repos/ts_config_attcs
-RUN git_v=${config_attcs_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${config_attcs_v}
 
 WORKDIR /home/saluser/repos/ts_ATMCSSimulator
-RUN git_v=${atmcs_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${atmcs_v}
 
 WORKDIR /home/saluser/repos/ts_standardscripts
-RUN git_v=${standardscripts_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${standardscripts_v}
 
 WORKDIR /home/saluser/repos/ts_externalscripts
-RUN git_v=${externalscripts_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${externalscripts_v}
 
 WORKDIR /home/saluser/repos/ts_ATDome
-RUN git_v=${atdome_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${atdome_v}
 
 WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
-RUN git_v=${atdometraj_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${atdometraj_v}
 
 WORKDIR /home/saluser
 

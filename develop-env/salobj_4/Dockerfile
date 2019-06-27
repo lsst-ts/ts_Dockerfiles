@@ -2,6 +2,8 @@ ARG base_image_tag
 
 FROM lsstts/base-env:$base_image_tag
 
+COPY checkout_repo.sh /home/saluser/.checkout_repo.sh
+
 RUN mkdir repos
 
 WORKDIR /home/saluser/repos
@@ -19,72 +21,21 @@ ARG xml_v="tags/v3.10.0"
 ARG idl_v="develop"
 
 WORKDIR /home/saluser/repos/ts_config_ocs
-RUN git_v=${config_ocs_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${config_ocs_v}
 
 WORKDIR /home/saluser/repos/ts_sal
-RUN git_v=${sal_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${sal_v}
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN git_v=${salobj_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${salobj_v}
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git_v=${xml_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${xml_v}
 
 WORKDIR /home/saluser/repos/ts_idl
-RUN git_v=${idl_v} && \
-    git fetch --all && \
-    if [[ ${git_v} == tags/* ]] ; \
-    then \
-        echo checkout ${git_v} -b $git_v ; \
-        git checkout ${git_v} -b $git_v ; \
-    else \
-        echo checkout ${git_v} ; \
-        git checkout ${git_v} ; \
-    fi
+RUN /home/saluser/.checkout_repo.sh ${idl_v}
 
 WORKDIR /home/saluser
-
-ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
-ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
-ENV PYTHON_BUILD_VERSION=3.6m
-ENV PYTHON_BUILD_LOCATION=/opt/lsst/software/stack/python/miniconda3-4.5.4/
-ENV LSST_DDS_DOMAIN=citest
 
 WORKDIR /home/saluser/repos/ts_config_ocs
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -127,7 +78,8 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
-    make_idl_files.py Test Script
+    make_idl_files.py Test Script && \
+    make_salpy_libs.py Test Script
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

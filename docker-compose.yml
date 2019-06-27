@@ -1,13 +1,14 @@
 version: "3.7"
 services:
   base:
-    image: lsstts/base-env:20190621
+    image: lsstts/base-env:${IMAGE_TAG}
     build:
       context: ./develop-env/base
       labels:
         com.description: "LSST Telescope and Site base development image."
       args:
-        image_tag: 7-stack-lsst_distrib-w_2019_08
+        image_tag: ${IMAGE_TAG}
+#        image_tag: 7-stack-lsst_distrib-w_2019_08
   salobj:
     image: lsstts/salobj:${IMAGE_TAG}
     depends_on:
