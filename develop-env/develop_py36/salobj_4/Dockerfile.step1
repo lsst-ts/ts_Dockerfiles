@@ -66,14 +66,16 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
-    eups declare -r . ts_ATDome -t current && setup ts_ATDome -t current && scons
+    eups declare -r . ts_ATDome -t current && setup ts_ATDome -t current && \
+    scons || py.test
 
 WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
-    eups declare -r . ts_ATDomeTrajectory -t current && setup ts_ATDomeTrajectory -t current && scons
+    eups declare -r . ts_ATDomeTrajectory -t current && \
+    setup ts_ATDomeTrajectory -t current && scons || py.test
 
 WORKDIR /home/saluser/repos/ts_ATMCSSimulator
 RUN  source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

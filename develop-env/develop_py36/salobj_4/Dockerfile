@@ -16,7 +16,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_salobj -t current && \
     eups declare -r . -t current && \
     setup ts_scriptqueue -t current && \
-    scons
+    scons || py.test
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh

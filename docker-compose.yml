@@ -28,7 +28,8 @@ services:
     depends_on:
       - salobj
     build:
-      context: ./develop-env/develop_py36/salobj_4/Dockerfile.step1
+      context: ./develop-env/develop_py36/salobj_4/
+      dockerfile: Dockerfile.step1
       labels:
         com.description: Develop environment image built for salobj 4.
       args:
@@ -44,7 +45,7 @@ services:
     depends_on:
       - salobj
     build:
-      context: ./develop-env/develop_py36/salobj_4/Dockerfile
+      context: ./develop-env/develop_py36/salobj_4/
       labels:
         com.description: Develop environment image built for salobj 4.
       args:
