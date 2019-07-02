@@ -1,34 +1,55 @@
 version: "3.7"
 services:
   base:
-    image: lsstts/base-env:20190621
+    image: lsstts/base-env:${IMAGE_TAG}
     build:
       context: ./develop-env/base
       labels:
         com.description: "LSST Telescope and Site base development image."
       args:
-        image_tag: 7-stack-lsst_distrib-w_2019_08
-  develop-env_py36_salobj4:
-    image: lsstts/develop-env:salobj4_${IMAGE_TAG}
+        image_tag: ${IMAGE_TAG}
+#        image_tag: 7-stack-lsst_distrib-w_2019_08
+  salobj:
+    image: lsstts/salobj:${IMAGE_TAG}
     depends_on:
       - base
     build:
-      context: ./develop-env/develop_py36/salobj_4/
+      context: ./develop-env/salobj_4/
       labels:
-        com.description: Develop environment image built for salobj 4.
+        com.description: Docker image with SalObj.
       args:
         base_image_tag: 20190621
         sal_v: "tags/v3.10.0"
         salobj_v: "tags/v4.2.0"
         xml_v: "tags/v3.10.0"
         idl_v: "develop"
-        scriptqueue_v: "tags/v2.1.0"
+  step1:
+    image: step1:${IMAGE_TAG}
+    depends_on:
+      - salobj
+    build:
+      context: ./develop-env/develop_py36/salobj_4/
+      dockerfile: Dockerfile.step1
+      labels:
+        com.description: Develop environment image built for salobj 4.
+      args:
+        base_image_tag: ${IMAGE_TAG}
         config_attcs_v: "tags/v0.1-alpha.4"
         atmcs_v: "tags/v0.6.0"
         atdome_v: "tags/v0.6.1"
         atdometraj_v: "tags/v0.8.1"
         standardscripts_v: "tags/v0.4.0"
         externalscripts_v: "tags/v0.1.0"
+  develop-env_py36_salobj4:
+    image: lsstts/develop-env:salobj4_${IMAGE_TAG}
+    depends_on:
+      - salobj
+    build:
+      context: ./develop-env/develop_py36/salobj_4/
+      labels:
+        com.description: Develop environment image built for salobj 4.
+      args:
+        scriptqueue_v: "tags/v2.1.0"
   develop-env_py36_salobj3:
     image: lsstts/develop-env:salobj3_${IMAGE_TAG}
     depends_on:
