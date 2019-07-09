@@ -1,5 +1,12 @@
 site_name: My Docs
+nav:
+- 'index.md'
+- 'csc_development.md'
+- 'installing_docker_on_centos.md'
+- 'sal_development.md'
+- 'using_adlink_tools_on_macos.md'
 theme:
   name: 'material'
 markdown_extensions:
   - admonition
+  - pymdownx.superfences
