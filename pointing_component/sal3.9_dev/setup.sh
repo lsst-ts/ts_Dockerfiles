@@ -12,5 +12,11 @@ setup lsst_distrib
 source $LSST_SDK_INSTALL/setup.env
 setup ts_sal -t $USER
 
-/home/saluser/repos/ts_pointing_common/build/bin/ATPtgController
+while :
+    do
+        /home/saluser/repos/ts_pointing_common/build/bin/ATPtgController
+        echo "# ATPtg exited. Restarting..."
+done
+
+
 # /bin/bash --rcfile /home/saluser/.bashrc

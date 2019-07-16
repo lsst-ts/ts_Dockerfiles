@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+
+        kafka_ATCamera:
+                image: lsstts/kafka:latest
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.150"
+                entrypoint: ["/home/saluser/efd_writers.sh", "ATCamera", "kafkawriter"]
+
+        kafka_Test:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.151"
+                entrypoint: ["/home/saluser/efd_writers.sh", "Test", "kafkawriter"]
+
+networks:
+  default:
+    external:
+      name: lab-priv-network
+  lab-priv-network:
+    external: true

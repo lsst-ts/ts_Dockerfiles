@@ -1,24 +1,31 @@
-FROM lsstts/develop-env:latest
+FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
 USER root
 
+RUN wget http://www.maier-komor.de/xjobs/xjobs-20170829.tgz && \
+    tar zxvf xjobs-20170829.tgz && \
+    cd xjobs-20170829 && \
+    ./configure && \
+    make && make install
+
 RUN yum install -y librdkafka-devel
+
+RUN rm -rf xjobs-20170829 xjobs-20170829.tgz
 
 USER saluser
 
+COPY make_efd_writter.sh /home/saluser/repos/ts_sal/bin/
+
 WORKDIR /home/saluser/repos/ts_sal/test
+
+RUN git fetch --all && git checkout "tickets/DM-20529_2"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
-    cp ~/repos/ts_xml/sal_interfaces/*xml . && \
-    cp ~/repos/ts_xml/sal_interfaces/ATCamera/*xml . && \
-    salgenerator ATCamera validate && \
-    salgenerator ATCamera sal html && \
-    salgenerator ATCamera sal cpp && \
-    salgenerator ATCamera lib && \
+    for COMP in Test Script ScriptQueue ATPtg ATMCS ATPneumatics ATHexapod ATAOS ATDome ATDomeTrajectory ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer; do make_efd_writter.sh $COMP; done && \
     echo "source ${LSST_SDK_INSTALL}/lsstsal/scripts/genkafkaefd.tcl ; updatekafkaschema" | tclsh
 
 WORKDIR ${HOME}
