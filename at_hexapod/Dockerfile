@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:20190509
+FROM lsstts/develop-env:20190705_sal3.10.0_salobj
 
 MAINTAINER Andres Anania <aanania@lsst.org>
 
@@ -9,7 +9,7 @@ ENV TSREPOS=/home/saluser/repos
 
 RUN git clone https://github.com/lsst-ts/pythonFileReader.git -b develop
 RUN git clone https://github.com/lsst-ts/pythonCommunicator.git -b develop
-RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git -b couger01/fix/dm-19762
+RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     cd ${TSREPOS}/pythonFileReader && \
@@ -19,6 +19,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_xml -t current && \
     setup ts_sal -t current && \
     cd ${TSREPOS}/ts_salobjATHexapod && \
+    git checkout "tags/v0.2.0" -b "v0.2.0" && \
     conda install -y -c conda pyqt && \
     conda install -y -c conda pyqtgraph && \
     eups declare -r ${TSREPOS}/ts_salobjATHexapod ts_salobjATHexapod git -t current && \

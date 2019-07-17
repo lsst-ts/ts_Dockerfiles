@@ -28,6 +28,71 @@ services:
                                 ipv4_address: "10.0.100.151"
                 entrypoint: ["/home/saluser/efd_writers.sh", "Test", "kafkawriter"]
 
+        kafka_ATHeaderService:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.152"
+                entrypoint: ["/home/saluser/efd_writers.sh", "ATHeaderService", "kafkawriter"]
+
+        kafka_ATArchiver:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.153"
+                entrypoint: ["/home/saluser/efd_writers.sh", "ATArchiver", "kafkawriter"]
+
+        kafka_ATMonochromator:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.154"
+                entrypoint: ["/home/saluser/efd_writers.sh", "ATMonochromator", "kafkawriter"]
+
+        kafka_ATSpectrograph:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.155"
+                entrypoint: ["/home/saluser/efd_writers.sh", "ATSpectrograph", "kafkawriter"]
+
+        kafka_Electrometer:
+                image: lsstts/kafka:sal3.10_xml3.10
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - LSST_EFD_HOST=localhost
+                        - LSST_KAFKA_BROKERS=140.252.32.142:31090
+                volumes:
+                        - ./efd_writers.sh:/home/saluser/efd_writers.sh
+                networks:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.156"
+                entrypoint: ["/home/saluser/efd_writers.sh", "Electrometer", "kafkawriter"]
+
 networks:
   default:
     external:

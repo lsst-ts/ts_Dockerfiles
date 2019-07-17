@@ -4,15 +4,7 @@ LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
 USER root
 
-RUN wget http://www.maier-komor.de/xjobs/xjobs-20170829.tgz && \
-    tar zxvf xjobs-20170829.tgz && \
-    cd xjobs-20170829 && \
-    ./configure && \
-    make && make install
-
 RUN yum install -y librdkafka-devel
-
-RUN rm -rf xjobs-20170829 xjobs-20170829.tgz
 
 USER saluser
 
@@ -25,7 +17,7 @@ RUN git fetch --all && git checkout "tickets/DM-20529_2"
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
-    for COMP in Test Script ScriptQueue ATPtg ATMCS ATPneumatics ATHexapod ATAOS ATDome ATDomeTrajectory ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer; do make_efd_writter.sh $COMP; done && \
+    for COMP in Test ; do make_efd_writter.sh $COMP; done && \
     echo "source ${LSST_SDK_INSTALL}/lsstsal/scripts/genkafkaefd.tcl ; updatekafkaschema" | tclsh
 
 WORKDIR ${HOME}
