@@ -8,14 +8,17 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. repos/ts_sal/setup.env
+. ~/repos/ts_sal/setup.env
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 
 setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_scriptqueue -t current
 setup ts_salobjATHexapod -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+while :
+    do
+        runATHexapodCSC.py
+        echo "# CSC exited. Restarting..."
+done
