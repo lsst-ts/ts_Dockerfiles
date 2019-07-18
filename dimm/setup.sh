@@ -13,13 +13,13 @@ echo "#"
 echo "# Setting up sal, salobj and ataos"
 
 setup ts_salobj -t current
-setup ts_ataos -t current
+setup ts_dimm -t current
 
-cd /home/saluser/repos/ts_ataos/bin/
-echo "# Starting ATAOS CSC"
+echo "# Starting DIMM CSC"
 
 while :
     do
-        python ./ataos_csc.py
+        dimm_csc.py $CSC_INDEX
+        echo "# CSC exited. Restarting..."
 done
 

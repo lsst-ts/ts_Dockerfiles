@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    environment {
+        registryCredential = "dockerhub-lssttsadmin"
+        dockerImageNameBuild = "lsstts/base-env:${image_tag}"
+        dockerImageBuild = ""
+    }
+
+    stages {
+        stage("Build Docker image") {
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg PYTHON_VERSION=${env.python_version} --build-arg CONDA_VERSION=${env.conda_version} --build-arg image_tag=${env.image_tag} ./develop-env/base/")
+                }
+            }
+        }
+
+        stage("Push Docker image") {
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageBuild.push()
+                    }
+                }
+            }
+        }
+    }
+}

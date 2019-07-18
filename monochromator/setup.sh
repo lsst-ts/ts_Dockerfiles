@@ -10,16 +10,15 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and ataos"
+echo "# Starting monochromator CSC"
 
 setup ts_salobj -t current
-setup ts_ataos -t current
+setup ts_monochromator -t current
 
-cd /home/saluser/repos/ts_ataos/bin/
-echo "# Starting ATAOS CSC"
-
+# /bin/bash --rcfile /home/saluser/.bashrc
 while :
     do
-        python ./ataos_csc.py
+        python /home/saluser/repos/ts_atmonochromator/bin/atmonochromator_csc.py
+        echo "# CSC exited. Restarting..."
 done
 

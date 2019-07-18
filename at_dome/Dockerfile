@@ -1,0 +1,10 @@
+FROM lsstts/develop-env:20190509 
+
+WORKDIR /home/saluser/repos/ts_config_attcs
+RUN git fetch && git pull && git checkout "tags/v0.1-alpha.3" -b "v0.1-alpha.3"
+
+WORKDIR /home/saluser
+COPY setup.sh /home/saluser/.setup.sh
+
+ENTRYPOINT ["/bin/bash", "--"]
+CMD ["/home/saluser/.setup.sh"]

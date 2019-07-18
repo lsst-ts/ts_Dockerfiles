@@ -10,16 +10,17 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and ataos"
+echo "# Setting up ATDome"
 
+setup ts_xml -t current
+setup ts_sal -t current
 setup ts_salobj -t current
-setup ts_ataos -t current
+setup ts_ATDome -t current
 
-cd /home/saluser/repos/ts_ataos/bin/
-echo "# Starting ATAOS CSC"
+echo "# Starting CSC"
 
 while :
     do
-        python ./ataos_csc.py
+        run_atdome.py -s
+        echo "# CSC exited. Restarting..."
 done
-

@@ -10,16 +10,12 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and ataos"
+echo "# Setting up ts_environment."
 
-setup ts_salobj -t current
-setup ts_ataos -t current
+setup ts_salobj -t $USER
+setup ts_environment -t $USER
 
-cd /home/saluser/repos/ts_ataos/bin/
-echo "# Starting ATAOS CSC"
+echo "#"
+echo "# Running environment CSC with index" $STATION_INDEX
 
-while :
-    do
-        python ./ataos_csc.py
-done
-
+python /home/saluser/repos/ts_environment/bin.src/environment_csc.py $STATION_INDEX
