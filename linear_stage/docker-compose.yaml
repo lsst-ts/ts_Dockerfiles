@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  linearstage:
+    image: lsstts/linearstage:develop_sal3.10_salobj3.12
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    volumes:
+      - ./setup.sh:/home/saluser/setup.sh
+    entrypoint:
+      - "/home/saluser/setup.sh"
