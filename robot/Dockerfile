@@ -9,12 +9,17 @@ yum -y install git which mlocate wget && \
 yum clean all && \
 rm -rf /var/cache/yum
 
+COPY --chown=1001:1001 python-3.7.3-.el7.centos.x86_64.rpm $HOME/
+RUN ls $HOME
+RUN rpm -ivh --nodeps $HOME/python-3.7.3-.el7.centos.x86_64.rpm
+
 RUN updatedb
 
 RUN easy_install-3.6 pip && \
 python3.6 -m pip install --upgrade pip setuptools numpy && \
 python3.6 -m pip install robotframework && \
-python3.6 -m pip install pytest && \
+python3.6 -m pip install astropy && \
+python3.6 -m pip install pytest
 
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
