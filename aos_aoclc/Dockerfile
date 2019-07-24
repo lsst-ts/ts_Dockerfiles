@@ -1,13 +1,13 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software with the needed AOS repos
 
-FROM lsstts/aos:w_2019_20
+FROM lsstts/aos:w_2019_24
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
-ARG SIMS_VERSION=sims_w_2019_20
+ARG SIMS_VERSION=sims_w_2019_24
 ARG AOS_REPOS=$LSST_USER_HOME/aos_repos
 
 USER root
@@ -37,19 +37,19 @@ RUN mkdir -p $AOS_REPOS \
     && cd $AOS_REPOS\
     && git clone -b master https://github.com/lsst-dm/phosim_utils.git \
     && cd phosim_utils/ \
-    && git checkout 7b02084 \
+    && git checkout c1f2391 \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_wep.git \
+    && git clone -b develop https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout b0d90ce \
+    && git checkout 082fdd7 \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
+    && git clone -b develop https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
-    && git checkout 8b2f74b \
+    && git checkout ccf971c \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_phosim.git \
+    && git clone -b develop https://github.com/lsst-ts/ts_phosim.git \
     && cd ts_phosim/ \
-    && git checkout 9078901
+    && git checkout 774614c
 
 # Add the PhoSim and output directory
 RUN mkdir -p phosim \
