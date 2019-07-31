@@ -42,11 +42,11 @@ rnogo 3600.0                          ; arcsec
 pointing_model at.mod
 
 ; Axis limits
-horizon_limit 25.0
-azimuth_low_limit -265.0
-azimuth_high_limit 265.0
-rotator_low_limit -85.0
-rotator_high_limit 85.0
+horizon_limit 15.0
+azimuth_low_limit -270.0
+azimuth_high_limit 270.0
+rotator_low_limit -60.0
+rotator_high_limit 160.0
 
 ; Additional margin when slewing to a new target
 slew_limit_margin 1.0
@@ -74,5 +74,10 @@ post_telem {
   telem_slow_multiplier 25
 }
 
-
+command_timeouot {
+  ack 10000; ms              General timeouts for receiving SAL__CMD_ACK
+  inprogress 10000; ms       General timeouts for receiving SAL__CMD_INPROGRESS (after SAL__CMD_ACK)
+  start_tracking 10000; ms  Command reply timeout for ATMCS startTracking command (after SAL__CMD_INPROGRESS)
+  stop_tracking 10000; ms   Command reply timeout for ATMCS stopTracking command (after SAL__CMD_INPROGRESS)
+}
 
