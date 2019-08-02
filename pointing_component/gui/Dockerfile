@@ -1,4 +1,4 @@
-FROM tiagorib/ptkernel:RCv0.3_sal3.9
+FROM tiagorib/ptkernel:rc0.5_sal3.10
 
 USER root
 
