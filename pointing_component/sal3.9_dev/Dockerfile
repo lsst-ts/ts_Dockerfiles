@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:develop
+FROM lsstts/develop-env:20190514
 
 WORKDIR /home/saluser/repos
 
@@ -32,7 +32,8 @@ WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
 RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git fetch && git checkout "tickets/DM-19890"
+#RUN git fetch && git checkout "tickets/DM-19890"
+RUN git fetch && git checkout "tags/RC_v0.5" -v "RC_v0.5"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \

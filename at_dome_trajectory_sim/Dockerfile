@@ -1,9 +1,5 @@
-FROM lsstts/develop-env:20190509
+FROM lsstts/develop-env:20190705_sal3.10.0_salobj
 
-USER saluser
-WORKDIR /home/saluser/repos
-
-WORKDIR /home/saluser
 COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]
