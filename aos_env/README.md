@@ -8,6 +8,11 @@
 
 ## Tag List
 
+- *w_2019_31*
+    - *lsst_distrib (tag: w_2019_31)*
+    - *lsst_sims (tag: sims_w_2019_31)*
+    - *ipython*
+    - *scikit-image*
 - *w_2019_29*
     - *lsst_distrib (tag: w_2019_29)*
     - *lsst_sims (tag: sims_w_2019_29)*
