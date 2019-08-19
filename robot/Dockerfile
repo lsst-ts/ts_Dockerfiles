@@ -26,7 +26,7 @@ RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
 RUN groupadd -r -g 1003 ${USER} && \
 groupadd -r -g 993 docker && \
-useradd -r -u 1003 -g ${USER} -G docker -m ${USER} && \
+useradd -r -u 1003 -g ${USER} -G docker -m ${USER} -d ${HOME} && \
 chown ${USER}:docker ${HOME}
 
 WORKDIR ${HOME}
