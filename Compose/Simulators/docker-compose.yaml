@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
     atmcs-sim:
-        image: lsstts/at_mcs_sim:3.9-0.4
+        image: lsstts/at_mcs_sim:0.4_sal3.10_salobj3.12
         container_name: atmcs-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -13,7 +13,7 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atdome-sim:
-        image: lsstts/at_dome_sim:3.9-0.5
+        image: lsstts/at_dome_sim:v0.6.1_sal3.10_salobj3.12
         container_name: atdome-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -23,7 +23,7 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atdometrajectory-sim:
-        image: lsstts/at_dome_trajectory_sim:3.9-0.6a
+        image: lsstts/at_dome_trajectory_sim:v0.8.1
         container_name: atdometrajectory-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -33,7 +33,7 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atpneumatics-sim:
-        image: lsstts/at_pneumatics_sim:3.9-0.2-3.11
+        image: lsstts/at_pneumatics_sim:0.2_sal3.10_salobj3.12
         container_name: atpneumatics-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -43,7 +43,7 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
 
     ataos-sim:
-        image: lsstts/ataos:0.2.2
+        image: lsstts/ataos:v1.1.0
         container_name: ataos-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -53,7 +53,7 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atptg-sim:
-        image: tiagorib/ptkernel:develop
+        image: tiagorib/ptkernel:rc0.5_sal3.10
         container_name: atptg-sim
         environment:
             - LSST_DDS_DOMAIN=atsimulatorcsc
@@ -61,7 +61,7 @@ services:
           - simulation-network
 
     athexapod-sim:
-      image: lsstts/ts_athexapod:3.9-dm-19762
+      image: lsstts/ts_athexapod:v0.2.0
       container_name: athexapod-sim
       environment:
         - LSST_DDS_DOMAIN=atsimulatorcsc
