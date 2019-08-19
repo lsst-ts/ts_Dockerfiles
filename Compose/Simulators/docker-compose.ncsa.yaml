@@ -3,46 +3,46 @@ services:
   atmcs-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
   
   atdome-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
   
   atdometrajectory-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
 
   atpneumatics-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
 
   ataos-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
     networks:
-      - teststand-network
+      teststand-network:
 
   atptg-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
     networks:
-      - teststand-network
+      teststand-network:
 
   athexapod-sim:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
     volumes:
       - ./tcpConfiguration.ncsa.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
 
   hexapod-sim:
     networks:
@@ -52,8 +52,8 @@ services:
   simulation-tests:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
-    networks:
-      - teststand-network
+    networks: 
+      teststand-network:
 
 networks:
   teststand-network:

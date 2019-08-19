@@ -1,0 +1,51 @@
+version: '3.6'
+services:
+  atmcs-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks:
+      simulation-network:
+  atdome-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks:
+      simulation-network:
+  atdometrajectory-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks:
+      simulation-network:
+
+  atpneumatics-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks: 
+      simulation-network:
+    
+  ataos-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks: 
+      simulation-network:
+
+  athexapod-sim:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    volumes:
+      - ./tcpConfiguration.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
+    networks: 
+      simulation-network:
+
+  hexapod-sim:
+    networks:
+      simulation-network:
+        ipv4_address: 172.18.0.8
+
+  simulation-tests:
+    environment:
+      - LSST_DDS_DOMAIN=atsimulatorcsc
+    networks: 
+      simulation-network:
+networks:
+  simulation-network:
+    external: true
