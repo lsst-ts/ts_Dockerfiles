@@ -27,11 +27,6 @@ services:
     ataos-sim:
         image: lsstts/ataos:v1.1.0
         container_name: ataos-sim
-        environment:
-            - LSST_DDS_DOMAIN=atsimulatorcsc
-        networks: 
-          simulation-network:
-
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atptg-sim:
