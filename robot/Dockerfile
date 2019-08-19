@@ -24,8 +24,9 @@ python3.6 -m pip install pytest
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
-RUN groupadd -g 1001 ${USER} && \
-useradd -r -u 1001 -g ${USER} -m ${USER} && \
+RUN groupadd -g 1003 ${USER} && \
+groupadd -g 993 docker && \
+useradd -r -u 1003 -g ${USER} -g docker -m ${USER} && \
 chown ${USER}:${USER} ${HOME}
 
 WORKDIR ${HOME}
