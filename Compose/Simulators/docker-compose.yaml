@@ -13,8 +13,8 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atdometrajectory-sim:
-        image: lsstts/at_dome_trajectory_sim:v0.8.1
-        container_name: atdometrajectory-sim
+        image: lsstts/at_dome_trajectory:v0.8.1
+        container_name: atdometrajectory
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atpneumatics-sim:
@@ -26,7 +26,7 @@ services:
 
     ataos-sim:
         image: lsstts/ataos:v1.1.0
-        container_name: ataos-sim
+        container_name: ataos
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atptg-sim:
