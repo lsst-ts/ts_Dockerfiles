@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:salobj4_b26
+FROM lsstts/develop-env:20190705_sal3.10.0_salobj
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -24,13 +24,25 @@ RUN git fetch --all && git checkout "v3.10.0" -b "v3.10.0"
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
-    make_idl_files.py ATCamera
+     make_idl_files.py ATCamera \
+                       ATHeaderService \
+                       ATArchiver \
+                       ATMonochromator \
+                       ATSpectrograph \
+                       Electrometer \
+                       Test \
+                       ATPtg \
+                       ATMCS \
+                       ATDome \
+                       ATDomeTrajectory \
+                       ATPneumatics \
+                       ATAOS
 
 WORKDIR /home/saluser/repos/ts_salobj
 
 RUN git fetch --all
 
-RUN git checkout tickets/DM-20148
+RUN git checkout "v4.5.0" -b "v4.5.0"
 
 WORKDIR /home/saluser/repos/
 
