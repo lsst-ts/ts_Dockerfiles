@@ -36,9 +36,6 @@ services:
     athexapod-sim:
       image: lsstts/ts_athexapod:v0.2.0
       container_name: athexapod-sim
-      entrypoint: ["/home/saluser/startCSC.sh"]
-      volumes:
-        - ./startCSC.sh:/home/saluser/startCSC.sh
       depends_on:
         - hexapod-sim
 
@@ -49,7 +46,7 @@ services:
       tty: true
 
     simulation-tests:
-      image: lsstts/simulation_tests:latest
+      image: lsstts/develop-env:20190705_sal3.10.0_salobj
       container_name: simulation-tests
       ports:
         - "8886:8886"

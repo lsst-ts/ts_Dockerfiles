@@ -52,6 +52,9 @@ services:
   simulation-tests:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
+    volumes:
+      - ./jupyter_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./start_jupyter_lab.sh:/home/saluser/.setup.sh
     networks: 
       teststand-network:
 
