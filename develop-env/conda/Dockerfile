@@ -24,6 +24,7 @@ RUN source ~/miniconda3/bin/activate && mkdir dds && cd dds && \
 tar xvzf /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/tools/python-support.tgz && cd python/src \
 && source ~/repos/ts_sal/setup.env && python setup.py install
 ARG xml_branch=v3.10.2
+ENV TS_XML_VERSION=${xml_branch}
 RUN cd repos && git clone https://github.com/lsst-ts/ts_xml && cd ts_xml \ 
     && git checkout ${xml_branch}
 RUN cd repos && git clone https://github.com/lsst-ts/ts_idl
