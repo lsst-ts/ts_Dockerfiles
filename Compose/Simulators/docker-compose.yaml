@@ -46,7 +46,7 @@ services:
       tty: true
 
     simulation-tests:
-      image: lsstts/develop-env:20190705_sal3.10.0_salobj
+      image: lsstts/develop-env:salobj4_b30
       container_name: simulation-tests
       ports:
         - "8886:8886"
