@@ -16,7 +16,7 @@ ENV PYTHON_BUILD_VERSION=${PYTHON_VERSION}
 ENV PYTHON_BUILD_LOCATION=/home/saluser/miniconda3
 ENV TS_IDL_DIR=/home/saluser/repos/ts_idl/
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && chmod +x miniconda.sh && ./miniconda.sh -b
-RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj cython
+RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj cython conda-build anaconda-client
 ARG sal_branch=v3.10.0
 RUN mkdir repos && cd repos && git clone https://github.com/lsst-ts/ts_sal \ 
     && cd ts_sal && git checkout ${sal_branch} && chmod -R +x bin.src
