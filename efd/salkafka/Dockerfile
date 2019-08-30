@@ -1,25 +1,8 @@
-FROM lsstts/develop-env:20190705_sal3.10.0_salobj
+FROM lsstts/develop-env:salobj4_b30
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
-USER root
-
-# RUN yum install -y librdkafka-devel
-
 USER saluser
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c conda-forge kafkacat
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install "kafkit[aiohttp]"
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install aiokafka && \
-    pip install confluent_kafka
-
-WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout "v3.10.0" -b "v3.10.0"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
@@ -36,13 +19,8 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
                        ATDome \
                        ATDomeTrajectory \
                        ATPneumatics \
-                       ATAOS
-
-WORKDIR /home/saluser/repos/ts_salobj
-
-RUN git fetch --all
-
-RUN git checkout "v4.5.0" -b "v4.5.0"
+                       ATAOS \
+                       MTM1M3
 
 WORKDIR /home/saluser/repos/
 
@@ -54,7 +32,6 @@ RUN git checkout tickets/DM-20911
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
     eups declare -r . -t current && \
     setup ts_salkafka -t current && \
     scons
