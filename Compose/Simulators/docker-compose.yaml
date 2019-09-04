@@ -31,7 +31,7 @@ services:
   
     atptg-sim:
         image: tiagorib/ptkernel:rc0.5_sal3.10
-        container_name: atptg-sim
+        container_name: atptg
 
     athexapod-sim:
       image: lsstts/ts_athexapod:v0.2.0
@@ -45,8 +45,17 @@ services:
       stdin_open: true
       tty: true
 
+    queue:
+      image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+      container_name: queue
+      volumes:
+        - ./queue_setup.sh:/home/saluser/.setup.sh
+      stdin_open: true
+      tty: true
+
+
     simulation-tests:
-      image: lsstts/develop-env:salobj4_b30
+      image: lsstts/develop-env:20190705_sal3.10.0_salobj
       container_name: simulation-tests
       ports:
         - "8886:8886"

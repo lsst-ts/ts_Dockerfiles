@@ -58,6 +58,12 @@ services:
     networks: 
       teststand-network:
 
+  queue:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks:
+      teststand-network:
+
 networks:
   teststand-network:
     external: true
