@@ -1,0 +1,63 @@
+version: '3.6'
+services:
+  atmcs-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks: 
+      teststand-network:
+  
+  atdome-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks: 
+      teststand-network:
+  
+  atdometrajectory-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks: 
+      teststand-network:
+
+  atpneumatics-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks: 
+      teststand-network:
+
+  ataos-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks:
+      teststand-network:
+
+  atptg-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    networks:
+      teststand-network:
+
+  athexapod-sim:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    volumes:
+      - ./tcpConfiguration.ncsa.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
+    networks: 
+      teststand-network:
+
+  hexapod-sim:
+    networks:
+      teststand-network:
+        ipv4_address: 172.17.0.8
+
+  simulation-tests:
+    environment:
+      - LSST_DDS_DOMAIN=ncsateststand
+    volumes:
+      - ./jupyter_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./start_jupyter_lab.sh:/home/saluser/.setup.sh
+    networks: 
+      teststand-network:
+
+networks:
+  teststand-network:
+    external: true

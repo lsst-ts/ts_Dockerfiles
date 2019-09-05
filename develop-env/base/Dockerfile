@@ -73,8 +73,12 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda update -y pyqt fontconfig sqlalchemy && \
+    conda install -y -c conda-forge kafkacat && \
     conda clean -ay && pip install "documenteer[pipelines]==0.4.2" && \
+    pip install "kafkit[aiohttp]" && \
+    pip install aiokafka && \
     pip install cmd2 && \
+    pip install confluent_kafka && \
     pip install asynccmd
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycodestyle
