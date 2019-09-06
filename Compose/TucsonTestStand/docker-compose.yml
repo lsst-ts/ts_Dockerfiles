@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   queue:
-    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    image: lsstts/develop-env:salobj4_b30
     container_name: queue
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -17,7 +17,7 @@ services:
         ipv4_address: "10.0.100.201"
 
   script:
-    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    image: lsstts/develop-env:salobj4_b30
     container_name: script
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
