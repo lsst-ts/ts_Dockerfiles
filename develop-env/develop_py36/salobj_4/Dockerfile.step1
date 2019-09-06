@@ -53,14 +53,6 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     Electrometer ATPtg ATCamera ATMonochromator ATSpectrograph \
     FiberSpectrograph
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t current && \
-    setup ts_idl -t current && \
-    make_salpy_libs.py ScriptQueue Script Test ATDome ATMCS ATDomeTrajectory \
-    Electrometer ATPtg ATCamera ATMonochromator ATSpectrograph \
-    FiberSpectrograph
-
 WORKDIR /home/saluser/repos/ts_ATDome
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
