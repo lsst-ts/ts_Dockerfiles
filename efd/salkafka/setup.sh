@@ -14,7 +14,7 @@ echo "# Setting up salkafka"
 
 setup ts_salkafka -t current
 
-#/bin/bash --rcfile /home/saluser/.bashrc
+. /home/saluser/.bashrc
 
 # BROKER_IP=140.252.32.142
 # BROKER_PORT=31090
@@ -22,7 +22,10 @@ setup ts_salkafka -t current
 # LOG_LEVEL=10
 # CSC_LIST=ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATPtg ATMCS ATDome ATDomeTrajectory ATPneumatics
 
+make_idl_files.py $CSC_LIST
+
 run_salkafka_producer.py --broker  $BROKER_IP:$BROKER_PORT \
                          --registry  $REGISTRY_ADDR \
                          --loglevel $LOG_LEVEL \
+                         --replication-factor $REPLICATION \
                          $CSC_LIST
