@@ -68,7 +68,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
 
 WORKDIR /home/saluser/
-COPY ATPtg.info /home/saluser/repos/ts_pointing_common/install/data/ATPtg.info
+# COPY ATPtg.info /home/saluser/repos/ts_pointing_common/install/data/ATPtg.info
 COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]

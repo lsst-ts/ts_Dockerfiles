@@ -43,10 +43,11 @@ pointing_model at.mod
 
 ; Axis limits
 horizon_limit 15.0
+elevation_tracking_high_limit 86.0
 azimuth_low_limit -270.0
 azimuth_high_limit 270.0
-rotator_low_limit -60.0
-rotator_high_limit 160.0
+rotator_low_limit -175.0
+rotator_high_limit 175.0
 
 ; Additional margin when slewing to a new target
 slew_limit_margin 1.0
@@ -75,9 +76,15 @@ post_telem {
 }
 
 command_timeouot {
-  ack 10000; ms              General timeouts for receiving SAL__CMD_ACK
-  inprogress 10000; ms       General timeouts for receiving SAL__CMD_INPROGRESS (after SAL__CMD_ACK)
-  start_tracking 10000; ms  Command reply timeout for ATMCS startTracking command (after SAL__CMD_INPROGRESS)
-  stop_tracking 10000; ms   Command reply timeout for ATMCS stopTracking command (after SAL__CMD_INPROGRESS)
+  ack 1000; ms              General timeouts for receiving SAL__CMD_ACK
+  start_tracking 10000; ms  Command reply timeout for ATMCS startTracking command (after ACK/INPROGRESS received)
+  stop_tracking 1000; ms   Command reply timeout for ATMCS stopTracking command (after ACK/INPROGRESS received)
 }
+
+airmass {
+  warning_diff 0.1;
+  default_limit 1.6;
+}
+
+
 
