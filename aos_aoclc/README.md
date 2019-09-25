@@ -8,6 +8,13 @@
 
 ## Tag List
 
+- *w_2019_38*
+    - *lsst_distrib (tag: w_2019_38)*
+    - *lsst_sims (tag: sims_w_2019_38)*
+    - *phosim_utils - master branch (commit: c1f2391)*
+    - *ts_wep - develop branch (commit: 5d20039)*
+    - *ts_ofc - develop branch (commit: e38c4e1)*
+    - *ts_phosim - develop branch (commit: a2a42f3)*
 - *w_2019_24*
     - *lsst_distrib (tag: w_2019_24)*
     - *lsst_sims (tag: sims_w_2019_24)*
