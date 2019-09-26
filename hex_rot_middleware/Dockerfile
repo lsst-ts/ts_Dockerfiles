@@ -5,7 +5,7 @@ FROM centos:7
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
-ARG LSST_USER_HOME=/home/$LSST_USER
+ARG LSST_USER_HOME=/home/${LSST_USER}
 
 # Set the needed environment variables of SAL
 ENV SAL_HOME=/opt/lsst/ts_sal
@@ -39,7 +39,7 @@ RUN echo "" >> /root/.bashrc \
     && echo "source ${OSPL_HOME}/release.com" >> /root/.bashrc
 
 # Add LSST user
-RUN useradd -ms /bin/bash lsst
+RUN useradd -ms /bin/bash ${LSST_USER}
 
 # Change to LSST user
 USER ${LSST_USER}
