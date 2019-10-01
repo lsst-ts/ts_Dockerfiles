@@ -57,7 +57,7 @@ services:
       - ./start_jupyter_lab.sh:/home/saluser/.setup.sh
     networks: 
       teststand-network:
-
+        ipv4_address: 172.17.0.14
   queue:
     environment:
       - LSST_DDS_DOMAIN=ncsateststand
