@@ -7,4 +7,6 @@ setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
 setup ts_scriptqueue -t current
-jupyter lab --ip='*' --port 8886
+setup ts_standardscripts -t current
+setup ts_externalscripts -t current
+jupyter lab --ip='172.17.0.14' --port 8886
