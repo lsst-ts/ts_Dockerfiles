@@ -2,3 +2,60 @@
 This Dockerfile creates the base image for the development environment. It
 will pull the base image from `lsstsqre/centos` and add the required software
 to prepare it to receive the T&S base development package.
+
+- 2019/Oct/07
+    - Included packages (`yum install`):
+        - epel-release
+        - unzip
+        - wget
+        - git
+        - dos2unix
+        - tk
+        - tk-devel
+        - swig
+        - ncurses-libs
+        - xterm
+        - xorg-x11-fonts-misc
+        - java-1.8.0-openjdk-devel
+        - maven
+        - which
+        - gnome-terminal
+        - mariadb
+        - mariadb-devel
+        - nano
+        - emacs
+        - ifconfig
+        - gdb
+        - ltrac
+        - strace
+        - net-tools
+        - ntp
+        - tcpdump
+        - OpenSpliceDDS-6.9.0-1
+        - tzdata
+    - Included packages (`conda install`):
+        - jsonschema=3.0.1
+        - ipython
+        - jupyter
+        - jupyterlab
+        - tornado=4.5.3
+        - jinja2
+        - ephem
+        - gitpython
+        - kafkacat
+        - documenteer[pipelines]==0.4.2
+        - asynctest
+        - pytest-asyncio
+        - moto
+        - boto3
+        - conda-build
+        - pytest-flake8
+    - Included packages (`pip install`):
+        - kafkit[aiohttp]
+        - aiokafka
+        - cmd2
+        - confluent_kafka
+        - asynccmd
+        - aiounittest
+        - ipdb
+        - wget
