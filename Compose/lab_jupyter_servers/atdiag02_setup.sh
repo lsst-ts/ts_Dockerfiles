@@ -20,4 +20,7 @@ setup ts_scriptqueue -t current
 echo "#"
 echo "# Starting jupyter lab server"
 
-jupyter lab --ip 10.0.100.204 --port 8885
+while :
+  do
+    jupyter lab --ip 10.0.100.204 --port 8885
+done

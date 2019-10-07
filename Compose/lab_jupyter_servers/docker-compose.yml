@@ -18,21 +18,20 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.230"
 
-  atdiag02:
-    image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_25
+  mreuter:
+    image: lsstts/develop-env:salobj4_b30
     container_name: atdiag02
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
-      - /home/saluser/ingest/:/home/lsst/ingest/
-      - /home/saluser/develop_mreuter:/home/lsst/develop
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_mreuter:/home/saluser/develop
       - /mnt/dmcs/:/mnt/dmcs
       - /mnt/data/:/mnt/data
-      - ./atdiag02_notebook_config.py:/home/lsst/.jupyter/jupyter_notebook_config.py
-      - ./atdiag02_setup.sh:/home/lsst/.setup.sh
+      - ./atdiag02_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag02_setup.sh:/home/saluser/.setup.sh
     stdin_open: true
     tty: true
-    entrypoint: ["/home/lsst/.setup.sh"]
     networks:
       lab-priv-network:
         ipv4_address: "10.0.100.204"
