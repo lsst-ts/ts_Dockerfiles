@@ -30,6 +30,15 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.202"
 
+  atspectrograph:
+    image: lsstts/atspectrograph:DM-19849
+    container_name: atspec
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.206"
+
   ingester:
     image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_25
     container_name: ingester
