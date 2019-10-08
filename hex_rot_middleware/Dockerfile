@@ -5,7 +5,8 @@ FROM centos:7
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
-ARG LSST_USER_HOME=/home/${LSST_USER}
+ARG LSST_USER_HOME=/home/$LSST_USER
+ARG SAL_XML_BUILD_VER=3.10.0-4.3.0.el7
 
 # Set the needed environment variables of SAL
 ENV SAL_HOME=/opt/lsst/ts_sal
@@ -20,7 +21,7 @@ USER root
 RUN yum update -y \
     && yum install -y git make gcc-c++ xterm xorg-x11-fonts-misc \
     java-1.7.0-openjdk-devel maven python-devel swig tk-devel ncurses-libs \
-    glib-devel glib2-devel.x86_64 cmake \
+    glib-devel glib2-devel.x86_64 libtool autoconf cmake \
     && yum clean all \
     && rm -rf /var/cache/yum
 
@@ -29,7 +30,7 @@ COPY lsst-ts.repo /etc/yum.repos.d/
 
 # Install the needed CSC
 RUN yum makecache fast \
-    && yum install -y Hexapod Rotator \
+    && yum install -y Hexapod-${SAL_XML_BUILD_VER} Rotator-${SAL_XML_BUILD_VER} \
     && yum clean all \
     && rm -rf /var/cache/yum
 

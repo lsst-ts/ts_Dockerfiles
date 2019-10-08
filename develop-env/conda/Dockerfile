@@ -16,7 +16,7 @@ ENV PYTHON_BUILD_VERSION=${PYTHON_VERSION}
 ENV PYTHON_BUILD_LOCATION=/home/saluser/miniconda3
 ENV TS_IDL_DIR=/home/saluser/repos/ts_idl/
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && chmod +x miniconda.sh && ./miniconda.sh -b
-RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj cython
+RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj cython conda-build anaconda-client
 ARG sal_branch=v3.10.0
 RUN mkdir repos && cd repos && git clone https://github.com/lsst-ts/ts_sal \ 
     && cd ts_sal && git checkout ${sal_branch} && chmod -R +x bin.src
@@ -24,6 +24,7 @@ RUN source ~/miniconda3/bin/activate && mkdir dds && cd dds && \
 tar xvzf /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/tools/python-support.tgz && cd python/src \
 && source ~/repos/ts_sal/setup.env && python setup.py install
 ARG xml_branch=v3.10.2
+ENV TS_XML_VERSION=${xml_branch}
 RUN cd repos && git clone https://github.com/lsst-ts/ts_xml && cd ts_xml \ 
     && git checkout ${xml_branch}
 RUN cd repos && git clone https://github.com/lsst-ts/ts_idl
