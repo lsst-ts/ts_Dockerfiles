@@ -6,7 +6,7 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. repos/ts_sal/setup.env
+./repos/ts_sal/setup.env
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 

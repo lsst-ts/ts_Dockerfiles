@@ -3,17 +3,17 @@ version: '3.6'
 services:
 
     atmcs-sim:
-        image: lsstts/at_mcs_sim:0.4_sal3.10_salobj3.12
+        image: lsstts/at_mcs_sim:v0.7.0
         container_name: atmcs-sim
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atdome-sim:
-        image: lsstts/at_dome_sim:v0.6.1_sal3.10_salobj4
+        image: lsstts/at_dome_sim:v0.7.0
         container_name: atdome-sim
         entrypoint: ["/home/saluser/.setup.sh"]
 
     atdometrajectory-sim:
-        image: lsstts/at_dome_trajectory:v0.8.1
+        image: lsstts/at_dome_trajectory:v1.0.0
         container_name: atdometrajectory
         entrypoint: ["/home/saluser/.setup.sh"]
 
@@ -25,13 +25,13 @@ services:
         entrypoint: ["/home/saluser/.setup.sh"]
 
     ataos-sim:
-        image: lsstts/ataos:v1.1.0
+        image: lsstts/ataos:DM-21161_2
         container_name: ataos
         entrypoint: ["/home/saluser/.setup.sh"]
   
     atptg-sim:
-        image: tiagorib/ptkernel:rc0.5_sal3.10
-        container_name: atptg-sim
+        image: tiagorib/ptkernel:v1.1rev0_xml4.2rev0_sal3.10
+        container_name: atptg
 
     athexapod-sim:
       image: lsstts/ts_athexapod:v0.2.0
@@ -44,6 +44,15 @@ services:
       container_name: hexapod-sim
       stdin_open: true
       tty: true
+
+    queue:
+      image: lsstts/develop-env:salobj4_b30
+      container_name: queue
+      volumes:
+        - ./scriptqueue_setup.sh:/home/saluser/.setup.sh
+      stdin_open: true
+      tty: true
+
 
     simulation-tests:
       image: lsstts/develop-env:salobj4_b30
