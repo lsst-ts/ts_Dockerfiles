@@ -40,7 +40,7 @@ RUN echo "" >> /root/.bashrc \
     && echo "source ${OSPL_HOME}/release.com" >> /root/.bashrc
 
 # Add LSST user
-RUN useradd -ms /bin/bash lsst
+RUN useradd -ms /bin/bash ${LSST_USER}
 
 # Change to LSST user
 USER ${LSST_USER}
