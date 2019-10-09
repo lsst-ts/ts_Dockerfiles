@@ -1,26 +1,11 @@
-FROM lsstts/develop-env:salobj4_b30
+FROM lsstts/develop-env:salobj4_b38
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
 USER saluser
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t current && \
-     make_idl_files.py ATCamera \
-                       ATHeaderService \
-                       ATArchiver \
-                       ATMonochromator \
-                       ATSpectrograph \
-                       Electrometer \
-                       Test \
-                       ATPtg \
-                       ATMCS \
-                       ATDome \
-                       ATDomeTrajectory \
-                       ATPneumatics \
-                       ATAOS \
-                       MTM1M3
+WORKDIR /home/saluser/repos/ts_xml
+RUN git checkout tags/v3.10.2 -b tags/v3.10.2
 
 WORKDIR /home/saluser/repos/
 
@@ -28,7 +13,7 @@ RUN git clone https://github.com/lsst-ts/ts_salkafka.git
 
 WORKDIR /home/saluser/repos/ts_salkafka
 
-RUN git checkout tickets/DM-20911
+RUN git checkout "tags/v1.0b1" -b "v1.0b1"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     source /home/saluser/repos/ts_sal/setup.env && \

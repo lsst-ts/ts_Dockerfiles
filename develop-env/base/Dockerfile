@@ -72,14 +72,22 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
 # jsonschema=3.0.1
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda update -y -n base -c defaults conda && \
     conda update -y pyqt fontconfig sqlalchemy && \
-    conda install -y -c conda-forge kafkacat && \
-    conda clean -ay && pip install "documenteer[pipelines]==0.4.2" && \
+    conda install -y -c anaconda-platform asynctest && \
+    conda install -y -c conda-forge pytest-asyncio && \
+    conda install -y -c conda-forge kafkacat moto boto3 && \
+    conda install -y conda-build &&\
+    conda install -y -c conda-forge pytest-flake8 && \
+    conda clean -ay && \
+    pip install "documenteer[pipelines]==0.4.2" && \
     pip install "kafkit[aiohttp]" && \
     pip install aiokafka && \
-    pip install cmd2 && \
     pip install confluent_kafka && \
-    pip install asynccmd
+    pip install asynccmd && \
+    pip install aiounittest && \
+    pip install ipdb && \
+    pip install wget
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycodestyle
 

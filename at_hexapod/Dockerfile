@@ -15,6 +15,9 @@ RUN git clone https://github.com/lsst-ts/pythonFileReader.git -b develop
 RUN git clone https://github.com/lsst-ts/pythonCommunicator.git -b develop
 RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git
 
+WORKDIR ${TSREPOS}/ts_xml
+RUN git fetch --all && git checkout "v4.2rev0" -b "v4.2rev0"
+
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \

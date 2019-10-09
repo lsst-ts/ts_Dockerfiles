@@ -2,10 +2,6 @@ FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
-USER root
-
-RUN yum install -y telnet
-
 USER saluser
 
 WORKDIR /home/saluser/repos
@@ -14,7 +10,7 @@ RUN git clone https://github.com/lsst-ts/ts_environment.git
 WORKDIR /home/saluser
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout "v4.1.1" -b "v4.1.1"
+RUN git fetch --all && git checkout "v4.2rev0" -b "v4.2rev0"
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -23,7 +19,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     make_salpy_libs.py Environment
 
 WORKDIR /home/saluser/repos/ts_environment
-RUN git fetch && git checkout "tags/v0.1.2" -b "v0.1.2"
+RUN git fetch && git checkout "tags/v0.1.3" -b "v0.1.3"
 
 WORKDIR /home/saluser/repos/ts_environment
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
