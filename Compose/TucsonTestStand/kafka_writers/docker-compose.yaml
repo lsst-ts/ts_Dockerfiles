@@ -11,15 +11,35 @@ services:
                         - BROKER_PORT=31090
                         - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
                         - LOG_LEVEL=10
-                        - CSC_LIST=ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATPtg ATMCS ATDome ATDomeTrajectory ATPneumatics
+                        - CSC_LIST=ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATPtg ATMCS ATDomeTrajectory ATPneumatics
                 stdin_open: true
                 tty: true
                 volumes:
-                        - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+                        - ./ospl_150.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
                 networks:
                         bridge:
                         lab-priv-network:
                                 ipv4_address: "10.0.100.150"
+
+        salkafka_watcher:
+                image: lsstts/salkafka:v1.0b1_xmlv4.3.0_RC1
+                container_name: salkafka_watcher
+                environment:
+                        - LSST_DDS_DOMAIN=auxtelpath
+                        - BROKER_IP=140.252.32.142
+                        - BROKER_PORT=31090
+                        - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+                        - LOG_LEVEL=10
+                        - CSC_LIST=Watcher
+                        - REPLICATION=3
+                stdin_open: true
+                tty: true
+                volumes:
+                        - ./ospl_151.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+                networks:
+                        bridge:
+                        lab-priv-network:
+                                ipv4_address: "10.0.100.151"
 
 networks:
   default:

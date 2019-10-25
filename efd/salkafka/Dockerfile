@@ -5,7 +5,8 @@ LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 USER saluser
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git checkout tags/v3.10.2 -b tags/v3.10.2
+#RUN git checkout tags/v3.10.2 -b tags/v3.10.2
+RUN git fetch --all && git checkout "tags/v4.3.0_RC1" -b "v4.3.0_RC1"
 
 WORKDIR /home/saluser/repos/
 
