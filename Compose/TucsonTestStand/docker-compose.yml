@@ -39,6 +39,15 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.206"
 
+  watcher:
+    image: lsstts/watcher:v0.2.1_tucson
+    container_name: watcher
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.224"
+
   ingester:
     image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_25
     container_name: ingester
