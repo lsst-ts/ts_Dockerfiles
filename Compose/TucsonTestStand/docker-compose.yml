@@ -3,13 +3,14 @@ version: "3.4"
 services:
 
   queue:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: queue
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
       - /home/saluser/develop:/home/saluser/develop
       - ./queue_setup.sh:/home/saluser/.setup.sh
+      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
     networks:
@@ -17,13 +18,14 @@ services:
         ipv4_address: "10.0.100.201"
 
   script:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: script
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
       - /home/saluser/develop:/home/saluser/develop
       - ./request_script_setup.sh:/home/saluser/.setup.sh
+      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
     networks:
@@ -31,7 +33,7 @@ services:
         ipv4_address: "10.0.100.202"
 
   atspectrograph:
-    image: lsstts/atspectrograph:DM-19849
+    image: lsstts/atspectrograph:DM-22016
     container_name: atspec
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -44,6 +46,8 @@ services:
     container_name: watcher
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     networks:
       lab-priv-network:
         ipv4_address: "10.0.100.224"
@@ -61,6 +65,106 @@ services:
     stdin_open: true
     tty: true
     entrypoint: ["/home/lsst/.setup.sh"]
+
+  atmcs-sim:
+    image: lsstts/develop-env:salobj4_b65
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atmcs_sim_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.216"
+
+  atdome-sim:
+    image: lsstts/develop-env:salobj4_b65
+    container_name: atdome-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atdome_sim_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.214"
+
+  atdometrajectory:
+    image: lsstts/develop-env:salobj4_b65
+    container_name: atdometrajectory
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atdometrajectory_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.215"
+
+  atpneumatics-sim:
+    image: lsstts/at_pneumatics_sim:DM-22016
+    container_name: atpneumatics-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.217"
+
+  ataos:
+    image: lsstts/ataos:v1.4.0
+    container_name: ataos
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.208"
+
+  atptg:
+    image: tiagorib/ptkernel:v1.1rev0_xml4.4.0_sal3.10
+    container_name: atptg
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.218"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  athexapod:
+    image: lsstts/ts_athexapod:v0.2.0_xmlv4.2rev0_sal3.10.0_salobj3.12.0
+    container_name: athexapod
+    volumes:
+      - ./hexapod_tcpConfiguration.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.155"
+    depends_on:
+      - hexapod-sim
+
+  hexapod-sim:
+    image: couger01/hexapod_simulator
+    container_name: hexapod-sim
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.156"
+
+    stdin_open: true
+    tty: true
 
 networks:
   default:

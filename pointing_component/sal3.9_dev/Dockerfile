@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:salobj4_b38
+FROM lsstts/develop-env:salobj4_b65
 
 WORKDIR /home/saluser/repos
 

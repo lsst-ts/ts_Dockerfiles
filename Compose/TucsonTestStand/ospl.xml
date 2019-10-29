@@ -1,0 +1,52 @@
+<OpenSplice>
+   <Domain>
+      <Name>ospl_sp_ddsi</Name>
+      <Id>99</Id>
+      <SingleProcess>true</SingleProcess>
+      <Service name="ddsi2">
+         <Command>ddsi2</Command>
+      </Service>
+       <Service name="durability">
+          <Command>durability</Command>
+       </Service>
+   </Domain>
+   <DDSI2Service name="ddsi2">
+      <General>
+         <NetworkInterfaceAddress>AUTO</NetworkInterfaceAddress>
+         <AllowMulticast>true</AllowMulticast>
+         <EnableMulticastLoopback>true</EnableMulticastLoopback>
+         <CoexistWithNativeNetworking>false</CoexistWithNativeNetworking>
+      </General>
+      <Compatibility>
+<!-- see the release notes and/or the OpenSplice configurator on DDSI interoperability -->
+         <StandardsConformance>lax</StandardsConformance>
+<!-- the following one is necessary only for TwinOaks CoreDX DDS compatibility -->
+<!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
+      </Compatibility>
+      <Discovery>
+         <ParticipantIndex>none</ParticipantIndex>
+      </Discovery>
+   </DDSI2Service>
+<!-- updated parameters to try and speed up discovery phase -->
+   <DurabilityService name="durability">
+      <Network>
+         <InitialDiscoveryPeriod>0.1</InitialDiscoveryPeriod>
+         <Alignment>
+            <TimeAlignment>false</TimeAlignment>
+            <RequestCombinePeriod>
+               <Initial>1.0</Initial>
+               <Operational>0.1</Operational>
+            </RequestCombinePeriod>
+         </Alignment>
+         <WaitForAttachment maxWaitCount="1">
+            <ServiceName>ddsi2</ServiceName>
+         </WaitForAttachment>
+      </Network>
+      <NameSpaces>
+         <NameSpace name="defaultNamespace">
+            <Partition>*</Partition>
+         </NameSpace>
+         <Policy alignee="Initial" aligner="true" durability="Durable" nameSpace="defaultNamespace"/>
+      </NameSpaces>
+   </DurabilityService>
+</OpenSplice>

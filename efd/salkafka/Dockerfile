@@ -1,12 +1,8 @@
-FROM lsstts/develop-env:salobj4_b38
+FROM lsstts/develop-env:salobj4_b61
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
 USER saluser
-
-WORKDIR /home/saluser/repos/ts_xml
-#RUN git checkout tags/v3.10.2 -b tags/v3.10.2
-RUN git fetch --all && git checkout "tags/v4.3.0_RC1" -b "v4.3.0_RC1"
 
 WORKDIR /home/saluser/repos/
 
@@ -14,7 +10,7 @@ RUN git clone https://github.com/lsst-ts/ts_salkafka.git
 
 WORKDIR /home/saluser/repos/ts_salkafka
 
-RUN git checkout "tags/v1.0b1" -b "v1.0b1"
+RUN git checkout "tags/v1.0.0" -b "v1.0.0"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     source /home/saluser/repos/ts_sal/setup.env && \
