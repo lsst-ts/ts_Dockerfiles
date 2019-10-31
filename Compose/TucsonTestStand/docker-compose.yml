@@ -162,9 +162,19 @@ services:
     networks:
       lab-priv-network:
         ipv4_address: "10.0.100.156"
-
     stdin_open: true
     tty: true
+
+  atmonochromator:
+    image: lsstts/monochromator:v0.1.0_sal3.10_salobj3.11.1
+    container_name: atmonochromator
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.205"
+
 
 networks:
   default:
