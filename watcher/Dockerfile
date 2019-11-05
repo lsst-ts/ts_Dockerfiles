@@ -43,7 +43,6 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
                       ATCamera \
                       ATSpectrograph \
                       ATArchiver \
-                      ATSpectrograph \
                       ATHeaderService
 
 WORKDIR /home/saluser/
