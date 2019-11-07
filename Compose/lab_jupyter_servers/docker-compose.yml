@@ -19,7 +19,7 @@ services:
         ipv4_address: "10.0.100.230"
 
   mreuter:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag02
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -37,7 +37,7 @@ services:
         ipv4_address: "10.0.100.204"
 
   patrickingraham:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag03
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -55,7 +55,7 @@ services:
         ipv4_address: "10.0.100.219"
 
   ecoughlin:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag04
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -73,7 +73,7 @@ services:
         ipv4_address: "10.0.100.220"
 
   tribeiro:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag05
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -91,7 +91,7 @@ services:
         ipv4_address: "10.0.100.221"
 
   SashaBrownsberger:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag06
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -109,7 +109,7 @@ services:
         ipv4_address: "10.0.100.222"
 
   mondrik:
-    image: lsstts/develop-env:salobj4_b30
+    image: lsstts/develop-env:salobj4_b65
     container_name: atdiag07
     environment:
       - LSST_DDS_DOMAIN=auxtelpath

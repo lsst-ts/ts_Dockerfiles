@@ -10,17 +10,15 @@ echo "#"
 echo "# Loading sal environment"
 . /home/saluser/repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up ATPneumatics Simulator"
+echo "# Setting up ATDomeTrajectory"
 
-setup ts_ATPneumaticsSimulator -t current
+setup ts_config_attcs -t current
+setup ts_ATDomeTrajectory -t current
 
 
-echo "# Starting ATPneumatics Simulator CSC"
-
+echo "# Starting ATDomeTrajectory CSC"
 while :
     do
-        run_atpneumatics_simulator.py
-        echo "# ATPneumatics Simulator exited. Restarting..."
+        run_atdometrajectory.py
+        echo "# ATDomeTrajectory CSC exited. Restarting..."
 done
-
-
