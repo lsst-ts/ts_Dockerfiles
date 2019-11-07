@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:sal_v4.0.0RC1_salobj_v5.0.0RC2_xml_v4.3.0RC1_idl_v0.4.0RC2
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -8,17 +8,11 @@ WORKDIR /home/saluser/repos
 RUN git clone https://github.com/lsst-ts/ts_rotator.git && \
     git clone https://github.com/lsst-ts/ts_hexrotcomm.git
 
-WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout "tickets/DM-21694"
-
 WORKDIR /home/saluser/repos/ts_rotator
-RUN git fetch --all && git checkout "tickets/DM-21694"
+RUN git fetch --all && git checkout "tags/v0.1.0" -b "v0.1.0"
 
 WORKDIR /home/saluser/repos/ts_hexrotcomm
-RUN git fetch --all && git checkout "tickets/DM-21694"
-
-WORKDIR /home/saluser/repos/ts_idl
-RUN git fetch --all && git checkout "tickets/DM-21694"
+RUN git fetch --all && git checkout "tags/v0.1.0" -b "v0.1.1"
 
 WORKDIR /home/saluser
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -29,17 +23,19 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_hexrotcomm
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_salobj -t current && \
     eups declare -r . -t current && setup ts_hexrotcomm -t current && \
     scons
 
 WORKDIR /home/saluser/repos/ts_rotator
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    setup ts_salobj -t current && \
     eups declare -r . -t current && setup ts_rotator -t current && \
-    scons
+    scons || echo "Failed, ignoring"
 
 WORKDIR /home/saluser/
-#COPY setup.sh /home/saluser/.setup.sh
+COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]

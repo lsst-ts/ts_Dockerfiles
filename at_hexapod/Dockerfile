@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:salobj4_b65
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 MAINTAINER Andres Anania <aanania@lsst.org>
 
@@ -21,7 +21,8 @@ RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
-    make_salpy_libs.py ATHexapod
+    make_salpy_libs.py ATHexapod && \
+    make_idl_files.py ATHexapod
 
 WORKDIR ${TSREPOS}/pythonFileReader
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

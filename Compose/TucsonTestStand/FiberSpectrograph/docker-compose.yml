@@ -1,0 +1,13 @@
+version: "3.6"
+
+services:
+  fiber_spectrograph:
+    image: lsstts/fiberspectrograph:DM-22130
+    devices:
+      - /dev/bus/usb/001/
+      - /dev/bus/usb/002/
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    network_mode: host
+    container_name: fiber_spectrograph
+    privileged: true

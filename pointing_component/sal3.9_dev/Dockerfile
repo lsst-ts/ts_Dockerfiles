@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:salobj4_b65
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 WORKDIR /home/saluser/repos
 
@@ -33,11 +33,12 @@ RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
 #RUN git fetch && git checkout "tickets/DM-19890"
-RUN git fetch --all && git checkout "tags/v1.1rev0" -b "v1.1rev0"
+RUN git fetch --all && git checkout "tags/v1.1.0_rc2" -b "v1.1.0_rc2"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
-    ./scripts/generate_interface
+    ./scripts/generate_interface && \
+    rm /home/saluser/repos/ts_sal/test/Environment/cpp/src/sacpp_*_send
 
 RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
 #WORKDIR /home/saluser/repos/ts_xml
@@ -62,10 +63,22 @@ RUN yum install -y \
 USER saluser
 
 WORKDIR /home/saluser/repos/ts_pointing_common
+RUN ls
+RUN git fetch --all && git checkout tickets/DM-22130 && mkdir build
+
+WORKDIR /home/saluser/
+
+WORKDIR /home/saluser/repos/ts_pointing_common/build/
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source scl_source enable devtoolset-3 && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t current && \
-    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
+    cmake .. && make
+
+WORKDIR /home/saluser/repos/ts_pointing_common/build/
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t current && \
+    cmake -DAT=ON .. && make
+
+ENV TELESCOPE=Main
 
 WORKDIR /home/saluser/
 # COPY ATPtg.info /home/saluser/repos/ts_pointing_common/install/data/ATPtg.info

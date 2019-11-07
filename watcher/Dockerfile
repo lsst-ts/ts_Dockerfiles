@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:salobj4_b65
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -22,9 +22,6 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_salobj -t current && \
     setup ts_watcher -t current && \
     scons
-
-WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout "v4.1.1" -b "v4.1.1"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \

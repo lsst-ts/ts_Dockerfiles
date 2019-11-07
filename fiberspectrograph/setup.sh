@@ -10,16 +10,16 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up ts_rotator."
+echo "# Setting up ts_environment."
 
 setup ts_salobj -t current
-setup ts_rotator -t current
+setup ts_environment -t current
 
 echo "#"
-echo "# Running rotator CSC"
+echo "# Running environment CSC with index" $STATION_INDEX
 
 while :
     do
-        run_rotator.py
+        python /home/saluser/repos/ts_environment/bin.src/environment_csc.py $STATION_INDEX
         echo "# CSC exited, restarting..."
 done
