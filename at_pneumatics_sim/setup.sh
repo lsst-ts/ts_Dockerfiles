@@ -8,18 +8,19 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. repos/ts_sal/setup.env
+. /home/saluser/repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up ATPneumatics Simulator"
 
-setup ts_xml -t current
-setup ts_sal -t current
-setup ts_salobj -t current
-setup ts_scriptqueue -t current
+setup ts_ATPneumaticsSimulator -t current
 
-setup ts_ATPneumaticsSimulator -t $USER
-
-cd /home/saluser/repos/ts_ATPneumaticsSimulator/bin/
 
 echo "# Starting ATPneumatics Simulator CSC"
-python ./run_atpneumatics_simulator.py
+
+while :
+    do
+        run_atpneumatics_simulator.py
+        echo "# ATPneumatics Simulator exited. Restarting..."
+done
+
+

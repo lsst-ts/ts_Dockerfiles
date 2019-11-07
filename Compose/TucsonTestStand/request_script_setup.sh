@@ -23,6 +23,6 @@ setup ts_externalscripts -t current
 
 while :
     do
-        request_script.py 1
+        request_script.py 2
         echo "# Queue exited. Restarting..."
 done

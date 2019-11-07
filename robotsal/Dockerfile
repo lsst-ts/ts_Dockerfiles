@@ -1,4 +1,4 @@
-FROM lsstts/robot:python37
+FROM lsstts/robot:latest
 MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
@@ -11,7 +11,7 @@ ADD aws_config /root/.aws/config
 ADD lv_includes.tgz /
 ADD mavenrepo69.tgz /root
 ADD mavenrepo69.tgz ${HOME}
-RUN chown -R 1001:1001 ${HOME}/.m2 
+RUN chown -R 1003:1003 ${HOME}/.m2 
 
 RUN python3.6 -m pip install awscli --upgrade
 

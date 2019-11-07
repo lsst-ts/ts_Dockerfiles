@@ -5,7 +5,7 @@ A docker compose file (in yaml format) that invokes the T&S simulators required 
 
 Clone the ts_Dockefiles repository:
 ```sh
- $ git clone -b feature/couger01/dm-18753 https://github.com/lsst-ts/ts_Dockerfiles.git
+ $ git clone https://github.com/lsst-ts/ts_Dockerfiles.git
 ```
 
 Navigate to the Compose/Simulators directory:
@@ -13,7 +13,7 @@ Navigate to the Compose/Simulators directory:
  $ cd Compose/Simulators
 ```
 
-Invoke the simulators in dettached mode file: 
+Invoke the simulators in detached mode with the following: 
 ```sh
  $ docker-compose up -d
 ```
@@ -77,6 +77,18 @@ Manipulate Containers:
  // Stop & Remove All Container
  $ docker-compose down 
  ```
+
+ ## Initializing the simulators
+ There are two configurations for setting up the simulators.
+ The tucson and ncsa modes.
+ To start up the tucson configuration, run the following command in the shell
+ ```sh
+ docker-compose -f docker-compose.yaml -f docker-compose.tucson.yaml up -d
+ ```
+ To start up the ncsa configuration, run the following command in the shell
+```
+docker-compose -f docker-compose.yaml -f docker-compose.ncsa.yaml up -d
+```
 
 ## Running Integration Tests
 

@@ -1,4 +1,4 @@
-FROM lsst/queue:latest
+FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -10,23 +10,23 @@ RUN git clone https://github.com/lsst-ts/ts_environment.git
 WORKDIR /home/saluser
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch && git checkout "origin/tickets/DM-17666" -b "tickets/DM-17666"
+RUN git fetch --all && git checkout "v4.2rev0" -b "v4.2rev0"
 
 WORKDIR /home/saluser/repos/ts_salobj
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t $USER && \
+    setup ts_sal -t current && \
     make_salpy_libs.py Environment
 
 WORKDIR /home/saluser/repos/ts_environment
-RUN git fetch && git checkout "tags/v0.1.1" -b "v0.1.1"
+RUN git fetch && git checkout "tags/v0.1.3" -b "v0.1.3"
 
 WORKDIR /home/saluser/repos/ts_environment
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t $USER && \
-    setup ts_sal -t $USER && \
-    eups declare -r . ts_environment -t $USER && setup ts_environment -t $USER && \
+    setup ts_salobj -t current && \
+    setup ts_sal -t current && \
+    eups declare -r . ts_environment -t current && setup ts_environment -t current && \
     scons
 
 WORKDIR /home/saluser/

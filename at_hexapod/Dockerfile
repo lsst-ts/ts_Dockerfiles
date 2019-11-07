@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+FROM lsstts/develop-env:salobj4_b65
 
 MAINTAINER Andres Anania <aanania@lsst.org>
 
@@ -14,6 +14,9 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
 RUN git clone https://github.com/lsst-ts/pythonFileReader.git -b develop
 RUN git clone https://github.com/lsst-ts/pythonCommunicator.git -b develop
 RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git
+
+#WORKDIR ${TSREPOS}/ts_xml
+#RUN git fetch --all && git checkout "v4.2rev0" -b "v4.2rev0"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
