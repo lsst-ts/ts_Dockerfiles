@@ -2,8 +2,8 @@ FROM centos:7
 
 ARG PYTHON_VERSION=3.7m
 ARG CONDA_VERSION=4.5.4
-ARG sal_branch=v3.10.0
-ARG xml_branch=v3.10.2
+ARG sal_branch=v4.0.0
+ARG xml_branch=v4.4.1
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
@@ -27,7 +27,7 @@ WORKDIR /home/saluser
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && chmod +x miniconda.sh && ./miniconda.sh -b
 
-RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj cython conda-build anaconda-client
+RUN source ~/miniconda3/bin/activate && conda install -y -c lsstts python=3.7 ts-salobj cython conda-build anaconda-client
 
 RUN mkdir repos && cd repos && git clone https://github.com/lsst-ts/ts_sal \
     && cd ts_sal && git checkout ${sal_branch} && chmod -R +x bin.src
@@ -45,8 +45,8 @@ RUN cd repos && \
     cd ts_xml && \
     git checkout ${xml_branch}
 
-RUN cd repos && \
-    git clone https://github.com/lsst-ts/ts_idl
+#RUN cd repos && \
+#    git clone https://github.com/lsst-ts/ts_idl
 
 COPY setup.sh /home/saluser/.setup.sh
 
