@@ -3,8 +3,10 @@ services:
   linearstage:
     image: lsstts/linearstage:v1.0.0_sal_v4.0.0_salobj_v5.0.0
     devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
     volumes:
       - ./setup.sh:/home/saluser/setup.sh
     entrypoint:
       - "/home/saluser/setup.sh"
+    environment: 
+      - LSST_DDS_DOMAIN="auxtelpath"

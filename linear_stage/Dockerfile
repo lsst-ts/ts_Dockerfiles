@@ -8,4 +8,5 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
        	cd ts_linearStage && \
 	git checkout v1.0.0 && \
 	pip install zaber.serial==0.8 && \
-	make_idl_files.py LinearStage
+	make_idl_files.py LinearStage && \
+	pip install .
