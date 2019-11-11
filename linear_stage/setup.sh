@@ -10,9 +10,7 @@ echo "# Setting up sal, salobj and scriptqueue"
 
 setup ts_xml -t current
 setup ts_sal -t current
+setup ts_idl -t current
 setup ts_salobj -t current
-setup ts_scriptqueue -t current
-setup ts_config_attcs -t current
-setup ts_ATDome -t current
 
 python linear_stage_csc.py /dev/ttyUSB0 1 1
