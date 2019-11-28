@@ -14,7 +14,7 @@ WORKDIR $LSST_USER_HOME
 RUN cd ${SAL_REPOS} \
     && git clone https://github.com/lsst-ts/ts_hexapod.git \
     && cd ts_hexapod/ \
-    && git checkout -t origin/tickets/DM-22385 \
+    && git checkout -t origin/develop \
     && cd ${SAL_REPOS} \
     && git clone https://github.com/lsst-ts/ts_hexrotcomm.git \
     && cd ts_hexrotcomm/ \

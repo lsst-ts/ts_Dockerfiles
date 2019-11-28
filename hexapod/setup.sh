@@ -19,6 +19,6 @@ setup ts_hexapod -t current
 
 # while :
 #     do
-#         run_hexapod.py
+#         run_hexapod.py 1
 #         echo "# CSC exited, restarting..."
 # done

@@ -12,10 +12,10 @@
 
 ## Tag List
 
-- *0.2.0*
+- *v0.2.1*
     - *ts_sal - develop branch (commit: 5baf80d)*
     - *ts_xml - develop branch (commit: f088b35)*
     - *ts_salobj - develop branch (commit: 939f1d5)*
     - *ts_idl - develop branch (commit: 4dafc4f)*
     - *ts_hexrotcomm - develop branch (commit: 131dd7a)*
-    - *ts_hexapod - tickets/DM-22385 branch (commit: 82138a3)*
+    - *ts_hexapod - develop branch (commit: ebe6c05)*
