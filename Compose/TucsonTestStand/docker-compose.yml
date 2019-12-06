@@ -3,14 +3,14 @@ version: "3.4"
 services:
 
   queue:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: queue
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
       - /home/saluser/develop:/home/saluser/develop
       - ./queue_setup.sh:/home/saluser/.setup.sh
-      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+#      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
     networks:
@@ -18,14 +18,14 @@ services:
         ipv4_address: "10.0.100.201"
 
   script:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: script
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
       - /home/saluser/develop:/home/saluser/develop
       - ./request_script_setup.sh:/home/saluser/.setup.sh
-      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+#      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
     networks:
@@ -33,7 +33,7 @@ services:
         ipv4_address: "10.0.100.202"
 
   atspectrograph:
-    image: lsstts/atspectrograph:DM-22016
+    image: lsstts/atspectrograph:DM-22016_salobj5
     container_name: atspec
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -42,18 +42,18 @@ services:
         ipv4_address: "10.0.100.206"
 
   watcher:
-    image: lsstts/watcher:v0.2.1_tucson
+    image: lsstts/watcher:v0.2.1_salobj5
     container_name: watcher
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
-    volumes:
-      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+#    volumes:
+#      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     networks:
       lab-priv-network:
         ipv4_address: "10.0.100.224"
 
   ingester:
-    image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_25
+    image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_44
     container_name: ingester
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -67,7 +67,7 @@ services:
     entrypoint: ["/home/lsst/.setup.sh"]
 
   atmcs-sim:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
     volumes:
@@ -79,7 +79,7 @@ services:
         ipv4_address: "10.0.100.216"
 
   atdome-sim:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdome-sim
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -92,7 +92,7 @@ services:
         ipv4_address: "10.0.100.214"
 
   atdometrajectory:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdometrajectory
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -105,7 +105,7 @@ services:
         ipv4_address: "10.0.100.215"
 
   atpneumatics-sim:
-    image: lsstts/at_pneumatics_sim:DM-22016
+    image: lsstts/at_pneumatics_sim:DM-22016_salobj5
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -116,7 +116,7 @@ services:
         ipv4_address: "10.0.100.217"
 
   ataos:
-    image: lsstts/ataos:v1.4.0
+    image: lsstts/ataos:DM-22130_salobj5
     container_name: ataos
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -127,10 +127,11 @@ services:
         ipv4_address: "10.0.100.208"
 
   atptg:
-    image: tiagorib/ptkernel:v1.1rev0_xml4.4.0_sal3.10
+    image: tiagorib/ptkernel:DM-22130_xml4.4.1_sal4.0.0
     container_name: atptg
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
+      - TELESCOPE=AuxTel
     stdin_open: true
     tty: true
     networks:
@@ -142,8 +143,25 @@ services:
         max-file: "5"
         max-size: "10m"
 
+  mtptg:
+    image: tiagorib/ptkernel:DM-22130_xml4.4.1_sal4.0.0
+    container_name: mtptg
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - TELESCOPE=Main
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.158"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
   athexapod:
-    image: lsstts/ts_athexapod:v0.2.0_xmlv4.2rev0_sal3.10.0_salobj3.12.0
+    image: lsstts/ts_athexapod:v0.2.0_sal_v4.0.0_salobj_v5.0.0
     container_name: athexapod
     volumes:
       - ./hexapod_tcpConfiguration.yaml:/home/saluser/repos/ts_salobjATHexapod/bin/settingFiles/Test/1/tcpConfiguration.yaml
@@ -165,8 +183,18 @@ services:
     stdin_open: true
     tty: true
 
+  mt-rotator-sim:
+    image: lsstts/rotator:v0.1.0_sim
+    container_name: mt-rotator-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.157"
+
   atmonochromator:
-    image: lsstts/monochromator:v0.1.0_sal3.10_salobj3.11.1
+    image: lsstts/monochromator:v0.1.0_sal4.4.0_salobj3.11.1
     container_name: atmonochromator
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -174,7 +202,6 @@ services:
     networks:
       lab-priv-network:
         ipv4_address: "10.0.100.205"
-
 
 networks:
   default:

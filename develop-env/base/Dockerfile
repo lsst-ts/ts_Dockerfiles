@@ -50,7 +50,7 @@ RUN yum -y --enablerepo=extras install epel-release \
   tcpdump && \
   yum clean all
 
-RUN yum install -y OpenSpliceDDS-6.9.0-1
+RUN yum install -y OpenSpliceDDS-6.9.0
 
 RUN yum install -y tzdata
 
@@ -65,29 +65,68 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda install -y -c anaconda jsonschema=3.0.1
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    conda install -y ipython jupyter jupyterlab tornado=4.5.3
+    conda install -y ipython jupyter jupyterlab
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda install -y jinja2 ephem gitpython
 # jsonschema=3.0.1
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda update -y -n base -c defaults conda && \
-    conda update -y pyqt fontconfig sqlalchemy && \
-    conda install -y -c anaconda-platform asynctest && \
-    conda install -y -c conda-forge pytest-asyncio && \
-    conda install -y -c conda-forge kafkacat moto boto3 && \
-    conda install -y conda-build &&\
-    conda install -y -c conda-forge pytest-flake8 && \
-    conda clean -ay && \
-    pip install "documenteer[pipelines]==0.4.2" && \
-    pip install "kafkit[aiohttp]" && \
-    pip install aiokafka && \
-    pip install confluent_kafka && \
-    pip install asynccmd && \
-    pip install aiounittest && \
-    pip install ipdb && \
+    conda config --add channels conda-forge
+
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+#    conda install -c anaconda setuptools
+
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+#    conda update -y -n base -c defaults conda
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda update -y pyqt fontconfig sqlalchemy
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda install -y -c anaconda-platform asynctest
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda install -y -c conda-forge pytest-asyncio
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda install -y -c conda-forge kafkacat moto boto3
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda install -y conda-build
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    conda install -y -c conda-forge pytest-flake8
+
+#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+#    conda install -c conda-forge pytest-subtests
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install "documenteer[pipelines]==0.4.2"
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install "kafkit[aiohttp]"
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install aiokafka
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install confluent_kafka
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install asynccmd
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install aiounittest
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install ipdb
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     pip install wget
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
+    pip install pytest-subtests
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycodestyle
 

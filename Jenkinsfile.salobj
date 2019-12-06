@@ -20,6 +20,14 @@ pipeline {
             }
 
         }
+        stage("Pull base image.") {
+            steps {
+                script {
+                    sh "docker pull lsstts/base-env:${base_image_tag}"
+                }
+            }
+
+        }
         stage("Build Docker image (master)") {
             when {
                 expression { return env.build_master.toBoolean() }

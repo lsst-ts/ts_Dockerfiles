@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
   salkafka_150:
-    image: lsstts/salkafka:v1.0.0_xmlv4.4.0
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
     container_name: salkafka_150
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -28,7 +28,7 @@ services:
         max-size: "10m"
 
   salkafka_151:
-    image: lsstts/salkafka:v1.0.0_xmlv4.4.0
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
     container_name: salkafka_151
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -46,6 +46,31 @@ services:
       bridge:
       lab-priv-network:
         ipv4_address: "10.0.100.151"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_152:
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
+    container_name: salkafka_152
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=140.252.32.142
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=FiberSpectrograph LinearStage Rotator MTPtg
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./ospl_152.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    networks:
+      bridge:
+      lab-priv-network:
+        ipv4_address: "10.0.100.152"
     logging:
       driver: "json-file"
       options:

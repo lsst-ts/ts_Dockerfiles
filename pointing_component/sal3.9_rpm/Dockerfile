@@ -16,37 +16,23 @@ RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 
 RUN yum -y --enablerepo=extras install epel-release \
-  bzip2 \
-  unzip \
-  wget \
-  git \
-  dos2unix \
-  tk \
-  tk-devel \
-  swig \
-  ncurses-libs \
-  xterm \
-  xorg-x11-fonts-misc \
-  java-1.8.0-openjdk-devel \
-  boost-python \
-  boost-python-devel \
-  maven \
-  which \
-  gnome-terminal \
-  mariadb \
-  mariadb-devel \
-  nano \
-  emacs \
-  cmake \
-  devtoolset-3 && \
-  yum clean all
+    wget \
+    git \
+    make \
+    wget \
+    gcc-c++ \
+    OpenSpliceDDS-6.9.0-1 \
+    boost-python \
+    boost-python-devel \
+    cmake \
+    yum clean all
 
-RUN yum install -y ATPtg-3.9.0 \
-    MTPtg-3.9.0 \
-    MTMount-3.9.0 \
-    Rotator-3.9.0 \
-    Environment-3.9.0 \
-    ATMCS-3.9.0
+RUN yum install -y ATPtg-4.0.0-4.4.1 \
+    MTPtg-4.0.0-4.4.1 \
+    MTMount-4.0.0-4.4.1 \
+    Rotator-4.0.0-4.4.1 \
+    Environment-4.0.0-4.4.1 \
+    ATMCS-4.0.0-4.4.1
 
 
 RUN mkdir /home/saluser/.ssh/ && chown saluser:lsst /home/saluser/.ssh/ && chmod 700 /home/saluser/.ssh/
@@ -68,7 +54,7 @@ RUN git clone git@github.com:lsst-ts/tcspk_source_lsst_161203.git && \
  git clone git@github.com:lsst-ts/ts_pointing_common.git
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git checkout "tags/RC_v0.3" -b "RC_v0.3"
+RUN git fetch --all && git checkout "tags/v1.1.0_rc2" -b "v1.1.0_rc2"
 
 WORKDIR /home/saluser
 
@@ -85,7 +71,6 @@ ENV SLALIB_DIR=/home/saluser/repos/slalib_source_lsst_161203
 ENV TCSPK_DIR=/home/saluser/repos/tcspk_source_lsst_161203
 ENV LSST_TS_XML_DIR=/home/saluser/repos/ts_xml
 
-#RUN ./scripts/generate_interface && mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
 WORKDIR /home/saluser/repos/slalib_source_lsst_161203
 RUN make
 
