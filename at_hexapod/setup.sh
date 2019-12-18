@@ -17,6 +17,8 @@ setup ts_sal -t current
 setup ts_salobj -t current
 setup ts_salobjATHexapod -t current
 
+echo "Starting ATHexapod CSC"
+
 while :
     do
         runATHexapodCSC.py
