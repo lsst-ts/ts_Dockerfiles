@@ -10,16 +10,15 @@ echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up ts_rotator."
+echo "# Setting up ts_hexapod."
 
-setup ts_salobj -t current
-setup ts_rotator -t current
+setup ts_hexapod -t current
 
-echo "#"
-echo "# Running rotator CSC"
+# echo "#"
+# echo "# Running hexapod CSC"
 
-while :
-    do
-        run_rotator.py
-        echo "# CSC exited, restarting..."
-done
+# while :
+#     do
+#         run_hexapod.py 1
+#         echo "# CSC exited, restarting..."
+# done

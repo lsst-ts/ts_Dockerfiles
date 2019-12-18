@@ -87,7 +87,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
     eups declare -r . ts_salobj -t current && setup ts_salobj -t current && \
-    scons || py.test
+    pytest --color=no || pytest --color=no --lf
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh

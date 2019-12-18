@@ -17,7 +17,7 @@ USER root
 
 RUN yum install -y mlocate
 RUN adduser -u 1004 -m -s /bin/bash saluser
-RUN yum install -y gcc-c++ make ncurses-libs xterm xorg-x11-fonts-misc java-1.7.0-openjdk-devel maven python-devel swig git tk-devel wget bzip2
+RUN yum install -y iproute gcc-c++ make ncurses-libs xterm xorg-x11-fonts-misc java-1.7.0-openjdk-devel maven python-devel swig git tk-devel wget bzip2
 
 COPY lsst-ts.repo /tmp/lsst-ts.repo
 
@@ -30,7 +30,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 RUN source ~/miniconda3/bin/activate && conda install -y -c lsstts python=3.7 ts-salobj cython conda-build anaconda-client
 
 RUN mkdir repos && cd repos && git clone https://github.com/lsst-ts/ts_sal \
-    && cd ts_sal && git checkout ${sal_branch} && chmod -R +x bin.src
+    && cd ts_sal && git checkout ${sal_branch} -b ${sal_branch} && chmod -R +x bin.src
 
 RUN source ~/miniconda3/bin/activate && \
     mkdir dds && \
@@ -43,7 +43,7 @@ RUN source ~/miniconda3/bin/activate && \
 RUN cd repos && \
     git clone https://github.com/lsst-ts/ts_xml && \
     cd ts_xml && \
-    git checkout ${xml_branch}
+    git checkout ${xml_branch} -b ${xml_branch}
 
 #RUN cd repos && \
 #    git clone https://github.com/lsst-ts/ts_idl

@@ -19,7 +19,7 @@ services:
         ipv4_address: "10.0.100.230"
 
   mreuter:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag02
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -37,7 +37,7 @@ services:
         ipv4_address: "10.0.100.204"
 
   patrickingraham:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag03
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -55,7 +55,7 @@ services:
         ipv4_address: "10.0.100.219"
 
   ecoughlin:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag04
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -73,7 +73,7 @@ services:
         ipv4_address: "10.0.100.220"
 
   tribeiro:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag05
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -91,7 +91,7 @@ services:
         ipv4_address: "10.0.100.221"
 
   SashaBrownsberger:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag06
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -109,7 +109,7 @@ services:
         ipv4_address: "10.0.100.222"
 
   mondrik:
-    image: lsstts/develop-env:salobj4_b65
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
     container_name: atdiag07
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -126,6 +126,41 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.223"
 
+  sthomas:
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    container_name: atdiag08
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_sthomas:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag08_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag08_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.225"
+
+  aroberts:
+    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    container_name: atdiag09
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_aroberts:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag09_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag09_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.226"
 
 networks:
   default:
