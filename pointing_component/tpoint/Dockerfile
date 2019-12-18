@@ -1,4 +1,4 @@
-FROM tiagorib/ptkernel:RCv0.3_sal3.9
+FROM tiagorib/ptkernel:v1.1.0_rc2_xml4.4.1_sal4.0.0
 
 USER root
 
@@ -20,5 +20,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source scl_source enable devtoolset-3 && \
     source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t current && \
     make INSTALL_DIR=/home/saluser/tpoint/
+
+WORKDIR /home/saluser/
 
 COPY setup.sh /home/saluser/.setup.sh

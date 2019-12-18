@@ -32,6 +32,9 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     eups declare -r . ts_ataos -t current && setup ts_ataos -t current && \
     scons
 
+WORKDIR /home/saluser/repos/ts_config_attcs/
+RUN git fetch --all && git checkout tickets/DM-22531
+
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
 
