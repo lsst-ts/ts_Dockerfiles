@@ -10,13 +10,13 @@ echo "#"
 echo "# Loading sal environment"
 . /home/saluser/repos/ts_sal/setup.env
 echo "#"
-echo "# Setting ATDome Simulator"
+echo "# Setting ATDome"
 
 setup ts_ATDome -t current
 
 while :
     do
-        run_atdome.py -s
-        echo "# ATDome Simulator exited. Restarting..."
+        run_atdome.py
+        echo "# ATDome exited. Restarting..."
 done
 
