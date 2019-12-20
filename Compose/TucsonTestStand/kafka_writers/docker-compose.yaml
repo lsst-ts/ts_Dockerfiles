@@ -62,7 +62,7 @@ services:
       - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
       - LOG_LEVEL=10
       - REPLICATION=3
-      - CSC_LIST=FiberSpectrograph LinearStage Rotator MTPtg
+      - CSC_LIST=FiberSpectrograph LinearStage Rotator MTPtg DSM
     stdin_open: true
     tty: true
     volumes:
