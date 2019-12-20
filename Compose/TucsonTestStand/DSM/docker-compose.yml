@@ -1,0 +1,39 @@
+version: "1.0"
+
+services:
+  dsm1-fast-sim:
+    image: lsstts/dsm
+    container_name: dsm1-fast-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - CSC_INDEX=1
+      - CSC_MODE=1
+    stdin_open: true
+    tty: true
+
+  dsm2-slow-sim:
+    image: lsstts/dsm
+    container_name: dsm2-slow-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - CSC_INDEX=2
+      - CSC_MODE=2
+    stdin_open: true
+    tty: true
+
+  dsm1:
+    image: lsstts/dsm
+    container_name: dsm1
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - CSC_INDEX=1
+      - CSC_MODE=0
+    volumes:
+      - /dsm/telemetry:/home/saluser/telemetry
+    stdin_open: true
+    tty: true
+
+networks:
+  default:
+    external:
+      name: host
