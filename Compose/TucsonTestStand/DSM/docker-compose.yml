@@ -2,7 +2,7 @@ version: "1.0"
 
 services:
   dsm1-fast-sim:
-    image: lsstts/dsm
+    image: lsstts/dsm:develop
     container_name: dsm1-fast-sim
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -12,7 +12,7 @@ services:
     tty: true
 
   dsm2-slow-sim:
-    image: lsstts/dsm
+    image: lsstts/dsm:develop
     container_name: dsm2-slow-sim
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
@@ -22,7 +22,7 @@ services:
     tty: true
 
   dsm1:
-    image: lsstts/dsm
+    image: lsstts/dsm:develop
     container_name: dsm1
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
