@@ -32,8 +32,3 @@ services:
       - /dsm/telemetry:/home/saluser/telemetry
     stdin_open: true
     tty: true
-
-networks:
-  default:
-    external:
-      name: host
