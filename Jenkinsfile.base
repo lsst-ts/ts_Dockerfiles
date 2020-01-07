@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         registryCredential = "dockerhub-lssttsadmin"
-        dockerImageNameBuild = "lsstts/base-env:${image_tag}"
+        dockerImageNameBuild = "lsstts/base-env:${image_tag}_b${BUILD_NUMBER}"
         dockerImageBuild = ""
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage("Build Docker image") {
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg PYTHON_VERSION=${env.python_version} --build-arg CONDA_VERSION=${env.conda_version} --build-arg image_tag=${env.image_tag} ./develop-env/base/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg PYTHON_VERSION=${env.python_version} --build-arg CONDA_VERSION=${env.conda_version} --build-arg image_tag=${env.image_tag} --build-arg UID=${env.user_id} --build-arg GID=${env.group_id} ./develop-env/base/")
                 }
             }
         }

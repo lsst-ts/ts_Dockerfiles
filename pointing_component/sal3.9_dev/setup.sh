@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Source this file when starting the container to set it up
-
-echo "#"
-echo "# Setting up and starting ATPtg CSC."
-echo "#"
-
 source /opt/lsst/software/stack/loadLSST.bash
 source $LSST_SDK_INSTALL/setup.env
 
@@ -22,6 +16,3 @@ while :
 	echo "# Auxiliary telescope pointing component exited."
     fi
 done
-
-
-# /bin/bash --rcfile /home/saluser/.bashrc

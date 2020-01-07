@@ -1,0 +1,182 @@
+version: "3.4"
+
+services:
+
+  queue:
+    image: lsstts/develop-env:b22
+    container_name: queue
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/develop:/home/saluser/develop
+      - ./queue_setup.sh:/home/saluser/.setup.sh
+#      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.100"
+
+  script:
+    image: lsstts/develop-env:b22
+    container_name: script
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - /home/saluser/develop:/home/saluser/develop
+      - ./request_script_setup.sh:/home/saluser/.setup.sh
+#      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.150"
+
+#  watcher:
+#    image: lsstts/watcher:v0.2.1_salobj5
+#    container_name: watcher
+#    environment:
+#      - LSST_DDS_DOMAIN=auxtelpath
+##    volumes:
+##      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+#    networks:
+#      test-stand-network:
+#        ipv4_address: "10.0.100.224"
+
+#  ingester:
+#    image: lsstsqre/centos:7-stack-lsst_distrib-w_2019_44
+#    container_name: ingester
+#    environment:
+#      - LSST_DDS_DOMAIN=auxtelpath
+#    volumes:
+#      - /home/saluser/ingest/:/home/lsst/ingest/
+#      - /mnt/dmcs/:/mnt/dmcs
+#      - /mnt/data/:/mnt/data
+#      - ./ingester_setup.sh:/home/lsst/.setup.sh
+#    stdin_open: true
+#    tty: true
+#    entrypoint: ["/home/lsst/.setup.sh"]
+
+  atmcs-sim:
+    image: lsstts/develop-env:b22
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atmcs_sim_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.149"
+
+  atdome-sim:
+    image: lsstts/develop-env:b22
+    container_name: atdome-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atdome_sim_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.148"
+
+  atdometrajectory:
+    image: lsstts/develop-env:b22
+    container_name: atdometrajectory
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atdometrajectory_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.147"
+
+  atpneumatics-sim:
+    image: lsstts/at_pneumatics_sim:DM-22016_b22
+    container_name: atpneumatics-sim
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.146"
+
+  ataos:
+    image: lsstts/ataos:v1.4.1_b22
+    container_name: ataos
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.145"
+
+  atptg:
+    image: ts-dockerhub.lsst.org/ptkernel:v1.1.0_rc3_b22
+    container_name: atptg
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - TELESCOPE=AuxTel
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.144"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  athexapod:
+    image: lsstts/ts_athexapod:v0.3.0_b22
+    container_name: athexapod
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.143"
+    depends_on:
+      - hexapod-sim
+
+  hexapod-sim:
+    image: couger01/hexapod_simulator
+    container_name: hexapod-sim
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.142"
+    stdin_open: true
+    tty: true
+
+#  atmonochromator:
+#    image: lsstts/monochromator:v0.1.0_sal4.4.0_salobj3.11.1
+#    container_name: atmonochromator
+#    environment:
+#      - LSST_DDS_DOMAIN=auxtelpath
+#    tty: true
+#    networks:
+#      test-stand-network:
+#        ipv4_address: "141.142.238.141"
+  atspectrograph:
+    image: lsstts/atspectrograph:b22
+    container_name: atspec
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.140"
+
+
+networks:
+  default:
+    external:
+      name: test-stand-network
+  test-stand-network:
+    external: true

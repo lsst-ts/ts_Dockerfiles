@@ -77,6 +77,28 @@ services:
         max-file: "5"
         max-size: "10m"
 
+  salkafka_153:
+    image: lsstts/salkafka:v1.1.0_b22
+    container_name: salkafka_153
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=140.252.32.142
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=CCCamera DSM
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "10.0.100.153"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
 networks:
   default:
     external:

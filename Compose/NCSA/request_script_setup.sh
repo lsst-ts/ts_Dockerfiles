@@ -8,8 +8,7 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. /home/saluser/repos/ts_sal/setup.env
-export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'`
+. repos/ts_sal/setup.env
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 
@@ -22,4 +21,8 @@ setup ts_ATDomeTrajectory -t current
 setup ts_standardscripts -t current
 setup ts_externalscripts -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+while :
+    do
+        request_script.py 2
+        echo "# Queue exited. Restarting..."
+done

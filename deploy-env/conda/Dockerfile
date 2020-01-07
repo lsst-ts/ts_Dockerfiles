@@ -22,14 +22,16 @@ RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf && \
                    make \
                    wget \
                    gcc-c++ \
-                   OpenSpliceDDS-6.9.0-1
+                   OpenSpliceDDS-6.9.0
 
 USER saluser
 WORKDIR /home/saluser
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && chmod +x miniconda.sh && ./miniconda.sh -b
 
-RUN source ~/miniconda3/bin/activate && conda install -c lsstts python=3.7 ts-salobj="v5.0.0" cython ts-idl="1.0.0_v4.4.1"
+RUN source ~/miniconda3/bin/activate && \
+    conda config --add channels conda-forge && \
+    conda install -c lsstts python=3.7 ts-salobj="v5.3.0" cython ts-idl="1.1.0_v4.6.0"
 
 RUN source ~/miniconda3/bin/activate && \
     source $OSPL_HOME/release.com && \
