@@ -31,6 +31,7 @@ RUN source ~/miniconda3/bin/activate && \
     pip install -e .
 
 COPY setup.sh /home/saluser/.setup.sh
+COPY shutdown.sh /home/saluser/.shutdown.sh
 
 USER saluser
 
