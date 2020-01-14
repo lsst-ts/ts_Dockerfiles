@@ -12,6 +12,7 @@ services:
       - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
+    network_mode: "host"
 
   dsm2-slow-sim:
     image: lsstts/dsm:develop
@@ -24,6 +25,7 @@ services:
       - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
+    network_mode: "host"
 
   dsm1:
     image: lsstts/dsm:develop
@@ -37,3 +39,4 @@ services:
       - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     stdin_open: true
     tty: true
+    network_mode: "host"
