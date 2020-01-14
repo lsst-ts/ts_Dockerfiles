@@ -40,3 +40,17 @@ services:
     stdin_open: true
     tty: true
     network_mode: "host"
+
+  dsm2:
+    image: lsstts/dsm:develop
+    container_name: dsm2
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - CSC_INDEX=2
+      - CSC_MODE=0
+    volumes:
+      - /dsm/telemetry:/home/saluser/telemetry
+      - ./ospl.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    stdin_open: true
+    tty: true
+    network_mode: "host"
