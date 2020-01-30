@@ -4,10 +4,17 @@
 
 ## Overview
 
-*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The modules of phosim_utils, ts_wep, ts_ofc, and ts_phosim are in the **/home/saluser/repos** directory.*
+*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The modules of phosim_utils, ts_wep, ts_ofc, and ts_phosim are in the **/home/lsst/aos_repos** directory.*
 
 ## Tag List
 
+- *w_2020_04*
+  - *lsst_distrib (tag: w_2020_04)*
+  - *lsst_sims (tag: sims_w_2020_04)*
+  - *phosim_utils - master branch (commit: 8744592)*
+  - *ts_wep - master branch (commit: d32de1c)*
+  - *ts_ofc - master branch (commit: 558517c)*
+  - *ts_phosim - master branch (commit: bea66c0)*
 - *w_2019_50*
   - *lsst_distrib (tag: w_2019_50)*
   - *lsst_sims (tag: sims_w_2019_50)*
