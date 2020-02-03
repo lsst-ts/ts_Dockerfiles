@@ -1,10 +1,7 @@
-FROM lsstts/develop-env:salobj4_b38
-
-WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout tickets/DM-21161
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0_b27
 
 WORKDIR /home/saluser/repos/ts_ATDome
-RUN git fetch --all && git checkout tickets/DM-21161
+RUN git fetch --all && git checkout u/rowen/DM-23158
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \

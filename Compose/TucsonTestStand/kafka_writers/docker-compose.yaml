@@ -81,7 +81,7 @@ services:
     image: lsstts/salkafka:v1.1.0_b22
     container_name: salkafka_153
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
       - BROKER_IP=140.252.32.142
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://test-registry-efd.lsst.codes

@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:b22
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -9,10 +9,12 @@ RUN git clone https://github.com/lsst-ts/ts_atspec.git && \
     git clone https://github.com/lsst-ts/ts_config_latiss.git
 
 WORKDIR /home/saluser/repos/ts_atspec
-RUN git fetch --tags && git checkout "tags/v0.3.0" -b "v0.3.0"
+RUN git fetch --all && git checkout "v0.4.0" -b "v0.4.0"
+RUN git checkout "tickets/DM-22731"
 
 WORKDIR /home/saluser/repos/ts_config_latiss
-RUN git fetch --tags && git checkout "tags/v0.1.0" -b "v0.1.0"
+RUN git fetch --all && git checkout "tickets/DM-22731"
+#RUN git fetch --tags && git checkout "tags/v0.2.0" -b "v0.2.0"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
