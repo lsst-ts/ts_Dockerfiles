@@ -14,12 +14,16 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_sal -t current && \
     make_idl_files.py ATHexapod
 
+WORKDIR ${TSREPOS}/ts_config_attcs
+RUN git fetch --all && git checkout tickets/DM-22546
+
 WORKDIR ${TSREPOS}/ts_salobjATHexapod
 RUN git checkout v0.3.0 -b v0.3.0
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_salobj -t current && \
     eups declare -r . ts_salobjATHexapod -t current && \
+    setup ts_config_attcs -t current && \
     setup ts_salobjATHexapod  -t current && scons
 
 WORKDIR /home/saluser/

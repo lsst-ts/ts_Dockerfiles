@@ -165,10 +165,12 @@ services:
 #      test-stand-network:
 #        ipv4_address: "141.142.238.141"
   atspectrograph:
-    image: lsstts/atspectrograph:b22
+    image: lsstts/atspectrograph:DM-22731_sal_v4.0.0_salobj_v5.0.0
     container_name: atspec
     environment:
       - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+      - ./atspec_sim_setup.sh:/home/saluser/.setup.sh
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.140"
