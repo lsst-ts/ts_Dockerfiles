@@ -82,9 +82,9 @@ services:
     container_name: salkafka_153
     environment:
       - LSST_DDS_DOMAIN=citesttucson
-      - BROKER_IP=140.252.32.142
+      - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
       - BROKER_PORT=31090
-      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
       - LOG_LEVEL=10
       - REPLICATION=3
       - CSC_LIST=CCCamera DSM
