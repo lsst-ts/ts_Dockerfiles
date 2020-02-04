@@ -78,7 +78,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
-    make_idl_files.py Test Script && \
+    make_idl_files.py Test Script LOVE && \
     make_salpy_libs.py Test Script
 
 WORKDIR /home/saluser/repos/ts_salobj
@@ -86,6 +86,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     eups declare -r . ts_salobj -t current && setup ts_salobj -t current && \
     pytest --color=no || pytest --color=no --lf
 

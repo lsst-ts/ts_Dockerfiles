@@ -5,9 +5,6 @@ log_level info
 fast_interval 50
 slow_interval 10000
 
-; fast loop lookahead (ms)
-timestamp_lookahead 60
-
 ; Weather data
 weather {
   default_temp 10.0
@@ -28,26 +25,18 @@ site {
     height 2663.0
     tz -4.0
 }
-
-instrument_location "Nasmyth left"
-"Nasmyth left" {
-    instrument_alignment_angle 0.0
-}
-"Nasmyth right" {
-    instrument_alignment_angle 0.0
-}
-
 focal_length 100000.0;              ; mm
-rnogo 3600.0                          ; arcsec
-pointing_model at.mod
+rnogo 3600.0                        ; arcsec
+instrument_alignment_angle 0.0;     ; degrees
+pointing_model mt.mod
 
 ; Axis limits
 horizon_limit 15.0
-elevation_tracking_high_limit 86.0
+elevation_tracking_high_limit 90.0
 azimuth_low_limit -270.0
 azimuth_high_limit 270.0
-rotator_low_limit -175.0
-rotator_high_limit 175.0
+rotator_low_limit -90.0
+rotator_high_limit 550.0
 
 ; Additional margin when slewing to a new target
 slew_limit_margin 1.0
@@ -55,7 +44,7 @@ slew_limit_margin 1.0
 ; Default observing wavelength
 wavelength 0.8
 
-; Reference observing wavelength
+; Default observing wavelength
 wavelr 0.8
 
 proximity {
@@ -65,6 +54,14 @@ proximity {
   moon_major 2.0;
 }
 
+proximity {
+  sun_minor 10.0; degrees
+  sun_major 5.0;
+  moon_minor 5.0;
+  moon_major 2.0;
+}
+
+dbg_time_offset 0.0
 dbg_time_offset 0.0
 
 mountdata {
@@ -80,11 +77,11 @@ post_telem {
 
 command_timeout {
   ack 1000; ms              General timeouts for receiving SAL__CMD_ACK
-  start_tracking 10000; ms  Command reply timeout for ATMCS startTracking command (after ACK/INPROGRESS received)
-  stop_tracking 1000; ms   Command reply timeout for ATMCS stopTracking command (after ACK/INPROGRESS received)
+  start_tracking 10000; ms  Command reply timeout for Rotator trackStart command (after ACK/INPROGRESS received)
+  stop_tracking 1000; ms   Command reply timeout for Rotator stop command (after ACK/INPROGRESS received)
 }
 
-airmass_limit 1.6;
+airmass_limit = 1.6;
 airmass_warning_diff 0.1;
 
 

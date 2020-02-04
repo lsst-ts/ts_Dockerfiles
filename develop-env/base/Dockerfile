@@ -4,6 +4,8 @@ FROM lsstsqre/centos:${image_tag}
 
 ARG PYTHON_VERSION=3.6m
 ARG CONDA_VERSION=4.5.4
+ARG UID=73006
+ARG GID=73006
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -13,9 +15,10 @@ ENV HOME /home/saluser
 USER root
 
 # Create user and group
-RUN adduser -u 1004 -m -g lsst -s /bin/bash saluser
+RUN groupadd --gid ${GID} saluser && \
+    adduser -u ${UID} -m -g ${GID} -s /bin/bash saluser
 
-RUN chmod g+w -R /opt/lsst/
+RUN chown ${UID}:${GID} -R /opt/lsst/
 
 COPY lsst-ts.repo /tmp/lsst-ts.repo
 RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
@@ -84,7 +87,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda update -y pyqt fontconfig sqlalchemy
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c anaconda-platform asynctest
+    conda install -y -c anaconda-platform asynctest lxml
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda install -y -c conda-forge pytest-asyncio
@@ -96,39 +99,26 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
     conda install -y conda-build
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c conda-forge pytest-flake8
+    conda install -y -c conda-forge pytest-flake8 ipympl nodejs
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    jupyter labextension install jupyter-matplotlib && \
+    jupyter notebook --generate-config
 
 #RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
 #    conda install -c conda-forge pytest-subtests
-
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install "documenteer[pipelines]==0.4.2"
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install "kafkit[aiohttp]"
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install aiokafka
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install confluent_kafka
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install asynccmd
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install aiounittest
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install ipdb
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install wget
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install pytest-subtests
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && pip install --upgrade pycodestyle
+    pip install "documenteer[pipelines]==0.4.2" &&\
+    pip install "kafkit[aiohttp]" &&\
+    pip install aiokafka &&\
+    pip install confluent_kafka &&\
+    pip install asynccmd &&\
+    pip install aiounittest &&\
+    pip install ipdb &&\
+    pip install wget &&\
+    pip install pytest-subtests &&\
+    pip install --upgrade pycodestyle
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux

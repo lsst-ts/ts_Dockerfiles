@@ -8,20 +8,17 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. ~/repos/ts_sal/setup.env
+. /home/saluser/repos/ts_sal/setup.env
 echo "#"
-echo "# Setting up sal, salobj and scriptqueue"
+echo "# Setting up ATDomeTrajectory"
 
-setup ts_xml -t current
-setup ts_sal -t current
-setup ts_salobj -t current
 setup ts_config_attcs -t current
-setup ts_salobjATHexapod -t current
+setup ts_ATDomeTrajectory -t current
 
-echo "Starting ATHexapod CSC"
 
+echo "# Starting ATDomeTrajectory CSC"
 while :
     do
-        runATHexapodCSC.py
-        echo "# CSC exited. Restarting..."
+        run_atdometrajectory.py
+        echo "# ATDomeTrajectory CSC exited. Restarting..."
 done
