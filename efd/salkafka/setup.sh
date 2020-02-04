@@ -22,7 +22,7 @@ setup ts_salkafka -t current
 # LOG_LEVEL=10
 # CSC_LIST=ATCamera ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATPtg ATMCS ATDome ATDomeTrajectory ATPneumatics
 
-make_idl_files.py $CSC_LIST
+# make_idl_files.py $CSC_LIST
 
 run_salkafka_producer.py --broker  $BROKER_IP:$BROKER_PORT \
                          --registry  $REGISTRY_ADDR \
