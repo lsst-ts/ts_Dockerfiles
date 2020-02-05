@@ -1,0 +1,122 @@
+pipeline {
+    agent any
+    environment {
+        registryCredential = "dockerhub-lssttsadmin"
+        dockerImageNameDevelop = "lsstts/salobj:develop"
+        dockerImageDevelop = ""
+        base_image_tag = "${base_image_tag}"
+    }
+
+    stages {
+        stage("Create docker network.") {
+            steps {
+                script {
+                    sh "docker network create salobj_b${BUILD_NUMBER}"
+                }
+            }
+
+        }
+        stage("Build Docker image") {
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg PYTHON_VERSION=${env.python_version} --build-arg CONDA_VERSION=${env.conda_version} --build-arg image_tag=${env.image_tag} --build-arg UID=${env.user_id} --build-arg GID=${env.group_id} ./develop-env/base/")
+                }
+            }
+        }
+
+        stage("Push Docker image") {
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageBuild.push()
+                    }
+                }
+            }
+        }
+        stage("Pull base image.") {
+            steps {
+                script {
+                    sh "docker pull lsstts/base-env:${base_image_tag}"
+                }
+            }
+
+        }
+        stage("Build Salobj develop container") {
+            steps {
+                script {
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=develop --build-arg salobj_v=develop --build-arg xml_v=develop --build-arg idl_v=develop --build-arg config_ocs_v=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj_4/")
+                }
+            }
+        }
+        stage("Build Docker image (tag/branch)") {
+            when {
+                not{
+                    anyOf {
+                        expression { return env.build_develop.toBoolean() }
+                        expression { return env.build_master.toBoolean() }
+                    }
+                }
+            }
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=${env.sal_v} --build-arg salobj_v=${env.salobj_v} --build-arg xml_v=${env.xml_v} --build-arg idl_v=${env.idl_v} --build-arg config_ocs_v=${config_ocs_v} --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj_4/")
+                }
+            }
+        }
+
+        stage("Push Docker image (master)") {
+            when {
+                expression { return env.build_master.toBoolean() }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageMaster.push()
+                    }
+                }
+            }
+        }
+        stage("Push Docker image (develop)") {
+            when {
+                expression { return env.build_develop.toBoolean() }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageDevelop.push()
+                    }
+                }
+            }
+        }
+        stage("Push Docker image (tag/branch)") {
+            when {
+                allOf {
+                    expression { return env.push_tag.toBoolean() }
+                    not{
+                        anyOf {
+                            expression { return env.build_develop.toBoolean() }
+                            expression { return env.build_master.toBoolean() }
+                        }
+                    }
+                }
+            }
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageBuild.push()
+                    }
+                }
+            }
+        }
+    }
+    post {
+        cleanup {
+            sh "docker network rm salobj_b${BUILD_NUMBER}"
+        }
+    }
+//    post {
+//        failure {
+//             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "tribeiro@lsst.org";
+//         }
+//    }
+}

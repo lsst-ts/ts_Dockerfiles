@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:b22
+FROM lsstts/develop-env:b42
 
 WORKDIR /home/saluser/repos
 
@@ -6,8 +6,7 @@ RUN git clone https://github.com/lsst-ts/ts_ATPneumaticsSimulator.git
 
 WORKDIR /home/saluser/repos/ts_ATPneumaticsSimulator
 
-RUN git fetch --all && \
-    git checkout "tickets/DM-22016"
+RUN git checkout "v0.4.0" -b "v0.4.0"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     source /home/saluser/repos/ts_sal/setup.env && \

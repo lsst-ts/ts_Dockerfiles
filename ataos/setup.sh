@@ -18,8 +18,6 @@ setup ts_ataos -t current
 cd /home/saluser/repos/ts_ataos/bin/
 echo "# Starting ATAOS CSC"
 
-while :
-    do
-        python ./ataos_csc.py
-done
+python ./ataos_csc.py
 
+echo "# CSC exited"

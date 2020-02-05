@@ -9,16 +9,15 @@ setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
 . repos/ts_sal/setup.env
+
+export LSST_DDS_IP=`ip route get 1 | awk '{print $(7);exit}'`
+
 echo "#"
 echo "# Setting up ts_hexapod."
 
 setup ts_hexapod -t current
 
-# echo "#"
-# echo "# Running hexapod CSC"
+echo "#"
+echo "# Running hexapod CSC"
 
-# while :
-#     do
-#         run_hexapod.py 1
-#         echo "# CSC exited, restarting..."
-# done
+run_hexapod.py $HEXAPOD_ID

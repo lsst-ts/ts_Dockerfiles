@@ -60,7 +60,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
-    make_idl_files.py `ls $TS_XML_DIR/sal_interfaces | grep -v xml| tr '\n' ' '`
+    make_idl_files.py `ls $TS_XML_DIR/sal_interfaces | grep -v xml | grep -v MTM1M3| tr '\n' ' '`
 
 WORKDIR /home/saluser/repos/ts_simactuators
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \

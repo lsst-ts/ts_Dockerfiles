@@ -13,6 +13,8 @@ setup lsst_distrib
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 
+export LSST_DDS_IP=`ip route get 1 | awk '{print $(7);exit}'`
+
 setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
@@ -39,7 +41,7 @@ echo "# Starting jupyter lab server"
 
 while :
     do
-        jupyter lab --ip 10.0.100.223 --port 8885
+        jupyter lab --ip `ip route get 1 | awk '{print $(7);exit}'` --port 8885
 done
 
 

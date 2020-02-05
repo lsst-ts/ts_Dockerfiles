@@ -16,13 +16,13 @@ services:
       - /scratch
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.230"
+        ipv4_address: "140.252.34.40"
 
   mreuter:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag02
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_mreuter:/home/saluser/develop
@@ -34,13 +34,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.204"
+        ipv4_address: "140.252.34.41"
 
   patrickingraham:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag03
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_pingraham:/home/saluser/develop
@@ -52,13 +52,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.219"
+        ipv4_address: "140.252.34.42"
 
   ecoughlin:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag04
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_ecoughlin:/home/saluser/develop
@@ -70,13 +70,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.220"
+        ipv4_address: "140.252.34.43"
 
   tribeiro:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag05
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_tribeiro:/home/saluser/develop
@@ -88,13 +88,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.221"
+        ipv4_address: "140.252.34.44"
 
   SashaBrownsberger:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag06
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_sasha:/home/saluser/develop
@@ -106,13 +106,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.222"
+        ipv4_address: "140.252.34.45"
 
   mondrik:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag07
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_mondrik:/home/saluser/develop
@@ -124,13 +124,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.223"
+        ipv4_address: "140.252.34.46"
 
   sthomas:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag08
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_sthomas:/home/saluser/develop
@@ -142,13 +142,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.225"
+        ipv4_address: "140.252.34.47"
 
   aroberts:
-    image: lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+    image: lsstts/develop-env:b42
     container_name: atdiag09
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_aroberts:/home/saluser/develop
@@ -160,7 +160,7 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.226"
+        ipv4_address: "140.252.34.48"
 
 networks:
   default:
