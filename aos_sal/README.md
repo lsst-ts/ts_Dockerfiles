@@ -4,10 +4,18 @@
 
 ## Overview
 
-*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The ts_sal, ts_xml, ts_opensplice, and ts_m1m3support are in the **/home/lsst/sal_repos** directory. The SAL API libraries of **MTWEP**, **MTOFC**, **MTM1M3**, **MTMount**, **MTM2**, and **Hexapod** are build in the **/home/lsst/sal_repos/ts_sal/test** already.*
+*The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. This Dockerfile will be removed after AOS does not need the lsst_sims anymore.*
 
 ## Tag List
 
+- *w_2020_06_sal*
+  - *lsst_sims (tag: sims_w_2020_06)*
+  - *ipython (by conda)*
+  - *scikit-image (by conda)*
+  - *sphinxcontrib-plantuml (by pip)*
+  - *csh (by yum)*
+  - *graphviz (by yum)*
+  - *SAL related packages maintained by develop-env in ts_Dockerfiles*
 - *w_2019_02*
     - *lsst_distrib (tag: w_2019_02)*
     - *lsst_sims (tag: sims_w_2019_02)*
