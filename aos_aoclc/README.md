@@ -8,6 +8,12 @@
 
 ## Tag List
 
+- *w_2020_06_sal*
+  - *phosim_utils - master branch (commit: 8744592)*
+  - *ts_wep - master branch (commit: d32de1c)*
+  - *ts_ofc - master branch (commit: 558517c)*
+  - *ts_phosim - master branch (commit: bea66c0)*
+  - *[LSST and SAL packages](https://cloud.docker.com/u/lsstts/repository/docker/lsstts/aos_sal)*
 - *w_2019_38_sal*
   - *phosim_utils - master branch (commit: c1f2391)*
   - *ts_wep - master branch (commit: 5d20039)*
