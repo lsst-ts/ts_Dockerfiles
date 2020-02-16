@@ -10,7 +10,7 @@
 
 - *w_2020_06_sal*
   - *phosim_utils - master branch (commit: 8744592)*
-  - *ts_wep - master branch (commit: d32de1c)*
+  - *ts_wep - feature/updateApi branch (commit: 18c2303)*
   - *ts_ofc - master branch (commit: 558517c)*
   - *ts_phosim - master branch (commit: bea66c0)*
   - *[LSST and SAL packages](https://cloud.docker.com/u/lsstts/repository/docker/lsstts/aos_sal)*

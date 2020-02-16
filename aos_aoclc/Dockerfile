@@ -23,9 +23,9 @@ RUN cd ${AOS_REPOS} \
     && cd phosim_utils/ \
     && git checkout 8744592 \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_wep.git \
+    && git clone -b feature/updateApi https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout d32de1c \
+    && git checkout 18c2303 \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
