@@ -1,14 +1,14 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstsqre/centos:7-stack-lsst_distrib-w_2020_06
+FROM lsstsqre/centos:7-stack-lsst_distrib-w_2020_07
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst/software/stack
-ARG SIMS_VERSION=sims_w_2020_06
+ARG SIMS_VERSION=sims_w_2020_07
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
