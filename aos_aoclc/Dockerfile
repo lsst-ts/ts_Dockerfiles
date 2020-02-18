@@ -1,7 +1,7 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software with the needed AOS repositories
 
-FROM lsstts/aos:w_2019_38_sal
+FROM lsstts/aos_sal:w_2020_06_sal
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
@@ -21,19 +21,19 @@ WORKDIR $LSST_USER_HOME
 RUN cd ${AOS_REPOS} \
     && git clone -b master https://github.com/lsst-dm/phosim_utils.git \
     && cd phosim_utils/ \
-    && git checkout c1f2391 \
+    && git checkout 8744592 \
     && cd .. \
-    && git clone -b master https://github.com/lsst-ts/ts_wep.git \
+    && git clone -b feature/updateApi https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout 5d20039 \
+    && git checkout 18c2303 \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
-    && git checkout e38c4e1 \
+    && git checkout 558517c \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_phosim.git \
     && cd ts_phosim/ \
-    && git checkout a2a42f3
+    && git checkout bea66c0
 
 # Add the PhoSim and output directory
 RUN mkdir -p ${PHOSIM_DIR} \
@@ -47,7 +47,7 @@ ENV AOCLCOUTPUTPATH "${AOCLC_OUTPUT_PATH}"
 WORKDIR $AOS_REPOS
 RUN source ${LSST_DIR}/loadLSST.bash \
     && cd phosim_utils/ \
-    && setup -k -r . -t $SIMS_VERSION \
+    && setup -k -r . -t ${SIMS_VERSION} \
     && scons \
     && cd ../ts_wep/ \
     && setup -k -r . \
