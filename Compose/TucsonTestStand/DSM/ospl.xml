@@ -27,6 +27,9 @@
             <!-- the following one is necessary only for TwinOaks CoreDX DDS compatibility -->
             <!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
         </Compatibility>
+        <Discovery>
+           <ParticipantIndex>none</ParticipantIndex>
+        </Discovery>
     </DDSI2Service>
     <DurabilityService name="durability">
         <Network>
