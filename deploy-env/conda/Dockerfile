@@ -1,6 +1,6 @@
 FROM centos:7
 
-ARG PYTHON_VERSION=3.7m
+ARG PYTHON_VERSION=3.7
 ARG CONDA_VERSION=4.5.4
 ARG SALOBJ_VERSION=5.0.0
 
@@ -19,7 +19,6 @@ RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf && \
     yum install -y wget \
                    git \
                    make \
-                   wget \
                    gcc-c++ \
                    OpenSpliceDDS-6.9.0
 
