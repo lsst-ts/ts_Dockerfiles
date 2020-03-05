@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         registryCredential = "dockerhub-lssttsadmin"
+        nexusRegistryCredential = "nexus3-lsst_jenkins"
 
         dockerImageNameMaster = "lsstts/deploy-env:master"
         dockerImageNameDevelop = "lsstts/deploy-env:develop"
@@ -12,8 +13,11 @@ pipeline {
         dockerImageBuild = ""
     } 
     parameters {
-        string defaultValue: "5.4.0", description: "The SalObj version.", name: 'SALOBJ_VERSION', trim: true
+        string defaultValue: "v5.4.0", description: "The SalObj version, requires the leading 'v' to build properly.", name: 'SALOBJ_VERSION', trim: true
         string defaultValue: "3.7", description: "The Python version.", name: 'PYTHON_VERSION', trim: true
+        booleanParam defaultValue: false, description: "Build the master/release branch.", name: 'build_master'
+        booleanParam defaultValue: false, description: "Build the develop branch.", name: 'build_develop'
+        booleanParam defaultValue: false, description: "Push the build image to the docker registries.", name: 'push_tag'
     }
     stages {
         stage("Create docker network.") {
@@ -74,7 +78,7 @@ pipeline {
                     docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
                         sh script: """
                             docker tag ${dockerImageNameMaster} ts-dockerhub.lsst.org/deploy-env:master
-                            docker push ts-dockerhub.lsst.org/deploy-env/deploy-env:master
+                            docker push ts-dockerhub.lsst.org/deploy-env:master
                         """
                     }
                 }
@@ -91,8 +95,8 @@ pipeline {
                     }
                     docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
                         sh script: """
-                            docker tag ${dockerImageNameMaster} ts-dockerhub.lsst.org/deploy-env:develop
-                            docker push ts-dockerhub.lsst.org/deploy-env/deploy-env:develop
+                            docker tag ${dockerImageNameDevelop} ts-dockerhub.lsst.org/deploy-env:develop
+                            docker push ts-dockerhub.lsst.org/deploy-env:develop
                         """
                     }
                 }
@@ -117,8 +121,8 @@ pipeline {
                     }
                     docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
                         sh script: """
-                            docker tag ${dockerImageNameMaster} ts-dockerhub.lsst.org/deploy-env:master
-                            docker push ts-dockerhub.lsst.org/deploy-env/deploy-env:b${BUILD_NUMBER}
+                            docker tag ${dockerImageNameBuild} ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
+                            docker push ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
                         """
                     }
                 }
