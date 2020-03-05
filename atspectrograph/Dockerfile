@@ -1,37 +1,14 @@
-FROM lsstts/develop-env:b42
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
+RUN git clone https://github.com/lsst-ts/ts_config_latiss.git
 
-USER saluser
+WORKDIR /home/saluser/ts_config_latiss
 
-WORKDIR /home/saluser/repos
-RUN git clone https://github.com/lsst-ts/ts_atspec.git && \
-    git clone https://github.com/lsst-ts/ts_config_latiss.git
+RUN git checkout "tags/v0.2.1" -b "v0.2.1"
 
-WORKDIR /home/saluser/repos/ts_atspec
-RUN git fetch --all && git checkout "v0.5.0" -b "v0.5.0"
-
-WORKDIR /home/saluser/repos/ts_config_latiss
-RUN git fetch --tags && git checkout "tags/v0.2.1" -b "v0.2.1"
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser
-
-WORKDIR /home/saluser/repos/ts_atspec
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    setup ts_sal -t current && \
-    eups declare -r . ts_atspectrograph -t current && \
-    setup ts_atspectrograph -t current && \
-    scons
+ENV TS_CONFIG_LATISS_DIR=/home/saluser/ts_config_latiss
 
 WORKDIR /home/saluser/
 
-COPY setup.sh /home/saluser/.setup.sh
-
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-atspec

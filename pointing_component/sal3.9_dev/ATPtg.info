@@ -29,7 +29,7 @@ site {
     tz -4.0
 }
 
-instrument_location "Nasmyth left"
+instrument_location "Nasmyth right"
 "Nasmyth left" {
     instrument_alignment_angle 0.0
 }

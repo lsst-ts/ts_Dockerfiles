@@ -16,9 +16,6 @@ setup ts_scheduler -t current
 
 echo "#"
 echo "# Running Scheduler CSC - $INDEX"
+run_scheduler.py $INDEX
+echo "# CSC exited..."
 
-while :
-    do
-        run_scheduler.py $INDEX
-        echo "# CSC exited, restarting..."
-done
