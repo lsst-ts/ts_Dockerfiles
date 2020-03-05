@@ -12,7 +12,8 @@ pipeline {
         dockerImageBuild = ""
     } 
     parameters {
-        string defaultValue: "5.4.0", description: "The SalObj version.", name: 'salobj_version', trim: true
+        string defaultValue: "5.4.0", description: "The SalObj version.", name: 'SALOBJ_VERSION', trim: true
+        string defaultValue: "3.7", description: "The Python version.", name: 'PYTHON_VERSION', trim: true
     }
     stages {
         stage("Create docker network.") {
@@ -31,7 +32,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg salobj_version=${SALOBJ_VERSION} ./deploy-env/conda/")
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
                 }
             }
         }
@@ -41,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg salobj_version=${SALOBJ_VERSION} ./deploy-env/conda/")
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
                 }
             }
         }
@@ -56,7 +57,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg salobj_version=${SALOBJ_VERSION} ./deploy-env/conda/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
                 }
             }
         }
