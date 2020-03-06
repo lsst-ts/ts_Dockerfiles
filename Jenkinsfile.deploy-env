@@ -39,7 +39,7 @@ pipeline {
                     docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
                         sh script: """
                             docker tag ${dockerImageNameBuild} ts-dockerhub.lsst.org/deploy-env:salobj_${SALOBJ_VERSION}
-                            docker push ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
+                            docker push ts-dockerhub.lsst.org/deploy-env:salobj_${SALOBJ_VERSION}
                         """
                     }
                 }
