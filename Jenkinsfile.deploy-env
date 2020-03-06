@@ -4,19 +4,12 @@ pipeline {
         registryCredential = "dockerhub-lssttsadmin"
         nexusRegistryCredential = "nexus3-lsst_jenkins"
 
-        dockerImageNameMaster = "lsstts/deploy-env:master"
-        dockerImageNameDevelop = "lsstts/deploy-env:develop"
-        dockerImageNameBuild = "lsstts/deploy-env:b${BUILD_NUMBER}"
-
-        dockerImageMaster = ""
-        dockerImageDevelop = ""
+        dockerImageNameBuild = "lsstts/deploy-env:salobj_${SALOBJ_VERSION}"
         dockerImageBuild = ""
     } 
     parameters {
         string defaultValue: "v5.4.0", description: "The SalObj version, requires the leading 'v' to build properly.", name: 'SALOBJ_VERSION', trim: true
         string defaultValue: "3.7", description: "The Python version.", name: 'PYTHON_VERSION', trim: true
-        booleanParam defaultValue: false, description: "Build the master/release branch.", name: 'build_master'
-        booleanParam defaultValue: false, description: "Build the develop branch.", name: 'build_develop'
         booleanParam defaultValue: false, description: "Push the build image to the docker registries.", name: 'push_tag'
     }
     stages {
@@ -30,90 +23,14 @@ pipeline {
             }
 
         }    
-        stage("Build Docker image (master)") {
-            when {
-                expression { return env.build_master.toBoolean() }
-            }
-            steps {
-                script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
-                }
-            }
-        }
-        stage("Build Docker image (develop)") {
-            when {
-                expression { return env.build_develop.toBoolean() }
-            }
-            steps {
-                script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
-                }
-            }
-        }
-        stage("Build Docker image (tag/branch)") {
-            when {
-                not{
-                    anyOf {
-                        expression { return env.build_develop.toBoolean() }
-                        expression { return env.build_master.toBoolean() }
-                    }
-                }
-            }
+        stage("Build Docker image") {
             steps {
                 script {
                     dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
                 }
             }
         }
-
-        stage("Push Docker image (master)") {
-            when {
-                expression { return env.build_master.toBoolean() }
-            }
-            steps {
-                script {
-                    docker.withRegistry("", registryCredential) {
-                        dockerImageMaster.push()
-                    }
-                    docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
-                        sh script: """
-                            docker tag ${dockerImageNameMaster} ts-dockerhub.lsst.org/deploy-env:master
-                            docker push ts-dockerhub.lsst.org/deploy-env:master
-                        """
-                    }
-                }
-            }
-        }
-        stage("Push Docker image (develop)") {
-            when {
-                expression { return env.build_develop.toBoolean() }
-            }
-            steps {
-                script {
-                    docker.withRegistry("", registryCredential) {
-                        dockerImageDevelop.push()
-                    }
-                    docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
-                        sh script: """
-                            docker tag ${dockerImageNameDevelop} ts-dockerhub.lsst.org/deploy-env:develop
-                            docker push ts-dockerhub.lsst.org/deploy-env:develop
-                        """
-                    }
-                }
-            }
-        }
-        stage("Push Docker image (tag/branch)") {
-            when {
-                allOf {
-                    expression { return env.push_tag.toBoolean() }
-                    not{
-                        anyOf {
-                            expression { return env.build_develop.toBoolean() }
-                            expression { return env.build_master.toBoolean() }
-                        }
-                    }
-                }
-            }
+        stage("Push Docker image") {
             steps {
                 script {
                     docker.withRegistry("", registryCredential) {
@@ -121,13 +38,13 @@ pipeline {
                     }
                     docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
                         sh script: """
-                            docker tag ${dockerImageNameBuild} ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
+                            docker tag ${dockerImageNameBuild} ts-dockerhub.lsst.org/deploy-env:salobj_${SALOBJ_VERSION}
                             docker push ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
                         """
                     }
                 }
             }
-        }        
+        }
     }
     post {
         cleanup {
