@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    environment {
+        registryCredential = "dockerhub-lssttsadmin"
+        nexusRegistryCredential = "nexus3-lsst_jenkins"
+
+        dockerImageNameBuild = "lsstts/deploy-env:salobj_${SALOBJ_VERSION}"
+        dockerImageBuild = ""
+    } 
+    parameters {
+        string defaultValue: "v5.4.0", description: "The SalObj version, requires the leading 'v' to build properly.", name: 'SALOBJ_VERSION', trim: true
+        string defaultValue: "3.7", description: "The Python version.", name: 'PYTHON_VERSION', trim: true
+        booleanParam defaultValue: false, description: "Push the build image to the docker registries.", name: 'push_tag'
+    }
+    stages {
+        stage("Create docker network.") {
+            steps {
+                script {
+                    sh """
+                    docker network create net_b${BUILD_NUMBER} || echo Network exists...
+                    """ 
+                }
+            }
+
+        }    
+        stage("Build Docker image") {
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
+                }
+            }
+        }
+        stage("Push Docker image") {
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                        dockerImageBuild.push()
+                    }
+                    docker.withRegistry("https://ts-dockerhub.lsst.org/", nexusRegistryCredential) {
+                        sh script: """
+                            docker tag ${dockerImageNameBuild} ts-dockerhub.lsst.org/deploy-env:salobj_${SALOBJ_VERSION}
+                            docker push ts-dockerhub.lsst.org/deploy-env:b${BUILD_NUMBER}
+                        """
+                    }
+                }
+            }
+        }
+    }
+    post {
+        cleanup {
+            sh "docker network rm net_b${BUILD_NUMBER}"
+        }
+    }
+}
