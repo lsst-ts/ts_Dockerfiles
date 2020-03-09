@@ -115,15 +115,6 @@ services:
     stdin_open: true
     tty: true
 
-##  atmonochromator:
-##    image: lsstts/monochromator:v0.1.0_sal4.4.0_salobj3.11.1
-##    container_name: atmonochromator
-##    environment:
-##      - LSST_DDS_DOMAIN=auxtelpath
-##    tty: true
-##    networks:
-##      test-stand-network:
-##        ipv4_address: "141.142.238.141"
   atspectrograph:
     image: lsstts/atspectrograph:v0.5.0_b42
     container_name: atspec

@@ -193,9 +193,9 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.157"
 
-  mt-hexapod-sim-1:
+  mt-cam-hexapod-sim:
     image: lsstts/hexapod:v0.4.0_b42
-    container_name: mt-hexapod-sim-1
+    container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=citesttucson
       - HEXAPOD_ID=-s 1
@@ -204,9 +204,9 @@ services:
       lab-priv-network:
         ipv4_address: "140.252.34.36"
 
-  mt-hexapod-sim-2:
+  mt-m2-hexapod-sim:
     image: lsstts/hexapod:v0.4.0_b42
-    container_name: mt-hexapod-sim-2
+    container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=citesttucson
       - HEXAPOD_ID=-s 2
