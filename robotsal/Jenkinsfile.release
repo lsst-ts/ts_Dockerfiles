@@ -84,11 +84,11 @@ node {
                             '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
                             '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
                             '--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
-                        \\'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                            \\'--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
-                            \\'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                            \\'--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
-                            \\'--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
+                        '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                            '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+                            '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                            '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
+                            '#--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
                         'exit 0'
                     },//AuxTel
                 'MainTel': {
@@ -104,11 +104,11 @@ node {
                         '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
                         '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
                         '--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
-                    \\'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                        \\'--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
-                        \\'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                        \\'--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
-                        \\'--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
+                    '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                        '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+                        '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                        '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
+                        '#--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
                     'exit 0'
                     }//MainTel
                 )//parallel
