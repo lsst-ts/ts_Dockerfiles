@@ -24,7 +24,7 @@ node {
         string(credentialsId: 'nexus_password', variable: 'nexus_passwd')]) {
             docker.image('lsstts/robotsal:latest').inside('-w ' + _home + ' -e AWS_ACCESS_KEY_ID=$aws_key_id -e AWS_SECRET_ACCESS_KEY=$aws_secret_key ' +
                 '-v ${WORKSPACE}/SAL:' + _home + '/trunk/ts_sal -v ${WORKSPACE}/rbtsalgen:' + _home + '/trunk/robotframework_salgenerator ' +
-                '-v ${WORKSPACE}/RPMs:/tmp -v ${WORKSPACE}/Reports:' + _home + '/Reports') {
+                '-v ${WORKSPACE}/rbtsalmsg:' + _home + '/trunk/robotframework_SAL -v ${WORKSPACE}/RPMs:/tmp -v ${WORKSPACE}/Reports:' + _home + '/Reports') {
             stage('Pull Git repos') {
                 // Get some code from a GitHub repository
                 checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SAL']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/lsst-ts/ts_sal']]]
@@ -62,11 +62,11 @@ node {
                     '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' + 
                     '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
                     '--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list \n' +
-                'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                    '--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' + 
-                    '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                    '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
-                    '--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list'
+                '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                    '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' + 
+                    '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                    '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
+                    '#--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list'
                 'echo Validation complete'
             }
             stage('Generate the RPMs') {
@@ -174,9 +174,9 @@ node {
 	                // Iterate over RPMs and push to Nexus3 yum repo.
 	                for(file in array) {
 	                    sh 'echo "========= Downloading ' + file + ' from s3 bucket ========="'
-                        sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
-                        sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
-                        sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
+                        //sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
+                        //sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
+                        //sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
                     }//for
                 }//else    
             }//Push RPMs to Nexus3   
