@@ -123,13 +123,13 @@ node {
 						'echo ========= Execute SAL messaging tests ========= \n' +
 						'echo robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
 							'--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
-							'--variable OpenspliceRelease:'OpenSplice HDE Release ' +
+							'--variable OpenspliceRelease:OpenSplice HDE Release ' +
 							'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
 							'--variable PythonVersion:'Python ' + _python_version + '\' ' +
 							'-A ' + _home + '/trunk/robotframework_SAL/CombinedCppTelemetry_Tests.list \n' +
 						'robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
                             '--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
-                            '--variable OpenspliceRelease:'OpenSplice HDE Release ' +
+                            '--variable OpenspliceRelease:OpenSplice HDE Release ' +
                             '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
                             '--variable PythonVersion:'Python ' + _python_version + '\' ' +
                             '-A ' + _home + '/trunk/robotframework_SAL/CombinedCppTelemetry_Tests.list \n' +
