@@ -86,32 +86,32 @@ node {
                             '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
                             '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
                             '--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
-                        '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                            '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
-                            '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                            '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
-                            '#--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
+                        'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                            '--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+                            '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                            '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
+                            '--name AuxTel --output AUXTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/AT_SalGen.list \n' +
                         'exit 0'
                     },//AuxTel
-                'MainTel': {
-                    // Generate the MainTel CSC RPMs
-                    sh label: 'MainTel', script: '#!/bin/bash \n' + 'source ' + _home + '/.bash_profile \n' +
-                    'echo ========= Move to robotframework_salgenerator directory ========= \n' +
-                    'echo cd ' + _home + '/trunk/robotframework_salgenerator \n' +
-                    'cd ' + _home + '/trunk/robotframework_salgenerator \n' +
-                    'pwd \n' +
-                    'echo ========= Execute MainTel salgenerator tests ========= \n' +
-                    'echo robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                        '--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' '  +
-                        '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                        '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
-                        '--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
-                    '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                        '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
-                        '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                        '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
-                        '#--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
-                    'exit 0'
+                	'MainTel': {
+                    	// Generate the MainTel CSC RPMs
+                    	sh label: 'MainTel', script: '#!/bin/bash \n' + 'source ' + _home + '/.bash_profile \n' +
+                    	'echo ========= Move to robotframework_salgenerator directory ========= \n' +
+                    	'echo cd ' + _home + '/trunk/robotframework_salgenerator \n' +
+                    	'cd ' + _home + '/trunk/robotframework_salgenerator \n' +
+                    	'pwd \n' +
+                    	'echo ========= Execute MainTel salgenerator tests ========= \n' +
+                    	'echo robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                        	'--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' '  +
+                        	'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                        	'--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
+                        	'--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
+						'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+							'--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+                        	'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                        	'--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' +
+                        	'--name MainTel --output MAINTEL --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/MT_SalGen.list \n' +
+                    	'exit 0'
                     }//MainTel
                 )//parallel
             }//Generate_RPMs
@@ -196,9 +196,9 @@ node {
 	                	// Iterate over RPMs and push to Nexus3 yum repo.
 	                	for(file in array) {
 	                    	sh 'echo "========= Downloading ' + file + ' from s3 bucket ========="'
-                        	//sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
-                        	//sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
-                        	//sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
+                        	sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
+                        	sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
+                        	sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
                     	}//for
                 	}//else    
 				}//If Push True
