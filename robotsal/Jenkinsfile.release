@@ -161,7 +161,7 @@ node {
 			}//RunMessagingTests
             stage('Process Results') {
                 sh label: 'Results', script: '#!/bin/bash \n' + 'echo "# Check for output files."\n' +
-                'declare -a outputs=(VALIDATE.xml AUXTEL.xml MAINTEL.xml CombinedCppTelemetry.xml CombinedEvents.xml CombinedJavaTelemetry.xml)\n' + 
+                'declare -a outputs=(VALIDATE.xml AUXTEL.xml MAINTEL.xml CombinedCppTelemetry.xml CombinedCppEvents.xml CombinedJavaTelemetry.xml)\n' + 
 				'echo ${outputs[@]}\n' +
                 'i=0\n echo i=$i\n' + 'for item in "${outputs[@]}"; do\n' +
                 '\tif test -f ' + _home + '/Reports/$item; then array[$i]=' + _home + '/Reports/$item; else echo ' + 
@@ -172,39 +172,37 @@ node {
                 '-r rpm_report.html ${array[@]}'
             }
             stage('Push RPMs to AWS S3 bucket') {
-				when {
-					// Only Push RPMs if desired
-					expression { params.Push == 'true' }
+                if (params.Push == 'true') {
+					sh 'aws s3 cp ' + _home + '/trunk/ts_sal/test/rpmbuild/RPMS/x86_64/ s3://sal-objects/daily ' +
+                    	'--acl public-read --recursive --exclude "dbsimulate/*" --exclude "salgenerator/*"'
+                	println('Pushed RPMs to S3 bucket')
+				} else {
+					echo "Not pushing build artifacts; running tests only."
 				}
-                sh 'aws s3 cp ' + _home + '/trunk/ts_sal/test/rpmbuild/RPMS/x86_64/ s3://sal-objects/daily ' +
-                    '--acl public-read --recursive --exclude "dbsimulate/*" --exclude "salgenerator/*"'
-                println('Pushed RPMs to S3 bucket')
             }
             stage('Push RPMs to Nexus3') {
-				when {
-					// Only Push RPMs if desired
-					expression { params.Push == 'true' }
-				}
-                def RPM_LIST = sh (
-                    script: 'aws s3 ls s3://sal-objects/daily/ |grep -v debuginfo |grep -v test |grep ' + SAL_Version + 
-                        ' |grep ' + XML_Version + ' |grep _${BUILD_NUMBER}- |cut -c 32-',
-                        returnStdout: true
-                    ).trim()
-                def array = RPM_LIST.split('\n')
-                println("Groovy variable: " + array)
+				if (params.Push == 'true') {
+                	def RPM_LIST = sh (
+                    	script: 'aws s3 ls s3://sal-objects/daily/ |grep -v debuginfo |grep -v test |grep ' + SAL_Version + 
+                        	' |grep ' + XML_Version + ' |grep _${BUILD_NUMBER}- |cut -c 32-',
+                        	returnStdout: true
+                    	).trim()
+                	def array = RPM_LIST.split('\n')
+                	println("Groovy variable: " + array)
                 if (array[0] == null) {
-	                // If no RPMs found, abort build and mark as failure.
-	                println("ERROR: No RPMs found with the given search parameters.")
-                } else {
-	                // Iterate over RPMs and push to Nexus3 yum repo.
-	                for(file in array) {
-	                    sh 'echo "========= Downloading ' + file + ' from s3 bucket ========="'
-                        //sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
-                        //sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
-                        //sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
-                    }//for
-                }//else    
-            }//Push RPMs to Nexus3   
+	                	// If no RPMs found, abort build and mark as failure.
+	                	println("ERROR: No RPMs found with the given search parameters.")
+                	} else {
+	                	// Iterate over RPMs and push to Nexus3 yum repo.
+	                	for(file in array) {
+	                    	sh 'echo "========= Downloading ' + file + ' from s3 bucket ========="'
+                        	//sh 'aws s3 cp s3://sal-objects/daily/' + file + ' /tmp'
+                        	//sh 'echo "=== Pushing RPM to Nexus3 yum repo ==="'
+                        	//sh 'curl -Ss -u $nexus_username:$nexus_passwd -T ${WORKSPACE}/RPMs/' + file + ' https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily/';
+                    	}//for
+                	}//else    
+				}//If Push True
+            }//Push RPMs to Nexus3
         }//lsstts/robotsal    
     }//withCredentials
 }//node
