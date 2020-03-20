@@ -64,11 +64,11 @@ node {
                     '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' + 
                     '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
                     '--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list \n' +
-                '#robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
-                    '#--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' + 
-                    '#--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
-                    '#--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
-                    '#--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list'
+                'robot --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* --variable SALVersion:' + SAL_Version + ' ' +
+                    '--variable SALInstall:' + _home + '/trunk/ts_sal --variable OpenspliceRelease:\'OpenSplice HDE Release\' ' + 
+                    '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 --variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                    '--variable XMLVersion:' + XML_Version + ' --variable Build_Number:_${BUILD_NUMBER} ' + 
+                    '--name Validate --output VALIDATE --outputdir ' + _home + '/Reports -A ' + _home + '/trunk/robotframework_salgenerator/Test_SalGen.list'
                 'echo Validation complete'
             }
             stage('Generate the RPMs') {
