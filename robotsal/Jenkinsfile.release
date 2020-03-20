@@ -8,6 +8,7 @@ node {
     println("The container user home dir: " + _home);
     
     
+	properties([parameters([booleanParam(defaultValue: true, description: 'Push RPMs to Nexus3 yum repo?', name: 'Push')])])
     stage('Cleanup') {
         // Clean the workspace from the previous build
         cleanWs()
@@ -16,6 +17,7 @@ node {
         sh 'mkdir XML'
         sh 'mkdir IDL'
         sh 'mkdir rbtsalgen'
+        sh 'mkdir rbtsalmsg'
         sh 'mkdir Reports'
     }
     withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'aws_key_id'), 
@@ -117,29 +119,43 @@ node {
 				parallel (
 					'CppTelemetry': {
 						sh label: 'CppTelemetry', script: '#!/bin/bash \n' +
-						'echo ========= Move to robotframework_SAL directory ========='
+						'echo ========= Move to robotframework_SAL directory ========= \n' +
 						'echo cd ' + _home + '/trunk/robotframework_SAL \n' +
-						'cd $home/trunk/robotframework_SAL \n' +
+						'cd ' + _home + '/trunk/robotframework_SAL \n' +
 						'echo ========= Execute SAL messaging tests ========= \n' +
 						'echo robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
 							'--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
-							'--variable OpenspliceRelease:OpenSplice HDE Release ' +
+							'--variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
 							'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
-							'--variable PythonVersion:Python ' + _python_version + '\' ' +
+							'--variable PythonVersion:\'Python ' + _python_version + '\' ' +
 							'-A ' + _home + '/trunk/robotframework_SAL/CombinedCppTelemetry_Tests.list \n' +
 						'robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
                             '--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
-                            '--variable OpenspliceRelease:OpenSplice HDE Release ' +
+                            '--variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
                             '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
-                            '--variable PythonVersion:Python ' + _python_version + '\' ' +
+                            '--variable PythonVersion:\'Python ' + _python_version + '\' ' +
                             '-A ' + _home + '/trunk/robotframework_SAL/CombinedCppTelemetry_Tests.list \n' +
 						'exit 0'
 					},//CppTelemetry
 					'CppEvents': {
 						sh label: 'CppTelemetry', script: '#!/bin/bash \n' +
-						'echo ========= Move to robotframework_SAL directory ========='
+						'echo ========= Move to robotframework_SAL directory ========= \n' +
 						'echo cd ' + _home + '/trunk/robotframework_SAL \n' +
-						'cd $home/trunk/robotframework_SAL \n'
+						'cd ' + _home + '/trunk/robotframework_SAL \n' +
+						'echo robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
+							'--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
+							'--variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+							'--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
+							'--variable PythonVersion:\'Python ' + _python_version + '\' ' +
+							'-A ' + _home + '/trunk/robotframework_SAL/CombinedCppEvents_Tests.list \n' +
+						'echo Start \n' +
+						'robot --outputdir ' + _home + '/Reports --variable ContInt:true -e skipped --noncritical TSS* --noncritical DM* ' +
+                            '--variable SALVersion:' + SAL_Version + ' --variable SALInstall:' + _home + '/trunk/ts_sal ' +
+                            '--variable OpenspliceRelease:\'OpenSplice HDE Release\' ' +
+                            '--variable OpenspliceVersion:6.9.181127OSS --variable OpenspliceDate:2018-11-28 ' + 
+                            '--variable PythonVersion:\'Python ' + _python_version + '\' ' +
+                            '-A ' + _home + '/trunk/robotframework_SAL/CombinedCppEvents_Tests.list \n' +
+						'exit 0'
 					}//CppEvents
 				)//parallel
 			}//RunMessagingTests
@@ -155,11 +171,19 @@ node {
                 '-r rpm_report.html ${array[@]}'
             }
             stage('Push RPMs to AWS S3 bucket') {
+				when {
+					// Only Push RPMs if desired
+					expression { params.Push == 'true' }
+				}
                 sh 'aws s3 cp ' + _home + '/trunk/ts_sal/test/rpmbuild/RPMS/x86_64/ s3://sal-objects/daily ' +
                     '--acl public-read --recursive --exclude "dbsimulate/*" --exclude "salgenerator/*"'
                 println('Pushed RPMs to S3 bucket')
             }
             stage('Push RPMs to Nexus3') {
+				when {
+					// Only Push RPMs if desired
+					expression { params.Push == 'true' }
+				}
                 def RPM_LIST = sh (
                     script: 'aws s3 ls s3://sal-objects/daily/ |grep -v debuginfo |grep -v test |grep ' + SAL_Version + 
                         ' |grep ' + XML_Version + ' |grep _${BUILD_NUMBER}- |cut -c 32-',
