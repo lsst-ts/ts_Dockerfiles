@@ -161,7 +161,8 @@ node {
 			}//RunMessagingTests
             stage('Process Results') {
                 sh label: 'Results', script: '#!/bin/bash \n' + 'echo "# Check for output files."\n' +
-                'declare -a outputs=(VALIDATE.xml AUXTEL.xml MAINTEL.xml)\n' + 'echo ${outputs[@]}\n' +
+                'declare -a outputs=(VALIDATE.xml AUXTEL.xml MAINTEL.xml CombinedCppTelemetry.xml CombinedEvents.xml CombinedJavaTelemetry.xml)\n' + 
+				'echo ${outputs[@]}\n' +
                 'i=0\n echo i=$i\n' + 'for item in "${outputs[@]}"; do\n' +
                 '\tif test -f ' + _home + '/Reports/$item; then array[$i]=' + _home + '/Reports/$item; else echo ' + 
                     _home + '/Reports/$item does not exist!; fi\n' +
