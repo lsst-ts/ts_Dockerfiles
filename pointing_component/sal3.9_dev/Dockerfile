@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:b22
+FROM lsstts/develop-env:b42
 
 WORKDIR /home/saluser/repos
 
@@ -47,6 +47,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     rm /home/saluser/repos/ts_sal/test/Environment/cpp/src/sacpp_*_send
 
 RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
+RUN mkdir /home/saluser/repos/ts_pointing_common/build/
 
 WORKDIR /home/saluser/
 
@@ -65,7 +66,9 @@ ENV TELESCOPE=Main
 WORKDIR /home/saluser/
 COPY ATPtg.info /home/saluser/repos/ts_pointing_common/install/data/ATPtg.info
 COPY MTPtg.info /home/saluser/repos/ts_pointing_common/install/data/MTPtg.info
-COPY auxtel_20191211_fauto.mod /home/saluser/repos/ts_pointing_common/install/data/at.mod
+COPY auxtel_20191211_fauto.mod /home/saluser/repos/ts_pointing_common/install/data/auxtel_20191211_fauto.mod
+COPY at_20200219_fauto.mod /home/saluser/repos/ts_pointing_common/install/data/at_20200219_fauto.mod
+COPY at_20200219_manual.mod /home/saluser/repos/ts_pointing_common/install/data/at.mod
 COPY setup.sh /home/saluser/.setup.sh
 USER root
 RUN chown saluser:lsst -R /home/saluser/repos/ts_pointing_common/install/data/ && \

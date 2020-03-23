@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
   salkafka_150:
-    image: lsstts/salkafka:v1.1.0_xml_v4.6.0
+    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
     container_name: salkafka_150
     environment:
       - LSST_DDS_DOMAIN=auxtelpath

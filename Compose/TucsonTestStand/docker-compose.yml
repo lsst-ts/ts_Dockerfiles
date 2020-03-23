@@ -193,6 +193,28 @@ services:
       lab-priv-network:
         ipv4_address: "10.0.100.157"
 
+  mt-cam-hexapod-sim:
+    image: lsstts/hexapod:v0.4.0_b42
+    container_name: mt-cam-hexapod-sim
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+      - HEXAPOD_ID=-s 1
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.36"
+
+  mt-m2-hexapod-sim:
+    image: lsstts/hexapod:v0.4.0_b42
+    container_name: mt-m2-hexapod-sim
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+      - HEXAPOD_ID=-s 2
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.37"
+
   atmonochromator:
     image: lsstts/monochromator:v0.1.0_sal4.4.0_salobj3.11.1
     container_name: atmonochromator

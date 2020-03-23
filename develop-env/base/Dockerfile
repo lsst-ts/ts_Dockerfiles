@@ -20,7 +20,10 @@ RUN groupadd --gid ${GID} saluser && \
 
 RUN chown ${UID}:${GID} -R /opt/lsst/
 
-COPY lsst-ts.repo /tmp/lsst-ts.repo
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - && \
+    yum install -y nodejs && node --version
+
+COPY lsst-ts-nexus.repo /tmp/lsst-ts.repo
 RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
 
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
@@ -50,7 +53,7 @@ RUN yum -y --enablerepo=extras install epel-release \
   strace \
   net-tools \
   ntp \
-  tcpdump && \
+  tcpdump \
   yum clean all
 
 RUN yum install -y OpenSpliceDDS-6.9.0
@@ -64,61 +67,23 @@ RUN wget http://www.ietf.org/timezones/data/leap-seconds.list
 USER saluser
 WORKDIR /home/saluser
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c anaconda jsonschema=3.0.1
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    conda install -y ipython jupyter jupyterlab
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y jinja2 ephem gitpython
-# jsonschema=3.0.1
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda config --add channels conda-forge
-
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-#    conda install -c anaconda setuptools
-
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-#    conda update -y -n base -c defaults conda
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda update -y pyqt fontconfig sqlalchemy
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c anaconda-platform asynctest lxml
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c conda-forge pytest-asyncio
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c conda-forge kafkacat moto boto3
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y conda-build
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    conda install -y -c conda-forge pytest-flake8 ipympl nodejs
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    pip install jupyterlab
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension install jupyter-matplotlib && \
     jupyter notebook --generate-config
 
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-#    conda install -c conda-forge pytest-subtests
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib &&\
-    pip install "documenteer[pipelines]==0.4.2" &&\
-    pip install "kafkit[aiohttp]" &&\
-    pip install aiokafka &&\
-    pip install confluent_kafka &&\
-    pip install asynccmd &&\
-    pip install aiounittest &&\
-    pip install ipdb &&\
-    pip install wget &&\
-    pip install pytest-subtests &&\
-    pip install --upgrade pycodestyle
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    pip install "documenteer[pipelines]==0.4.2" "kafkit[aiohttp]" \
+    aiokafka confluent_kafka asynccmd aiounittest ipdb wget pytest-subtests \
+    pycodestyle aiomisc ipympl ginga pyevents jinja2 ephem gitpython \
+    sqlalchemy asynctest lxml pytest-asyncio && \
+    pip install moto boto3
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    conda install -y -c conda-forge kafkacat pyqt fontconfig
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux

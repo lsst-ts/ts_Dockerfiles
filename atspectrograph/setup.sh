@@ -15,8 +15,8 @@ echo "# Setting up ts_atspectrograph."
 setup ts_salobj -t current
 setup ts_atspectrograph -t current
 
-while :
-    do
-        echo "# Starting ATSpectrograph CSC"
-        atspec_csc.py
-done
+echo "# Starting ATSpectrograph CSC"
+
+atspec_csc.py
+
+echo "# ATSpectrograph exited"
