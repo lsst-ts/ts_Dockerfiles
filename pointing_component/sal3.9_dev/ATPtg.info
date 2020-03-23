@@ -34,7 +34,7 @@ instrument_location "Nasmyth left"
     instrument_alignment_angle 0.0
 }
 "Nasmyth right" {
-    instrument_alignment_angle 0.0
+    instrument_alignment_angle 180.0
 }
 
 focal_length 100000.0;              ; mm
@@ -53,6 +53,9 @@ rotator_high_limit 175.0
 slew_limit_margin 1.0
 
 ; Default observing wavelength
+wavelength 0.8
+
+; Reference observing wavelength
 wavelr 0.8
 
 proximity {
@@ -75,16 +78,12 @@ post_telem {
   telem_slow_multiplier 25
 }
 
-command_timeouot {
-  ack 1000; ms              General timeouts for receiving SAL__CMD_ACK
-  start_tracking 10000; ms  Command reply timeout for ATMCS startTracking command (after ACK/INPROGRESS received)
-  stop_tracking 1000; ms   Command reply timeout for ATMCS stopTracking command (after ACK/INPROGRESS received)
+command_timeout {
+  ack 10000; ms              General timeouts for receiving SAL__CMD_ACK
+  start_tracking 100000; ms  Command reply timeout for ATMCS startTracking command (after ACK/INPROGRESS received)
+  stop_tracking 10000; ms   Command reply timeout for ATMCS stopTracking command (after ACK/INPROGRESS received)
 }
 
-airmass {
-  warning_diff 0.1;
-  default_limit 1.6;
-}
-
-
+airmass_limit 1.6;
+airmass_warning_diff 0.1;
 

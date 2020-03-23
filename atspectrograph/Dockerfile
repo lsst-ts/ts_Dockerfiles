@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+FROM lsstts/develop-env:b42
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
@@ -9,22 +9,16 @@ RUN git clone https://github.com/lsst-ts/ts_atspec.git && \
     git clone https://github.com/lsst-ts/ts_config_latiss.git
 
 WORKDIR /home/saluser/repos/ts_atspec
-# RUN git fetch --tags && git checkout "tags/v0.3.0" -b "v0.3.0"
-RUN git fetch --tags && git checkout tickets/DM-22016
+RUN git fetch --all && git checkout "v0.5.0" -b "v0.5.0"
 
 WORKDIR /home/saluser/repos/ts_config_latiss
-RUN git fetch --tags && git checkout "tags/v0.1.0" -b "v0.1.0"
+RUN git fetch --tags && git checkout "tags/v0.2.1" -b "v0.2.1"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     eups declare -r . -t current
 
 WORKDIR /home/saluser
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t current && \
-    make_idl_files.py ATSpectrograph ATCamera
 
 WORKDIR /home/saluser/repos/ts_atspec
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -36,6 +30,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     scons
 
 WORKDIR /home/saluser/
+
 COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]

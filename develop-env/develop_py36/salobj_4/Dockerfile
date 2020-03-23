@@ -9,7 +9,8 @@ RUN  git clone https://github.com/lsst-ts/ts_config_attcs.git && \
      git clone https://github.com/lsst-ts/ts_externalscripts.git && \
      git clone https://github.com/lsst-ts/ts_ATMCSSimulator.git && \
      git clone https://github.com/lsst-ts/ts_ATDome.git && \
-     git clone https://github.com/lsst-ts/ts_ATDomeTrajectory.git
+     git clone https://github.com/lsst-ts/ts_ATDomeTrajectory.git && \
+     git clone https://github.com/lsst-ts/ts_simactuators.git
 
 # Arguments for package versions
 ARG config_attcs_v="tags/v0.1-alpha.4"
@@ -19,7 +20,7 @@ ARG atdometraj_v="tags/v0.8.1"
 ARG standardscripts_v="tags/v0.4.0"
 ARG externalscripts_v="tags/v0.1.0"
 ARG scriptqueue_v="tags/v2.1.0"
-
+ARG simactuators_v="tags/v2.1.0"
 
 WORKDIR /home/saluser/repos/ts_config_attcs
 RUN /home/saluser/.checkout_repo.sh ${config_attcs_v}
@@ -42,11 +43,15 @@ RUN /home/saluser/.checkout_repo.sh ${atdometraj_v}
 WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN /home/saluser/.checkout_repo.sh ${scriptqueue_v}
 
+WORKDIR /home/saluser/repos/ts_simactuators
+RUN /home/saluser/.checkout_repo.sh ${simactuators_v}
+
 WORKDIR /home/saluser
 
 WORKDIR /home/saluser/repos/ts_config_attcs
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     eups declare -r . ts_config_attcs -t current && \
     setup ts_config_attcs -t current
 
@@ -55,11 +60,19 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
-    make_idl_files.py all
+    make_idl_files.py `ls $TS_XML_DIR/sal_interfaces | grep -v xml | grep -v MTM1M3| tr '\n' ' '`
+
+WORKDIR /home/saluser/repos/ts_simactuators
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
+    eups declare -r . ts_simactuators -t current && setup ts_simactuators -t current && \
+    scons || pytest --color=no
 
 WORKDIR /home/saluser/repos/ts_ATDome
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
     eups declare -r . ts_ATDome -t current && setup ts_ATDome -t current && \
@@ -68,6 +81,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
     eups declare -r . ts_ATDomeTrajectory -t current && \
@@ -76,6 +90,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_ATMCSSimulator
 RUN  source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
     eups declare -r . ts_ATMCSSimulator -t current && \
@@ -85,6 +100,7 @@ RUN  source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_standardscripts
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_sal -t current && \
     setup ts_salobj -t current && \
     setup ts_config_attcs -t current && \
@@ -97,6 +113,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 WORKDIR /home/saluser/repos/ts_externalscripts
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_sal -t current && \
     setup ts_salobj -t current && \
     setup ts_standardscripts -t current && \
@@ -116,6 +133,7 @@ WORKDIR /home/saluser
 WORKDIR /home/saluser/repos/ts_scriptqueue
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
+    export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
     setup ts_salobj -t current && \

@@ -17,9 +17,6 @@ setup ts_watcher -t current
 
 echo "# Starting Watcher CSC"
 
-while :
-    do
-        run_watcher.py
-        echo "# Watcher exited, restarting..."
-done
+run_watcher.py
 
+echo "# Watcher exited..."

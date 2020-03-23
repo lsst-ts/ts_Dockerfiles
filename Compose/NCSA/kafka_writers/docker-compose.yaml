@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+
+  salkafka_150:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
+    container_name: salkafka_150
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod ATPtg ATMCS ATCamera
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.130"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+networks:
+  default:
+    external:
+      name: test-stand-network
+  test-stand-network:
+    external: true

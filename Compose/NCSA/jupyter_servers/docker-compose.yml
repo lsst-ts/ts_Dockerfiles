@@ -1,0 +1,98 @@
+version: "3.4"
+
+services:
+
+#  firefly:
+#    image: ipac/firefly:lsst-dev
+#    container_name: lab_jupyter_servers_firefly
+#    environment:
+#      - ADMIN_PASSWORD=saluser
+#      - MANAGER=FALSE
+#      - FIREFLY_OPTS="-Dvisualize.fits.search.path=/scratch/firefly"
+#      - FIREFLY_SHARED_WORK_DIR="/scratch/firefly/workarea"
+#      - MAX_JVM_SIZE=64G
+#      - DEBUG=false
+#    volumes:
+#      - /scratch
+#    networks:
+#      test-stand-network:
+#        ipv4_address: "10.0.100.230"
+
+  mreuter:
+    image: lsstts/develop-env:b42
+    container_name: diag01
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+#      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /deploy-lsstts/develop_mreuter/:/home/saluser/develop
+#      - /mnt/dmcs/:/mnt/dmcs
+#      - /mnt/data/:/mnt/data
+      - ./diag01_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./diag01_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.101"
+
+  patrickingraham:
+    image: lsstts/develop-env:b42
+    container_name: diag02
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+#      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /deploy-lsstts/develop_pingraham:/home/saluser/develop
+#      - /mnt/dmcs/:/mnt/dmcs
+#      - /mnt/data/:/mnt/data
+      - ./diag02_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./diag02_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.102"
+
+  tribeiro:
+    image: lsstts/develop-env:b42
+    container_name: diag03
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+#      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /deploy-lsstts/develop_tribeiro:/home/saluser/develop
+#      - /mnt/dmcs/:/mnt/dmcs
+#      - /mnt/data/:/mnt/data
+      - ./diag03_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./diag03_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.103"
+
+  ecoughlin:
+    image: lsstts/develop-env:b42
+    container_name: diag04
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+    volumes:
+#      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /deploy-lsstts/develop_ecoughlin:/home/saluser/develop
+#      - /mnt/dmcs/:/mnt/dmcs
+#      - /mnt/data/:/mnt/data
+      - ./diag04_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./diag04_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.104"
+
+networks:
+  default:
+    external:
+      name: test-stand-network
+  test-stand-network:
+    external: true

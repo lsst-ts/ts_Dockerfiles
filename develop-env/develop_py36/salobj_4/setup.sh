@@ -8,7 +8,8 @@ echo "# Loading LSST Stack"
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. repos/ts_sal/setup.env
+. /home/saluser/repos/ts_sal/setup.env
+export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'`
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 

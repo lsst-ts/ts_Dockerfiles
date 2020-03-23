@@ -17,10 +17,6 @@ setup ts_ATPneumaticsSimulator -t current
 
 echo "# Starting ATPneumatics Simulator CSC"
 
-while :
-    do
-        run_atpneumatics_simulator.py
-        echo "# ATPneumatics Simulator exited. Restarting..."
-done
+run_atpneumatics_simulator.py
 
-
+echo "# ATPneumatics Simulator exited."
