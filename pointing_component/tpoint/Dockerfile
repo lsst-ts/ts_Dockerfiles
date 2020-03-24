@@ -1,4 +1,4 @@
-FROM tiagorib/ptkernel:v1.1.0_rc2_xml4.4.1_sal4.0.0
+FROM ts-dockerhub.lsst.org/ptkernel:v1.1.0_rc4_b42
 
 USER root
 
