@@ -143,23 +143,6 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mtptg:
-    image: tiagorib/ptkernel:DM-22130_xml4.4.1_sal4.0.0
-    container_name: mtptg
-    environment:
-      - LSST_DDS_DOMAIN=auxtelpath
-      - TELESCOPE=Main
-    stdin_open: true
-    tty: true
-    networks:
-      lab-priv-network:
-        ipv4_address: "10.0.100.158"
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "10m"
-
   athexapod:
     image: lsstts/ts_athexapod:v0.2.0_sal_v4.0.0_salobj_v5.0.0
     container_name: athexapod
@@ -183,6 +166,24 @@ services:
     stdin_open: true
     tty: true
 
+  mtptg:
+    image: tiagorib/ptkernel:DM-22130_xml4.4.1_sal4.0.0
+    container_name: mtptg
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - TELESCOPE=Main
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.21"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+
   mt-rotator-sim:
     image: lsstts/rotator:v0.1.0_sim
     container_name: mt-rotator-sim
@@ -191,7 +192,7 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.157"
+        ipv4_address: "140.252.34.22"
 
   mt-cam-hexapod-sim:
     image: lsstts/hexapod:v0.4.0_b42
