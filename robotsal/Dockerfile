@@ -1,4 +1,4 @@
-FROM lsstts/robot:python37
+FROM lsstts/robot:python376
 MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
@@ -13,7 +13,7 @@ ADD mavenrepo69.tgz /root
 ADD mavenrepo69.tgz ${HOME}
 RUN chown -R 1001:1001 ${HOME}/.m2 
 
-RUN python3.6 -m pip install awscli --upgrade
+RUN python3.7 -m pip install awscli --upgrade
 
 RUN yum -y install tk tk-devel \
 swig ncurses-libs xterm \
@@ -26,8 +26,8 @@ rpm-build && \
 yum clean all && \
 rm -rf /var/cache/yum
 
-RUN curl -s https://project.lsst.org/ts/lsstrepo/OpenSpliceDDS-6.9.0-4.x86_64.rpm --output OpenSpliceDDS-6.9.0-4.x86_64.rpm
-RUN yum -y install OpenSpliceDDS-6.9.0-4.x86_64.rpm
+RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
+RUN yum -y install OpenSpliceDDS-6.9.0-6.x86_64.rpm
 
 USER ${USER}
 
@@ -37,8 +37,8 @@ COPY --chown=0:0 rpmmacros /root/.rpmmacros
 
 ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
-ENV PYTHON_BUILD_VERSION=3.6m
-ENV PYTHON_BUILD_LOCATION=/usr
+ENV PYTHON_BUILD_VERSION=3.7m
+ENV PYTHON_BUILD_LOCATION=/usr/local
 ENV LSST_DDS_DOMAIN=citest
 
 RUN echo "" >> ${HOME}/.bash_profile && \
