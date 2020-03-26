@@ -26,8 +26,8 @@ python3.7 -m pip install pytest
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
-RUN groupadd -g 1001 ${USER} && \
-useradd -r -u 1001 -g ${USER} -m ${USER} && \
+RUN groupadd -g 1003 ${USER} && \
+useradd -r -u 1003 -g ${USER} -m ${USER} && \
 chown ${USER}:${USER} ${HOME}
 
 WORKDIR ${HOME}
@@ -38,6 +38,6 @@ RUN mkdir bin && mkdir trunk && mkdir Reports
 
 # Apparently Docker does not support variable expansion in the ADD and COPY context.
 # ... Therefore, the ownership must be hardcoded.
-COPY --chown=1001:1001 Test_Vars.txt ${HOME}/bin/Test_Vars.txt
-COPY --chown=1001:1001 bash_profile ${HOME}/.bash_profile
+COPY --chown=1003:1003 Test_Vars.txt ${HOME}/bin/Test_Vars.txt
+COPY --chown=1003:1003 bash_profile ${HOME}/.bash_profile
 RUN echo 'source ~/.bash_profile' >> ${HOME}/.bashrc

@@ -11,7 +11,7 @@ ADD aws_config /root/.aws/config
 ADD lv_includes.tgz /
 ADD mavenrepo69.tgz /root
 ADD mavenrepo69.tgz ${HOME}
-RUN chown -R 1001:1001 ${HOME}/.m2 
+RUN chown -R 1003:1003 ${HOME}/.m2 
 
 RUN python3.7 -m pip install awscli --upgrade
 
@@ -31,8 +31,8 @@ RUN yum -y install OpenSpliceDDS-6.9.0-6.x86_64.rpm
 
 USER ${USER}
 
-COPY --chown=1001:1001 start.sh ${HOME}/.
-COPY --chown=1001:1001 rpmmacros ${HOME}/.rpmmacros
+COPY --chown=1003:1003 start.sh ${HOME}/.
+COPY --chown=1003:1003 rpmmacros ${HOME}/.rpmmacros
 COPY --chown=0:0 rpmmacros /root/.rpmmacros
 
 ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
