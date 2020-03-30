@@ -1,7 +1,7 @@
 node {
     def XML_Version = "not_yet_set"
     def SAL_Version = "not_yet_set"
-    def _python_version="3.6.8"
+    def _python_version="3.7.6"
     def _user="appuser"
     def _home="/home/" + _user
     println("The container user: " + _user);
