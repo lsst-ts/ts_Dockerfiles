@@ -1,0 +1,13 @@
+version : "3.6"
+services:
+    electrometer:
+        image: lsstts/electrometer:develop
+        container_name: electrometer
+        devices:
+            - "/dev/ttyUSB0:/dev/electrometer"
+        volumes:
+            - "./setup.sh:/home/saluser/setup.sh"
+        entrypoint:
+            - "/home/saluser/setup.sh"
+        environment:
+            - LSST_DDS_DOMAIN="auxtelpath"
