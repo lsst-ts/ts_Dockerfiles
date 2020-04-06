@@ -1,4 +1,6 @@
-FROM lsstts/deploy-env:salobj_v5.7.0
+ARG deploy_tag=salobj_v5.7.0
+
+FROM lsstts/deploy-env:${deploy_tag}
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
