@@ -1,10 +1,15 @@
-FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
+ARG deploy_tag=salobj_v5.7.0
+
+FROM lsstts/deploy-env:${deploy_tag}
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
+ARG salkafka=v1.1.1
+ARG idl=1.1.3_4.8.0
+
 RUN source /home/saluser/.setup.sh && \
     pip install kafkit[aiohttp] aiokafka && \
-    conda install -c lsstts ts-salkafka
+    conda install -c lsstts ts-salkafka=${salkafka} ts-idl=${idl}
 
 COPY setup.sh /home/saluser/.setup.sh
 

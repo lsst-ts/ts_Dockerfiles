@@ -60,7 +60,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
-    make_idl_files.py `ls $TS_XML_DIR/sal_interfaces | grep -v xml | grep -v MTM1M3| tr '\n' ' '`
+    for comp in `ls $TS_XML_DIR/sal_interfaces/ | grep -v xml`; do echo "Building IDL for ${comp}"; make_idl_files.py $comp &> /dev/null || echo "FAILED to build idl for ${comp}" ;done
 
 WORKDIR /home/saluser/repos/ts_simactuators
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -108,7 +108,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_ATMCSSimulator -t current && \
     eups declare -r . -t current && \
     setup ts_standardscripts -t current && \
-    pytest --color=no
+    pytest --color=no || pytest --last-failed
 
 WORKDIR /home/saluser/repos/ts_externalscripts
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
@@ -139,7 +139,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     setup ts_salobj -t current && \
     eups declare -r . -t current && \
     setup ts_scriptqueue -t current && \
-    pytest --color=no
+    pytest --color=no || pytest --last-failed
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh

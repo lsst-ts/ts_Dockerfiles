@@ -49,19 +49,20 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
 
 USER saluser
 
+WORKDIR /home/saluser/repos/ts_idl
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    eups declare -r . ts_idl -t current
+
+# TODO: Remove astropy downgrade when SAL 4.1 is released.
 WORKDIR /home/saluser/repos/ts_sal
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     eups declare -r . ts_sal -t current && \
+    conda install -y astropy=3.2.1 && \
+    python -c 'from astropy.time import Time; print(Time.now())' && \
     setup ts_sal -t current && \
     mkdir -p $SAL_WORK_DIR && \
-    mkdir -p $TS_SAL_DIR/lib && scons
-
-WORKDIR /home/saluser/repos/ts_idl
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t current && \
-    eups declare -r . ts_idl -t current && setup ts_idl -t current && scons
+    mkdir -p $TS_SAL_DIR/lib && scons || pytest
 
 WORKDIR /home/saluser/repos
 RUN mkdir dds
