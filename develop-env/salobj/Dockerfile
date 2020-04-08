@@ -2,26 +2,58 @@ ARG base_image_tag
 
 FROM lsstts/base-env:$base_image_tag
 
+USER saluser
+
 COPY checkout_repo.sh /home/saluser/.checkout_repo.sh
 
 RUN mkdir repos
 
 WORKDIR /home/saluser/repos
 RUN  git clone https://github.com/lsst-ts/ts_config_ocs.git && \
+     git clone https://github.com/lsst-ts/ts_config_attcs.git && \
+     git clone https://github.com/lsst-ts/ts_config_mtcalsys.git && \
+     git clone https://github.com/lsst-ts/ts_config_eas.git && \
+     git clone https://github.com/lsst-ts/ts_config_latiss.git && \
+     git clone https://github.com/lsst-ts/ts_config_mttcs.git && \
+     git clone https://github.com/lsst-ts/ts_config_atcalsys.git && \
      git clone https://github.com/lsst-ts/ts_sal.git && \
      git clone https://github.com/lsst-ts/ts_salobj.git && \
      git clone https://github.com/lsst-ts/ts_xml.git && \
      git clone https://github.com/lsst-ts/ts_idl.git
 
 # Arguments for package versions
-ARG config_ocs_v="tags/v0.0-alpha.0"
-ARG sal_v="tags/v3.10.0"
-ARG salobj_v="tags/v4.2.0"
-ARG xml_v="tags/v3.10.0"
+ARG config_ocs_v="develop"
+ARG config_attcs_v="develop"
+ARG config_mtcalsys_v="develop"
+ARG config_eas_v="develop"
+ARG config_latiss_v="develop"
+ARG config_mttcs_v="develop"
+ARG config_atcalsys_v="develop"
+ARG sal_v="develop"
+ARG salobj_v="develop"
+ARG xml_v="develop"
 ARG idl_v="develop"
 
 WORKDIR /home/saluser/repos/ts_config_ocs
 RUN /home/saluser/.checkout_repo.sh ${config_ocs_v}
+
+WORKDIR /home/saluser/repos/ts_config_attcs
+RUN /home/saluser/.checkout_repo.sh ${config_attcs_v}
+
+WORKDIR /home/saluser/repos/ts_config_mtcalsys
+RUN /home/saluser/.checkout_repo.sh ${config_mtcalsys_v}
+
+WORKDIR /home/saluser/repos/ts_config_eas
+RUN /home/saluser/.checkout_repo.sh ${config_eas_v}
+
+WORKDIR /home/saluser/repos/ts_config_latiss
+RUN /home/saluser/.checkout_repo.sh ${config_latiss_v}
+
+WORKDIR /home/saluser/repos/ts_config_mttcs
+RUN /home/saluser/.checkout_repo.sh ${config_mttcs_v}
+
+WORKDIR /home/saluser/repos/ts_config_atcalsys
+RUN /home/saluser/.checkout_repo.sh ${config_atcalsys_v}
 
 WORKDIR /home/saluser/repos/ts_sal
 RUN /home/saluser/.checkout_repo.sh ${sal_v}
@@ -40,26 +72,51 @@ WORKDIR /home/saluser
 WORKDIR /home/saluser/repos/ts_config_ocs
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . ts_config_ocs -t current && setup ts_config_ocs -t current
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_attcs
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_mtcalsys
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_eas
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_latiss
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_mttcs
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
+
+WORKDIR /home/saluser/repos/ts_config_atcalsys
+RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
+    source /home/saluser/repos/ts_sal/setup.env && \
+    eups declare -r . -t current
 
 WORKDIR /home/saluser/repos/ts_xml
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     setup lsst_distrib && \
-    eups declare -r . ts_xml -t current
-
-USER saluser
+    eups declare -r . -t current
 
 WORKDIR /home/saluser/repos/ts_idl
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     eups declare -r . ts_idl -t current
 
-# TODO: Remove astropy downgrade when SAL 4.1 is released.
 WORKDIR /home/saluser/repos/ts_sal
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
     source /home/saluser/repos/ts_sal/setup.env && \
     eups declare -r . ts_sal -t current && \
-    conda install -y astropy=3.2.1 && \
-    python -c 'from astropy.time import Time; print(Time.now())' && \
     setup ts_sal -t current && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib && scons || pytest
