@@ -4,7 +4,7 @@ services:
         image: lsstts/electrometer:develop
         container_name: electrometer
         devices:
-            - "/dev/ttyUSB0:/dev/electrometer"
+            - "/dev/electrometer:/dev/electrometer"
         volumes:
             - "./setup.sh:/home/saluser/setup.sh"
         entrypoint:
