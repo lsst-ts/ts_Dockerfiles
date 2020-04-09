@@ -16,11 +16,11 @@ RUN source setup.env \
     && salgenerator MTMount generate cpp \
     && salgenerator MTM1M3 generate cpp
 
-RUN cd /home/saluser/repos && git clone --branch DM-24026 https://github.com/pkubanek/ts_m1m3support
+RUN cd /home/saluser/repos && git clone --branch SAL4Compat https://github.com/lsst-ts/ts_m1m3support
 
 WORKDIR /home/saluser/repos
 RUN source ts_sal/setup.env \
-    && cd ts_m1m3support/CentOS \
+    && cd ts_m1m3support \
     && make SIMULATOR=1
 
 COPY startup.sh .
