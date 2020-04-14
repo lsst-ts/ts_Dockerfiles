@@ -192,7 +192,7 @@ node {
                         'echo ========= Execute SAL messaging tests ========= \n' +
                         'echo No Java messaging tests at this time \n' +
                     'exit 0'
-                    {//JavaEvents
+                    }//JavaEvents
                 )//parallel
             }//RunJavaMessagingTests
             stage('Process Results') {
