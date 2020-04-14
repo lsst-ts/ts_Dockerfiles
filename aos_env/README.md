@@ -8,6 +8,11 @@ The scientific pipeline is installed with the lsst_distrib and lsst_sims package
 
 ## Tag List
 
+- w_2020_15
+  - lsst_distrib (tag: w_2020_15)
+  - lsst_sims (tag: sims_w_2020_15)
+  - ipython
+  - scikit-image
 - w_2020_14
   - lsst_distrib (tag: w_2020_14)
   - lsst_sims (tag: sims_w_2020_14)
