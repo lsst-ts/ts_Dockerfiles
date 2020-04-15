@@ -8,6 +8,12 @@ The scientific pipeline is installed with the lsst_distrib and lsst_sims package
 
 ## Tag List
 
+- w_2020_15_sal
+  - phosim_utils - master branch (commit: 8744592)
+  - ts_wep - master branch (commit: 3c661a4)
+  - ts_ofc - master branch (commit: 87075e2)
+  - ts_phosim - master branch (commit: 474d2eb)
+  - [LSST and SAL packages](https://cloud.docker.com/u/lsstts/repository/docker/lsstts/aos_sal)
 - w_2020_14_sal
   - phosim_utils - master branch (commit: 8744592)
   - ts_wep - master branch (commit: 3c661a4)

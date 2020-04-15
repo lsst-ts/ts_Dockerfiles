@@ -1,7 +1,7 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software with the needed AOS repositories
 
-FROM lsstts/aos_sal:w_2020_14_sal
+FROM lsstts/aos_sal:w_2020_15_sal
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
