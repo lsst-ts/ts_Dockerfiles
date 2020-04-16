@@ -8,4 +8,4 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     source /home/saluser/repos/ts_sal/setup.env && \
     setup ts_idl -t current && setup ts_salobj -t current && \
-    make_idl_files.py Electrometer && cd ts_electrometer2 && setup -kr . && scons install declare
+    make_idl_files.py Electrometer && cd ts_electrometer2 && setup -kr . && scons && scons install declare

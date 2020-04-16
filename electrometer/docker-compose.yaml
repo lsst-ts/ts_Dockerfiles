@@ -6,8 +6,8 @@ services:
         devices:
             - "/dev/electrometer:/dev/electrometer"
         volumes:
-            - "./setup.sh:/home/saluser/setup.sh"
+            - "./setup.sh:/home/saluser/.setup.sh"
         entrypoint:
-            - "/home/saluser/setup.sh"
+            - "/home/saluser/.setup.sh"
         environment:
             - LSST_DDS_DOMAIN="auxtelpath"
