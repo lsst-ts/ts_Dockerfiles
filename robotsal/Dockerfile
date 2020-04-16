@@ -11,6 +11,7 @@ ADD aws_config /root/.aws/config
 ADD lv_includes.tgz /
 ADD mavenrepo69.tgz /root
 ADD mavenrepo69.tgz ${HOME}
+ADD settings.xml ${HOME}/.m2
 RUN chown -R 1003:1003 ${HOME}/.m2 
 
 RUN python3.7 -m pip install awscli --upgrade
