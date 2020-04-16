@@ -44,6 +44,7 @@ node {
                 echo "The SAL version: " + SAL_Version
                 echo "The XML version: " + XML_Version
                 echo "The Maven version: " + MavenVersion
+                echo "Push build artifacts? " + Push
             }
             stage('Copy XML files') {
                 sh label: 'XML files', script: '#!/bin/bash \n' + 'cp -v ${WORKSPACE}/XML/sal_interfaces/*/*.xml SAL/test'
@@ -206,10 +207,11 @@ node {
                 '\t(( i++ ))\n' + 'done\n' + 
                 'echo ========= Generate the reports =========\n' +
                 'rebot --nostatusrc --noncritical TSS* --noncritical DM* --outputdir ' + _home + '/Reports --name RPM_Generation -o rpm_output.xml -l rpm_log.html ' +
-                '-r rpm_report.html ${array[@]}'
+                '-r rpm_report.html ${array[@]}\n' +
+                'echo Robot Report Complete'
             }
             stage('Push RPMs to AWS S3 bucket') {
-                if (params.Push == 'true') {
+                if (Push == 'true') {
                     sh 'aws s3 cp ' + _home + '/trunk/ts_sal/test/rpmbuild/RPMS/x86_64/ s3://sal-objects/daily ' +
                         '--acl public-read --recursive --exclude "dbsimulate/*" --exclude "salgenerator/*"'
                     println('Pushed RPMs to S3 bucket')
@@ -218,18 +220,19 @@ node {
                 }
             }
             stage('Push Java artifacts') {
-                if (params.Push == 'true') {
+                if (Push == 'true') {
                     sh label: 'Java Artifacts', script: '#!/bin/bash \n' +
                     'cd ' + _home + 'trunk/ts_sal/test/maven/ATCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
                     'cd ' + _home + 'trunk/ts_sal/test/maven/CCCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
                     'cd ' + _home + 'trunk/ts_sal/test/maven/MTCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
-                    'mvn -DskipTests=true deploy'
+                    'mvn -DskipTests=true deploy \n' +
+                    'Java Push Complete'
                 }//If Push True
             }//Java artifacts
             stage('Push RPMs to Nexus3') {
-                if (params.Push == 'true') {
+                if (Push == 'true') {
                     def RPM_LIST = sh (
                         script: 'aws s3 ls s3://sal-objects/daily/ |grep -v debuginfo |grep -v test |grep ' + SAL_Version + 
                             ' |grep ' + XML_Version + ' |grep _${BUILD_NUMBER}- |cut -c 32-',
