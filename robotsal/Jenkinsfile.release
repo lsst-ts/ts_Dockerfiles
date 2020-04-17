@@ -222,11 +222,11 @@ node {
             stage('Push Java artifacts') {
                 if (Push == 'true') {
                     sh label: 'Java Artifacts', script: '#!/bin/bash \n' +
-                    'cd ' + _home + 'trunk/ts_sal/test/maven/ATCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
+                    'cd ' + _home + '/trunk/ts_sal/test/maven/ATCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
-                    'cd ' + _home + 'trunk/ts_sal/test/maven/CCCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
+                    'cd ' + _home + '/trunk/ts_sal/test/maven/CCCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
-                    'cd ' + _home + 'trunk/ts_sal/test/maven/MTCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
+                    'cd ' + _home + '/trunk/ts_sal/test/maven/MTCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
                     'Java Push Complete'
                 }//If Push True
