@@ -16,11 +16,13 @@ setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current
 setup ts_scriptqueue -t current
-setup ts_config_attcs -t current
+setup ts_ATDome -t current
+setup ts_ATDomeTrajectory -t current
+setup ts_standardscripts -t current
+setup ts_externalscripts -t current
 
-setup ts_ATDomeTrajectory -t $USER
-
-cd /home/saluser/repos/ts_ATDomeTrajectory/bin/
-
-echo "# Starting ATDomeTrajectory Simulator CSC"
-python ./run_atdometrajectory.py
+while :
+    do
+        run_script_queue.py 1
+        echo "# Queue exited. Restarting..."
+done

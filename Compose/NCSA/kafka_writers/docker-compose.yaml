@@ -1,0 +1,102 @@
+version: '3.6'
+
+services:
+
+  salkafka_115:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
+    container_name: salkafka_115
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod ATPtg ATMCS ATCamera
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.115"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_116:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
+    container_name: salkafka_116
+    environment:
+      - LSST_DDS_DOMAIN=comcampath
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=CCHeaderService CCArchiver CCCamera
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.116"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_117:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.7.0_xml_4.8.0
+    container_name: salkafka_117
+    environment:
+      - LSST_DDS_DOMAIN=comcampath
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - REPLICATION=3
+      - CSC_LIST=MTM1M3
+    volumes:
+      - /deploy-lsstts/idl/develop/:/home/saluser/miniconda3/lib/python3.7/idl
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.117"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_118:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.7.0_xml_4.8.0
+    container_name: salkafka_118
+    environment:
+      - LSST_DDS_DOMAIN=comcampath
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - REPLICATION=3
+      - CSC_LIST=Rotator Hexapod MTM2 MTAOS MTPtg
+    volumes:
+      - /deploy-lsstts/idl/develop/:/home/saluser/miniconda3/lib/python3.7/idl
+    stdin_open: true
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.118"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+networks:
+  default:
+    external:
+      name: test-stand-network
+  test-stand-network:
+    external: true

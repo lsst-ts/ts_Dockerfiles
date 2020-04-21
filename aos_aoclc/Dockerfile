@@ -1,68 +1,53 @@
 # Dockerfile to execute a base machine with all set to test active optics
-# system software with the needed AOS repos
+# system software with the needed AOS repositories
 
-FROM lsstts/aos:w_2019_24
+FROM lsstts/aos_sal:w_2020_14_sal
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
-ARG LSST_USER=lsst
-ARG LSST_USER_HOME=/home/$LSST_USER
-ARG SIMS_VERSION=sims_w_2019_24
-ARG AOS_REPOS=$LSST_USER_HOME/aos_repos
-
-USER root
-
-# Install the needed packages
-RUN conda install -y ipython scikit-image
-
-# Source the AOS environment automatically
-RUN echo "" >> /root/.bashrc \
-    && echo "# Setup the aos environment" >> /root/.bashrc \
-    && echo "cd $AOS_REPOS/phosim_utils" >> /root/.bashrc \
-    && echo "setup -k -r . -t $SIMS_VERSION" >> /root/.bashrc \
-    && echo "cd $AOS_REPOS/ts_wep" >> /root/.bashrc \
-    && echo "setup -k -r ." >> /root/.bashrc \
-    && echo "cd $AOS_REPOS/ts_ofc" >> /root/.bashrc \
-    && echo "setup -k -r ." >> /root/.bashrc \
-    && echo "cd $AOS_REPOS/ts_phosim" >> /root/.bashrc \
-    && echo "setup -k -r ." >> /root/.bashrc \
-    && echo "cd $LSST_USER_HOME" >> /root/.bashrc
+ARG LSST_USER=saluser
+ARG LSST_USER_HOME=/home/${LSST_USER}
+ARG AOS_REPOS=${LSST_USER_HOME}/repos
+ARG PHOSIM_DIR=${LSST_USER_HOME}/phosim
+ARG AOCLC_OUTPUT_PATH=${LSST_USER_HOME}/output
+ARG LSST_DIR=/opt/lsst/software/stack
+ARG SIMS_VERSION=current
 
 # Change to LSST user
 USER $LSST_USER
 WORKDIR $LSST_USER_HOME
 
 # Download the needed AOS repo
-RUN mkdir -p $AOS_REPOS \
-    && cd $AOS_REPOS\
+RUN cd ${AOS_REPOS} \
     && git clone -b master https://github.com/lsst-dm/phosim_utils.git \
     && cd phosim_utils/ \
-    && git checkout c1f2391 \
+    && git checkout 8744592 \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_wep.git \
+    && git clone -b master https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout 082fdd7 \
+    && git checkout 3c661a4 \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_ofc.git \
+    && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
-    && git checkout ccf971c \
+    && git checkout 87075e2 \
     && cd .. \
-    && git clone -b develop https://github.com/lsst-ts/ts_phosim.git \
+    && git clone -b master https://github.com/lsst-ts/ts_phosim.git \
     && cd ts_phosim/ \
-    && git checkout 774614c
+    && git checkout 474d2eb
 
 # Add the PhoSim and output directory
-RUN mkdir -p phosim \
-    && mkdir -p output
+RUN mkdir -p ${PHOSIM_DIR} \
+    && mkdir -p ${AOCLC_OUTPUT_PATH}
 
 # Set the PhoSim and output environment variables
-ENV PHOSIMPATH "$LSST_USER_HOME/phosim"
-ENV AOCLCOUTPUTPATH "$LSST_USER_HOME/output"
+ENV PHOSIMPATH "${PHOSIM_DIR}"
+ENV AOCLCOUTPUTPATH "${AOCLC_OUTPUT_PATH}"
 
 # Build the packages
 WORKDIR $AOS_REPOS
-RUN cd phosim_utils/ \
-    && setup -k -r . -t $SIMS_VERSION \
+RUN source ${LSST_DIR}/loadLSST.bash \
+    && cd phosim_utils/ \
+    && setup -k -r . -t ${SIMS_VERSION} \
     && scons \
     && cd ../ts_wep/ \
     && setup -k -r . \
@@ -74,18 +59,8 @@ RUN cd phosim_utils/ \
     && setup -k -r . \
     && scons
 
-# Source the AOS environment automatically
-RUN echo "" >> $LSST_USER_HOME/.bashrc \
-    && echo "# Setup the aos environment" >> $LSST_USER_HOME/.bashrc \
-    && echo "cd $AOS_REPOS/phosim_utils" >> $LSST_USER_HOME/.bashrc \
-    && echo "setup -k -r . -t $SIMS_VERSION" >> $LSST_USER_HOME/.bashrc \
-    && echo "cd $AOS_REPOS/ts_wep" >> $LSST_USER_HOME/.bashrc \
-    && echo "setup -k -r ." >> $LSST_USER_HOME/.bashrc \
-    && echo "cd $AOS_REPOS/ts_ofc" >> $LSST_USER_HOME/.bashrc \
-    && echo "setup -k -r ." >> $LSST_USER_HOME/.bashrc \
-    && echo "cd $AOS_REPOS/ts_phosim" >> $LSST_USER_HOME/.bashrc \
-    && echo "setup -k -r ." >> $LSST_USER_HOME/.bashrc \
-    && echo "cd $LSST_USER_HOME" >> $LSST_USER_HOME/.bashrc
+# Copy the file for the start of container with interactive environment
+COPY setup.sh ${LSST_USER_HOME}/.setup.sh
 
 # Set the default environment
 SHELL ["/bin/bash", "-lc"]

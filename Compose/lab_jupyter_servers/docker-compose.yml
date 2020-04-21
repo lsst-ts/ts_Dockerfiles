@@ -2,11 +2,45 @@ version: "3.4"
 
 services:
 
+  firefly:
+    image: ipac/firefly:lsst-dev
+    container_name: lab_jupyter_servers_firefly
+    environment:
+      - ADMIN_PASSWORD=saluser
+      - MANAGER=FALSE
+      - FIREFLY_OPTS="-Dvisualize.fits.search.path=/scratch/firefly"
+      - FIREFLY_SHARED_WORK_DIR="/scratch/firefly/workarea"
+      - MAX_JVM_SIZE=64G
+      - DEBUG=false
+    volumes:
+      - /scratch
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.40"
+
+  mreuter:
+    image: lsstts/develop-env:b42
+    container_name: atdiag02
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_mreuter:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag02_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag02_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.41"
+
   patrickingraham:
-    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    image: lsstts/develop-env:b42
     container_name: atdiag03
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_pingraham:/home/saluser/develop
@@ -18,13 +52,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.219"
+        ipv4_address: "140.252.34.42"
 
   ecoughlin:
-    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    image: lsstts/develop-env:b42
     container_name: atdiag04
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_ecoughlin:/home/saluser/develop
@@ -36,13 +70,13 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.220"
+        ipv4_address: "140.252.34.43"
 
   tribeiro:
-    image: lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+    image: lsstts/develop-env:b42
     container_name: atdiag05
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
+      - LSST_DDS_DOMAIN=citesttucson
     volumes:
       - /home/saluser/ingest/:/home/saluser/ingest/
       - /home/saluser/develop_tribeiro:/home/saluser/develop
@@ -54,7 +88,79 @@ services:
     tty: true
     networks:
       lab-priv-network:
-        ipv4_address: "10.0.100.221"
+        ipv4_address: "140.252.34.44"
+
+  SashaBrownsberger:
+    image: lsstts/develop-env:b42
+    container_name: atdiag06
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_sasha:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag06_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag06_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.45"
+
+  mondrik:
+    image: lsstts/develop-env:b42
+    container_name: atdiag07
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_mondrik:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag07_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag07_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.46"
+
+  sthomas:
+    image: lsstts/develop-env:b42
+    container_name: atdiag08
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_sthomas:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag08_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag08_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.47"
+
+  aroberts:
+    image: lsstts/develop-env:b42
+    container_name: atdiag09
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+    volumes:
+      - /home/saluser/ingest/:/home/saluser/ingest/
+      - /home/saluser/develop_aroberts:/home/saluser/develop
+      - /mnt/dmcs/:/mnt/dmcs
+      - /mnt/data/:/mnt/data
+      - ./atdiag09_notebook_config.py:/home/saluser/.jupyter/jupyter_notebook_config.py
+      - ./atdiag09_setup.sh:/home/saluser/.setup.sh
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.48"
 
 networks:
   default:

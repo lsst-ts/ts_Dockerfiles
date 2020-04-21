@@ -1,10 +1,14 @@
-FROM lsstts/develop-env:20190509 
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-WORKDIR /home/saluser/repos/ts_config_attcs
-RUN git fetch && git pull && git checkout "tags/v0.1-alpha.3" -b "v0.1-alpha.3"
+RUN git clone https://github.com/lsst-ts/ts_config_attcs.git
 
-WORKDIR /home/saluser
-COPY setup.sh /home/saluser/.setup.sh
+WORKDIR /home/saluser/ts_config_attcs
 
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]
+RUN git checkout "v0.4.0" -b "v0.4.0"
+
+ENV TS_CONFIG_ATTCS_DIR=/home/saluser/ts_config_attcs
+
+WORKDIR /home/saluser/
+
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-atdome="v1.1_8_g7ce737c"

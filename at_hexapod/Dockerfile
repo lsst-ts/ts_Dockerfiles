@@ -1,30 +1,14 @@
-FROM lsstts/develop-env:20190509
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-MAINTAINER Andres Anania <aanania@lsst.org>
+RUN git clone https://github.com/lsst-ts/ts_config_attcs.git
 
-USER saluser
+WORKDIR /home/saluser/ts_config_attcs
 
-WORKDIR /home/saluser/repos
-ENV TSREPOS=/home/saluser/repos
+RUN git checkout "v0.4.0" -b "v0.4.0"
 
-RUN git clone https://github.com/lsst-ts/pythonFileReader.git -b develop
-RUN git clone https://github.com/lsst-ts/pythonCommunicator.git -b develop
-RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git -b couger01/fix/dm-19762
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    cd ${TSREPOS}/pythonFileReader && \
-    pip install . && \
-    cd ${TSREPOS}/pythonCommunicator && \
-    pip install . && \
-    setup ts_xml -t current && \
-    setup ts_sal -t current && \
-    cd ${TSREPOS}/ts_salobjATHexapod && \
-    conda install -y -c conda pyqt && \
-    conda install -y -c conda pyqtgraph && \
-    eups declare -r ${TSREPOS}/ts_salobjATHexapod ts_salobjATHexapod git -t current && \
-    source ${TSREPOS}/ts_sal/setup.env && \
-    make_salpy_libs.py ATHexapod
+ENV TS_CONFIG_ATTCS_DIR=/home/saluser/ts_config_attcs
 
 WORKDIR /home/saluser/
 
-COPY setup.sh /home/saluser/.setup.sh
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-athexapod

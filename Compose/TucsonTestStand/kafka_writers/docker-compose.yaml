@@ -1,0 +1,104 @@
+version: '3.6'
+
+services:
+
+  salkafka_150:
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
+    container_name: salkafka_150
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=140.252.32.142
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./ospl_150.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.50"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_151:
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
+    container_name: salkafka_151
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=140.252.32.142
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=ATPtg ATMCS ATCamera
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./ospl_151.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.51"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_152:
+    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
+    container_name: salkafka_152
+    environment:
+      - LSST_DDS_DOMAIN=auxtelpath
+      - BROKER_IP=140.252.32.142
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=FiberSpectrograph LinearStage Rotator MTPtg DSM
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./ospl_152.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.52"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka_153:
+    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
+    container_name: salkafka_153
+    environment:
+      - LSST_DDS_DOMAIN=citesttucson
+      - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
+      - LOG_LEVEL=10
+      - REPLICATION=3
+      - CSC_LIST=CCCamera DSM Hexapod Rotator
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.53"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+networks:
+  default:
+    external:
+      name: lab-priv-network
+  lab-priv-network:
+    external: true

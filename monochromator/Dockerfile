@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:20190610_sal3.10.0_salobj3.12.0
+FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 

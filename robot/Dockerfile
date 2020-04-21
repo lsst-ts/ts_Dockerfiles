@@ -26,15 +26,18 @@ python3.7 -m pip install pytest
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
-RUN groupadd -g 1003 ${USER} && \
-useradd -r -u 1003 -g ${USER} -m ${USER} && \
-chown ${USER}:${USER} ${HOME}
+RUN groupadd -r -g 1003 ${USER} && \
+groupadd -r -g 993 docker && \
+useradd -r -u 1003 -g ${USER} -G docker -m ${USER} -d ${HOME} && \
+chown ${USER}:docker ${HOME}
 
 WORKDIR ${HOME}
 RUN pwd
 
 USER ${USER}
 RUN mkdir bin && mkdir trunk && mkdir Reports
+ENV ROBOTFRAMEWORK_SAL_DIR ${HOME}/trunk/robotframework_SAL
+ENV TS_XML_DIR ${HOME}/trunk/ts_xml
 
 # Apparently Docker does not support variable expansion in the ADD and COPY context.
 # ... Therefore, the ownership must be hardcoded.

@@ -1,28 +1,35 @@
 pipeline {
     agent any
     environment {
-        registryCredential = "dockerhub-lsstsadmin"
+        registryCredential = "dockerhub-lssttsadmin"
 
-        dockerImageNameStep1 = "step1"
-        dockerImageNameMaster = "lsstts/develop-env:salobj4_master"
-        dockerImageNameDevelop = "lsstts/develop-env:salobj4_develop"
-        dockerImageNameBuild = "lsstts/develop-env:salobj4_b${BUILD_NUMBER}"
+        dockerImageNameMaster = "lsstts/develop-env:master"
+        dockerImageNameDevelop = "lsstts/develop-env:develop"
+        dockerImageNameBuild = "lsstts/develop-env:b${BUILD_NUMBER}"
 
-        dockerStep1 = ""
         dockerImageMaster = ""
         dockerImageDevelop = ""
         dockerImageBuild = ""
-    }
+    }    
 
     stages {
+        stage("Create docker network.") {
+            steps {
+                script {
+                    sh """
+                    docker network create net_b${BUILD_NUMBER} || echo Network exists...
+                    """ 
+                }
+            }
+
+        }    
         stage("Build Docker image (master)") {
             when {
                 expression { return env.build_master.toBoolean() }
             }
             steps {
                 script {
-                    dockerStep1 = docker.build(dockerImageNameStep1, "--no-cache --build-arg config_attcs_v=master --build-arg atmcs_v=master --build-arg atdome_v=master --build-arg atdometraj_v=master --build-arg standardscripts_v=master --build-arg externalscripts_v=master --build-arg base_image_tag=master -f ./develop-env/develop_py36/salobj_4/Dockerfile.step1 ./develop-env/develop_py36/salobj_4/")
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --build-arg scriptqueue_v=master ./develop-env/develop_py36/salobj_4/")
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg config_attcs_v=master --build-arg atmcs_v=master --build-arg atdome_v=master --build-arg atdometraj_v=master --build-arg standardscripts_v=master --build-arg externalscripts_v=master --build-arg base_image_tag=master --build-arg scriptqueue_v=master --build-arg simactuators_v=master ./develop-env/develop_py36/salobj_4/")
                 }
             }
         }
@@ -32,8 +39,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerStep1 = docker.build(dockerImageNameStep1, "--no-cache --build-arg config_attcs_v=develop --build-arg atmcs_v=develop --build-arg atdome_v=develop --build-arg atdometraj_v=develop --build-arg standardscripts_v=develop --build-arg externalscripts_v=develop --build-arg base_image_tag=develop -f ./develop-env/develop_py36/salobj_4/Dockerfile.step1 ./develop-env/develop_py36/salobj_4/")
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --build-arg scriptqueue_v=develop ./develop-env/develop_py36/salobj_4/")
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg config_attcs_v=develop --build-arg atmcs_v=develop --build-arg atdome_v=develop --build-arg atdometraj_v=develop --build-arg standardscripts_v=develop --build-arg externalscripts_v=develop --build-arg base_image_tag=develop --build-arg scriptqueue_v=develop --build-arg simactuators_v=develop ./develop-env/develop_py36/salobj_4/")
                 }
             }
         }
@@ -48,8 +54,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerStep1 = docker.build(dockerImageNameStep1, "--no-cache --build-arg config_attcs_v=${env.config_attcs_v} --build-arg atmcs_v=${env.atmcs_v} --build-arg atdome_v=${env.atdome_v} --build-arg atdometraj_v=${env.atdometraj_v} --build-arg standardscripts_v=${env.standardscripts_v} --build-arg externalscripts_v=${env.externalscripts_v} --build-arg base_image_tag=${env.base_image_tag} -f ./develop-env/develop_py36/salobj_4/Dockerfile.step1 ./develop-env/develop_py36/salobj_4/")
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg scriptqueue_v=${env.scriptqueue_v} ./develop-env/develop_py36/salobj_4/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg config_attcs_v=${env.config_attcs_v} --build-arg atmcs_v=${env.atmcs_v} --build-arg atdome_v=${env.atdome_v} --build-arg atdometraj_v=${env.atdometraj_v} --build-arg standardscripts_v=${env.standardscripts_v} --build-arg externalscripts_v=${env.externalscripts_v} --build-arg base_image_tag=${env.base_image_tag} --build-arg scriptqueue_v=${env.scriptqueue_v} --build-arg simactuators_v=${env.simactuators_v} ./develop-env/develop_py36/salobj_4/")
                 }
             }
         }
@@ -97,6 +102,11 @@ pipeline {
                     }
                 }
             }
+        }        
+    }
+    post {
+        cleanup {
+            sh "docker network rm net_b${BUILD_NUMBER}"
         }
     }
 }

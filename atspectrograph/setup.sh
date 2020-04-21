@@ -12,7 +12,11 @@ echo "# Loading sal environment"
 echo "#"
 echo "# Setting up ts_atspectrograph."
 
-setup ts_salobj -t $USER
-setup ts_atspectrograph -t $USER
+setup ts_salobj -t current
+setup ts_atspectrograph -t current
 
-/bin/bash --rcfile /home/saluser/.bashrc
+echo "# Starting ATSpectrograph CSC"
+
+atspec_csc.py
+
+echo "# ATSpectrograph exited"
