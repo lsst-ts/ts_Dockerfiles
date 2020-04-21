@@ -228,7 +228,7 @@ node {
                     'mvn -DskipTests=true deploy \n' +
                     'cd ' + _home + '/trunk/ts_sal/test/maven/MTCamera_' + SAL_Version + '_' + XML_Version + MavenVersion + ' \n' +
                     'mvn -DskipTests=true deploy \n' +
-                    'Java Push Complete'
+                    'echo Java deploy complete'
                 }//If Push True
             }//Java artifacts
             stage('Push RPMs to Nexus3') {
