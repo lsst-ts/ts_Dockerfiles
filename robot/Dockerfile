@@ -3,23 +3,25 @@ MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
 
+RUN yum -y update
 RUN yum -y --enablerepo=extras install epel-release && \
-yum -y install python36 python36-devel python36-setuptools && \
-yum -y install git which mlocate wget && \
+yum -y install git which mlocate wget \
+python36-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
 yum clean all && \
 rm -rf /var/cache/yum
 
-COPY --chown=1003:1003 python-3.7.3-.el7.centos.x86_64.rpm $HOME/
-RUN ls $HOME
-RUN rpm -ivh --nodeps $HOME/python-3.7.3-.el7.centos.x86_64.rpm
+ADD Python-3.7.6.tgz ${HOME}/
+RUN cd ${HOME}/Python-3.7.6 && \
+./configure --prefix=/usr/local && \
+make && make install
 
 RUN updatedb
 
-RUN easy_install-3.6 pip && \
-python3.6 -m pip install --upgrade pip setuptools numpy && \
-python3.6 -m pip install robotframework && \
-python3.6 -m pip install astropy && \
-python3.6 -m pip install pytest
+RUN easy_install-3.7 pip && \
+python3.7 -m pip install --upgrade pip setuptools numpy && \
+python3.7 -m pip install robotframework && \
+python3.7 -m pip install astropy && \
+python3.7 -m pip install pytest
 
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
