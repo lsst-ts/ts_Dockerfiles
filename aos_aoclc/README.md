@@ -4,7 +4,7 @@ This is the software environment for active optics system (AOS) to do the closed
 
 ## Overview
 
-The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The modules of phosim_utils, ts_wep, ts_ofc, and ts_phosim are in the **/home/saluser/repos** directory.
+The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. The modules of phosim_utils, ts_wep, ts_ofc, and ts_phosim are in the **/home/saluser/repos** directory. In the build process, the user needs to assign the argument of `IMAGE_TAG` by `--build-arg`.
 
 ## Tag List
 

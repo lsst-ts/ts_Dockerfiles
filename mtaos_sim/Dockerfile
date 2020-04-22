@@ -1,6 +1,7 @@
 # Dockerfile to execute a base machine with the MTAOS simulation environment
 
-FROM lsstts/aos_aoclc:w_2020_15_sal
+ARG IMAGE_TAG
+FROM lsstts/aos_aoclc:${IMAGE_TAG}
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
