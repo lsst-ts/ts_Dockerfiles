@@ -1,14 +1,25 @@
-FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
+ARG deploy_tag=salobj_v5.7.0
+
+FROM lsstts/deploy-env:${deploy_tag}
+
+LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
+
+ARG atspec=0.5.1
+ARG idl=1.1.3_4.8.0
+ARG config=v0.2.1
 
 RUN git clone https://github.com/lsst-ts/ts_config_latiss.git
 
 WORKDIR /home/saluser/ts_config_latiss
 
-RUN git checkout "tags/v0.2.1" -b "v0.2.1"
+RUN git checkout ${config} -b ${config}
 
 ENV TS_CONFIG_LATISS_DIR=/home/saluser/ts_config_latiss
+ENV RUN_ARG=""
 
 WORKDIR /home/saluser/
 
 RUN source /home/saluser/.setup.sh && \
-    conda install -c lsstts ts-atspec
+    conda install -c lsstts ts-atspec=${atspec} ts-idl=${idl}
+
+COPY setup.sh /home/saluser/.setup.sh

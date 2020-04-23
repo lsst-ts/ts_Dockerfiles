@@ -1,5 +1,9 @@
 FROM centos:centos7
 
+
+ARG rpm=0:4.1.0-5.0.0.el7.x86_64
+ARG ptg=v2.0.0
+
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
 ENV USER ${USER:-saluser}
@@ -21,24 +25,34 @@ RUN yum -y --enablerepo=extras install epel-release \
     make \
     wget \
     gcc-c++ \
-    OpenSpliceDDS-6.9.0-1 \
+    OpenSpliceDDS-6.9.0 \
     boost-python \
     boost-python-devel \
     cmake \
+    curl-devel \
     yum clean all
 
-RUN yum install -y ATPtg-4.0.0-4.4.1 \
-    MTPtg-4.0.0-4.4.1 \
-    MTMount-4.0.0-4.4.1 \
-    Rotator-4.0.0-4.4.1 \
-    Environment-4.0.0-4.4.1 \
-    ATMCS-4.0.0-4.4.1
-
+RUN yum install -y ATPtg-${rpm} \
+    MTPtg-${rpm} \
+    MTMount-${rpm} \
+    Rotator-${rpm} \
+    Environment-${rpm} \
+    ATMCS-${rpm} \
+    NewMTMount-${rpm}
 
 RUN mkdir /home/saluser/.ssh/ && chown saluser:lsst /home/saluser/.ssh/ && chmod 700 /home/saluser/.ssh/
 COPY id_rsa /home/saluser/.ssh/
 COPY known_hosts /home/saluser/.ssh/
 RUN chown saluser:lsst /home/saluser/.ssh/id_rsa && chown saluser:lsst /home/saluser/.ssh/known_hosts
+#RUN mkdir /opt/lsst/ts_sal/lsstsal/ && \
+#    ln -s /opt/lsst/ts_sal/include /opt/lsst/ts_sal/lsstsal/include && \
+#    ln -s /opt/lsst/ts_sal/lib /opt/lsst/ts_sal/lsstsal/lib && \
+#    mkdir /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/examples/ && \
+#    ln -s /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/include/ /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/examples/include && \
+#    cd /opt/lsst/ts_sal/include &&\
+#    curl -O https://raw.githubusercontent.com/lsst-ts/ts_sal/develop/lsstsal/include/os.h && \
+#    curl -O https://raw.githubusercontent.com/lsst-ts/ts_sal/develop/lsstsal/include/example_main.h
+
 
 USER saluser
 WORKDIR /home/saluser
@@ -54,7 +68,7 @@ RUN git clone git@github.com:lsst-ts/tcspk_source_lsst_161203.git && \
  git clone git@github.com:lsst-ts/ts_pointing_common.git
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git fetch --all && git checkout "tags/v1.1.0_rc2" -b "v1.1.0_rc2"
+RUN git fetch --all && git checkout ${ptg} -b ${ptg} || git checkout ${ptg}
 
 WORKDIR /home/saluser
 
@@ -70,6 +84,7 @@ ENV LSST_TOP=/home/saluser/repos/ts_pointing_common
 ENV SLALIB_DIR=/home/saluser/repos/slalib_source_lsst_161203
 ENV TCSPK_DIR=/home/saluser/repos/tcspk_source_lsst_161203
 ENV LSST_TS_XML_DIR=/home/saluser/repos/ts_xml
+ENV TELESCOPE=MT
 
 WORKDIR /home/saluser/repos/slalib_source_lsst_161203
 RUN make
@@ -78,32 +93,17 @@ WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
 RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-#RUN git fetch && git checkout "origin/feature/AY/SAL_v3.8" -b "feature/AY/SAL_v3.8"
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
-#    ./scripts/generate_interface
-#
-#RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
-#WORKDIR /home/saluser/repos/ts_xml
-#RUN git checkout develop && git pull && \
-#    cp -v sal_interfaces/ATMCS/ATMCS_*xml /home/saluser/repos/ts_sal/test
-#WORKDIR /home/saluser/repos/ts_sal/test
-#RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source /home/saluser/repos/ts_sal/setup.env && \
-#    setup ts_sal -t $USER && \
-#    salgenerator ATMCS validate && \
-#    salgenerator ATMCS html && \
-#    salgenerator ATMCS sal cpp && \
-#    salgenerator ATMCS sal python && \
-#    salgenerator ATMCS lib
-#WORKDIR /home/saluser/repos/ts_pointing_common
-#RUN source scl_source enable devtoolset-3 && \
-#    source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-#    source $LSST_SDK_INSTALL/setup.env && setup ts_sal -t $USER && \
-#    mkdir build && cd build && cmake -DAT=ON .. && make && cmake .. && make
+RUN mkdir build
+
+WORKDIR /home/saluser/repos/ts_pointing_common/build
+RUN source /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/release.com && \
+    cmake -DRPM=ON .. && make && \
+    cmake -DRPM=ON -DAT=ON .. && make
+
+RUN mkdir -p $PTG_DATA_DIR && cp $LSST_TOP/src/data/* $PTG_DATA_DIR/
 
 WORKDIR /home/saluser/
 COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]
-#CMD ["/home/saluser/.setup.sh"]
+CMD ["/home/saluser/.setup.sh"]

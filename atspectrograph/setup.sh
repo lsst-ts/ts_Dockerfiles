@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 
-# Source this file when starting the container to set it up
-
-echo "#"
-echo "# Loading LSST Stack"
-. /opt/lsst/software/stack/loadLSST.bash
-setup lsst_distrib
-echo "#"
-echo "# Loading sal environment"
-. repos/ts_sal/setup.env
-echo "#"
-echo "# Setting up ts_atspectrograph."
-
-setup ts_salobj -t current
-setup ts_atspectrograph -t current
+source ~/miniconda3/bin/activate
+source $OSPL_HOME/release.com
+source /home/saluser/.bashrc
 
 echo "# Starting ATSpectrograph CSC"
 
-atspec_csc.py
+atspec_csc.py $RUN_ARG
 
 echo "# ATSpectrograph exited"

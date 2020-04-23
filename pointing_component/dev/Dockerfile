@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:b42
+FROM lsstts/develop-env:b
 
 WORKDIR /home/saluser/repos
 
@@ -38,7 +38,7 @@ WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
 RUN make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
-RUN git fetch --all && git checkout "v1.1.0_rc4" -b "v1.1.0_rc4"
+RUN git fetch --all && git checkout "v2.0.0" -b "v2.0.0"
 #RUN git fetch --all && git checkout "tags/v1.1.0_rc3" -b "v1.1.0_rc3"
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
