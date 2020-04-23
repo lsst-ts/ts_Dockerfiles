@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "#"
 echo "# Loading LSST Stack"
 source /opt/lsst/software/stack/loadLSST.bash
@@ -12,6 +14,7 @@ setup ts_xml -t current
 setup ts_sal -t current
 setup ts_idl -t current
 setup ts_salobj -t current
-setup ts_electrometer -t current
+cd ts_electrometer2
+setup -kr .
 
 python /home/saluser/repos/ts_electrometer2/bin/RunElectrometer.py 1
