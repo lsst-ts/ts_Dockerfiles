@@ -1,19 +1,14 @@
-FROM lsstts/develop-env:salobj4_b38
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-WORKDIR /home/saluser/repos/ts_xml
-RUN git fetch --all && git checkout tickets/DM-21161
+RUN git clone https://github.com/lsst-ts/ts_config_attcs.git
 
-WORKDIR /home/saluser/repos/ts_ATDomeTrajectory
-RUN git fetch --all && git checkout tickets/DM-21161
+WORKDIR /home/saluser/ts_config_attcs
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    setup ts_config_attcs -t current && \
-    setup ts_ATDomeTrajectory -t current && \
-    make_idl_files.py ATDome
+RUN git checkout "v0.4.0" -b "v0.4.0"
 
-COPY setup.sh /home/saluser/.setup.sh
+ENV TS_CONFIG_ATTCS_DIR=/home/saluser/ts_config_attcs
 
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]
+WORKDIR /home/saluser/
+
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-atdometrajectory

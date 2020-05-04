@@ -1,7 +1,8 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software with the needed AOS repositories
 
-FROM lsstts/aos_sal:w_2020_06_sal
+ARG IMAGE_TAG
+FROM lsstts/aos_sal:${IMAGE_TAG}
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
@@ -23,17 +24,17 @@ RUN cd ${AOS_REPOS} \
     && cd phosim_utils/ \
     && git checkout 8744592 \
     && cd .. \
-    && git clone -b feature/updateApi https://github.com/lsst-ts/ts_wep.git \
+    && git clone -b master https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout 18c2303 \
+    && git checkout 3c661a4 \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
-    && git checkout 558517c \
+    && git checkout 87075e2 \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_phosim.git \
     && cd ts_phosim/ \
-    && git checkout bea66c0
+    && git checkout 474d2eb
 
 # Add the PhoSim and output directory
 RUN mkdir -p ${PHOSIM_DIR} \

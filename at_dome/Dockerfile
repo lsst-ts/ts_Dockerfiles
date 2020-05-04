@@ -1,19 +1,14 @@
-FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0_b27
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-WORKDIR /home/saluser/repos/ts_ATDome
-RUN git fetch --all && git checkout u/rowen/DM-23158
+RUN git clone https://github.com/lsst-ts/ts_config_attcs.git
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    setup ts_config_attcs -t current && \
-    setup ts_ATDome -t current && \
-    make_idl_files.py ATDome
+WORKDIR /home/saluser/ts_config_attcs
 
-WORKDIR /home/saluser
+RUN git checkout "v0.4.0" -b "v0.4.0"
 
-WORKDIR /home/saluser
-COPY setup.sh /home/saluser/.setup.sh
+ENV TS_CONFIG_ATTCS_DIR=/home/saluser/ts_config_attcs
 
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]
+WORKDIR /home/saluser/
+
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-atdome="v1.1_8_g7ce737c"

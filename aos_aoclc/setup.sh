@@ -2,18 +2,17 @@
 
 # Source this file when starting the container to set it up
 
-# Add the description
 echo "#"
 echo "# Loading LSST Stack"
 . /opt/lsst/software/stack/loadLSST.bash
 setup lsst_distrib
 echo "#"
 echo "# Loading sal environment"
-. repos/ts_sal/setup.env
+. /home/saluser/repos/ts_sal/setup.env
+export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'`
 echo "#"
 echo "# Setting up sal, salobj and scriptqueue"
 
-# Set up the SAL related packages
 setup ts_xml -t current
 setup ts_sal -t current
 setup ts_salobj -t current

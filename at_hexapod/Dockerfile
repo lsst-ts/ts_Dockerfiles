@@ -1,24 +1,14 @@
-FROM lsstts/develop-env:b42
+FROM lsstts/deploy-env:salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
 
-MAINTAINER Tiago Ribeiro <tribeiro@lsst.org>
+RUN git clone https://github.com/lsst-ts/ts_config_attcs.git
 
-USER saluser
+WORKDIR /home/saluser/ts_config_attcs
 
-WORKDIR /home/saluser/repos
-ENV TSREPOS=/home/saluser/repos
+RUN git checkout "v0.4.0" -b "v0.4.0"
 
-RUN git clone https://github.com/lsst-ts/ts_salobjATHexapod.git
-
-WORKDIR ${TSREPOS}/ts_salobjATHexapod
-RUN git checkout v0.3.0 -b v0.3.0
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    eups declare -r . ts_salobjATHexapod -t current && \
-    setup ts_config_attcs -t current && \
-    setup ts_salobjATHexapod  -t current && scons
+ENV TS_CONFIG_ATTCS_DIR=/home/saluser/ts_config_attcs
 
 WORKDIR /home/saluser/
 
-COPY setup.sh /home/saluser/.setup.sh
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-athexapod
