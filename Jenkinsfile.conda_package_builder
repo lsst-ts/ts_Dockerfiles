@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    triggers {
+        upstream(upstreamProjects: 'Parallel_Release', threshold: hudson.model.Result.SUCCESS)
+    }
+    environment {
+        registryCredential = "dockerhub-lssttsadmin"
+        dockerImageNameBuild = "lsstts/conda_package_builder:latest"
+        dockerImageBuild = ""
+    }
+
+    stages {
+        stage("Build Docker image") {
+            steps {
+                script {
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache ./develop-env/conda_package_builder/")
+                }
+            }
+        }
+
+        stage("Push Docker image") {
+            steps {
+                script {
+                    docker.withRegistry("", registryCredential) {
+                    dockerImageBuild.push()
+                    }
+                }
+            }
+        }
+    }
+}
