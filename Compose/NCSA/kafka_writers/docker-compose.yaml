@@ -78,7 +78,7 @@ services:
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
       - LOG_LEVEL=20
       - REPLICATION=3
-      - CSC_LIST=Rotator Hexapod MTM2 MTAOS MTPtg
+      - CSC_LIST=Rotator Hexapod MTM2 MTAOS MTPtg MTMount NewMTMount
     stdin_open: true
     tty: true
     networks:
