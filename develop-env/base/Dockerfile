@@ -54,6 +54,7 @@ RUN yum -y --enablerepo=extras install epel-release \
   net-tools \
   ntp \
   tcpdump \
+  graphviz* \
   yum clean all
 
 RUN yum install -y OpenSpliceDDS-6.9.0
@@ -79,7 +80,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     pip install "documenteer[pipelines]==0.4.2" "kafkit[aiohttp]" \
     aiokafka confluent_kafka asynccmd aiounittest ipdb wget pytest-subtests \
     pycodestyle aiomisc ipympl ginga pyevents jinja2 ephem gitpython \
-    sqlalchemy asynctest lxml pytest-asyncio && \
+    sqlalchemy asynctest lxml pytest-asyncio astroquery ltd-conveyor && \
     pip install moto boto3
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \

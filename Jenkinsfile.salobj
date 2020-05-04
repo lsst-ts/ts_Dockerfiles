@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=master --build-arg salobj_v=master --build-arg xml_v=master --build-arg idl_v=master --build-arg config_ocs_v=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj_4/")
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=master --build-arg salobj_v=master --build-arg xml_v=master --build-arg idl_v=master --build-arg config_ocs_v=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=develop --build-arg salobj_v=develop --build-arg xml_v=develop --build-arg idl_v=develop --build-arg config_ocs_v=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj_4/")
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=develop --build-arg salobj_v=develop --build-arg xml_v=develop --build-arg idl_v=develop --build-arg config_ocs_v=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -59,7 +59,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=${env.sal_v} --build-arg salobj_v=${env.salobj_v} --build-arg xml_v=${env.xml_v} --build-arg idl_v=${env.idl_v} --build-arg config_ocs_v=${config_ocs_v} --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj_4/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=${env.sal_v} --build-arg salobj_v=${env.salobj_v} --build-arg xml_v=${env.xml_v} --build-arg idl_v=${env.idl_v} --build-arg config_ocs_v=${config_ocs_v} --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
