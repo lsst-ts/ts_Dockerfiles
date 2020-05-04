@@ -1,2 +1,2 @@
 
-c.NotebookApp.token = '07949ec5b8f05fdaee1b2b7af9d018488568a586378a36b5'
+c.NotebookApp.token = 'cae9f84684c2f8b650d3d49d098cda2bca6a1fdf5ec193ab'
