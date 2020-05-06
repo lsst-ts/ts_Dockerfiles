@@ -81,7 +81,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     aiokafka confluent_kafka asynccmd aiounittest ipdb wget pytest-subtests \
     pycodestyle aiomisc ipympl ginga pyevents jinja2 ephem gitpython \
     sqlalchemy asynctest lxml pytest-asyncio astroquery ltd-conveyor && \
-    pip install moto boto3
+    pip install moto boto3 black
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     conda install -y -c conda-forge kafkacat pyqt fontconfig
