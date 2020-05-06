@@ -15,8 +15,9 @@ RUN adduser -u 1004 -m -s /bin/bash saluser
 RUN yum install -y iproute gcc-c++ make ncurses-libs xterm xorg-x11-fonts-misc java-1.7.0-openjdk-devel maven python-devel swig git tk-devel wget bzip2
 
 COPY lsst-ts-nexus.repo /tmp/lsst-ts-nexus.repo
+COPY salpy_test /home/saluser/salpy_test
 
-RUN cat /tmp/lsst-ts-nexus.repo >> /etc/yum.conf && yum install -y OpenSpliceDDS-6.9.0 ts_sal_runtime
+RUN cat /tmp/lsst-ts-nexus.repo >> /etc/yum.conf && yum install -y OpenSpliceDDS-6.9.0
 USER saluser
 WORKDIR /home/saluser
 
@@ -25,7 +26,8 @@ RUN wget --no-verbose https://repo.anaconda.com/miniconda/Miniconda3-latest-Linu
 RUN source ~/miniconda3/bin/activate && \
     conda config --add channels conda-forge && \
     conda config --add channels lsstts && \
-    conda install -y python=3.7 conda-build anaconda-client
+    conda install -y python=3.7 conda-build anaconda-client && \
+    cd salpy_test && conda build .
 
 COPY setup.sh /home/saluser/.setup.sh
 

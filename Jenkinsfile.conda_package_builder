@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    triggers {
-        upstream(upstreamProjects: 'Parallel_Release', threshold: hudson.model.Result.SUCCESS)
-    }
     environment {
         registryCredential = "dockerhub-lssttsadmin"
         dockerImageNameBuild = "lsstts/conda_package_builder:latest"
