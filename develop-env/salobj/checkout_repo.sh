@@ -16,6 +16,7 @@ while [ "$1" != "" ]; do
         git checkout $1 -b $1 && exit 0
     else
         echo checkout $1
+        git pull
         git checkout $1 && exit 0
     fi
 
