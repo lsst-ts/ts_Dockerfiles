@@ -1,4 +1,4 @@
-FROM lsstts/develop-env:b
+FROM lsstts/develop-env:b42
 
 WORKDIR /home/saluser/repos
 
