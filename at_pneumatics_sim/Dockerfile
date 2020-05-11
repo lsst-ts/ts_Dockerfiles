@@ -1,26 +1,13 @@
-FROM lsstts/develop-env:b42
+ARG deploy_tag=salobj_v5.7.0
 
-WORKDIR /home/saluser/repos
+FROM lsstts/deploy-env:${deploy_tag}
 
-RUN git clone https://github.com/lsst-ts/ts_ATPneumaticsSimulator.git
+LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
-WORKDIR /home/saluser/repos/ts_ATPneumaticsSimulator
+ARG atmcs=0.1.dev27+g702e358
+ARG idl=1.1.3_4.8.0
 
-RUN git checkout "v0.4.0" -b "v0.4.0"
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-atpneumatics-simulator=${atmcs} ts-idl=${idl}
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_idl -t current && \
-    make_idl_files.py ATPneumatics
-
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . ts_ATPneumaticsSimulator -t current && \
-    setup ts_ATPneumaticsSimulator -t current && \
-    scons
-
-WORKDIR /home/saluser
 COPY setup.sh /home/saluser/.setup.sh
-
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]

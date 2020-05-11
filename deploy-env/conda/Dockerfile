@@ -2,6 +2,7 @@ FROM centos:7
 
 ARG PYTHON_VERSION=3.7m
 ARG CONDA_VERSION=4.5.4
+ARG SALOBJ_VERSION
 
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
 ENV LSST_DDS_DOMAIN=citest
@@ -31,7 +32,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 RUN source ~/miniconda3/bin/activate && \
     conda config --add channels conda-forge && \
-    conda install -c lsstts python=3.7 ts-salobj="v5.4.1_RC1" cython ts-idl="v1.1.1_v4.6.0"
+    conda install -c lsstts python=3.7 ts-salobj=${SALOBJ_VERSION} cython
 
 RUN source ~/miniconda3/bin/activate && \
     source $OSPL_HOME/release.com && \

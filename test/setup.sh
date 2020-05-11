@@ -4,4 +4,4 @@ source ~/miniconda3/bin/activate
 source $OSPL_HOME/release.com
 source /home/saluser/.bashrc
 
-ataos_csc.py
+run_test_csc.py $RUN_ARG
