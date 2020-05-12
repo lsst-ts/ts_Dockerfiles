@@ -16,6 +16,11 @@ the container is started.
     - Send the "enable" command and then "raiseM1M3" command. Once the detailedState is ActiveState then the simulator can accept the "applyActiveOpticForces" command.
 
 ## Tag List
+- *v1.7*
+    - lsstts/develop-env:b68
+    - *ts_sal* develop (includes salgenerator generate command)
+    - *ts_m1m3support* v1.7
+
 - *v1.6*
     - *centos* - (tag: 7.6.1810)
     - *python* - (ver: 3.6.7)

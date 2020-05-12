@@ -1,13 +1,11 @@
-FROM lsstts/develop-env:b42
+FROM lsstts/develop-env:b68
 
 USER root
 RUN yum -y install boost-devel
 
 USER saluser
 
-RUN rm -rf /home/saluser/repos/ts_sal
-RUN cd /home/saluser/repos && git clone https://github.com/pkubanek/ts_sal
-RUN cd /home/saluser/repos/ts_xml && git checkout develop && git pull
+RUN cd /home/saluser/repos/ts_sal && git checkout develop && git pull
 
 WORKDIR /home/saluser/repos/ts_sal
 RUN source setup.env \
@@ -16,11 +14,11 @@ RUN source setup.env \
     && salgenerator MTMount generate cpp \
     && salgenerator MTM1M3 generate cpp
 
-RUN cd /home/saluser/repos && git clone --branch DM-24026 https://github.com/pkubanek/ts_m1m3support
+RUN cd /home/saluser/repos && git clone -b v1.7 https://github.com/lsst-ts/ts_m1m3support
 
 WORKDIR /home/saluser/repos
 RUN source ts_sal/setup.env \
-    && cd ts_m1m3support/CentOS \
+    && cd ts_m1m3support \
     && make SIMULATOR=1
 
 COPY startup.sh .
