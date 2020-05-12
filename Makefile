@@ -12,7 +12,6 @@ aos_sal:
 aos_aoclc: aos_sal
 	cd $@ && docker build -t lsstts/$@:$(IMAGE_TAG) --build-arg IMAGE_TAG=$(IMAGE_TAG) .
 
-
 mtaos_sim: aos_sal aos_aoclc
 	cd $@ && docker build -t lsstts/$@:$(IMAGE_TAG) --build-arg IMAGE_TAG=$(IMAGE_TAG) .
 
