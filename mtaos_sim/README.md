@@ -8,7 +8,7 @@ This docker is based off the [lsstts/aos_aoclc](https://hub.docker.com/repositor
 
 Container executes `run_mtaos.py -s` to run the MTAOS simulator.
 
-Environment variable `ISRDIRPATH` is used to assign the Instrument Signature Removal (ISR). This is the disk position of butler instance basically (notice the butler instance has a hierarchy structure). This value will override the value defined in the configuration file in `ts_config_mttcs`. Environmental values can be changed with -e argument to docker run command - see man docker-run for details.
+Environment variable `ISRDIRPATH` is used to assign the Instrument Signature Removal (ISR). This is the disk position of butler instance basically (notice the butler instance has a hierarchy structure). This value will override the value defined in the configuration file in `ts_config_mttcs`. Environmental values can be changed with the `-e` argument to docker run command - see man docker-run for details.
 
 ## Tag List
 
