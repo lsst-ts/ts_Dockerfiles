@@ -1,45 +1,60 @@
-## Docker Environment for salobj
+# Docker Environment for salobj
 
-#There are 2 versions of the docker file to use salobj. 
-#1-no_lsst_stack: Doesn't use the lsst-stack
-#2-with_lsst_stack: Uses the lsst-stack
-#Either case should work the same
+There are 2 versions of the docker file to use salobj. 
 
-#A more updated version of docker is required, so to install use:
+1. no_lsst_stack: Doesn't use the lsst-stack
+2. with_lsst_stack: Uses the lsst-stack
+
+Due to some use of ARG before FROM, Docker >= 17.06 is needed. Either update Docker through your packaging system, or with:
+
+```bash
 curl -fsSL https://get.docker.com/ | sh
+```
 
-1.- 
-#The following instructions are for the Dockerfile in ./no_lsst_stack folder.
-#First build the Dockerfile
-#In ./no_lsst_stack
-docker build -t salobj .
+## Building salobj
 
-#To run the docker container, you need to use the following command.
+Either:
+
+```bash
+make no_lsst_stack
+```
+
+or
+
+```bash
+make with_lsst_stack
+```
+
+To run the salobj container, do:
+
+```bash
 docker run -it --net=host --name salobjImage salobj bash
+```
 
-#Setup the packages by running. This will build the Test topics, setup salobj and run unit tests.
+Setup the packages by running in the container:
+
+```bash
 source /home/lsst/environment.env
+```
 
-2.- 
-#The following instructions are for the Dockerfile in ./with_lsst_stack folder.
-#First build the Dockerfile
-#In ./with_lsst_stack
-docker build -t salobj .
+or (for with_lsst_stack) by:
 
-#To run the docker container, you need to use the following command.
-docker run -it --net=host --name salobjImage salobj bash
-
-#Setup the packages by running. This will build the Test topics, setup salobj and run unit tests.
+```bash
 source /home/lsst/repos/salgenerate.sh
+```
 
 ## Documentation
-Installing requirements.
-```
+
+To install prerequisites:
+
+```bash
 cd docs
 pip install -r requirements.txt
 ```
-Building and serving documentation.
-```
+
+To build and serve the documentation:
+
+```bash
 cd docs
 mkdocs serve
 ```
