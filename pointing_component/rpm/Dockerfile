@@ -17,18 +17,18 @@ RUN groupadd lsst && adduser -u 1004 -m -g lsst -s /bin/bash saluser
 COPY lsst-ts.repo /tmp/lsst-ts.repo
 RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum install -y centos-release-scl cmake
 
 RUN yum -y --enablerepo=extras install epel-release \
+    devtoolset-8-gcc* \
     wget \
     git \
     make \
     wget \
-    gcc-c++ \
     OpenSpliceDDS-6.9.0 \
     boost-python \
     boost-python-devel \
-    cmake \
     curl-devel \
     yum clean all
 
@@ -87,16 +87,17 @@ ENV LSST_TS_XML_DIR=/home/saluser/repos/ts_xml
 ENV TELESCOPE=MT
 
 WORKDIR /home/saluser/repos/slalib_source_lsst_161203
-RUN make
+RUN source scl_source enable devtoolset-8 && make
 
 WORKDIR /home/saluser/repos/tcspk_source_lsst_161203
-RUN make
+RUN source scl_source enable devtoolset-8 && make
 
 WORKDIR /home/saluser/repos/ts_pointing_common
 RUN mkdir build
 
 WORKDIR /home/saluser/repos/ts_pointing_common/build
-RUN source /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/release.com && \
+RUN source scl_source enable devtoolset-8 && \
+    source /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/release.com && \
     cmake -DRPM=ON .. && make && \
     cmake -DRPM=ON -DAT=ON .. && make
 
