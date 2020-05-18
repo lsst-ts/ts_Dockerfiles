@@ -4,6 +4,12 @@ FROM lsstts/deploy-env:${deploy_tag}
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
+USER root
+
+RUN yum install -y iproute
+
+USER saluser
+
 ARG salkafka=v1.1.1
 ARG idl=1.1.3_4.8.0
 

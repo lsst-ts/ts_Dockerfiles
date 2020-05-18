@@ -17,7 +17,7 @@ RUN groupadd lsst && adduser -u 1004 -m -g lsst -s /bin/bash saluser
 COPY lsst-ts.repo /tmp/lsst-ts.repo
 RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm && \
     yum install -y centos-release-scl cmake
 
 RUN yum -y --enablerepo=extras install epel-release \

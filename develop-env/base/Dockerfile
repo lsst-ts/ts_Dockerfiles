@@ -26,7 +26,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - && \
 COPY lsst-ts-nexus.repo /tmp/lsst-ts.repo
 RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 
 RUN yum -y --enablerepo=extras install epel-release \
   unzip \
