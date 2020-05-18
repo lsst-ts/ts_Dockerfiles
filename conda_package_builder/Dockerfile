@@ -25,7 +25,7 @@ RUN wget --no-verbose https://repo.anaconda.com/miniconda/Miniconda3-latest-Linu
 RUN source ~/miniconda3/bin/activate && \
     conda config --add channels conda-forge && \
     conda config --add channels lsstts && \
-    conda install -y python=3.7 conda-build anaconda-client
+    conda install -y python=3.7 conda-build anaconda-client setuptools_scm
 
 COPY setup.sh /home/saluser/.setup.sh
 
