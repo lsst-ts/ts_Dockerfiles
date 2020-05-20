@@ -3,7 +3,7 @@ FROM centos:7
 LABEL authors="Andres Anania <aanania@lsst.org>"
 
 # install required software
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 
 RUN yum -y --enablerepo=extras install epel-release \
   unzip \

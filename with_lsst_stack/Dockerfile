@@ -8,7 +8,7 @@ LABEL author="Andres Anania <aanania@lsst.org>"
 # RUN setup lsst_distrib
 USER root
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 
 RUN yum -y --enablerepo=extras install java-1.8.0-openjdk-devel \
   which \
