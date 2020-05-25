@@ -6,7 +6,7 @@ Building this Dockerfile
 
 2) Now, you must have a way to open the GUI applications on your machine from the docker containers. The following is what I did to get the LabVIEW windows working on my MacOS laptop. 
 
-- Install xquartz https://www.xquartz.org/
+- Install xquartz https://www.xquartz.org/, or any other x server for your operating system.
 - Do `docker build -t tma_simulations .`
 - Do `export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')`
 - Do `xhost + $IP`
