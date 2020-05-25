@@ -1,7 +1,5 @@
-# This docker file at some points has saved container states, the first is after
-# opening VIPM because it need to do many updates. The second is after installing
-# all the VIPM packaged. 
-
+# This docker file cannot fully automate the EUI installation. You must carry on
+# with the installation of the VIPM package installs to complete the installation. 
 
 FROM centos:centos7
 
@@ -79,34 +77,31 @@ RUN source ${HOME}/repos/ts_sal/setup.env && \
     make
 
 # Install LabVIEW 2015
-COPY LabVIEW2015Linux ${HOME}/LabVIEW/LabVIEW2015Linux
+COPY TeknikerSoftware/LabVIEW2015Linux ${HOME}/LabVIEW/LabVIEW2015Linux
 WORKDIR ${HOME}/LabVIEW/LabVIEW2015Linux
 USER root
 RUN echo -e 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\nn\n' | ./INSTALL
 
 # Install LabVIEW 2018
-COPY LabVIEW2018Linux ${HOME}/LabVIEW/LabVIEW2018Linux
+COPY TeknikerSoftware/LabVIEW2018Linux ${HOME}/LabVIEW/LabVIEW2018Linux
 WORKDIR ${HOME}/LabVIEW/LabVIEW2018Linux
 USER root
 RUN echo -e 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\nn\n' | ./INSTALL
 
 # Install VIPM
-COPY vipm-17.0.2018-linux/JKI ${HOME}/../../usr/local/JKI
+COPY TeknikerSoftware/vipm-17.0.2018-linux/JKI ${HOME}/../../usr/local/JKI
 
 # Tekniker developed LabVIEW software into proper location
-COPY TeknikerLabVIEWLibraries ${HOME}/LabVIEW/TeknikerLabVIEWLibraries
+COPY TeknikerSoftware/TeknikerLabVIEWLibraries ${HOME}/LabVIEW/TeknikerLabVIEWLibraries
 RUN rsync -ra ${HOME}/LabVIEW/TeknikerLabVIEWLibraries/* /usr/local/natinst/LabVIEW-2018-64 
 RUN chmod -R 777 /usr/local/natinst/LabVIEW-2018-64/*
-
 
 
 ### I'm afraid, my lone traveler you must carry on alone from here ###
 
 # 1) Run VIPM by doing `./usr/local/JKI/VIPM/vipm`
 
-# 2) Install the following NI packages
-
-#3) 
+# 2) Continue with the VIPM Package installation process here https://tstn-008.lsst.io/installing_eui.html
 
 # Some magic created by @tiago
 WORKDIR /home/saluser/
