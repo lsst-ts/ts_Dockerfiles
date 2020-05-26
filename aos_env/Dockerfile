@@ -1,20 +1,21 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstsqre/centos:7-stack-lsst_distrib-w_2020_15
+FROM lsstsqre/centos:7-stack-lsst_distrib-w_latest
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
+
+ARG SIMS_VERSION
 
 ARG LSST_USER=lsst
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst/software/stack
-ARG SIMS_VERSION=sims_w_2020_15
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
 
 # Install the required packages
-RUN yum install -y csh graphviz\
+RUN yum install -y csh graphviz wget\
     && yum clean all \
     && rm -rf /var/cache/yum
 
@@ -30,7 +31,8 @@ USER $LSST_USER
 RUN source $LSST_DIR/loadLSST.bash \
     && eups distrib install lsst_sims -t ${SIMS_VERSION} \
     && curl -sSL $SHEBANGTRON_URL | python \
-    && conda install -y ipython scikit-image
+    && conda install -y ipython \
+    && conda install -y -c conda-forge black
 
 # Install the documenteer and plantUML
 WORKDIR $LSST_USER_HOME
