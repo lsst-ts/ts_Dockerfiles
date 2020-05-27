@@ -23,9 +23,7 @@ RUN yum install -y OpenSpliceDDS-6.9.0
 RUN yum groupinstall -y "Development Tools"
 RUN yum install -y cmake boost-devel.x86_64
 
-#RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN rpm -ivh epel-release-latest-7.noarch.rpm
+RUN yum install -y epel-release
 RUN yum install -y geany java-1.7.0-openjdk-devel
 RUN yum install -y glibc.i686 libstdc++.so.6 libXinerama.i686 && \
 yum upgrade -y gnome-packagekit-common && \
