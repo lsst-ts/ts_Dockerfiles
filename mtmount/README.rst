@@ -9,8 +9,8 @@ Building this Dockerfile
 - Install xquartz https://www.xquartz.org/, or any other x server for your operating system.
 - Do `docker build -t tma_simulations .`
 - Do `export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')`
-- Do `xhost + $IP`
-- Then run your container like this `docker run -it --net host -e DISPLAY=$IP:0 -v /tmp/.x11-unix:/tmp/.x11-unix tma_simulations:latest`
+- Do `xhost + $IP`, on linux you will need to `xhost local:root`
+- Then run your container like this `docker run -it --net host -e DISPLAY=$IP:0 -v /tmp/.x11-unix:/tmp/.x11-unix tma_simulations:latest` on linux you will need to `docker run -it --net host -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix tma_simulations:latest`
 - Once inside the container, you should be able to do `labview` or `labview64` and see a labview window appear. Cool!
 
-3) Now you can begin with the VIPM complete the EUI installation by entering the image, and installing the required VIPM (VI Package Manager - a tool for installing LabVIEW modules) modules. 
+3) Now you can begin with the VIPM complete the EUI installation by entering the image, and installing the required VIPM (VI Package Manager - a tool for installing LabVIEW modules) modules. The OpenG Toolkit file will trasnfer for you via the Dockerfile since for some reason I do not know the VIPM does not work. 

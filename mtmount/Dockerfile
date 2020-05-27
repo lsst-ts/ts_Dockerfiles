@@ -22,6 +22,8 @@ RUN yum install -y OpenSpliceDDS-6.9.0
 #RUN yum update
 RUN yum groupinstall -y "Development Tools"
 RUN yum install -y cmake boost-devel.x86_64
+
+#RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -ivh epel-release-latest-7.noarch.rpm
 RUN yum install -y geany java-1.7.0-openjdk-devel
@@ -96,6 +98,9 @@ COPY TeknikerSoftware/TeknikerLabVIEWLibraries ${HOME}/LabVIEW/TeknikerLabVIEWLi
 RUN rsync -ra ${HOME}/LabVIEW/TeknikerLabVIEWLibraries/* /usr/local/natinst/LabVIEW-2018-64 
 RUN chmod -R 777 /usr/local/natinst/LabVIEW-2018-64/*
 
+# Copy over a VIPM package that is unable to be installed by VIPM
+COPY TeknikerSoftware/openg.org_lib_openg_toolkit-4.0.1.9.vip ${HOME}/LabVIEW/openg.org_lib_openg_toolkit-4.0.1.9.vip
+WORKDIR ${HOME}/LabVIEW/LabVIEW2018Linux
 
 ### I'm afraid, my lone traveler you must carry on alone from here ###
 
