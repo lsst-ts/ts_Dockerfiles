@@ -19,7 +19,8 @@ RUN yum install -y OpenSpliceDDS-6.9.0
 
 #Install and update various packages needed for Labview, VPM, and be able to
 #compile C++ tma management 
-#RUN yum update
+#RUN yum update - for some reason, adding yum updated fails to work, this may
+# need attention in the future.
 RUN yum groupinstall -y "Development Tools"
 RUN yum install -y cmake boost-devel.x86_64
 
