@@ -13,7 +13,6 @@ The scientific pipeline is installed with the `lsst_distrib` and `lsst_sims` pac
   - lsst_sims (tag: sims_w_2020_21)
   - csh
   - graphviz
-  - wget
   - ipython
   - black
   - plantuml

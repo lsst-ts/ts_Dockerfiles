@@ -15,7 +15,7 @@ ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/sh
 USER root
 
 # Install the required packages
-RUN yum install -y csh graphviz wget\
+RUN yum install -y csh graphviz\
     && yum clean all \
     && rm -rf /var/cache/yum
 
@@ -37,7 +37,7 @@ RUN source $LSST_DIR/loadLSST.bash \
 # Install the documenteer and plantUML
 WORKDIR $LSST_USER_HOME
 RUN source $LSST_DIR/loadLSST.bash \
-    && wget https://newcontinuum.dl.sourceforge.net/project/plantuml/plantuml.jar \
+    && curl -O https://newcontinuum.dl.sourceforge.net/project/plantuml/plantuml.jar \
     && pip install sphinxcontrib-plantuml\
     && git clone https://github.com/lsst-sqre/documenteer.git \
     && cd documenteer \
