@@ -11,7 +11,22 @@ pipeline {
         dockerImageDevelop = ""
         dockerImageBuild = ""
     }    
-
+    parameters {
+        string defaultValue: 'b71', description: 'Which tag of salobj docker image to use as base?', name: 'base_image_tag', trim: false
+        string defaultValue: 'tags/v2.5.1', description: 'Which version of scriptqueue to build?', name: 'scriptqueue_v', trim: false
+        string defaultValue: 'tags/v0.5.0', description: 'Which version of config_attcs to use?', name: 'config_attcs_v', trim: false
+        string defaultValue: 'tags/v1.0.1', description: 'Which version of atmcs_v to use?', name: 'atmcs_v', trim: false
+        string defaultValue: 'tags/v1.1.2', description: 'Which version of atdome_v to use?', name: 'atdome_v', trim: false
+        string defaultValue: 'tags/v0.2.0', description: 'Which version of obscontrol_v to use?', name: 'obscontrol_v', trim: false
+        string defaultValue: 'tags/v1.1.0', description: 'Which version of standardscripts_v to use?', name: 'standardscripts_v', trim: false
+        string defaultValue: 'tags/v1.3.2', description: 'Which version of atdometraj_v to use?', name: 'atdometraj_v', trim: false
+        string defaultValue: 'tags/v0.4.0', description: 'Which version of externalscripts_v to use?', name: 'externalscripts_v', trim: false
+        string defaultValue: 'tags/v0.5.0', description: 'Which version of hexrotcomm_v to use?', name: 'hexrotcomm_v', trim: false
+        string defaultValue: 'tags/v0.5.tags/v1.0.0', description: 'Which version of simactuators_v to use?', name: 'simactuators_v', trim: false
+        booleanParam defaultValue: false, description: 'Build master branch for all repos. Ignores All "_v" parameters.', name: 'build_master'
+        booleanParam defaultValue: false, description: 'Build develop branch for all repos. Ignores All "_v" parameters.', name: 'build_develop'
+        booleanParam defaultValue: true, description: 'Push the tagged build to docker hub?', name: 'push_tag'
+    }
     stages {
         stage("Create docker network.") {
             steps {
