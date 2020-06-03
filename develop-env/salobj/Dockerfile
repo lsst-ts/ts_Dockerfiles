@@ -5,151 +5,89 @@ FROM lsstts/base-env:$base_image_tag
 USER saluser
 
 COPY checkout_repo.sh /home/saluser/.checkout_repo.sh
+COPY setup_env.sh /home/saluser/.setup_salobj.sh
+COPY setup.sh /home/saluser/.setup.sh
 
-RUN mkdir repos
+USER root
+RUN chown saluser:lsst /home/saluser/.setup_salobj.sh && \
+    chmod a+x /home/saluser/.setup_salobj.sh && \
+    chown saluser:lsst /home/saluser/.checkout_repo.sh && \
+    chmod a+x /home/saluser/.checkout_repo.sh && \
+    chown saluser:lsst /home/saluser/.setup.sh && \
+    chmod a+x /home/saluser/.setup.sh
 
-WORKDIR /home/saluser/repos
-RUN  git clone https://github.com/lsst-ts/ts_config_ocs.git && \
-     git clone https://github.com/lsst-ts/ts_config_attcs.git && \
-     git clone https://github.com/lsst-ts/ts_config_mtcalsys.git && \
-     git clone https://github.com/lsst-ts/ts_config_eas.git && \
-     git clone https://github.com/lsst-ts/ts_config_latiss.git && \
-     git clone https://github.com/lsst-ts/ts_config_mttcs.git && \
-     git clone https://github.com/lsst-ts/ts_config_atcalsys.git && \
-     git clone https://github.com/lsst-ts/ts_sal.git && \
-     git clone https://github.com/lsst-ts/ts_salobj.git && \
-     git clone https://github.com/lsst-ts/ts_xml.git && \
-     git clone https://github.com/lsst-ts/ts_idl.git
+USER saluser
+
+RUN source /home/saluser/.setup_salobj.sh && \
+    mkdir $EUPS_PATH/../tssw && \
+    ln -s $EUPS_PATH/../tssw repos
 
 # Arguments for package versions
-ARG config_ocs_v="develop"
-ARG config_attcs_v="develop"
-ARG config_mtcalsys_v="develop"
-ARG config_eas_v="develop"
-ARG config_latiss_v="develop"
-ARG config_mttcs_v="develop"
-ARG config_atcalsys_v="develop"
-ARG sal_v="develop"
-ARG salobj_v="develop"
-ARG xml_v="develop"
-ARG idl_v="develop"
+ARG ts_config_ocs="develop"
+ARG ts_config_attcs="develop"
+ARG ts_config_mtcalsys="develop"
+ARG ts_config_eas="develop"
+ARG ts_config_latiss="develop"
+ARG ts_config_mttcs="develop"
+ARG ts_config_atcalsys="develop"
+ARG ts_xml="develop"
+ARG ts_idl="develop"
+ARG ts_sal="develop"
+ARG ts_salobj="develop"
 
-WORKDIR /home/saluser/repos/ts_config_ocs
-RUN /home/saluser/.checkout_repo.sh ${config_ocs_v}
-
-WORKDIR /home/saluser/repos/ts_config_attcs
-RUN /home/saluser/.checkout_repo.sh ${config_attcs_v}
-
-WORKDIR /home/saluser/repos/ts_config_mtcalsys
-RUN /home/saluser/.checkout_repo.sh ${config_mtcalsys_v}
-
-WORKDIR /home/saluser/repos/ts_config_eas
-RUN /home/saluser/.checkout_repo.sh ${config_eas_v}
-
-WORKDIR /home/saluser/repos/ts_config_latiss
-RUN /home/saluser/.checkout_repo.sh ${config_latiss_v}
-
-WORKDIR /home/saluser/repos/ts_config_mttcs
-RUN /home/saluser/.checkout_repo.sh ${config_mttcs_v}
-
-WORKDIR /home/saluser/repos/ts_config_atcalsys
-RUN /home/saluser/.checkout_repo.sh ${config_atcalsys_v}
-
-WORKDIR /home/saluser/repos/ts_sal
-RUN /home/saluser/.checkout_repo.sh ${sal_v}
-
-WORKDIR /home/saluser/repos/ts_salobj
-RUN /home/saluser/.checkout_repo.sh ${salobj_v}
-
-WORKDIR /home/saluser/repos/ts_xml
-RUN /home/saluser/.checkout_repo.sh ${xml_v}
-
-WORKDIR /home/saluser/repos/ts_idl
-RUN /home/saluser/.checkout_repo.sh ${idl_v}
-
-WORKDIR /home/saluser
-
-WORKDIR /home/saluser/repos/ts_config_ocs
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_attcs
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_mtcalsys
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_eas
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_latiss
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_mttcs
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_config_atcalsys
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_xml
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    setup lsst_distrib && \
-    eups declare -r . -t current
-
-WORKDIR /home/saluser/repos/ts_idl
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    eups declare -r . ts_idl -t current
+RUN source /home/saluser/.setup_salobj.sh && \
+    cd $EUPS_PATH/../tssw && \
+    gitsrc="ts_config_ocs:${ts_config_ocs} \
+            ts_config_attcs:${ts_config_attcs} \
+            ts_config_mtcalsys:${ts_config_mtcalsys} \
+            ts_config_eas:${ts_config_eas} \
+            ts_config_latiss:${ts_config_latiss} \
+            ts_config_mttcs:${ts_config_mttcs} \
+            ts_config_atcalsys:${ts_config_atcalsys} \
+            ts_xml:${ts_xml} \
+            ts_idl:${ts_idl} \
+            ts_sal:${ts_sal} \
+            ts_salobj:${ts_salobj}" && \
+    rb="https://github.com/lsst-ts" && \
+    for g in $gitsrc ; do \
+        r=$(echo ${g} | cut -d ':' -f 1) \
+        t=$(echo ${g} | cut -d ':' -f 2) ;\
+        git clone ${rb}/${r}.git ; \
+        cd ${r} ; \
+        /home/saluser/.checkout_repo.sh ${t} ; \
+        eups declare -r . -t current ; \
+        cd .. ; \
+    done
 
 WORKDIR /home/saluser/repos/ts_sal
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
+RUN source /home/saluser/.setup_salobj.sh && \
     eups declare -r . ts_sal -t current && \
+    setup ts_idl -t current && \
     setup ts_sal -t current && \
     mkdir -p $SAL_WORK_DIR && \
-    mkdir -p $TS_SAL_DIR/lib && scons || pytest
-
-WORKDIR /home/saluser/repos
-RUN mkdir dds
-WORKDIR /home/saluser/repos/dds/
-RUN tar zxvf /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/tools/python-support.tgz
-WORKDIR /home/saluser/repos/dds/python/src/
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    setup ts_idl -t current && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    python setup.py install
+    mkdir -p $TS_SAL_DIR/lib && scons || pytest --color=no --lf
 
 WORKDIR /home/saluser/
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
+RUN source /home/saluser/.setup_salobj.sh && \
+    pip install ts-dds=="6.9.181127"
+
+WORKDIR /home/saluser/
+RUN source /home/saluser/.setup_salobj.sh && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
     make_idl_files.py Test Script LOVE && \
     make_salpy_libs.py Test Script
 
 WORKDIR /home/saluser/repos/ts_salobj
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
+RUN source /home/saluser/.setup_salobj.sh && \
     setup ts_sal -t current && \
     setup ts_idl -t current && \
     export LSST_DDS_IP=`ip route get 1 | awk '{print $7;exit}'` && \
-    eups declare -r . ts_salobj -t current && setup ts_salobj -t current && \
-    pytest --color=no || pytest --color=no --lf
+    eups declare -r . ts_salobj -t current && \
+    setup ts_salobj -t current && \
+    scons || pytest --color=no --lf
 
 WORKDIR /home/saluser/
-COPY setup.sh /home/saluser/.setup.sh
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]
