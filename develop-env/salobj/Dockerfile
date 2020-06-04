@@ -89,5 +89,17 @@ RUN source /home/saluser/.setup_salobj.sh && \
 
 WORKDIR /home/saluser/
 
+LABEL ts_config_ocs="${ts_config_ocs}" \
+      ts_config_attcs="${ts_config_attcs}" \
+      ts_config_mtcalsys="${ts_config_mtcalsys}" \
+      ts_config_eas="${ts_config_eas}" \
+      ts_config_latiss="${ts_config_latiss}" \
+      ts_config_mttcs="${ts_config_mttcs}" \
+      ts_config_atcalsys="${ts_config_atcalsys}" \
+      ts_xml="${ts_xml}" \
+      ts_idl="${ts_idl}" \
+      ts_sal="${ts_sal}" \
+      ts_salobj="${ts_salobj}"
+
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]

@@ -133,5 +133,15 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
 
 WORKDIR /home/saluser/
 
+LABEL ts_scriptqueue="${ts_scriptqueue}" \
+      ts_observatory_control="${ts_observatory_control}" \
+      ts_standardscripts="${ts_standardscripts}" \
+      ts_externalscripts="${ts_externalscripts}" \
+      ts_ATMCSSimulator="${ts_ATMCSSimulator}" \
+      ts_ATDome="${ts_ATDome}" \
+      ts_ATDomeTrajectory="${ts_ATDomeTrajectory}" \
+      ts_simactuators="${ts_simactuators}" \
+      ts_hexrotcomm="${ts_hexrotcomm}"
+
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup_dev.sh"]

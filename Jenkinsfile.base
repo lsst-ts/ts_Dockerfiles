@@ -14,6 +14,7 @@ pipeline {
         stage("Build Docker image") {
             steps {
                 script {
+                    sh "docker pull lsstsqre/centos:${params.image_tag}"
                     dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg image_tag=${params.image_tag} --build-arg UID=${params.user_id} --build-arg GID=${params.group_id} ./develop-env/base/")
                 }
             }

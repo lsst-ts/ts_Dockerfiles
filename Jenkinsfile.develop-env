@@ -43,6 +43,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh "docker pull lsstts/salobj:master"
                     dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=master --build-arg ts_scriptqueue=master --build-arg ts_observatory_control=master --build-arg ts_standardscripts=master --build-arg ts_externalscripts=master --build-arg ts_ATMCSSimulator=master --build-arg ts_ATDome=master --build-arg ts_ATDomeTrajectory=master --build-arg ts_simactuators=master --build-arg ts_hexrotcomm=master ./develop-env/develop-env/")
                 }
             }
@@ -53,6 +54,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh "docker pull lsstts/salobj:develop"
                     dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=develop --build-arg ts_scriptqueue=develop --build-arg ts_observatory_control=develop --build-arg ts_standardscripts=develop --build-arg ts_externalscripts=develop --build-arg ts_ATMCSSimulator=develop --build-arg ts_ATDome=develop --build-arg ts_ATDomeTrajectory=develop --build-arg ts_simactuators=develop --build-arg ts_hexrotcomm=develop ./develop-env/develop-env/")
                 }
             }
@@ -68,6 +70,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh "docker pull lsstts/salobj:${params.base_image_tag}"
                     dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=${params.base_image_tag} --build-arg ts_scriptqueue=${params.ts_scriptqueue} --build-arg ts_observatory_control=${params.ts_observatory_control} --build-arg ts_standardscripts=${params.ts_standardscripts} --build-arg ts_externalscripts=${params.ts_externalscripts} --build-arg ts_ATMCSSimulator=${params.ts_ATMCSSimulator} --build-arg ts_ATDome=${params.ts_ATDome} --build-arg ts_ATDomeTrajectory=${params.ts_ATDomeTrajectory} --build-arg ts_simactuators=${params.ts_simactuators} --build-arg ts_hexrotcomm=${params.ts_hexrotcomm} ./develop-env/develop-env/")
                 }
             }
