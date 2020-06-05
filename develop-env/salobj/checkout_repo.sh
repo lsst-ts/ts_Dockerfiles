@@ -8,6 +8,7 @@ else
 fi
 
 git fetch --all
+git pull
 
 while [ "$1" != "" ]; do
     if [[ "$1" == tags/* ]] ;
@@ -25,4 +26,3 @@ while [ "$1" != "" ]; do
 done
 
 exit 1
-

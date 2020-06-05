@@ -10,7 +10,22 @@ pipeline {
         dockerImageBuild = ""
         base_image_tag = "${base_image_tag}"
     }
-
+    parameters {
+        string defaultValue: 'w_latest_1000_1000', description: 'Which tag of lsstts/base-env docker image to use as base?', name: 'base_image_tag', trim: false
+        string defaultValue: 'tags/v0.5.0', description: 'Which version of ts_config_ocs to build?', name: 'ts_config_ocs', trim: false
+        string defaultValue: 'tags/v0.5.0', description: 'Which version of ts_config_attcs to build?', name: 'ts_config_attcs', trim: false
+        string defaultValue: 'tags/v0.1.0', description: 'Which version of ts_config_eas to build?', name: 'ts_config_eas', trim: false
+        string defaultValue: 'tags/v0.4.0', description: 'Which version of ts_config_latiss to build?', name: 'ts_config_latiss', trim: false
+        string defaultValue: 'tags/v0.2.0', description: 'Which version of ts_config_mttcs to build?', name: 'ts_config_mttcs', trim: false
+        string defaultValue: 'tags/v0.1.0', description: 'Which version of ts_config_atcalsys to build?', name: 'ts_config_atcalsys', trim: false
+        string defaultValue: 'tags/v4.1.3', description: 'Which version of ts_sal to build?', name: 'ts_sal', trim: false
+        string defaultValue: 'tags/v5.14.0', description: 'Which version of ts_salobj to build?', name: 'ts_salobj', trim: false
+        string defaultValue: 'tags/v5.1.0', description: 'Which version of ts_xml to build?', name: 'ts_xml', trim: false
+        string defaultValue: 'tags/v1.2.0', description: 'Which version of ts_idl to build?', name: 'ts_idl', trim: false
+        booleanParam defaultValue: false, description: 'Build master branch for all repos. Ignores All version parameters.', name: 'build_master'
+        booleanParam defaultValue: false, description: 'Build develop branch for all repos. Ignores All version parameters.', name: 'build_develop'
+        booleanParam defaultValue: true, description: 'Push the tagged build to docker hub?', name: 'push_tag'
+    }
     stages {
         stage("Create docker network.") {
             steps {
@@ -34,7 +49,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=master --build-arg salobj_v=master --build-arg xml_v=master --build-arg idl_v=master --build-arg config_ocs_v=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=master --build-arg ts_config_attcs=master --build-arg config_mtcalsys_v=master --build-arg ts_config_eas=master --build-arg ts_config_latiss=master --build-arg ts_config_mttcs=master --build-arg ts_config_atcalsys=master --build-arg ts_sal=master --build-arg ts_salobj=master --build-arg ts_xml=master --build-arg ts_idl=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -44,7 +59,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=develop --build-arg salobj_v=develop --build-arg xml_v=develop --build-arg idl_v=develop --build-arg config_ocs_v=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=develop --build-arg ts_config_attcs=develop --build-arg config_mtcalsys_v=develop --build-arg ts_config_eas=develop --build-arg ts_config_latiss=develop --build-arg ts_config_mttcs=develop --build-arg ts_config_atcalsys=develop --build-arg ts_sal=develop --build-arg ts_salobj=develop --build-arg ts_xml=develop --build-arg ts_idl=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -59,7 +74,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg sal_v=${env.sal_v} --build-arg salobj_v=${env.salobj_v} --build-arg xml_v=${env.xml_v} --build-arg idl_v=${env.idl_v} --build-arg config_ocs_v=${config_ocs_v} --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=${params.ts_config_ocs} --build-arg ts_config_attcs=${params.ts_config_attcs} --build-arg ts_config_eas=${params.ts_config_eas} --build-arg ts_config_latiss=${params.ts_config_latiss} --build-arg ts_config_mttcs=${params.ts_config_mttcs} --build-arg ts_config_atcalsys=${params.ts_config_atcalsys} --build-arg ts_sal=${params.ts_sal} --build-arg ts_salobj=${params.ts_salobj} --build-arg ts_xml=${params.ts_xml} --build-arg ts_idl=${params.ts_idl} --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -104,6 +119,7 @@ pipeline {
                 script {
                     docker.withRegistry("", registryCredential) {
                     dockerImageBuild.push()
+                    dockerImageBuild.push("latest")
                     }
                 }
             }

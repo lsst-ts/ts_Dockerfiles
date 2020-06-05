@@ -2,15 +2,20 @@ pipeline {
     agent any
     environment {
         registryCredential = "dockerhub-lssttsadmin"
-        dockerImageNameBuild = "lsstts/base-env:${image_tag}_b${BUILD_NUMBER}"
+        dockerImageNameBuild = "lsstts/base-env:${image_tag}_${params.user_id}_${params.group_id}"
         dockerImageBuild = ""
     }
-
+    parameters {
+        string defaultValue: 'w_latest', description: 'lsstsqre/centos image tag.', name: 'image_tag', trim: false
+        string defaultValue: '1000', description: 'UID for saluser.', name: 'user_id', trim: false
+        string defaultValue: '1000', description: 'GID for saluser.', name: 'group_id', trim: false
+    }
     stages {
         stage("Build Docker image") {
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg PYTHON_VERSION=${env.python_version} --build-arg CONDA_VERSION=${env.conda_version} --build-arg image_tag=${env.image_tag} --build-arg UID=${env.user_id} --build-arg GID=${env.group_id} ./develop-env/base/")
+                    sh "docker pull lsstsqre/centos:${params.image_tag}"
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg image_tag=${params.image_tag} --build-arg UID=${params.user_id} --build-arg GID=${params.group_id} ./develop-env/base/")
                 }
             }
         }

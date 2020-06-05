@@ -32,6 +32,8 @@ source /home/saluser/.bashrc
 
 run_salkafka_producer.py --broker  $BROKER_IP:$BROKER_PORT \
                          --registry  $REGISTRY_ADDR \
+                         --partitions  $PARTITIONS \
                          --loglevel $LOG_LEVEL \
                          --replication-factor $REPLICATION \
+                         --wait-ack $WAIT_ACK \
                          $CSC_LIST
