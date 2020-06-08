@@ -15,7 +15,7 @@ ARG idl=1.1.3_4.8.0
 
 RUN source /home/saluser/.setup.sh && \
     pip install kafkit[aiohttp] aiokafka && \
-    conda install -c lsstts ts-salkafka=${salkafka} ts-idl=${idl}
+    conda install -c lsstts ts-salkafka=${salkafka} ts-idl=${idl} python-confluent-kafka
 
 COPY setup.sh /home/saluser/.setup.sh
 

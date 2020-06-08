@@ -10,26 +10,41 @@ pipeline {
         dockerImageMaster = ""
         dockerImageDevelop = ""
         dockerImageBuild = ""
-    }    
-
+    }
+    parameters {
+        string defaultValue: 'latest', description: 'Which tag of salobj docker image to use as base?', name: 'base_image_tag', trim: false
+        string defaultValue: 'tags/v2.5.1', description: 'Which version of ts_scriptqueue to use?', name: 'ts_scriptqueue', trim: false
+        string defaultValue: 'tags/v0.2.2', description: 'Which version of ts_observatory_control to use?', name: 'ts_observatory_control', trim: false
+        string defaultValue: 'tags/v1.1.1', description: 'Which version of ts_standardscripts to use?', name: 'ts_standardscripts', trim: false
+        string defaultValue: 'tags/v0.4.0', description: 'Which version of ts_externalscripts to use?', name: 'ts_externalscripts', trim: false
+        string defaultValue: 'tags/v1.0.3', description: 'Which version of ts_ATMCSSimulator to use?', name: 'ts_ATMCSSimulator', trim: false
+        string defaultValue: 'tags/v1.1.3', description: 'Which version of ts_ATDome to use?', name: 'ts_ATDome', trim: false
+        string defaultValue: 'tags/v1.3.3', description: 'Which version of ts_ATDomeTrajectory to use?', name: 'ts_ATDomeTrajectory', trim: false
+        string defaultValue: 'tags/v1.0.1', description: 'Which version of ts_simactuators to use?', name: 'ts_simactuators', trim: false
+        string defaultValue: 'tags/v0.5.1', description: 'Which version of ts_hexrotcomm to use?', name: 'ts_hexrotcomm', trim: false
+        booleanParam defaultValue: false, description: 'Build master branch for all repos. Ignores All "_v" parameters.', name: 'build_master'
+        booleanParam defaultValue: false, description: 'Build develop branch for all repos. Ignores All "_v" parameters.', name: 'build_develop'
+        booleanParam defaultValue: true, description: 'Push the tagged build to docker hub?', name: 'push_tag'
+    }
     stages {
         stage("Create docker network.") {
             steps {
                 script {
                     sh """
                     docker network create net_b${BUILD_NUMBER} || echo Network exists...
-                    """ 
+                    """
                 }
             }
 
-        }    
+        }
         stage("Build Docker image (master)") {
             when {
                 expression { return env.build_master.toBoolean() }
             }
             steps {
                 script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg atmcs_v=master --build-arg atdome_v=master --build-arg atdometraj_v=master --build-arg standardscripts_v=master --build-arg externalscripts_v=master --build-arg base_image_tag=master --build-arg scriptqueue_v=master --build-arg simactuators_v=master --build-arg hexrotcomm_v=master --build-arg obscontrol_v=master ./develop-env/develop-env/")
+                    sh "docker pull lsstts/salobj:master"
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=master --build-arg ts_scriptqueue=master --build-arg ts_observatory_control=master --build-arg ts_standardscripts=master --build-arg ts_externalscripts=master --build-arg ts_ATMCSSimulator=master --build-arg ts_ATDome=master --build-arg ts_ATDomeTrajectory=master --build-arg ts_simactuators=master --build-arg ts_hexrotcomm=master ./develop-env/develop-env/")
                 }
             }
         }
@@ -39,7 +54,8 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg atmcs_v=develop --build-arg atdome_v=develop --build-arg atdometraj_v=develop --build-arg standardscripts_v=develop --build-arg externalscripts_v=develop --build-arg base_image_tag=develop --build-arg scriptqueue_v=develop --build-arg simactuators_v=develop --build-arg hexrotcomm_v=develop --build-arg obscontrol_v=develop ./develop-env/develop-env/")
+                    sh "docker pull lsstts/salobj:develop"
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=develop --build-arg ts_scriptqueue=develop --build-arg ts_observatory_control=develop --build-arg ts_standardscripts=develop --build-arg ts_externalscripts=develop --build-arg ts_ATMCSSimulator=develop --build-arg ts_ATDome=develop --build-arg ts_ATDomeTrajectory=develop --build-arg ts_simactuators=develop --build-arg ts_hexrotcomm=develop ./develop-env/develop-env/")
                 }
             }
         }
@@ -54,7 +70,8 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg atmcs_v=${env.atmcs_v} --build-arg atdome_v=${env.atdome_v} --build-arg atdometraj_v=${env.atdometraj_v} --build-arg standardscripts_v=${env.standardscripts_v} --build-arg externalscripts_v=${env.externalscripts_v} --build-arg base_image_tag=${env.base_image_tag} --build-arg scriptqueue_v=${env.scriptqueue_v} --build-arg simactuators_v=${env.simactuators_v} --build-arg hexrotcomm_v=${env.hexrotcomm_v} --build-arg obscontrol_v=${env.obscontrol_v} ./develop-env/develop-env/")
+                    sh "docker pull lsstts/salobj:${params.base_image_tag}"
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg base_image_tag=${params.base_image_tag} --build-arg ts_scriptqueue=${params.ts_scriptqueue} --build-arg ts_observatory_control=${params.ts_observatory_control} --build-arg ts_standardscripts=${params.ts_standardscripts} --build-arg ts_externalscripts=${params.ts_externalscripts} --build-arg ts_ATMCSSimulator=${params.ts_ATMCSSimulator} --build-arg ts_ATDome=${params.ts_ATDome} --build-arg ts_ATDomeTrajectory=${params.ts_ATDomeTrajectory} --build-arg ts_simactuators=${params.ts_simactuators} --build-arg ts_hexrotcomm=${params.ts_hexrotcomm} ./develop-env/develop-env/")
                 }
             }
         }
@@ -99,10 +116,11 @@ pipeline {
                 script {
                     docker.withRegistry("", registryCredential) {
                     dockerImageBuild.push()
+                    dockerImageBuild.push("latest")
                     }
                 }
             }
-        }        
+        }
     }
     post {
         cleanup {
