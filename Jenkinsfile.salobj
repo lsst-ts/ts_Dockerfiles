@@ -10,7 +10,9 @@ pipeline {
         dockerImageBuild = ""
         base_image_tag = "${base_image_tag}"
     }
-
+    parameters {
+        booleanParam defaultValue: false, description: 'Trigger the Develop Environment build?', name: 'Build_DevEnv'
+    }
     stages {
         stage("Create docker network.") {
             steps {
@@ -106,6 +108,16 @@ pipeline {
                     dockerImageBuild.push()
                     }
                 }
+            }
+        }
+        stage("Trigger the Develop Environment job") {
+            when {
+                expression {
+                    return params.Build_DevEnv
+                }
+            }
+            steps {
+                build job: 'DevelopEnvironment', parameters: [booleanParam(name: 'build_develop', value: true), booleanParam(name: 'push_tag', value: false)], wait: false
             }
         }
     }
