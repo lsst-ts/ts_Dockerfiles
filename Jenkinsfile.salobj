@@ -25,7 +25,7 @@ pipeline {
         booleanParam defaultValue: false, description: 'Build master branch for all repos. Ignores All version parameters.', name: 'build_master'
         booleanParam defaultValue: false, description: 'Build develop branch for all repos. Ignores All version parameters.', name: 'build_develop'
         booleanParam defaultValue: true, description: 'Push the tagged build to docker hub?', name: 'push_tag'
-        booleanParam defaultValue: false, description: 'Trigger the Develop Environment build?', name: 'Build_DevEnv'
+        booleanParam defaultValue: false, description: 'Trigger the Develop Environment build?', name: 'BuildDevEnv'
     }
     stages {
         stage("Create docker network.") {
@@ -128,7 +128,7 @@ pipeline {
         stage("Trigger the Develop Environment job") {
             when {
                 expression {
-                    return params.Build_DevEnv
+                    return params.BuildDevEnv
                 }
             }
             steps {
