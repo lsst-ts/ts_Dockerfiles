@@ -5,7 +5,10 @@ pipeline {
         dockerImageNameBuild = "lsstts/base-env:${image_tag}_b${BUILD_NUMBER}"
         dockerImageBuild = ""
     }
-
+    parameters {
+        booleanParam defaultValue: false, description: 'Trigger the SalObjContainer build?', name: 'BuildSalobjContainer'
+        booleanParam defaultValue: false, description: 'Trigger the DevelopEnvironment build?', name: 'BuildDevEnv'
+    }
     stages {
         stage("Build Docker image") {
             steps {
@@ -22,6 +25,18 @@ pipeline {
                     dockerImageBuild.push()
                     }
                 }
+            }
+        }
+        stage("Trigger the SalObjContainer job") {
+            when {
+                expression {
+                    return params.BuildSalobjContainer
+                }
+            }
+            steps {
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv', value: true), 
+                    booleanParam(name: 'build_develop', value: true), 
+                    booleanParam(name: 'push_tag', value: false)], wait: false
             }
         }
     }
