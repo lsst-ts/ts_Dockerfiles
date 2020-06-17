@@ -26,8 +26,7 @@ RUN if [ $UID -eq 1000 ] && [ $GID -eq 1000 ]; then  \
 RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - && \
     yum install -y nodejs && node --version
 
-COPY lsst-ts-nexus.repo /tmp/lsst-ts.repo
-RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
+COPY lsst-ts-nexus.repo /etc/yum.repos.d/lsst-ts.repo
 
 RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 

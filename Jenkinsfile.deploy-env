@@ -6,10 +6,11 @@ pipeline {
 
         dockerImageNameBuild = "lsstts/deploy-env:salobj_${SALOBJ_VERSION}"
         dockerImageBuild = ""
-    } 
+    }
     parameters {
-        string defaultValue: "v5.4.0", description: "The SalObj version, requires the leading 'v' to build properly.", name: 'SALOBJ_VERSION', trim: true
-        string defaultValue: "3.7", description: "The Python version.", name: 'PYTHON_VERSION', trim: true
+        string defaultValue: "5.15.0", description: "The SalObj version.", name: 'SALOBJ_VERSION', trim: true
+        string defaultValue: "6.9.0-7", description: "The OpenSplice version.", name: 'OPENSPLICE_VERSION', trim: true
+        string defaultValue: "v6.9.190925_7", description: "The dds python binding version.", name: 'DDS_VERSION', trim: true
         booleanParam defaultValue: false, description: "Push the build image to the docker registries.", name: 'push_tag'
     }
     stages {
@@ -18,15 +19,15 @@ pipeline {
                 script {
                     sh """
                     docker network create net_b${BUILD_NUMBER} || echo Network exists...
-                    """ 
+                    """
                 }
             }
 
-        }    
+        }
         stage("Build Docker image") {
             steps {
                 script {
-                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} ./deploy-env/conda/")
+                    dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --network net_b${BUILD_NUMBER} --build-arg SALOBJ_VERSION=${SALOBJ_VERSION} --build-arg OPENSPLICE_VERSION=${OPENSPLICE_VERSION} --build-arg DDS_VERSION=${DDS_VERSION} ./deploy-env/conda/")
                 }
             }
         }

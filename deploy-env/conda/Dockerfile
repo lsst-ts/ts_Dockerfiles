@@ -1,48 +1,47 @@
 FROM centos:7
 
-ARG PYTHON_VERSION=3.7m
-ARG CONDA_VERSION=4.5.4
-ARG SALOBJ_VERSION
+ARG SALOBJ_VERSION=5.15.0
+ARG OPENSPLICE_VERSION=6.9.0-7
+ARG DDS_VERSION=v6.9.190925_7
 
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
+ENV WORKDIR=/opt/lsst/software/
 ENV LSST_DDS_DOMAIN=citest
-ENV PYTHON_BUILD_VERSION=${PYTHON_VERSION}
-ENV PYTHON_BUILD_LOCATION=/home/saluser/miniconda3
-#ENV TS_IDL_DIR=/home/saluser/repos/ts_idl/
-#ENV TS_XML_VERSION=${xml_branch}
 
 USER root
 
 RUN adduser -u 1004 -m -s /bin/bash saluser
 
-COPY lsst-ts.repo /tmp/lsst-ts.repo
+COPY lsst-ts.repo /etc/yum.repos.d/lsst-ts.repo
+COPY setup_sal_env.sh /home/saluser/.setup_sal_env.sh
+COPY setup.sh /home/saluser/.setup.sh
 
-RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf && \
-    yum install -y wget \
+RUN yum install -y wget \
                    git \
                    make \
-                   wget \
                    gcc-c++ \
-                   OpenSpliceDDS-6.9.0
+                   which \
+                   tcpdump \
+                   OpenSpliceDDS-${OPENSPLICE_VERSION}
+
+RUN mkdir -p ${WORKDIR} && \
+    chown -R saluser:saluser /opt/lsst/ && \
+    chown saluser:saluser /home/saluser/.setup.sh && \
+    chown saluser:saluser /home/saluser/.setup_sal_env.sh && \
+    chmod a+x /home/saluser/.setup.sh && \
+    chmod a+x /home/saluser/.setup_sal_env.sh
 
 USER saluser
-WORKDIR /home/saluser
+WORKDIR ${WORKDIR}
 
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && chmod +x miniconda.sh && ./miniconda.sh -b
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
+    chmod +x miniconda.sh && ./miniconda.sh -b
 
-RUN source ~/miniconda3/bin/activate && \
+RUN source /home/saluser/.setup_sal_env.sh && \
     conda config --add channels conda-forge && \
-    conda install -c lsstts python=3.7 ts-salobj=${SALOBJ_VERSION} cython
+    conda install -c lsstts python=3.7 ts-dds=${DDS_VERSION} ts-salobj=${SALOBJ_VERSION} cython
 
-RUN source ~/miniconda3/bin/activate && \
-    source $OSPL_HOME/release.com && \
-    mkdir dds && \
-    cd dds && \
-    tar xvzf /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/tools/python-support.tgz && \
-    cd python/src && \
-    python setup.py install
-
-COPY setup.sh /home/saluser/.setup.sh
+WORKDIR /home/saluser/
 
 ENTRYPOINT ["/bin/bash", "--"]
 CMD ["/home/saluser/.setup.sh"]

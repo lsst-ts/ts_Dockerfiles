@@ -50,7 +50,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=master --build-arg ts_config_attcs=master --build-arg config_mtcalsys_v=master --build-arg ts_config_eas=master --build-arg ts_config_latiss=master --build-arg ts_config_mttcs=master --build-arg ts_config_atcalsys=master --build-arg ts_sal=master --build-arg ts_salobj=master --build-arg ts_xml=master --build-arg ts_idl=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
+                    dockerImageMaster = docker.build(dockerImageNameMaster, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=master --build-arg ts_config_attcs=master --build-arg ts_config_eas=master --build-arg ts_config_latiss=master --build-arg ts_config_mttcs=master --build-arg ts_config_atcalsys=master --build-arg ts_sal=master --build-arg ts_salobj=master --build-arg ts_xml=master --build-arg ts_idl=master --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=develop --build-arg ts_config_attcs=develop --build-arg config_mtcalsys_v=develop --build-arg ts_config_eas=develop --build-arg ts_config_latiss=develop --build-arg ts_config_mttcs=develop --build-arg ts_config_atcalsys=develop --build-arg ts_sal=develop --build-arg ts_salobj=develop --build-arg ts_xml=develop --build-arg ts_idl=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
+                    dockerImageDevelop = docker.build(dockerImageNameDevelop, "--no-cache --network salobj_b${BUILD_NUMBER} --build-arg ts_config_ocs=develop --build-arg ts_config_attcs=develop --build-arg ts_config_eas=develop --build-arg ts_config_latiss=develop --build-arg ts_config_mttcs=develop --build-arg ts_config_atcalsys=develop --build-arg ts_sal=develop --build-arg ts_salobj=develop --build-arg ts_xml=develop --build-arg ts_idl=develop --build-arg base_image_tag=${base_image_tag} ./develop-env/salobj/")
                 }
             }
         }
