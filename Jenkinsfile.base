@@ -7,8 +7,10 @@ pipeline {
     }
     parameters {
         string defaultValue: 'w_latest', description: 'lsstsqre/centos image tag.', name: 'image_tag', trim: false
-        string defaultValue: '1000', description: 'UID for saluser.', name: 'user_id', trim: false
-        string defaultValue: '1000', description: 'GID for saluser.', name: 'group_id', trim: false
+        string defaultValue: '1000', description: 'UID of saluser.', name: 'user_id', trim: false
+        string defaultValue: '1000', description: 'GID of saluser.', name: 'group_id', trim: false
+        booleanParam defaultValue: false, description: 'Trigger the SalObjContainer build?', name: 'BuildSalobjContainer'
+        booleanParam defaultValue: false, description: 'Trigger the DevelopEnvironment build?', name: 'BuildDevEnv'
     }
     stages {
         stage("Build Docker image") {
@@ -27,6 +29,18 @@ pipeline {
                     dockerImageBuild.push()
                     }
                 }
+            }
+        }
+        stage("Trigger the SalObjContainer job") {
+            when {
+                expression {
+                    return params.BuildSalobjContainer
+                }
+            }
+            steps {
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv', value: true), 
+                    booleanParam(name: 'build_develop', value: true), 
+                    booleanParam(name: 'push_tag', value: false)], wait: false
             }
         }
     }
