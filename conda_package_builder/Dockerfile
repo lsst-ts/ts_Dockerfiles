@@ -14,9 +14,9 @@ RUN yum install -y mlocate
 RUN adduser -u 1004 -m -s /bin/bash saluser
 RUN yum install -y iproute gcc-c++ make ncurses-libs xterm xorg-x11-fonts-misc java-1.7.0-openjdk-devel maven python-devel swig git tk-devel wget bzip2
 
-COPY lsst-ts-nexus.repo /tmp/lsst-ts-nexus.repo
+COPY lsst-ts-nexus.repo /etc/yum.repos.d
 
-RUN cat /tmp/lsst-ts-nexus.repo >> /etc/yum.conf && yum install -y OpenSpliceDDS-6.9.0
+RUN yum install -y OpenSpliceDDS-6.9.0
 USER saluser
 WORKDIR /home/saluser
 
