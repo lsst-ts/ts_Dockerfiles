@@ -73,8 +73,7 @@ RUN yum -y --enablerepo=extras install epel-release \
     tcpdump && \
     yum clean all
 
-COPY lsst-ts.repo /tmp/lsst-ts.repo
-RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
+RUN cat /tmp/lsst-ts-nexus.repo >> /etc/yum.conf
 
 RUN yum install -y OpenSpliceDDS-6.9.0-1
 

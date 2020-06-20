@@ -1,5 +1,5 @@
+#!/usr/bin/env bash
 
-source ~/miniconda3/bin/activate
-source $OSPL_HOME/release.com
+source /home/saluser/.setup_sal_env.sh
 
 /bin/bash --rcfile /home/saluser/.bashrc

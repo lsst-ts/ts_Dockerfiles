@@ -14,8 +14,7 @@ USER root
 # Create user and group
 RUN groupadd lsst && adduser -u 1004 -m -g lsst -s /bin/bash saluser
 
-COPY lsst-ts.repo /tmp/lsst-ts.repo
-RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
+COPY lsst-ts.repo /etc/yum.repos.d/lsst-ts.repo
 
 RUN yum install -y https://repo.ius.io/ius-release-el7.rpm && \
     yum install -y centos-release-scl cmake
@@ -43,7 +42,10 @@ RUN yum install -y ATPtg-${rpm} \
 RUN mkdir /home/saluser/.ssh/ && chown saluser:lsst /home/saluser/.ssh/ && chmod 700 /home/saluser/.ssh/
 COPY id_rsa /home/saluser/.ssh/
 COPY known_hosts /home/saluser/.ssh/
-RUN chown saluser:lsst /home/saluser/.ssh/id_rsa && chown saluser:lsst /home/saluser/.ssh/known_hosts
+RUN chown saluser:lsst /home/saluser/.ssh/id_rsa && \
+    chown saluser:lsst /home/saluser/.ssh/known_hosts && \
+    chmod 400 /home/saluser/.ssh/id_rsa
+
 #RUN mkdir /opt/lsst/ts_sal/lsstsal/ && \
 #    ln -s /opt/lsst/ts_sal/include /opt/lsst/ts_sal/lsstsal/include && \
 #    ln -s /opt/lsst/ts_sal/lib /opt/lsst/ts_sal/lsstsal/lib && \

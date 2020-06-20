@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
   salkafka_115:
-    image: lsstts/salkafka:v1.1.3_salobj_v5.15.0_xml_v5.1.0
+    image: lsstts/salkafka:v1.1.3_5.15.0_1.2.2_4.1.1_6.0.0
     container_name: salkafka_115
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -27,7 +27,7 @@ services:
         max-size: "10m"
 
   salkafka_116:
-    image: lsstts/salkafka:v1.1.3_salobj_v5.15.0_xml_v5.1.0
+    image: lsstts/salkafka:v1.1.3_5.15.0_1.2.2_4.1.1_6.0.0
     container_name: salkafka_116
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -51,7 +51,7 @@ services:
         max-size: "10m"
 
   salkafka_117:
-    image: lsstts/salkafka:v1.1.3_salobj_v5.15.0_xml_v5.1.0
+    image: lsstts/salkafka:v1.1.3_5.15.0_1.2.2_4.1.1_6.0.0
     container_name: salkafka_117
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -75,7 +75,7 @@ services:
         max-size: "10m"
 
   salkafka_118:
-    image: lsstts/salkafka:v1.1.3_salobj_v5.15.0_xml_v5.1.0
+    image: lsstts/salkafka:v1.1.3_5.15.0_1.2.2_4.1.1_6.0.0
     container_name: salkafka_118
     environment:
       - LSST_DDS_DOMAIN=ncsa

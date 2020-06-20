@@ -1,7 +1,7 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstts/develop-env:b68
+FROM lsstts/develop-env:b101
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 

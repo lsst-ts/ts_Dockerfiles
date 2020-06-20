@@ -13,8 +13,7 @@ USER root
 # Create user and group
 RUN groupadd lsst && adduser -u 1004 -m -g lsst -s /bin/bash saluser
 
-COPY lsst-ts.repo /tmp/lsst-ts.repo
-RUN cat /tmp/lsst-ts.repo >> /etc/yum.conf
+COPY lsst-ts.repo /etc/yum.repos.d/lsst-ts.repo
 
 RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 
