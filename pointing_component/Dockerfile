@@ -10,7 +10,7 @@ USER root
 # Create user and group
 RUN adduser -u 1004 -m -g lsst -s /bin/bash saluser
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y https://repo.ius.io/ius-release-el7.rpm
 
 RUN yum -y --enablerepo=extras install epel-release \
   unzip \

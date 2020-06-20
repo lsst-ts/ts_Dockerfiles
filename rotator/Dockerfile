@@ -1,41 +1,15 @@
-FROM lsstts/develop-env:sal_v4.0.0_salobj_v5.0.0
+ARG deploy_tag=salobj_v5.7.0
+
+FROM lsstts/deploy-env:${deploy_tag}
 
 LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
-USER saluser
+ARG rotator=0.1.dev51+gad1edcb
+ARG hexrotcomm=0.5.0
+ARG idl=1.1.3_4.8.0
 
-WORKDIR /home/saluser/repos
-RUN git clone https://github.com/lsst-ts/ts_rotator.git && \
-    git clone https://github.com/lsst-ts/ts_hexrotcomm.git
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-rotator=${rotator} ts-idl=${idl} ts-hexrotcomm=${hexrotcomm}
 
-WORKDIR /home/saluser/repos/ts_rotator
-RUN git fetch --all && git checkout "tags/v0.1.0" -b "v0.1.0"
-
-WORKDIR /home/saluser/repos/ts_hexrotcomm
-RUN git fetch --all && git checkout "tags/v0.1.0" -b "v0.1.1"
-
-WORKDIR /home/saluser
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_sal -t current && \
-    make_idl_files.py Rotator
-
-WORKDIR /home/saluser/repos/ts_hexrotcomm
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    eups declare -r . -t current && setup ts_hexrotcomm -t current && \
-    scons
-
-WORKDIR /home/saluser/repos/ts_rotator
-RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_distrib && \
-    source /home/saluser/repos/ts_sal/setup.env && \
-    setup ts_salobj -t current && \
-    eups declare -r . -t current && setup ts_rotator -t current && \
-    scons || echo "Failed, ignoring"
-
-WORKDIR /home/saluser/
+ENV RUN_ARG=""
 COPY setup.sh /home/saluser/.setup.sh
-
-ENTRYPOINT ["/bin/bash", "--"]
-CMD ["/home/saluser/.setup.sh"]

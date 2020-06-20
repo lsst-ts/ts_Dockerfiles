@@ -4,24 +4,20 @@ This is the software environment for the MTAOS software simulator.
 
 ## Overview
 
-This docker is based off the [lsstts/aos_aoclc](https://hub.docker.com/repository/docker/lsstts/aos_aoclc) image with everything required to run the MTAOS software. In the build process, the user needs to assign the argument of `IMAGE_TAG` by `--build-arg`.
+This docker is based off the [lsstts/aos_aoclc](https://hub.docker.com/repository/docker/lsstts/aos_aoclc) image with everything required to run the MTAOS software. When building the container (docker build), assign `IMAGE_TAG` with --build-arg command line argument.
 
-1. After entering the container, do the following to check the available option to run MTAOS:
+Container executes `run_mtaos.py -s` to run the MTAOS simulator.
 
-```bash
-run_mtaos.py -h
-```
-
-2. The user can do the following to run MTAOS in the simulation mode:
-
-```bash
-run_mtaos.py -s
-```
-
-3. The user can use the environment variable of `ISRDIRPATH` to assign the ISR (instrument signature removal) directory. This is the disk position of butler instance basically (notice the butler instance has a hierarchy structure). This value will override the value defined in the configuration file in `ts_config_mttcs`.
+Environment variable `ISRDIRPATH` is used to assign the Instrument Signature Removal (ISR). This is the disk position of butler instance basically (notice the butler instance has a hierarchy structure). This value will override the value defined in the configuration file in `ts_config_mttcs`. Environmental values can be changed with the `-e` argument to docker run command - see man docker-run for details.
 
 ## Tag List
 
+- w_2020_16_sal
+  - ts_MTAOS - master branch (commit: 8b73ca2)
+  - [AOCLC packages](https://hub.docker.com/repository/docker/lsstts/aos_aoclc)
+- w_2020_15_sal
+  - ts_MTAOS - master branch (commit: 8b73ca2)
+  - [AOCLC packages](https://hub.docker.com/repository/docker/lsstts/aos_aoclc)
 - w_2020_15_sal
   - ts_MTAOS - master branch (commit: 2e23b60)
   - [AOCLC packages](https://hub.docker.com/repository/docker/lsstts/aos_aoclc)

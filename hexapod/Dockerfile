@@ -1,51 +1,15 @@
-FROM lsstts/develop-env:b42
+ARG deploy_tag=salobj_v5.7.0
 
-LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
+FROM lsstts/deploy-env:${deploy_tag}
 
-ARG LSST_USER=saluser
-ARG LSST_USER_HOME=/home/${LSST_USER}
-ARG SAL_REPOS=${LSST_USER_HOME}/repos
-ARG LSST_DIR=/opt/lsst/software/stack
-ARG DISTRIB_VERSION=current
+LABEL maintainer Tiago Ribeiro <tribeiro@lsst.org>
 
-USER $LSST_USER
-WORKDIR $LSST_USER_HOME
+ARG hexapod=0.1.dev65+ge3a234e
+ARG hexrotcomm=0.5.0
+ARG idl=1.1.3_4.8.0
 
-RUN cd ${SAL_REPOS} \
-    && git clone https://github.com/lsst-ts/ts_hexapod.git \
-    && cd ts_hexapod/ \
-    && git checkout "v0.4.0" -b "v0.4.0"  \
-    && cd ${SAL_REPOS} \
-    && git clone https://github.com/lsst-ts/ts_hexrotcomm.git \
-    && cd ts_hexrotcomm/ \
-    && git checkout "v0.3.0" -b "v0.3.0"
+RUN source /home/saluser/.setup.sh && \
+    conda install -c lsstts ts-hexapod=${hexapod} ts-idl=${idl} ts-hexrotcomm=${hexrotcomm}
 
-WORKDIR ${SAL_REPOS}/ts_hexrotcomm
-
-RUN source ${LSST_DIR}/loadLSST.bash \
-    && setup lsst_distrib \
-    && source ${SAL_REPOS}/ts_sal/setup.env \
-    && eups declare -r . -t ${DISTRIB_VERSION} \
-    && setup ts_salobj -t ${DISTRIB_VERSION} \
-    && setup ts_hexrotcomm -t ${DISTRIB_VERSION} \
-    && scons
-
-WORKDIR ${SAL_REPOS}/ts_hexapod
-
-RUN source ${LSST_DIR}/loadLSST.bash \
-    && setup lsst_distrib \
-    && source ${SAL_REPOS}/ts_sal/setup.env \
-    && eups declare -r . -t ${DISTRIB_VERSION} \
-    && setup ts_hexapod -t ${DISTRIB_VERSION} \
-    && scons
-
-ENV HEXAPOD_ID=1
-
-COPY setup.sh ${LSST_USER_HOME}/.setup.sh
-
-SHELL ["/bin/bash", "-lc"]
-WORKDIR $LSST_USER_HOME
-
-ENTRYPOINT ["/bin/bash", "--"]
-
-CMD ["/home/saluser/.setup.sh"]
+ENV RUN_ARG=""
+COPY setup.sh /home/saluser/.setup.sh

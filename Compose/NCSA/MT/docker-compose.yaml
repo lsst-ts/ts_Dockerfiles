@@ -3,11 +3,11 @@ version: "3.4"
 services:
 
   mtptg:
-    image: ts-dockerhub.lsst.org/ptkernel:newATMCS_develop
+    image: ts-dockerhub.lsst.org/ptkernel:DM-24828
     container_name: mtptg
     environment:
-      - LSST_DDS_DOMAIN=comcampath
-      - TELESCOPE=Main
+      - LSST_DDS_DOMAIN=ncsa
+      - TELESCOPE=MT
     stdin_open: true
     tty: true
     networks:
@@ -20,68 +20,76 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: lsstts/rotator:v0.1.0_sim
+    image: lsstts/rotator:v0.4.3
     container_name: mt-rotator-sim
     environment:
-      - LSST_DDS_DOMAIN=comcampath
+      - LSST_DDS_DOMAIN=ncsa
+      - RUN_ARG=-s
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.132"
 
   mt-cam-hexapod-sim:
-    image: lsstts/hexapod:v0.4.0_b42
+    image: lsstts/hexapod:v0.5.2
     container_name: mt-cam-hexapod-sim
     environment:
-      - LSST_DDS_DOMAIN=comcampath
-      - HEXAPOD_ID=-s 1
+      - LSST_DDS_DOMAIN=ncsa
+      - RUN_ARG=-s 1
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.133"
 
   mt-m2-hexapod-sim:
-    image: lsstts/hexapod:v0.4.0_b42
+    image: lsstts/hexapod:v0.5.2
     container_name: mt-m2-hexapod-sim
     environment:
-      - LSST_DDS_DOMAIN=comcampath
-      - HEXAPOD_ID=-s 2
+      - LSST_DDS_DOMAIN=ncsa
+      - RUN_ARG=-s 2
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.134"
 
   mtaos:
-    image: lsstts/mtaos_sim:w_2020_06_sal
+    image: lsstts/mtaos_sim:w_2020_20_sal
     container_name: mtaos
     environment:
-      - LSST_DDS_DOMAIN=comcampath
-    volumes:
-      - ./mtaos_setup.sh:/home/saluser/.setup.sh
+      - LSST_DDS_DOMAIN=ncsa
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: lsstts/mtm1m3_sim
+    image: lsstts/mtm1m3_sim:v1.7.0
     container_name: m1m3
     environment:
-      - LSST_DDS_DOMAIN=comcampath
+      - LSST_DDS_DOMAIN=ncsa
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.136"
 
   m2:
-    image: lsstts/m2_sim:DM-24028
+    image: lsstts/m2:v0.1
     container_name: m2
     environment:
-      - LSST_DDS_DOMAIN=comcampath
+      - LSST_DDS_DOMAIN=ncsa
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.137"
+
+  mtmount:
+    image: lsstts/mtmount:v0.1.0
+    environment:
+      - LSST_DDS_DOMAIN=ncsa
+    tty: true
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.138"
 
 networks:
   default:

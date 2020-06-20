@@ -26,15 +26,15 @@ RUN cd ${AOS_REPOS} \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_wep.git \
     && cd ts_wep/ \
-    && git checkout 3c661a4 \
+    && git checkout 1ede81e \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_ofc.git \
     && cd ts_ofc/ \
-    && git checkout 87075e2 \
+    && git checkout c5aade4 \
     && cd .. \
     && git clone -b master https://github.com/lsst-ts/ts_phosim.git \
     && cd ts_phosim/ \
-    && git checkout 474d2eb
+    && git checkout d613cb2
 
 # Add the PhoSim and output directory
 RUN mkdir -p ${PHOSIM_DIR} \

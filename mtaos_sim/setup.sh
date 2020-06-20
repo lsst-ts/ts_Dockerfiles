@@ -47,6 +47,3 @@ setup -k -r .
 
 # Back to the default directory
 cd ${LSST_USER_HOME}
-
-# Execute the file in the interactive environment
-/bin/bash --rcfile ${LSST_USER_HOME}/.bashrc
