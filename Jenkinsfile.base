@@ -38,8 +38,11 @@ pipeline {
                 }
             }
             steps {
-                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv', value: true), 
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv_develop', value: true), 
                     booleanParam(name: 'build_develop', value: true), 
+                    booleanParam(name: 'push_tag', value: false)], wait: false
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv_master', value: true), 
+                    booleanParam(name: 'build_master', value: true), 
                     booleanParam(name: 'push_tag', value: false)], wait: false
             }
         }
