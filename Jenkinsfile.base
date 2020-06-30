@@ -16,6 +16,9 @@ pipeline {
         stage("Build Docker image") {
             steps {
                 script {
+                    // Set the Current Build status, in order to make the email notification function work.
+                    currentBuild.result = 'SUCCESS'
+                    // Build the Docker Image.
                     sh "docker pull lsstsqre/centos:${params.image_tag}"
                     dockerImageBuild = docker.build(dockerImageNameBuild, "--no-cache --build-arg image_tag=${params.image_tag} --build-arg UID=${params.user_id} --build-arg GID=${params.group_id} ./develop-env/base/")
                 }
@@ -38,10 +41,23 @@ pipeline {
                 }
             }
             steps {
-                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv', value: true), 
+                // Start the SalObjContainer, Develop build.
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv_develop', value: true), 
                     booleanParam(name: 'build_develop', value: true), 
                     booleanParam(name: 'push_tag', value: false)], wait: false
+                // Start the SalObjContainer, Master build.
+                build job: 'SalObjContainer', parameters: [booleanParam(name: 'BuildDevEnv_master', value: true), 
+                    booleanParam(name: 'build_master', value: true), 
+                    booleanParam(name: 'push_tag', value: false)], wait: false
             }
+        }
+    }
+    post {
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: false,
+                recipients: "tribeiro@lsst.org",
+                sendToIndividuals: true])
         }
     }
 }

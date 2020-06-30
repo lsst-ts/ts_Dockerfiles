@@ -30,6 +30,9 @@ pipeline {
         stage("Create docker network.") {
             steps {
                 script {
+                    // Set the Current Build status, in order to make the email notification function work.
+                    currentBuild.result = 'SUCCESS'
+                    // Create the Docker network.
                     sh """
                     docker network create net_b${BUILD_NUMBER} || echo Network exists...
                     """
@@ -125,6 +128,12 @@ pipeline {
     post {
         cleanup {
             sh "docker network rm net_b${BUILD_NUMBER}"
+        }
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: false,
+                recipients: "tribeiro@lsst.org",
+                sendToIndividuals: true])
         }
     }
 }

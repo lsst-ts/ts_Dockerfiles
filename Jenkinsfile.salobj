@@ -25,12 +25,16 @@ pipeline {
         booleanParam defaultValue: false, description: 'Build master branch for all repos. Ignores All version parameters.', name: 'build_master'
         booleanParam defaultValue: false, description: 'Build develop branch for all repos. Ignores All version parameters.', name: 'build_develop'
         booleanParam defaultValue: true, description: 'Push the tagged build to docker hub?', name: 'push_tag'
-        booleanParam defaultValue: false, description: 'Trigger the Develop Environment build?', name: 'BuildDevEnv'
+        booleanParam defaultValue: false, description: 'Trigger the DevelopEnvironment/develop build?', name: 'BuildDevEnv_develop'
+        booleanParam defaultValue: false, description: 'Trigger the DevelopEnvironment/master build?', name: 'BuildDevEnv_master'
     }
     stages {
         stage("Create docker network.") {
             steps {
                 script {
+                    // Set the Current Build status, in order to make the email notification function work.
+                    currentBuild.result = 'SUCCESS'
+                    // Create Docker network.
                     sh "docker network create salobj_b${BUILD_NUMBER}"
                 }
             }
@@ -125,14 +129,26 @@ pipeline {
                 }
             }
         }
-        stage("Trigger the Develop Environment job") {
+        stage("Trigger the DevelopEnvironment/develop job") {
             when {
                 expression {
-                    return params.BuildDevEnv
+                    return params.BuildDevEnv_develop
                 }
             }
             steps {
-                build job: 'DevelopEnvironment', parameters: [booleanParam(name: 'build_develop', value: true), booleanParam(name: 'push_tag', value: false)], wait: false
+                build job: 'DevelopEnvironment', parameters: [booleanParam(name: 'build_develop', value: true), 
+                    booleanParam(name: 'push_tag', value: false)], wait: false
+            }
+        }
+        stage("Trigger the DevelopEnvironment/master job") {
+            when {
+                expression {
+                    return params.BuildDevEnv_master
+                }
+            }
+            steps {
+                build job: 'DevelopEnvironment', parameters: [booleanParam(name: 'build_master', value: true),
+                    booleanParam(name: 'push_tag', value: false)], wait: false
             }
         }
     }
@@ -140,10 +156,11 @@ pipeline {
         cleanup {
             sh "docker network rm salobj_b${BUILD_NUMBER}"
         }
+        always {
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: false,
+            recipients: "tribeiro@lsst.org",
+            sendToIndividuals: true])
+        }
     }
-//    post {
-//        failure {
-//             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "tribeiro@lsst.org";
-//         }
-//    }
 }
