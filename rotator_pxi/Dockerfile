@@ -23,12 +23,22 @@ ARG IPIPE_PATCH_FILE=ipipe-core-3.18.20-x86-9.patch
 ARG ETHERCAT_VERSION=ethercat-hg
 ARG ETHERCAT_FILE=${ETHERCAT_VERSION}.tar.gz
 ARG ETHERCAT_SOURCE_DIR_HOST=libs/ethercat
-ARG ETHERCAT_SOURCE=/home/ethercat
+ARG ETHERCAT_SOURCE_DIR=/home/ethercat
 
 ARG HDF5_VERSION=hdf5-1.12.0
 ARG HDF5_FILE=${HDF5_VERSION}.tar.gz
 ARG HDF5_SOURCE_DIR_HOST=libs/hdf5
 ARG HDF5_SOURCE_DIR=/home/hdf5
+
+ARG GOOGLETEST_VERSION=googletest-release-1.10.0
+ARG GOOGLETEST_FILE=${GOOGLETEST_VERSION}.tar
+ARG GOOGLETEST_SOURCE_DIR_HOST=libs/googletest
+ARG GOOGLETEST_SOURCE_DIR=/home/googletest
+
+ARG LIBYAML_VERSION=yaml-0.2.5
+ARG LIBYAML_FILE=${LIBYAML_VERSION}.tar
+ARG LIBYAML_SOURCE_DIR_HOST=libs/libyaml
+ARG LIBYAML_SOURCE_DIR=/home/libyaml
 
 USER root
 
@@ -76,8 +86,8 @@ RUN mkdir ${XENOMAI_BUILD_DIR} \
 
 # Install the EtherCAT
 COPY ${ETHERCAT_SOURCE_DIR_HOST}/${ETHERCAT_FILE} /home
-RUN mkdir ${ETHERCAT_SOURCE} \
-    && cd ${ETHERCAT_SOURCE} \
+RUN mkdir ${ETHERCAT_SOURCE_DIR} \
+    && cd ${ETHERCAT_SOURCE_DIR} \
     && mv /home/${ETHERCAT_FILE} . \
     && tar -xzf ${ETHERCAT_FILE} \
     && cd ${ETHERCAT_VERSION} \
@@ -103,6 +113,30 @@ RUN mkdir ${HDF5_SOURCE_DIR} \
     && make \
     && make install \
     && rm ../${HDF5_FILE}
+
+# Install the google test
+COPY ${GOOGLETEST_SOURCE_DIR_HOST}/${GOOGLETEST_FILE} /home
+RUN mkdir ${GOOGLETEST_SOURCE_DIR} \
+    && cd ${GOOGLETEST_SOURCE_DIR} \
+    && mv /home/${GOOGLETEST_FILE} . \
+    && tar -xvf ${GOOGLETEST_FILE} \
+    && cd ${GOOGLETEST_VERSION} \
+    && cmake . \
+    && make \
+    && make install \
+    && rm ../${GOOGLETEST_FILE}
+
+# Install the libyaml
+COPY ${LIBYAML_SOURCE_DIR_HOST}/${LIBYAML_FILE} /home
+RUN mkdir ${LIBYAML_SOURCE_DIR} \
+    && cd ${LIBYAML_SOURCE_DIR} \
+    && mv /home/${LIBYAML_FILE} . \
+    && tar -xvf ${LIBYAML_FILE} \
+    && cd ${LIBYAML_VERSION} \
+    && ./configure \
+    && make \
+    && make install \
+    && rm ../${LIBYAML_FILE}
 
 # Add LSST user
 RUN useradd -ms /bin/bash ${LSST_USER}

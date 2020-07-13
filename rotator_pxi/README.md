@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Dockerfile tries to have the similar software environment in the rotator real-time controller. The NI PXIe-8840 controller is used. The Xenomai dual kernel is installed in the controller. The ipipe, EtherCAT, and HDF5 are installed as well.
+This Dockerfile tries to have the similar software environment in the rotator real-time controller. The NI PXIe-8840 controller is used. The Xenomai dual kernel is installed in the controller. The ipipe, EtherCAT, HDF5, googletest, and libyaml are installed as well.
 
 ## Difference with the PXI Controller
 
@@ -40,8 +40,26 @@ $xenomai_dir/configure --with-core=cobalt --enable-smp -enable-pshared -host=i68
 2. The Xenomai is at `/usr/xenomai`.
 3. The EtherCAT is at `/opt/etherlab`.
 4. The HDF5 is at `/usr/local/hdf5`.
+5. The header files of googletest is at `/usr/local/include/gtest` and `/usr/local/include/gmock`. The library is at `/usr/local/lib64`.
+6. The header file of libyaml is at `/usr/local/include`. The library is at `/usr/local/lib`.
 
 ## Tag List
+
+- v0.2
+  - linux-kernel: v3.18.25
+  - xenomai: v3.0.1
+  - ipipe-core: 3.18.20-x86-9.patch
+  - ethercat: hg, v1.5.2
+  - hdf5: v1.12.0
+  - googletest: v1.10.0
+  - libyaml: v0.2.5
+  - cmake
+  - glib-devel
+  - glib2-devel.x86_64
+  - libtool
+  - autoconf
+  - automake
+  - python-devel
 
 - v0.1
   - linux-kernel: v3.18.25
