@@ -57,6 +57,7 @@ RUN yum -y --enablerepo=extras install epel-release \
   ntp \
   tcpdump \
   graphviz* \
+  libgphoto2-devel \
   yum clean all
 
 RUN yum install -y OpenSpliceDDS-6.9.0-1.el6
@@ -84,6 +85,14 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     pycodestyle aiomisc ipympl ginga pyevents jinja2 ephem gitpython \
     sqlalchemy asynctest lxml pytest-asyncio astroquery ltd-conveyor \
     moto boto3 black
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    which pip > /home/saluser/pip.sh && \
+    chmod a+x /home/saluser/pip.sh
+
+USER root
+
+RUN /home/saluser/pip.sh gphoto2
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     conda install -y -c conda-forge kafkacat pyqt fontconfig
