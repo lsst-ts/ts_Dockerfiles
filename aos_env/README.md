@@ -4,10 +4,20 @@ This is the software environment of active optics system (AOS) with the scientif
 
 ## Overview
 
-The scientific pipeline is installed with the `lsst_distrib` and `lsst_sims` packages. The detail of lsst packages (`lsst_distrib` and `lsst_sims`) for individual tag version is [here](https://eups.lsst.codes/stack/src/tags/). In the build process, the user needs to assign the argument of `SIMS_VERSION` by `--build-arg` for the tag version of `lsst_sims` (e.g. `sims_w_2020_21`).
+The scientific pipeline is installed with the `lsst_distrib` and `lsst_sims` packages. The detail of lsst packages (`lsst_distrib` and `lsst_sims`) for individual tag version is [here](https://eups.lsst.codes/stack/src/tags/). If the `lsst_distrib` uses the weekly built tag such as `w_2020_28`, related tag of `lsst_sims` should be `sims_w_2020_28`. Notice that there is a prefix of `sims_` for `lsst_sims` and the week (e.g. `w_2020_28`) should be the same as `lsst_distrib`. In the build process (`docker build`), the user should assign the argument of `SIMS_VERSION` by `--build-arg` for the tag version of `lsst_sims`.
 
 ## Tag List
 
+- w_2020_28
+  - lsst_distrib (tag: w_2020_28)
+  - lsst_sims (tag: sims_w_2020_28)
+  - csh
+  - graphviz
+  - ipython
+  - black
+  - plantuml
+  - sphinxcontrib-plantuml
+  - documenteer
 - w_2020_21
   - lsst_distrib (tag: w_2020_21)
   - lsst_sims (tag: sims_w_2020_21)
