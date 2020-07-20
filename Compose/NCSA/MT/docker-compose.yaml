@@ -7,6 +7,8 @@ services:
     container_name: mtqueue
     environment:
       - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - ./setup_mtqueue.sh:/home/saluser/.setup_dev.sh
     tty: true
     networks:
       test-stand-network:
@@ -73,7 +75,7 @@ services:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: lsstts/mtm1m3_sim:v1.7.0
+    image: lsstts/mtm1m3_sim:DM-25475
     container_name: m1m3
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -93,9 +95,10 @@ services:
         ipv4_address: "141.142.238.137"
 
   mtmount:
-    image: lsstts/mtmount:v0.2.0_5.15.0_1.2.2_4.1.1_6.0.0
+    image: lsstts/mtmount:c0009
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - RUN_ARG=-s
     tty: true
     networks:
       test-stand-network:
