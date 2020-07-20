@@ -2,20 +2,30 @@ version: "3.4"
 
 services:
 
-  mtqueue:
-    image: lsstts/develop-env:b101
-    container_name: mtqueue
+  # mtqueue:
+  #   image: lsstts/develop-env:b101
+  #   container_name: mtqueue
+  #   environment:
+  #     - LSST_DDS_DOMAIN=ncsa
+  #   volumes:
+  #     - ./setup_mtqueue.sh:/home/saluser/.setup_dev.sh
+  #   tty: true
+  #   networks:
+  #     test-stand-network:
+  #       ipv4_address: "141.142.238.130"
+
+  test:
+    image: lsstts/test:c0010
+    container_name: test
     environment:
       - LSST_DDS_DOMAIN=ncsa
-    volumes:
-      - ./setup_mtqueue.sh:/home/saluser/.setup_dev.sh
     tty: true
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.130"
 
   mtptg:
-    image: ts-dockerhub.lsst.org/ptkernel:v2.1.0
+    image: ts-dockerhub.lsst.org/ptkernel:c0010
     container_name: mtptg
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -32,7 +42,7 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: lsstts/rotator:v0.4.4
+    image: lsstts/rotator:c0010
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -43,7 +53,7 @@ services:
         ipv4_address: "141.142.238.132"
 
   mt-cam-hexapod-sim:
-    image: lsstts/hexapod:v0.6.0
+    image: lsstts/hexapod:c0010
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -54,7 +64,7 @@ services:
         ipv4_address: "141.142.238.133"
 
   mt-m2-hexapod-sim:
-    image: lsstts/hexapod:v0.6.0
+    image: lsstts/hexapod:c0010
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -65,7 +75,7 @@ services:
         ipv4_address: "141.142.238.134"
 
   mtaos:
-    image: lsstts/mtaos_sim:w_2020_20_sal
+    image: lsstts/mtaos_sim:c0010
     container_name: mtaos
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -75,7 +85,7 @@ services:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: lsstts/mtm1m3_sim:DM-25475
+    image: lsstts/mtm1m3_sim:c0010
     container_name: m1m3
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -85,7 +95,7 @@ services:
         ipv4_address: "141.142.238.136"
 
   m2:
-    image: lsstts/m2:v0.1
+    image: lsstts/m2:c0010
     container_name: m2
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -95,7 +105,7 @@ services:
         ipv4_address: "141.142.238.137"
 
   mtmount:
-    image: lsstts/mtmount:c0009
+    image: lsstts/mtmount:c0010
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s
