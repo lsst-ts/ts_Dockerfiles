@@ -69,7 +69,15 @@ WORKDIR /usr/share/zoneinfo
 RUN wget http://www.ietf.org/timezones/data/leap-seconds.list
 
 USER saluser
+
 WORKDIR /home/saluser
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    conda list --explicit > .spec_file.txt && \
+    conda create -n $LSST_CONDA_ENV_NAME -y python=3.7.6 && \
+    conda install -y --file .spec_file.txt && \
+    conda install --file .spec_file.txt && \
+    conda install -y -c conda-forge kafkacat pyqt fontconfig
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     pip install jupyterlab
@@ -94,8 +102,7 @@ USER root
 
 RUN /home/saluser/pip.sh gphoto2
 
-RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    conda install -y -c conda-forge kafkacat pyqt fontconfig
+USER saluser
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
