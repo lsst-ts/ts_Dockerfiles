@@ -76,7 +76,6 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     conda list --explicit > .spec_file.txt && \
     conda create -n $LSST_CONDA_ENV_NAME -y python=3.7.6 && \
     conda install -y --file .spec_file.txt && \
-    conda install --file .spec_file.txt && \
     conda install -y -c conda-forge kafkacat pyqt fontconfig
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \

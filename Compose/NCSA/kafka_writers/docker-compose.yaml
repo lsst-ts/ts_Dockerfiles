@@ -2,21 +2,42 @@ version: '3.6'
 
 services:
 
+  ospl-daemon:
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0010
+    container_name: ospl-daemon
+    environment:
+      - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.110"
+
   salkafka_115:
-    image: lsstts/salkafka:c0010
+    image: ts-dockerhub.lsst.org/salkafka:c0010
+    depends_on:
+      - ospl-daemon
     container_name: salkafka_115
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
-      - LOG_LEVEL=10
+      - LOG_LEVEL=20
       - REPLICATION=3
       - PARTITIONS=1
       - WAIT_ACK=1
       - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod ATPtg ATMCS ATCamera
-    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.115"
@@ -27,20 +48,27 @@ services:
         max-size: "10m"
 
   salkafka_116:
-    image: lsstts/salkafka:c0010
+    image: ts-dockerhub.lsst.org/salkafka:c0010
+    depends_on:
+      - ospl-daemon
     container_name: salkafka_116
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
-      - LOG_LEVEL=10
+      - LOG_LEVEL=20
       - REPLICATION=3
       - PARTITIONS=1
       - WAIT_ACK=1
       - CSC_LIST=CCHeaderService CCArchiver CCCamera
     stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.116"
@@ -51,7 +79,9 @@ services:
         max-size: "10m"
 
   salkafka_117:
-    image: lsstts/salkafka:c0010
+    image: ts-dockerhub.lsst.org/salkafka:c0010
+    depends_on:
+      - ospl-daemon
     container_name: salkafka_117
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -64,7 +94,12 @@ services:
       - WAIT_ACK=1
       - CSC_LIST=MTM1M3
     stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.117"
@@ -75,7 +110,9 @@ services:
         max-size: "10m"
 
   salkafka_118:
-    image: lsstts/salkafka:c0010
+    image: ts-dockerhub.lsst.org/salkafka:c0010
+    depends_on:
+      - ospl-daemon
     container_name: salkafka_118
     environment:
       - LSST_DDS_DOMAIN=ncsa
@@ -88,7 +125,12 @@ services:
       - REPLICATION=3
       - CSC_LIST=Rotator Hexapod MTM2 MTAOS MTPtg MTMount NewMTMount
     stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.118"

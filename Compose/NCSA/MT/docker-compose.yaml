@@ -2,6 +2,21 @@ version: "3.4"
 
 services:
 
+  ospl-daemon:
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0010
+    container_name: ospl-daemon
+    environment:
+      - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.129"
+
   # mtqueue:
   #   image: lsstts/develop-env:b101
   #   container_name: mtqueue
@@ -15,23 +30,37 @@ services:
   #       ipv4_address: "141.142.238.130"
 
   test:
-    image: lsstts/test:c0010
+    image: ts-dockerhub.lsst.org/test:c0010
+    depends_on:
+      - ospl-daemon
     container_name: test
     environment:
       - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.130"
 
   mtptg:
     image: ts-dockerhub.lsst.org/ptkernel:c0010
+    depends_on:
+      - ospl-daemon
     container_name: mtptg
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - TELESCOPE=MT
     stdin_open: true
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.131"
@@ -42,74 +71,123 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: lsstts/rotator:c0010
+    image: ts-dockerhub.lsst.org/rotator:c0010
+    depends_on:
+      - ospl-daemon
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.132"
 
   mt-cam-hexapod-sim:
-    image: lsstts/hexapod:c0010
+    image: ts-dockerhub.lsst.org/hexapod:c0010
+    depends_on:
+      - ospl-daemon
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s 1
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.133"
 
   mt-m2-hexapod-sim:
-    image: lsstts/hexapod:c0010
+    image: ts-dockerhub.lsst.org/hexapod:c0010
+    depends_on:
+      - ospl-daemon
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s 2
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.134"
 
   mtaos:
-    image: lsstts/mtaos_sim:c0010
+    image: ts-dockerhub.lsst.org/mtaos_sim:c0010
+    depends_on:
+      - ospl-daemon
     container_name: mtaos
     environment:
       - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: lsstts/mtm1m3_sim:c0010
+    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0010
+    depends_on:
+      - ospl-daemon
     container_name: m1m3
     environment:
       - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.136"
 
   m2:
-    image: lsstts/m2:c0010
+    image: ts-dockerhub.lsst.org/m2:c0010
+    depends_on:
+      - ospl-daemon
     container_name: m2
     environment:
       - LSST_DDS_DOMAIN=ncsa
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.137"
 
   mtmount:
-    image: lsstts/mtmount:c0010
+    image: ts-dockerhub.lsst.org/mtmount:c0010
+    depends_on:
+      - ospl-daemon
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.138"
