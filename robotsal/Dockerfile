@@ -1,4 +1,4 @@
-FROM lsstts/robot:python376
+FROM lsstts/robot:latest
 MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}

@@ -6,7 +6,7 @@ ARG HOME=/home/${USER}
 RUN yum -y update
 RUN yum -y --enablerepo=extras install epel-release && \
 yum -y install git which mlocate wget \
-python36-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
+python37-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
 yum clean all && \
 rm -rf /var/cache/yum
 
@@ -36,6 +36,7 @@ RUN pwd
 
 USER ${USER}
 RUN mkdir bin && mkdir trunk && mkdir Reports
+ENV PATH $PATH:${HOME}/bin:${HOME}/.local/bin
 ENV ROBOTFRAMEWORK_SAL_DIR ${HOME}/trunk/robotframework_SAL
 ENV TS_XML_DIR ${HOME}/trunk/ts_xml
 
