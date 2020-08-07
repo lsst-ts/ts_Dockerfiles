@@ -1,2 +1,5 @@
 # MAC OS file
 .DS_Store
+
+# PyCharm config dir
+.idea
