@@ -2,21 +2,21 @@ version: '3.6'
 
 services:
 
-  salkafka_150:
-    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
-    container_name: salkafka_150
+  salkafka_50:
+    image: lsstts/salkafka:c0009
+    container_name: salkafka_50
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
-      - BROKER_IP=140.252.32.142
+      - LSST_DDS_DOMAIN=tucson
+      - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
       - BROKER_PORT=31090
-      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
-      - LOG_LEVEL=10
+      - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
       - REPLICATION=3
       - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod
     stdin_open: true
     tty: true
-    volumes:
-      - ./ospl_150.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     networks:
       lab-priv-network:
         ipv4_address: "140.252.34.50"
@@ -26,21 +26,21 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_151:
-    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
-    container_name: salkafka_151
+  salkafka_51:
+    image: lsstts/salkafka:c0009
+    container_name: salkafka_51
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
-      - BROKER_IP=140.252.32.142
+      - LSST_DDS_DOMAIN=tucson
+      - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
       - BROKER_PORT=31090
-      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
-      - LOG_LEVEL=10
+      - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
       - REPLICATION=3
       - CSC_LIST=ATPtg ATMCS ATCamera
     stdin_open: true
     tty: true
-    volumes:
-      - ./ospl_151.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     networks:
       lab-priv-network:
         ipv4_address: "140.252.34.51"
@@ -50,21 +50,21 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_152:
-    image: lsstts/salkafka:v1.0.0_salobj_v5.0.0_xml_v4.4.1
-    container_name: salkafka_152
+  salkafka_52:
+    image: lsstts/salkafka:c0009
+    container_name: salkafka_52
     environment:
-      - LSST_DDS_DOMAIN=auxtelpath
-      - BROKER_IP=140.252.32.142
+      - LSST_DDS_DOMAIN=tucson
+      - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
       - BROKER_PORT=31090
-      - REGISTRY_ADDR=https://test-registry-efd.lsst.codes
-      - LOG_LEVEL=10
+      - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
       - REPLICATION=3
-      - CSC_LIST=FiberSpectrograph LinearStage Rotator MTPtg DSM
+      - CSC_LIST=MTM1M3
     stdin_open: true
     tty: true
-    volumes:
-      - ./ospl_152.xml:/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
     networks:
       lab-priv-network:
         ipv4_address: "140.252.34.52"
@@ -74,17 +74,19 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_153:
-    image: lsstts/salkafka:v1.1.0_salobj_v5.4.0_xml_v4.7.0
-    container_name: salkafka_153
+  salkafka_53:
+    image: lsstts/salkafka:c0009
+    container_name: salkafka_53
     environment:
-      - LSST_DDS_DOMAIN=citesttucson
+      - LSST_DDS_DOMAIN=tucson
       - BROKER_IP=kafka-0-tucson-teststand-efd.lsst.codes
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://schema-registry-tucson-teststand-efd.lsst.codes
-      - LOG_LEVEL=10
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
       - REPLICATION=3
-      - CSC_LIST=CCCamera DSM Hexapod Rotator
+      - CSC_LIST=CCCamera Rotator Hexapod MTM2 MTAOS MTPtg MTMount NewMTMount
     stdin_open: true
     tty: true
     networks:

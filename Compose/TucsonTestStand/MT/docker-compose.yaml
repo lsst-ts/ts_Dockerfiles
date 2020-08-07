@@ -1,0 +1,112 @@
+version: "3.4"
+
+services:
+
+  mtqueue:
+    image: lsstts/develop-env:c0009
+    container_name: mtqueue
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+    volumes:
+      - ./setup_mtqueue.sh:/home/saluser/.setup_dev.sh
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.21"
+
+  mtptg:
+    image: ts-dockerhub.lsst.org/ptkernel:c0009
+    container_name: mtptg
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+      - TELESCOPE=MT
+    stdin_open: true
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.22"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  mt-rotator-sim:
+    image: lsstts/rotator:c0009
+    container_name: mt-rotator-sim
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+      - RUN_ARG=-s
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.23"
+
+  mt-cam-hexapod-sim:
+    image: lsstts/hexapod:c0009
+    container_name: mt-cam-hexapod-sim
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+      - RUN_ARG=-s 1
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.24"
+
+  mt-m2-hexapod-sim:
+    image: lsstts/hexapod:c0009
+    container_name: mt-m2-hexapod-sim
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+      - RUN_ARG=-s 2
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.25"
+
+  mtaos:
+    image: lsstts/mtaos_sim:c0009
+    container_name: mtaos
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.26"
+
+  m1m3:
+    image: lsstts/mtm1m3_sim:c0009
+    container_name: m1m3
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.27"
+
+  m2:
+    image: lsstts/m2:c0009
+    container_name: m2
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.28"
+
+  mtmount:
+    image: lsstts/mtmount:c0009
+    environment:
+      - LSST_DDS_DOMAIN=tucson
+      - RUN_ARG=-s
+    tty: true
+    networks:
+      lab-priv-network:
+        ipv4_address: "140.252.34.29"
+
+networks:
+  default:
+    external:
+      name: lab-priv-network
+  lab-priv-network:
+    external: true

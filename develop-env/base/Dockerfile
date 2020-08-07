@@ -57,6 +57,7 @@ RUN yum -y --enablerepo=extras install epel-release \
   ntp \
   tcpdump \
   graphviz* \
+  libgphoto2-devel \
   yum clean all
 
 RUN yum install -y OpenSpliceDDS-6.9.0-1.el6
@@ -68,7 +69,14 @@ WORKDIR /usr/share/zoneinfo
 RUN wget http://www.ietf.org/timezones/data/leap-seconds.list
 
 USER saluser
+
 WORKDIR /home/saluser
+
+RUN source /opt/lsst/software/stack/loadLSST.bash && \
+    conda list --explicit > .spec_file.txt && \
+    conda create -n $LSST_CONDA_ENV_NAME -y python=3.7.6 && \
+    conda install -y --file .spec_file.txt && \
+    conda install -y -c conda-forge kafkacat pyqt fontconfig
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     pip install jupyterlab
@@ -86,7 +94,14 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     moto boto3 black
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
-    conda install -y -c conda-forge kafkacat pyqt fontconfig
+    which pip > /home/saluser/pip.sh && \
+    chmod a+x /home/saluser/pip.sh
+
+USER root
+
+RUN /home/saluser/pip.sh gphoto2
+
+USER saluser
 
 ENV LSST_SDK_INSTALL=/home/saluser/repos/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
