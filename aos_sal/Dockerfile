@@ -1,14 +1,14 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstts/develop-env:b101
+FROM lsstts/develop-env:c0010
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
 
 ARG LSST_USER=saluser
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst/software/stack
-ARG SIMS_VERSION=sims_w_2020_16
+ARG SIMS_VERSION=sims_w_2020_29
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
@@ -24,13 +24,12 @@ USER $LSST_USER
 # Install the lsst_sims and needed packages
 RUN source $LSST_DIR/loadLSST.bash \
     && eups distrib install lsst_sims -t ${SIMS_VERSION} \
-    && curl -sSL $SHEBANGTRON_URL | python \
-    && conda install -y scikit-image
+    && curl -sSL $SHEBANGTRON_URL | python
 
 # Install the plantUML
 WORKDIR $LSST_USER_HOME
 RUN source $LSST_DIR/loadLSST.bash \
-    && wget https://newcontinuum.dl.sourceforge.net/project/plantuml/plantuml.jar \
+    && curl -O https://managedway.dl.sourceforge.net/project/plantuml/plantuml.jar \
     && pip install sphinxcontrib-plantuml
 
 # Set the default environment
