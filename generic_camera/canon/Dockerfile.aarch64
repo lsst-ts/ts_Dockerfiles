@@ -54,4 +54,3 @@ RUN echo 'export TS_CONFIG_OCS_DIR=/home/allsky/ts_config_ocs' >> .bashrc \
  && echo 'export LD_LIBRARY_PATH=${OSPL_HOME}/lib' >> .bashrc \
  && echo 'export LSST_DDS_DOMAIN=AllSky' >> .bashrc \
  && echo 'export PYTHONPATH=/home/allsky/ts_GenericCamera/python' >> .bashrc
-ENTRYPOINT /bin/bash
