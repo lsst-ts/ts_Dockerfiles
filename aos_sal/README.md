@@ -8,6 +8,22 @@ The scientific pipeline is installed with the lsst_distrib and lsst_sims package
 
 ## Tag List
 
+- w_2020_29_sal
+  - lsst_sims (tag: sims_w_2020_29)
+  - sphinxcontrib-plantuml (by pip)
+  - csh (by yum)
+  - SAL related packages maintained by develop-env in ts_Dockerfiles
+- w_2020_22_sal
+  - lsst_sims (tag: sims_w_2020_20)
+  - scikit-image (by conda)
+  - sphinxcontrib-plantuml (by pip)
+  - SAL related packages maintained by develop-env in ts_Dockerfiles
+- w_2020_20_sal
+  - lsst_sims (tag: sims_w_2020_20)
+  - scikit-image (by conda)
+  - sphinxcontrib-plantuml (by pip)
+  - csh (by yum)
+  - SAL related packages maintained by develop-env in ts_Dockerfiles
 - w_2020_16_sal
   - lsst_sims (tag: sims_w_2020_16)
   - scikit-image (by conda)
