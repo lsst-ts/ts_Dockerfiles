@@ -46,11 +46,15 @@ USER root
 RUN yum update -y \
     && yum clean all \
     && yum groupinstall -y "Development tools" \
+    && yum install -y epel-release \
     && yum install -y ncurses-devel hmaccalc zlib-devel binutils-devel \
     elfutils-libelf-devel wget bc xfsdump nfs-utils grub2 cmake glib-devel \
-    glib2-devel.x86_64 libtool autoconf automake python-devel \
+    glib2-devel.x86_64 libtool autoconf automake python-devel python-pip \
     && yum clean all \
     && rm -rf /var/cache/yum
+
+# Install the pip modules
+RUN pip install gcovr
 
 # Install the Linux kernel
 COPY ${LINUX_KERNEL_SOURCE_DIR_HOST}/${LINUX_KERNEL_FILE} /home
