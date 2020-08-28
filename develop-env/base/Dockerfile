@@ -91,7 +91,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && \
     aiokafka confluent_kafka asynccmd aiounittest ipdb wget pytest-subtests \
     pycodestyle aiomisc ipympl ginga pyevents jinja2 ephem gitpython \
     sqlalchemy asynctest lxml pytest-asyncio astroquery ltd-conveyor \
-    moto boto3 black
+    moto boto3 black==19.10b0
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && \
     which pip > /home/saluser/pip.sh && \
