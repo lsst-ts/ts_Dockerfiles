@@ -1,26 +1,32 @@
 # Generic SAL configuration
 FROM centos:centos7
+
 RUN yum update -y \
   && yum install -y git gcc gcc-c++ glibc autoconf make file libtool-ltdl-devel libtool automake openssl-devel bzip2-devel libffi-devel ncurses-libs xterm xorg-x11-fonts-misc java-1.8.0-openjdk-devel maven swig tk-devel vim bash-completion bash-completion-extras wget libjpeg-turbo-devel sqlite-devel libusb-devel popt-devel gettext-devel libexif-devel \
   && yum clean all
+
 RUN wget -q https://www.python.org/ftp/python/3.7.8/Python-3.7.8.tgz \
   && tar xzf Python-3.7.8.tgz \
   && cd Python-3.7.8 \
   && ./configure --enable-optimizations --enable-shared --with-system-expat --with-ensurepip=yes --with-system-ffi \
   && make -j4 build_all \
   && make altinstall
+
 RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/python3.conf \
   && ldconfig
+
 RUN cd /usr/local/bin \
   && ln -s python3.7 python3 \
   && ln -s python3 python \
   && ln -s pip3.7 pip3 \
   && pip3 install --upgrade pip
+
 RUN cd /tmp \
   && wget -q https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-arm64.tar.xz \
   && tar xJf node-v12.18.3-linux-arm64.tar.xz \
   && cd node-v12.18.3-linux-arm64 \
   && cp -R * /usr/local/
+
 RUN wget -q https://repo-nexus.lsst.org/nexus/repository/ts_yum/releases/OpenSpliceDDS-6.9.0-1.el7.aarch64.rpm \
   && rpm -i OpenSpliceDDS-6.9.0-1.el7.aarch64.rpm \
   && export OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/aarch64.linux \
@@ -52,6 +58,7 @@ RUN cd /tmp \
   && echo "/usr/local/lib/libgphoto2/2.5.25.1" > /etc/ld.so.conf.d/gphoto2.conf \
   && echo "/usr/local/lib/libgphoto2_port/0.12.0" > /etc/ld.so.conf.d/gphoto2.conf \
   && ldconfig
+
 RUN cd /tmp \
   && git clone https://github.com/gphoto/gphoto2.git \
   && cd gphoto2 \
@@ -59,21 +66,27 @@ RUN cd /tmp \
   && ./configure --prefix=/usr/local \
   && make \
   && make install
+
 RUN cd /tmp \
   && git clone https://github.com/jim-easterbrook/python-gphoto2.git \
   && cd python-gphoto2 \
-  && python setup.py build_swig \
+  && python3 setup.py build_swig \
   && python3 setup.py build \
   && python3 setup.py install
+
 RUN pip3 install Pillow
+
 RUN adduser -G wheel,dialout allsky
+
 USER allsky
 WORKDIR /home/allsky
+
 RUN git clone https://github.com/lsst-ts/ts_GenericCamera.git \
   && git clone https://github.com/lsst-ts/ts_config_ocs.git \
   && git clone https://github.com/lsst-ts/ts_notebooks.git \
   && sed -i  's/default: Simulator/default: Canon/' ts_GenericCamera/schema/GenericCamera.yaml \
   && chmod 755 ts_GenericCamera/bin.src/run_genericcamera.py
+
 RUN echo 'export TS_CONFIG_OCS_DIR=/home/allsky/ts_config_ocs' >> .bashrc \
  && echo 'export OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/aarch64.linux' >> .bashrc \
  && echo 'export OSPL_URI=file://${OSPL_HOME}/etc/config/ospl.xml' >> .bashrc \
