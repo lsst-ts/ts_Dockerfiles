@@ -4,17 +4,33 @@ This is the software environment of active optics system (AOS) with the scientif
 
 ## Overview
 
-The scientific pipeline is installed with the `lsst_distrib` and `lsst_sims` packages. The detail of lsst packages (`lsst_distrib` and `lsst_sims`) for individual tag version is [here](https://eups.lsst.codes/stack/src/tags/). If the `lsst_distrib` uses the weekly built tag such as `w_2020_28`, related tag of `lsst_sims` should be `sims_w_2020_28`. Notice that there is a prefix of `sims_` for `lsst_sims` and the week (e.g. `w_2020_28`) should be the same as `lsst_distrib`. In the build process (`docker build`), the user should assign the argument of `SIMS_VERSION` by `--build-arg` for the tag version of `lsst_sims`.
+The scientific pipeline is installed with the `lsst_distrib` and `lsst_sims` packages.
+The detail of lsst packages (`lsst_distrib` and `lsst_sims`) for individual tag version is listed in [Index of /stack/src/tags](https://eups.lsst.codes/stack/src/tags/).
+If the `lsst_distrib` uses the weekly built tag such as `w_2020_28`, related tag of `lsst_sims` should be `sims_w_2020_28`.
+Notice that there is a prefix of `sims_` for `lsst_sims` and the week (e.g. `w_2020_28`) should be the same as `lsst_distrib`.
+In the build process (`docker build`), the user should assign the arguments of `IMAGE_TAG` and `SIMS_VERSION` by `--build-arg` for the tag versions of `lsst_distrib` and `lsst_sims`.
+For the available tag of docker image of `lsst_distrib` to use, please follow [lsstsqre/centos](https://hub.docker.com/r/lsstsqre/centos).
 
 ## Tag List
 
+- w_2020_36
+  - lsst_distrib (tag: w_2020_36)
+  - lsst_sims (tag: sims_w_2020_36)
+  - csh
+  - graphviz
+  - clang
+  - ipython
+  - black (19.10b0)
+  - plantuml
+  - sphinxcontrib-plantuml
+  - documenteer
 - w_2020_28
   - lsst_distrib (tag: w_2020_28)
   - lsst_sims (tag: sims_w_2020_28)
   - csh
   - graphviz
   - ipython
-  - black
+  - black (19.10b0)
   - plantuml
   - sphinxcontrib-plantuml
   - documenteer
