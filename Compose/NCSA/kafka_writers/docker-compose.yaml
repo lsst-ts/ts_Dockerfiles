@@ -2,21 +2,6 @@ version: '3.6'
 
 services:
 
-  ospl-daemon:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0010
-    container_name: ospl-daemon
-    environment:
-      - LSST_DDS_DOMAIN=ncsa
-    volumes:
-      - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
-    tty: true
-    ipc: host
-    pid: host
-    networks:
-      test-stand-network:
-        ipv4_address: "141.142.238.110"
-
   salkafka_115:
     image: ts-dockerhub.lsst.org/salkafka:c0010
     depends_on:
