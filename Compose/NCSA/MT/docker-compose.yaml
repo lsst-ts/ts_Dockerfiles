@@ -2,26 +2,6 @@ version: "3.4"
 
 services:
 
-  mtqueue:
-    image: ts-dockerhub.lsst.org/scriptqueue:c0013
-    depends_on:
-      - ospl-daemon
-    container_name: mtqueue
-    environment:
-      - LSST_DDS_DOMAIN=ncsa
-      - RUN_ARG=1
-      - OSPL_INFOFILE=/tmp/ospl-info-mtqueue.log
-      - OSPL_ERRORFILE=/tmp/ospl-error-mtqueue.log
-    volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
-      - /tmp/docker_tmp/:/tmp/
-    tty: true
-    ipc: host
-    pid: host
-    networks:
-      test-stand-network:
-        ipv4_address: "141.142.238.130"
-
   mtptg:
     image: ts-dockerhub.lsst.org/ptkernel:c0013
     depends_on:

@@ -2,23 +2,6 @@ version: "3.4"
 
 services:
 
-  atqueue:
-    image: ts-dockerhub.lsst.org/scriptqueue:c0013
-    container_name: atqueue
-    environment:
-      - LSST_DDS_DOMAIN=ncsa
-      - OSPL_INFOFILE=/tmp/ospl-info-atqueue.log
-      - OSPL_ERRORFILE=/tmp/ospl-error-atqueue.log
-    volumes:
-      - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
-    tty: true
-    ipc: host
-    pid: host
-    networks:
-      test-stand-network:
-        ipv4_address: "141.142.238.100"
-
   atmcs-sim:
     image: ts-dockerhub.lsst.org/atmcs_sim:c0013
     environment:
