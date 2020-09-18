@@ -3,10 +3,12 @@ version: "3.4"
 services:
 
   ospl-daemon:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0010
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0013
     container_name: ospl-daemon
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
@@ -17,25 +19,16 @@ services:
       test-stand-network:
         ipv4_address: "141.142.238.129"
 
-  # mtqueue:
-  #   image: lsstts/develop-env:b101
-  #   container_name: mtqueue
-  #   environment:
-  #     - LSST_DDS_DOMAIN=ncsa
-  #   volumes:
-  #     - ./setup_mtqueue.sh:/home/saluser/.setup_dev.sh
-  #   tty: true
-  #   networks:
-  #     test-stand-network:
-  #       ipv4_address: "141.142.238.130"
-
-  test:
-    image: ts-dockerhub.lsst.org/test:c0010
+  mtqueue:
+    image: ts-dockerhub.lsst.org/scriptqueue:c0013
     depends_on:
       - ospl-daemon
-    container_name: test
+    container_name: mtqueue
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - RUN_ARG=1
+      - OSPL_INFOFILE=/tmp/ospl-info-mtqueue.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtqueue.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -47,13 +40,15 @@ services:
         ipv4_address: "141.142.238.130"
 
   mtptg:
-    image: ts-dockerhub.lsst.org/ptkernel:c0010
+    image: ts-dockerhub.lsst.org/ptkernel:c0013
     depends_on:
       - ospl-daemon
     container_name: mtptg
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - TELESCOPE=MT
+      - OSPL_INFOFILE=/tmp/ospl-info-mtptg.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtptg.log
     stdin_open: true
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
@@ -71,13 +66,15 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: ts-dockerhub.lsst.org/rotator:c0010
+    image: ts-dockerhub.lsst.org/rotator:c0013
     depends_on:
       - ospl-daemon
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s
+      - OSPL_INFOFILE=/tmp/ospl-info-mtrotator.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtrotator.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -89,13 +86,15 @@ services:
         ipv4_address: "141.142.238.132"
 
   mt-cam-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0010
+    image: ts-dockerhub.lsst.org/hexapod:c0013
     depends_on:
       - ospl-daemon
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s 1
+      - OSPL_INFOFILE=/tmp/ospl-info-mtcamhexapod.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtcamhexapod.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -107,13 +106,15 @@ services:
         ipv4_address: "141.142.238.133"
 
   mt-m2-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0010
+    image: ts-dockerhub.lsst.org/hexapod:c0013
     depends_on:
       - ospl-daemon
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s 2
+      - OSPL_INFOFILE=/tmp/ospl-info-mtm2hexapod.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtm2hexapod.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -125,12 +126,14 @@ services:
         ipv4_address: "141.142.238.134"
 
   mtaos:
-    image: ts-dockerhub.lsst.org/mtaos_sim:c0010
+    image: ts-dockerhub.lsst.org/mtaos_sim:c0013
     depends_on:
       - ospl-daemon
     container_name: mtaos
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-mtaos.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtaos.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -142,12 +145,14 @@ services:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0010
+    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0013
     depends_on:
       - ospl-daemon
     container_name: m1m3
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -159,12 +164,14 @@ services:
         ipv4_address: "141.142.238.136"
 
   m2:
-    image: ts-dockerhub.lsst.org/m2:c0010
+    image: ts-dockerhub.lsst.org/m2:c0013
     depends_on:
       - ospl-daemon
     container_name: m2
     environment:
       - LSST_DDS_DOMAIN=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
@@ -176,12 +183,14 @@ services:
         ipv4_address: "141.142.238.137"
 
   mtmount:
-    image: ts-dockerhub.lsst.org/mtmount:c0010
+    image: ts-dockerhub.lsst.org/mtmount:c0013
     depends_on:
       - ospl-daemon
     environment:
       - LSST_DDS_DOMAIN=ncsa
       - RUN_ARG=-s
+      - OSPL_INFOFILE=/tmp/ospl-info-mtmount.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtmount.log
     volumes:
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
       - /tmp/docker_tmp/:/tmp/
