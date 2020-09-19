@@ -25,7 +25,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.115"
+        ipv4_address: "141.142.238.110"
     logging:
       driver: "json-file"
       options:
@@ -56,7 +56,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.116"
+        ipv4_address: "141.142.238.111"
     logging:
       driver: "json-file"
       options:
@@ -87,7 +87,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.117"
+        ipv4_address: "141.142.238.112"
     logging:
       driver: "json-file"
       options:
@@ -118,7 +118,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.118"
+        ipv4_address: "141.142.238.113"
     logging:
       driver: "json-file"
       options:
@@ -149,7 +149,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.118"
+        ipv4_address: "141.142.238.114"
     logging:
       driver: "json-file"
       options:
@@ -180,7 +180,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.118"
+        ipv4_address: "141.142.238.115"
     logging:
       driver: "json-file"
       options:
@@ -211,7 +211,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.118"
+        ipv4_address: "141.142.238.116"
     logging:
       driver: "json-file"
       options:
@@ -242,7 +242,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.118"
+        ipv4_address: "141.142.238.117"
     logging:
       driver: "json-file"
       options:

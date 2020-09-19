@@ -20,7 +20,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.130"
+        ipv4_address: "141.142.238.127"
 
   atqueue:
     image: ts-dockerhub.lsst.org/scriptqueue:c0013
@@ -38,7 +38,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.100"
+        ipv4_address: "141.142.238.126"
 
   watcher:
     image: ts-dockerhub.lsst.org/watcher:c0013
@@ -58,7 +58,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.130"
+        ipv4_address: "141.142.238.125"
 
   mtscheduler:
     image: ts-dockerhub.lsst.org/scheduler:c0013
@@ -78,7 +78,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.130"
+        ipv4_address: "141.142.238.128"
 
   atscheduler:
     image: ts-dockerhub.lsst.org/scheduler:c0013
@@ -98,7 +98,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.130"
+        ipv4_address: "141.142.238.129"
 
 networks:
   default:

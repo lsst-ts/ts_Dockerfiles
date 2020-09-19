@@ -17,7 +17,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.129"
+        ipv4_address: "141.142.238.120"
 
   ospl-daemon2:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
@@ -34,7 +34,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.129"
+        ipv4_address: "141.142.238.121"
 
   ospl-daemon3:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
@@ -51,7 +51,7 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.129"
+        ipv4_address: "141.142.238.122"
 
 networks:
   default:
