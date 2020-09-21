@@ -5,7 +5,7 @@ services:
   salkafka-auxtel:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-auxtel
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -35,7 +35,7 @@ services:
   salkafka-comcam:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-comcam
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -66,7 +66,7 @@ services:
   salkafka-m1m3:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-m1m3
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -97,7 +97,7 @@ services:
   salkafka-m2:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-m2
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -128,7 +128,7 @@ services:
   salkafka-latiss:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-latiss
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -159,7 +159,7 @@ services:
   salkafka-maintel:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-maintel
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -190,7 +190,7 @@ services:
   salkafka-mtmount:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-mtmount
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -221,7 +221,7 @@ services:
   salkafka-obssys:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-obssys
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -252,7 +252,7 @@ services:
   salkafka-test:
     image: ts-dockerhub.lsst.org/salkafka:c0013
     depends_on:
-      - ospl-daemon
+      - ospl-daemon4
     container_name: salkafka-test
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
