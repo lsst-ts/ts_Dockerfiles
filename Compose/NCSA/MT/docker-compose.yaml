@@ -8,7 +8,7 @@ services:
       - ospl-daemon
     container_name: mtptg
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - TELESCOPE=MT
       - OSPL_INFOFILE=/tmp/ospl-info-mtptg.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtptg.log
@@ -34,7 +34,7 @@ services:
       - ospl-daemon
     container_name: mt-rotator-sim
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
       - OSPL_INFOFILE=/tmp/ospl-info-mtrotator.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtrotator.log
@@ -54,7 +54,7 @@ services:
       - ospl-daemon
     container_name: mt-cam-hexapod-sim
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s 1
       - OSPL_INFOFILE=/tmp/ospl-info-mtcamhexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtcamhexapod.log
@@ -74,7 +74,7 @@ services:
       - ospl-daemon
     container_name: mt-m2-hexapod-sim
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s 2
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2hexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2hexapod.log
@@ -94,7 +94,7 @@ services:
       - ospl-daemon
     container_name: mtaos
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-mtaos.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtaos.log
     volumes:
@@ -113,7 +113,7 @@ services:
       - ospl-daemon
     container_name: m1m3
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
     volumes:
@@ -132,7 +132,7 @@ services:
       - ospl-daemon
     container_name: m2
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log
     volumes:
@@ -150,7 +150,7 @@ services:
     depends_on:
       - ospl-daemon
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
       - OSPL_INFOFILE=/tmp/ospl-info-mtmount.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtmount.log

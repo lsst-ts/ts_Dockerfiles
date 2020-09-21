@@ -6,7 +6,7 @@ services:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
     container_name: ospl-daemon
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
@@ -23,7 +23,7 @@ services:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
     container_name: ospl-daemon
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
@@ -40,7 +40,7 @@ services:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
     container_name: ospl-daemon
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
@@ -57,7 +57,7 @@ services:
     image: ts-dockerhub.lsst.org/ospl-daemon:c0013
     container_name: ospl-daemon
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:

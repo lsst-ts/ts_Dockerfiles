@@ -8,7 +8,7 @@ services:
       - ospl-daemon
     container_name: salkafka-auxtel
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -38,7 +38,7 @@ services:
       - ospl-daemon
     container_name: salkafka-comcam
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -69,7 +69,7 @@ services:
       - ospl-daemon
     container_name: salkafka-m1m3
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -100,7 +100,7 @@ services:
       - ospl-daemon
     container_name: salkafka-m2
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -131,7 +131,7 @@ services:
       - ospl-daemon
     container_name: salkafka-latiss
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -162,7 +162,7 @@ services:
       - ospl-daemon
     container_name: salkafka-maintel
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -193,7 +193,7 @@ services:
       - ospl-daemon
     container_name: salkafka-mtmount
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -224,7 +224,7 @@ services:
       - ospl-daemon
     container_name: salkafka-obssys
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -255,7 +255,7 @@ services:
       - ospl-daemon
     container_name: salkafka-test
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
