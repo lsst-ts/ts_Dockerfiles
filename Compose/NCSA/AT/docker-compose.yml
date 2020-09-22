@@ -115,6 +115,7 @@ services:
     container_name: athexapod
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - HEXAPOD_SIM_SERVICE_HOST=141.142.238.142
       - OSPL_INFOFILE=/tmp/ospl-info-athexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-athexapod.log
     volumes:
