@@ -4,8 +4,6 @@ services:
 
   mtptg:
     image: ts-dockerhub.lsst.org/ptkernel:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mtptg
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -30,8 +28,6 @@ services:
 
   mt-rotator-sim:
     image: ts-dockerhub.lsst.org/rotator:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -50,8 +46,6 @@ services:
 
   mt-cam-hexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -70,8 +64,6 @@ services:
 
   mt-m2-hexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -90,8 +82,6 @@ services:
 
   mtaos:
     image: ts-dockerhub.lsst.org/mtaos_sim:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mtaos
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -109,8 +99,6 @@ services:
 
   m1m3:
     image: ts-dockerhub.lsst.org/mtm1m3_sim:c0013
-    depends_on:
-      - ospl-daemon
     container_name: m1m3
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -128,8 +116,6 @@ services:
 
   m2:
     image: ts-dockerhub.lsst.org/m2:c0013
-    depends_on:
-      - ospl-daemon
     container_name: m2
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -147,8 +133,6 @@ services:
 
   mtmount:
     image: ts-dockerhub.lsst.org/mtmount:c0013
-    depends_on:
-      - ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
