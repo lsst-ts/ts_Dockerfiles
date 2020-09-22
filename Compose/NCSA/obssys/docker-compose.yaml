@@ -4,8 +4,6 @@ services:
 
   mtqueue:
     image: ts-dockerhub.lsst.org/scriptqueue:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mtqueue
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -42,8 +40,6 @@ services:
 
   watcher:
     image: ts-dockerhub.lsst.org/watcher:c0013
-    depends_on:
-      - ospl-daemon
     container_name: watcher
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -62,8 +58,6 @@ services:
 
   mtscheduler:
     image: ts-dockerhub.lsst.org/scheduler:c0013
-    depends_on:
-      - ospl-daemon
     container_name: mtscheduler
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -82,8 +76,6 @@ services:
 
   atscheduler:
     image: ts-dockerhub.lsst.org/scheduler:c0013
-    depends_on:
-      - ospl-daemon
     container_name: atscheduler
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
