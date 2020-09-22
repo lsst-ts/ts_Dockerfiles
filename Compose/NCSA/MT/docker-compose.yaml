@@ -148,6 +148,39 @@ services:
       test-stand-network:
         ipv4_address: "141.142.238.138"
 
+  mtdome:
+    image: ts-dockerhub.lsst.org/mtdome:c0013
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - RUN_ARG=-s
+      - OSPL_INFOFILE=/tmp/ospl-info-mtdome.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtdome.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.139"
+
+  mtdometrajectory:
+    image: ts-dockerhub.lsst.org/mtdometrajectory:c0013
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-mtdometrajectory.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtdometrajectory.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.130"
+
 networks:
   default:
     external:
