@@ -133,6 +133,7 @@ services:
 
   mtmount:
     image: ts-dockerhub.lsst.org/mtmount:c0013
+    container_name: mtmount-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
@@ -150,6 +151,7 @@ services:
 
   mtdome:
     image: ts-dockerhub.lsst.org/mtdome:c0013
+    container_name: mtdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
@@ -167,6 +169,7 @@ services:
 
   mtdometrajectory:
     image: ts-dockerhub.lsst.org/mtdometrajectory:c0013
+    container_name: mtdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-mtdometrajectory.log
