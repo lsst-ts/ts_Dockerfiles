@@ -35,6 +35,7 @@ ARG ts_idl="develop"
 ARG ts_sal="develop"
 ARG ts_salobj="develop"
 
+
 RUN source /home/saluser/.setup_salobj.sh && \
     cd $EUPS_PATH/../tssw && \
     gitsrc="ts_config_ocs:${ts_config_ocs} \
@@ -67,9 +68,8 @@ RUN source /home/saluser/.setup_salobj.sh && \
     mkdir -p $SAL_WORK_DIR && \
     mkdir -p $TS_SAL_DIR/lib && scons || pytest --color=no --lf
 
-WORKDIR /home/saluser/
 RUN source /home/saluser/.setup_salobj.sh && \
-    pip install ts-dds=="6.9.181127"
+    pip install ts-dds=="6.9.190705.post8"
 
 WORKDIR /home/saluser/
 RUN source /home/saluser/.setup_salobj.sh && \
