@@ -1,5 +1,11 @@
 version: "3.4"
 
+# The different daemons are meant for different NCSA machines:
+# ospl-daemon1 - lsst-teststand-ts1.ncsa.illinois.edu
+# ospl-daemon2 - lsst-teststand-ts2.ncsa.illinois.edu
+# ospl-daemon3 - lsst-nts-ts3.ncsa.illinois.edu
+# ospl-daemon4 - lsst-l1-cl-ocs.ncsa.illinois.edu
+
 services:
 
   ospl-daemon1:
@@ -7,6 +13,7 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_MASTER_PRIORITY=200
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
