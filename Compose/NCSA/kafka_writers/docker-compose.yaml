@@ -2,11 +2,19 @@ version: '3.6'
 
 services:
 
-  ospl-daemon:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0010
-    container_name: ospl-daemon
+  salkafka-auxtel:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-auxtel
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - REPLICATION=3
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - CSC_LIST=ATDome ATDomeTrajectory ATAOS ATPneumatics ATHexapod ATPtg ATMCS
     volumes:
       - /tmp/docker_tmp/:/tmp/
       - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
@@ -16,44 +24,17 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.110"
-
-  salkafka_115:
-    image: ts-dockerhub.lsst.org/salkafka:c0010
-    depends_on:
-      - ospl-daemon
-    container_name: salkafka_115
-    environment:
-      - LSST_DDS_DOMAIN=ncsa
-      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
-      - BROKER_PORT=31090
-      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
-      - LOG_LEVEL=20
-      - REPLICATION=3
-      - PARTITIONS=1
-      - WAIT_ACK=1
-      - CSC_LIST=ATHeaderService ATArchiver ATMonochromator ATSpectrograph Electrometer Test ScriptQueue Script ATDome ATDomeTrajectory ATAOS ATPneumatics Watcher ATHexapod ATPtg ATMCS ATCamera
-    volumes:
-      - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
-    tty: true
-    ipc: host
-    pid: host
-    networks:
-      test-stand-network:
-        ipv4_address: "141.142.238.115"
     logging:
       driver: "json-file"
       options:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_116:
-    image: ts-dockerhub.lsst.org/salkafka:c0010
-    depends_on:
-      - ospl-daemon
-    container_name: salkafka_116
+  salkafka-comcam:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-comcam
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -71,20 +52,18 @@ services:
     pid: host
     networks:
       test-stand-network:
-        ipv4_address: "141.142.238.116"
+        ipv4_address: "141.142.238.111"
     logging:
       driver: "json-file"
       options:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_117:
-    image: ts-dockerhub.lsst.org/salkafka:c0010
-    depends_on:
-      - ospl-daemon
-    container_name: salkafka_117
+  salkafka-m1m3:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-m1m3
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -92,7 +71,152 @@ services:
       - REPLICATION=3
       - PARTITIONS=1
       - WAIT_ACK=1
-      - CSC_LIST=MTM1M3
+      - CSC_LIST=--file m1m3.yaml
+    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.112"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka-m2:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-m2
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - REPLICATION=3
+      - CSC_LIST=Rotator Hexapod MTM2
+    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.113"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka-latiss:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-latiss
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - REPLICATION=3
+      - CSC_LIST=ATArchiver ATCamera ATHeaderService ATSpectrograph
+    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.114"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka-maintel:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-maintel
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - REPLICATION=3
+      - CSC_LIST=MTAOS Dome MTDomeTrajectory MTPtg
+    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.115"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka-mtmount:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-mtmount
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - REPLICATION=3
+      - CSC_LIST=MTMount NewMTMount
+    stdin_open: true
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.116"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  salkafka-obssys:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-obssys
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
+      - BROKER_PORT=31090
+      - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
+      - LOG_LEVEL=20
+      - PARTITIONS=1
+      - WAIT_ACK=1
+      - REPLICATION=3
+      - CSC_LIST=GenericCamera Scheduler Script ScriptQueue Watcher
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
@@ -109,13 +233,11 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  salkafka_118:
-    image: ts-dockerhub.lsst.org/salkafka:c0010
-    depends_on:
-      - ospl-daemon
-    container_name: salkafka_118
+  salkafka-test:
+    image: ts-dockerhub.lsst.org/salkafka:c0013
+    container_name: salkafka-test
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - BROKER_IP=lsst-kafka-0-nts-efd.ncsa.illinois.edu
       - BROKER_PORT=31090
       - REGISTRY_ADDR=https://lsst-schema-registry-nts-efd.ncsa.illinois.edu
@@ -123,7 +245,7 @@ services:
       - PARTITIONS=1
       - WAIT_ACK=1
       - REPLICATION=3
-      - CSC_LIST=Rotator Hexapod MTM2 MTAOS MTPtg MTMount NewMTMount
+      - CSC_LIST=Test
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/

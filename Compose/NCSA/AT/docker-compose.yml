@@ -2,83 +2,105 @@ version: "3.4"
 
 services:
 
-  queue:
-    image: lsstts/develop-env:b65
-    container_name: queue
-    environment:
-      - LSST_DDS_DOMAIN=ncsa
-    volumes:
-      - /home/saluser/develop:/home/saluser/develop
-      - ./queue_setup.sh:/home/saluser/.setup.sh
-    stdin_open: true
-    tty: true
-    networks:
-      test-stand-network:
-        ipv4_address: "141.142.238.100"
-
   atmcs-sim:
-    image: lsstts/atmcs_sim:v1.0.0_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/atmcs_sim:c0013
     environment:
-      - LSST_DDS_DOMAIN=ncsa
-    stdin_open: true
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.149"
 
   atdome-sim:
-    image: lsstts/atdome:v1.1.1_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/atdome:c0013
     container_name: atdome-sim
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
-    stdin_open: true
+      - OSPL_INFOFILE=/tmp/ospl-info-atdome.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atdome.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.148"
 
   atdometrajectory:
-    image: lsstts/atdometrajectory:v1.3.1_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/atdometrajectory:c0013
     container_name: atdometrajectory
     environment:
-      - LSST_DDS_DOMAIN=ncsa
-    stdin_open: true
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-atdometrajectory.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atdometrajectory.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.147"
 
   atpneumatics-sim:
-    image: lsstts/at_pneumatics_sim:v0.5.0_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/at_pneumatics_sim:c0013
     container_name: atpneumatics-sim
     environment:
-      - LSST_DDS_DOMAIN=ncsa
-    stdin_open: true
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-atpneumatics.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atpneumatics.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.146"
 
   ataos:
-    image: lsstts/ataos:v1.5.1_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/ataos:c0013
     container_name: ataos
     environment:
-      - LSST_DDS_DOMAIN=ncsa
-    stdin_open: true
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_INFOFILE=/tmp/ospl-info-ataos.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-ataos.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.145"
 
   atptg:
-    image: ts-dockerhub.lsst.org/ptkernel:DM-24562
+    image: ts-dockerhub.lsst.org/ptkernel:c0013
     container_name: atptg
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - TELESCOPE=AT
-    stdin_open: true
+      - OSPL_INFOFILE=/tmp/ospl-info-atptg.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atptg.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.144"
@@ -89,11 +111,19 @@ services:
         max-size: "10m"
 
   athexapod:
-    image: lsstts/athexapod:v0.4.1_salobj_v5.10.0_xml_v5.0.0
+    image: ts-dockerhub.lsst.org/athexapod:c0013
     container_name: athexapod
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - HEXAPOD_SIM_SERVICE_HOST=141.142.238.142
+      - OSPL_INFOFILE=/tmp/ospl-info-athexapod.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-athexapod.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.143"
@@ -110,11 +140,19 @@ services:
     tty: true
 
   atspectrograph:
-    image: lsstts/atspec:v0.5.1_salobj_v5.10.0_xml_v5.0.0
-    container_name: atspec
+    image: ts-dockerhub.lsst.org/atspec:c0013
+    container_name: atspectrograph
     environment:
-      - LSST_DDS_DOMAIN=ncsa
+      - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
+      - OSPL_INFOFILE=/tmp/ospl-info-atspectrograph.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atspectrograph.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.140"

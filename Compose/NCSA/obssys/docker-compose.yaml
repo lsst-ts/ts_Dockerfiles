@@ -1,0 +1,100 @@
+version: "3.4"
+
+services:
+
+  mtqueue:
+    image: ts-dockerhub.lsst.org/scriptqueue:c0013
+    container_name: mtqueue
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - RUN_ARG=1
+      - OSPL_INFOFILE=/tmp/ospl-info-mtqueue.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtqueue.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.127"
+
+  atqueue:
+    image: ts-dockerhub.lsst.org/scriptqueue:c0013
+    container_name: atqueue
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - RUN_ARG=2
+      - OSPL_INFOFILE=/tmp/ospl-info-atqueue.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atqueue.log
+    volumes:
+      - /tmp/docker_tmp/:/tmp/
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.126"
+
+  watcher:
+    image: ts-dockerhub.lsst.org/watcher:c0013
+    container_name: watcher
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - INDEX=1
+      - OSPL_INFOFILE=/tmp/ospl-info-watcher.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-watcher.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.125"
+
+  mtscheduler:
+    image: ts-dockerhub.lsst.org/scheduler:c0013
+    container_name: mtscheduler
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - INDEX=1
+      - OSPL_INFOFILE=/tmp/ospl-info-mtscheduler.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-mtscheduler.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.128"
+
+  atscheduler:
+    image: ts-dockerhub.lsst.org/scheduler:c0013
+    container_name: atscheduler
+    environment:
+      - LSST_DDS_PARTITION_PREFIX=ncsa
+      - INDEX=2
+      - OSPL_INFOFILE=/tmp/ospl-info-atscheduler.log
+      - OSPL_ERRORFILE=/tmp/ospl-error-atscheduler.log
+    volumes:
+      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - /tmp/docker_tmp/:/tmp/
+    tty: true
+    ipc: host
+    pid: host
+    networks:
+      test-stand-network:
+        ipv4_address: "141.142.238.129"
+
+networks:
+  default:
+    external:
+      name: test-stand-network
+  test-stand-network:
+    external: true
