@@ -1,0 +1,17 @@
+# vi:syntax=cmake 
+#  Arguments file for testing the SAL XML definition files
+#  Output directory
+-d /home/appuser/Reports
+
+#  Specify tags to NOT run
+-e skipped
+#-e TSS*
+
+# Specify non-critical failures
+--noncritical skipped
+--noncritical TSS*
+
+# Invoke xmlstarlet in Linux
+--variable ContInt:true
+
+#  Redefine default variables
