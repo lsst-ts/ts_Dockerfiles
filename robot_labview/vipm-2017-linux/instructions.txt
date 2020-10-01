@@ -1,0 +1,22 @@
+VI Package Manager (VIPM) is Copyright JKI
+
+Installing VIPM for Linux:
+
+Copy the folder /JKI and all the contents to /usr/local
+You may need root access to do this.
+
+VIPM for Linux depends on the LabVIEW 2015 SP1 run-time engine which is provided with this distribution. It's located in the LabVIEW2015SP1RTE_Linux folder. You must install all the RPM files located there. If you have trouble installing the run-time engine, please contact National Instruments (http://ni.com/support). Note: If you have the LabVIEW 2015 SP1 full development system already installed on your system, then you probably don't need to install the run-time engine since you already have it installed.
+
+Running VIPM for Linux:
+
+VIPM for Linux must be run with admin or root level privileges. There is no way around this. If you run VIPM as a standard user, it will not work as expected and will generate errors. To do this, navigate to the installation folder at /usr/local/JKI/VIPM and execute the following:
+
+$ sudo ./vipm
+
+You will be prompted for your root password. Enter the password and VIPM will launch.
+
+If you need help with VIPM, visit our Community Forums at https://forums.jki.net
+
+JKI also provides custom LabVIEW programming services and training. Contact us at sales@jki.net and we'll do our best to help solve your tough technical challenges.
+
+VIPM is also available on Mac and Windows. See http://vipm.jki.net for more info.

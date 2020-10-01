@@ -1,0 +1,70 @@
+#!/bin/bash -
+#
+# LabVIEW 2015 SP1 installation script.
+# Copyright (c) 2017 National Instruments Corporation
+#
+
+if [ "`whoami`" != root ]; then
+    echo ""
+    echo "*** Sorry, you must have root privileges to run this install script. ***"
+    echo "Please su or login as root and try again."
+    echo "Installation aborted."
+    exit 1
+fi
+
+if [ -x /usr/bin/rpm ]; then
+   RPM=/usr/bin/rpm
+elif [ -x /bin/rpm ]; then
+   RPM=/bin/rpm
+else
+    echo "This install script supports only RPM-based package installation system."
+    echo "Installation aborted."
+    exit 2
+fi
+
+RPMOPT="-Uvh --replacepkgs --replacefiles"
+
+MACHINE="`uname -m`"
+BITNESS=32
+case "$MACHINE" in
+    i*86)
+    ;;
+    x86_64)
+        BITNESS=64
+    ;;
+    *);;
+esac
+
+#
+# Initialization
+#
+CDPATH="`dirname $0`"
+case "$CDPATH" in
+    /*) ;;
+    .) CDPATH="`pwd`" ;;
+    *) CDPATH="`pwd`/$CDPATH" ;;
+esac
+
+#
+# MAIN
+#
+cd "$CDPATH"
+echo ""
+
+for file in ./labview*.rpm; do
+    [ -e "$file" ] || continue
+    [ "${BITNESS}" = "32" ] && [[ $file == *.x86_64.rpm ]] && continue
+    $RPM $RPMOPT "$file"
+done
+
+for file in ./nissl*.rpm ./nicurl*.rpm ./nisvcloc*.rpm ./nitdms*.rpm; do
+    [ -e "$file" ] || continue
+    [ "${BITNESS}" = "32" ] && [[ $file == *.x86_64.rpm ]] && continue
+    [ "${BITNESS}" = "64" ] && [[ $file == *.i386.rpm ]] && continue
+    $RPM $RPMOPT "$file"
+done
+
+
+echo ""
+echo "Installation completed."
+exit 0

@@ -1,0 +1,1 @@
+d2hStoreMenuItems("TX__15010", [["windowmenu.htm", "right", "Window Menu"],["windowmenu1.htm", "right", "Window Menu"],["windowmenu2.htm", "right", "Window Menu"],["windowmenu3.htm", "right", "Window Menu"]]);

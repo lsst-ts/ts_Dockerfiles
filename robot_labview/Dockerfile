@@ -2,69 +2,78 @@ ARG CENTOS_VERSION
 FROM centos:$CENTOS_VERSION
 MAINTAINER Andrew Heyer
 
-# Obtain arguments
+# Arguments to make Dockerfile nicer
 ARG USER=appuser
+ARG GROUP_ID=993
+ARG USER_ID=1003
+
+#The name of the LabVIEW folder, which contains the "./INSTALL" script
+ARG LV_PATH 
+
+# Home installation location for software.
 ARG HOME=/home/${USER}
-ARG LV_PATH
 
-RUN yum -y update
-RUN yum -y install git
-RUN yum -y --enablerepo=extras install epel-release
-RUN yum -y install git which mlocate wget \
-openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
-yum clean all && \
-rm -rf /var/cache/yum
-#python37-devel
+# Directory for LabVIEW and related software, keeps things tidy.          
+ARG LV=${HOME}/LabVIEW
 
-ADD Python-3.7.6.tgz ${HOME}/
-RUN cd ${HOME}/Python-3.7.6 && \
-./configure --prefix=/usr/local && \
-make && make install
+# Directory for manually installed VIPM packages b/c they dont work through VIPM.       
+ARG VIPM_PKGS=${LV}/${LV_PATH}  
 
-RUN updatedb
 
-RUN easy_install-3.7 pip && \
-python3.7 -m pip install --upgrade pip setuptools numpy && \
-python3.7 -m pip install robotframework && \
-python3.7 -m pip install astropy && \
-python3.7 -m pip install pytest
+# Create User and Groups
+RUN groupadd -r -g ${USER_ID} ${USER} && \
+    groupadd -r -g ${GROUP_ID} docker && \
+    useradd -r -u ${USER_ID} -g ${USER} -G docker -m ${USER} -d ${HOME} && \
+    chown ${USER}:docker ${HOME}
 
-RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
-RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
-RUN groupadd -r -g 1003 ${USER} && \
-groupadd -r -g 993 docker && \
-useradd -r -u 1003 -g ${USER} -G docker -m ${USER} -d ${HOME} && \
-chown ${USER}:docker ${HOME}
-
-WORKDIR ${HOME}
-USER ${USER}
-RUN mkdir bin && mkdir trunk && mkdir Reports
-ENV PATH $PATH:${HOME}/bin:${HOME}/.local/bin
-ENV ROBOTFRAMEWORK_SAL_DIR ${HOME}/trunk/robotframework_SAL
-ENV TS_XML_DIR ${HOME}/trunk/ts_xml
-
-# Apparently Docker does not support variable expansion in the ADD and COPY context.
-# ... Therefore, the ownership must be hardcoded.
-COPY --chown=1003:1003 Test_Vars.txt ${HOME}/bin/Test_Vars.txt
-COPY --chown=1003:1003 bash_profile ${HOME}/.bash_profile
-RUN echo 'source ~/.bash_profile' >> ${HOME}/.bashrc
+# Install base CentOS7 Software needed for this application
+RUN yum -y update && \
+    yum -y --enablerepo=extras install epel-release && \
+    yum -y install git which mlocate wget tigervnc-server \
+           openssl-devel make gcc-c++ bzip2-devel libffi-devel \
+           libXinerama libXinerama.i686 mesa-libGL mesa-libGL.i686 \
+           libstdc++ libstdc++.i686 && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
 
 # Install LabVIEW 2015 Runtime & VIPM 2017 
-# ***LV2015 is a dependency for VIPM*** ***VIPM 2020 not out yet for LABVIEW 2020*** 
 USER root
-COPY vipm-2017-linux ${HOME}/LabVIEW/vipm-2017-linux
-WORKDIR  /home/appuser/LabVIEW/vipm-2017-linux/LabVIEW2015SP1RTE_Linux/
+COPY vipm-2017-linux ${LV}/vipm-2017-linux
+WORKDIR  ${LV}/vipm-2017-linux/LabVIEW2015SP1RTE_Linux/
 RUN ./INSTALL
-RUN cp -R /home/appuser/LabVIEW/vipm-2017-linux/JKI /usr/local
+RUN cp -R ${LV}/vipm-2017-linux/JKI /usr/local
+ENV PATH="/usr/local/JKI/VIPM:${PATH}"
 
-# Install LabVIEW 2018SP1
-# COPY ${LV_PATH} /home/appuser/LabVIEW/LabVIEW2018
-# WORKDIR /home/appuser/LabVIEW/LabVIEW2018
-# RUN echo -e 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\nn\n' | ./INSTALL
 
-# Install LabVIEW 2020
-COPY ${LV_PATH} /home/appuser/LabVIEW/${LV_PATH}
-WORKDIR /home/appuser/LabVIEW/${LV_PATH}
-RUN echo -e 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\ny\nn\n' | ./INSTALL
+# Install the LabVIEW version based on the arguments given. Read the README for more information.
+COPY ${LV_PATH} ${LV}/${LV_PATH}
+WORKDIR ${LV}/${LV_PATH}
+RUN yes | ./INSTALL 
+
+
+# Install the VNC server, this is a trick to create the .Xvncserver file
+RUN echo -e 'taco12345\ntaco12345\nn' | vncserver :10 \
+    && vncserver -kill :10
+
+
+# Copy over a package that is needed to be manually installed
+COPY jki_rsc_toolkits_palette-1.1-1.ogp ${LV}
+
+
+# Exit the container with the regular user account
+SHELL ["/bin/bash", "-lc"]
+WORKDIR ${HOME}
+
+
+########## MANUAL STEPS ###########
+
+
+# Install Caraya via VIPM
+# 2) Run `vipm`
+# 3) Navigate to "Tools->Options->LabVIEW" click "verify" 
+# 4) In the LabVIEW window that pops up, navigate to "Tools->Options->VI Server"
+# 5) Check mark the "TCP/IP" box and add the following to the "Machine Acess" list "localhost", "127.0.0.1", "*" without the quotes
+# 6) in VIPM navigate to "File->Open package File(s)", navigate to "/home/appuser/LabVIEW/" and double click "jki_rsc_toolkits_palette-1.1-1.ogp" to install it
+# 7) Within VIPM search for "Caraya Unit Test Framework" and install it  
