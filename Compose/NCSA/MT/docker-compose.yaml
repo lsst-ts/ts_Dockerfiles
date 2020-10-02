@@ -113,6 +113,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.136"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   m2:
     image: ts-dockerhub.lsst.org/m2:c0013

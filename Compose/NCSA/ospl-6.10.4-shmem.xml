@@ -1,7 +1,7 @@
 <OpenSplice>
    <Domain>
       <Name>ospl_sp_ddsi</Name>
-      <Id>2</Id>
+      <Id>0</Id>
       <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
       <Database>
          <Size>104857600</Size>
