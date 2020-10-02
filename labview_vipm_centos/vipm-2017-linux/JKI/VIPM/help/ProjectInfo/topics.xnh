@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<topics>
+    <topic id="0" tId="182" url="aboutvipm.htm" target="right" default="1"><![CDATA[About VIPM]]><contextids /></topic>
+    <topic id="1" tId="798" url="activatingyourversionofvipm.htm" target="right"><![CDATA[Activating Your Version of VIPM]]><contextids /></topic>
+    <topic id="2" tId="846" url="addoreditpackagedependencydialog.htm" target="right"><![CDATA[Add or Edit Package Dependency Dialog]]><contextids><item id="846" /></contextids></topic>
+    <topic id="3" tId="1007" url="addpalettetolibraryorclass.htm" target="right"><![CDATA[Add Palette to Library or Class]]><contextids><item id="1007" /></contextids></topic>
+    <topic id="4" tId="423" url="advancedoptionsopengpackagemirrors.htm" target="right"><![CDATA[Advanced Options - OpenG Package Mirrors]]><contextids /></topic>
+    <topic id="5" tId="424" url="appendixatroubleshooting.htm" target="right"><![CDATA[Appendix A: Troubleshooting]]><contextids /></topic>
+    <topic id="6" tId="425" url="appendixbhowtomanuallyconfigureyourlabviewversiontoallowvipmcommunication.htm" target="right"><![CDATA[Appendix B: How to manually configure your LabVIEW version to allow VIPM communication.]]><contextids /></topic>
+    <topic id="7" tId="971" url="bsdlicense.htm" target="right"><![CDATA[BSD License]]><contextids /></topic>
+    <topic id="8" tId="834" url="buildinformation.htm" target="right"><![CDATA[Build Information]]><contextids /></topic>
+    <topic id="9" tId="948" url="checkingyoursubscriptionsforavailablepackages.htm" target="right"><![CDATA[Checking your Subscriptions for Available Packages]]><contextids /></topic>
+    <topic id="10" tId="915" url="clickablelogo.htm" target="right"><![CDATA[Clickable Logo]]><contextids /></topic>
+    <topic id="11" tId="422" url="configurelabviewportdialog.htm" target="right"><![CDATA[Configure LabVIEW Port Dialog]]><contextids><item id="422" /></contextids></topic>
+    <topic id="12" tId="968" url="copyrightinformation.htm" target="right"><![CDATA[Copyright Information]]><contextids /></topic>
+    <topic id="13" tId="850" url="customactions.htm" target="right"><![CDATA[Custom Actions]]><contextids /></topic>
+    <topic id="14" tId="899" url="debuggingpackagebuilderrors1.htm" target="right"><![CDATA[Debugging Package Build Errors]]><contextids /></topic>
+    <topic id="15" tId="250" url="definelabviewversiondialog.htm" target="right"><![CDATA[Define LabVIEW Version Dialog]]><contextids><item id="250" /></contextids></topic>
+    <topic id="16" tId="787" url="deprecatingpackagesintherepository.htm" target="right"><![CDATA[Deprecating Packages in the Repository]]><contextids /></topic>
+    <topic id="17" tId="992" url="description.htm" target="right"><![CDATA[Description]]><contextids /></topic>
+    <topic id="18" tId="843" url="destinations.htm" target="right"><![CDATA[Destinations]]><contextids /></topic>
+    <topic id="19" tId="835" url="displayinformation.htm" target="right"><![CDATA[Display Information]]><contextids /></topic>
+    <topic id="20" tId="996" url="doineedalabviewruntimeengine.htm" target="right"><![CDATA[Do I need a LabVIEW Run-Time Engine?]]><contextids /></topic>
+    <topic id="21" tId="838" url="dragdrop1.htm" target="right"><![CDATA[Drag & Drop]]><contextids /></topic>
+    <topic id="22" tId="696" url="editmenu.htm" target="right"><![CDATA[Edit Menu]]><contextids><item id="696" /></contextids></topic>
+    <topic id="23" tId="555" url="editmenu2.htm" target="right"><![CDATA[Edit Menu]]><contextids><item id="555" /></contextids></topic>
+    <topic id="24" tId="568" url="editmenu3.htm" target="right"><![CDATA[Edit Menu]]><contextids><item id="568" /></contextids></topic>
+    <topic id="25" tId="418" url="editoptions.htm" target="right"><![CDATA[Edit options]]><contextids /></topic>
+    <topic id="26" tId="837" url="editingthepalettes1.htm" target="right"><![CDATA[Editing the Palettes]]><contextids><item id="837" /></contextids></topic>
+    <topic id="27" tId="591" url="errorlistdialog.htm" target="right"><![CDATA[Error List Dialog]]><contextids /></topic>
+    <topic id="28" tId="959" url="faqfrequentlyaskedquestions.htm" target="right"><![CDATA[FAQ - Frequently Asked Questions]]><contextids /></topic>
+    <topic id="29" tId="912" url="filemenu4.htm" target="right"><![CDATA[File Menu]]><contextids><item id="912" /></contextids></topic>
+    <topic id="30" tId="776" url="filemenu1.htm" target="right"><![CDATA[File Menu]]><contextids><item id="776" /></contextids></topic>
+    <topic id="31" tId="567" url="filemenu3.htm" target="right"><![CDATA[File Menu]]><contextids><item id="567" /></contextids></topic>
+    <topic id="32" tId="554" url="filemenu2.htm" target="right"><![CDATA[File Menu]]><contextids><item id="554" /></contextids></topic>
+    <topic id="33" tId="695" url="filemenu.htm" target="right"><![CDATA[File Menu]]><contextids><item id="695" /></contextids></topic>
+    <topic id="34" tId="946" url="freeedition.htm" target="right"><![CDATA[Free Edition]]><contextids /></topic>
+    <topic id="35" tId="419" url="generaloptions.htm" target="right"><![CDATA[General Options]]><contextids /></topic>
+    <topic id="36" tId="217" url="gettingpackageinformation.htm" target="right"><![CDATA[Getting Package Information]]><contextids /></topic>
+    <topic id="37" tId="286" url="gettingstarted.htm" target="right"><![CDATA[Getting Started]]><contextids /></topic>
+    <topic id="38" tId="972" url="gnulessergeneralpubliclicense.htm" target="right"><![CDATA[GNU Lesser General Public License]]><contextids /></topic>
+    <topic id="39" tId="700" url="helpmenu.htm" target="right"><![CDATA[Help Menu]]><contextids><item id="700" /></contextids></topic>
+    <topic id="40" tId="572" url="helpmenu3.htm" target="right"><![CDATA[Help Menu]]><contextids><item id="572" /></contextids></topic>
+    <topic id="41" tId="779" url="helpmenu1.htm" target="right"><![CDATA[Help Menu]]><contextids><item id="779" /></contextids></topic>
+    <topic id="42" tId="559" url="helpmenu2.htm" target="right"><![CDATA[Help Menu]]><contextids><item id="559" /></contextids></topic>
+    <topic id="43" tId="914" url="helpmenu4.htm" target="right"><![CDATA[Help Menu]]><contextids><item id="914" /></contextids></topic>
+    <topic id="44" tId="964" url="howdoiconfigurevipmtouseaproxyserver.htm" target="right"><![CDATA[How do I configure VIPM to use a proxy server?]]><contextids /></topic>
+    <topic id="45" tId="184" url="importantterminology.htm" target="right"><![CDATA[Important Terminology]]><contextids /></topic>
+    <topic id="46" tId="849" url="incompatiblepackages.htm" target="right"><![CDATA[Incompatible Packages]]><contextids /></topic>
+    <topic id="47" tId="224" url="installbuttonisdisabledgrayed.htm" target="right"><![CDATA[Install button is disabled/grayed]]><contextids /></topic>
+    <topic id="48" tId="848" url="installrequirements.htm" target="right"><![CDATA[Install Requirements]]><contextids /></topic>
+    <topic id="49" tId="218" url="installingoneormorepackagesfromthelist.htm" target="right"><![CDATA[Installing One or More Packages from the List]]><contextids /></topic>
+    <topic id="50" tId="186" url="installingvipm.htm" target="right"><![CDATA[Installing VIPM]]><contextids /></topic>
+    <topic id="51" tId="991" url="installingvipmviacommandlinewindowsonly.htm" target="right"><![CDATA[Installing VIPM via command line (Windows Only)]]><contextids><item id="991" /></contextids></topic>
+    <topic id="52" tId="1010" url="instrumentdrivernetworktool.htm" target="right"><![CDATA[Instrument Driver Network Tool]]><contextids /></topic>
+    <topic id="53" tId="1011" url="labview20092014.htm" target="right"><![CDATA[LabVIEW 2009-2014]]><contextids /></topic>
+    <topic id="54" tId="426" url="labview6x.htm" target="right"><![CDATA[LabVIEW 6.x]]><contextids /></topic>
+    <topic id="55" tId="427" url="labview7x.htm" target="right"><![CDATA[LabVIEW 7.x]]><contextids /></topic>
+    <topic id="56" tId="428" url="labview8x.htm" target="right"><![CDATA[LabVIEW 8.x]]><contextids /></topic>
+    <topic id="57" tId="421" url="labviewoptionsversionmanagement.htm" target="right"><![CDATA[LabVIEW Options - Version Management]]><contextids /></topic>
+    <topic id="58" tId="220" url="lastactionresultswindow.htm" target="right"><![CDATA[Last Action Results Window]]><contextids><item id="220" /></contextids></topic>
+    <topic id="59" tId="287" url="launchingvipm.htm" target="right"><![CDATA[Launching VIPM]]><contextids /></topic>
+    <topic id="60" tId="847" url="licensingactivation.htm" target="right"><![CDATA[Licensing & Activation]]><contextids /></topic>
+    <topic id="61" tId="216" url="managingpackages.htm" target="right"><![CDATA[Managing Packages]]><contextids /></topic>
+    <topic id="62" tId="677" url="menubar.htm" target="right"><![CDATA[Menu Bar]]><contextids /></topic>
+    <topic id="63" tId="911" url="menubar5.htm" target="right"><![CDATA[Menu Bar]]><contextids /></topic>
+    <topic id="64" tId="553" url="menubar2.htm" target="right"><![CDATA[Menu Bar]]><contextids /></topic>
+    <topic id="65" tId="766" url="menubar1.htm" target="right"><![CDATA[Menu Bar]]><contextids /></topic>
+    <topic id="66" tId="566" url="menubar3.htm" target="right"><![CDATA[Menu Bar]]><contextids /></topic>
+    <topic id="67" tId="799" url="networkoptions.htm" target="right"><![CDATA[Network Options]]><contextids /></topic>
+    <topic id="68" tId="746" url="newfeaturesandchanges.htm" target="right"><![CDATA[New Features and Changes]]><contextids /></topic>
+    <topic id="69" tId="833" url="newpackagebuildprojectdialog.htm" target="right"><![CDATA[New Package Build Project Dialog]]><contextids><item id="833" /></contextids></topic>
+    <topic id="70" tId="222" url="nolabviewruntimeengineerror.htm" target="right"><![CDATA[No LabVIEW run-time engine error]]><contextids /></topic>
+    <topic id="71" tId="1024" url="opengbuilderlicense.htm" target="right"><![CDATA[OpenG Builder License]]><contextids /></topic>
+    <topic id="72" tId="185" url="overviewofvipminterface.htm" target="right"><![CDATA[Overview of VIPM Interface]]><contextids /></topic>
+    <topic id="73" tId="219" url="packageactionconfirmationwindow.htm" target="right"><![CDATA[Package Action Confirmation Window]]><contextids><item id="219" /></contextids></topic>
+    <topic id="74" tId="717" url="packagebuilderoptionsvipackagebuilder.htm" target="right"><![CDATA[Package Builder Options - VI Package Builder]]><contextids /></topic>
+    <topic id="75" tId="590" url="packageconfigurationfilepropertiesdialog.htm" target="right"><![CDATA[Package Configuration File Properties Dialog]]><contextids /></topic>
+    <topic id="76" tId="845" url="packagedependencies.htm" target="right"><![CDATA[Package Dependencies]]><contextids /></topic>
+    <topic id="77" tId="851" url="packagefilename.htm" target="right"><![CDATA[Package Filename]]><contextids /></topic>
+    <topic id="78" tId="768" url="packagelist.htm" target="right"><![CDATA[Package List]]><contextids /></topic>
+    <topic id="79" tId="562" url="packagelist2.htm" target="right"><![CDATA[Package list]]><contextids /></topic>
+    <topic id="80" tId="575" url="packagelist3.htm" target="right"><![CDATA[Package list]]><contextids /></topic>
+    <topic id="81" tId="557" url="packagemenu2.htm" target="right"><![CDATA[Package Menu]]><contextids><item id="557" /></contextids></topic>
+    <topic id="82" tId="570" url="packagemenu3.htm" target="right"><![CDATA[Package Menu]]><contextids><item id="570" /></contextids></topic>
+    <topic id="83" tId="697" url="packagemenu.htm" target="right"><![CDATA[Package Menu]]><contextids><item id="697" /></contextids></topic>
+    <topic id="84" tId="778" url="packagemenu1.htm" target="right"><![CDATA[Package Menu]]><contextids><item id="778" /></contextids></topic>
+    <topic id="85" tId="918" url="pagenavigation.htm" target="right"><![CDATA[Page Navigation]]><contextids /></topic>
+    <topic id="86" tId="884" url="palettecategorybrowserdialog.htm" target="right"><![CDATA[Palette Category Browser Dialog]]><contextids><item id="884" /></contextids></topic>
+    <topic id="87" tId="993" url="palettedefaults.htm" target="right"><![CDATA[Palette Defaults]]><contextids><item id="993" /></contextids></topic>
+    <topic id="88" tId="836" url="palettes.htm" target="right"><![CDATA[Palettes]]><contextids /></topic>
+    <topic id="89" tId="592" url="pceoptionspackageconfigurationeditor.htm" target="right"><![CDATA[PCE Options - Package Configuration Editor]]><contextids /></topic>
+    <topic id="90" tId="900" url="prebuildcheckproblemreportwindow1.htm" target="right"><![CDATA[Pre-Build Check Problem Report Window]]><contextids><item id="900" /></contextids></topic>
+    <topic id="91" tId="1009" url="prepostbuildactions.htm" target="right"><![CDATA[Pre/Post Build Actions]]><contextids /></topic>
+    <topic id="92" tId="947" url="proedition.htm" target="right"><![CDATA[Pro Edition]]><contextids /></topic>
+    <topic id="93" tId="917" url="productenumeration.htm" target="right"><![CDATA[Product Enumeration]]><contextids /></topic>
+    <topic id="94" tId="921" url="productinformation.htm" target="right"><![CDATA[Product Information]]><contextids /></topic>
+    <topic id="95" tId="970" url="relinkingtoupdatedlgplcomponents.htm" target="right"><![CDATA[Relinking to Updated LGPL Components]]><contextids /></topic>
+    <topic id="96" tId="950" url="repositorymanageroptions.htm" target="right"><![CDATA[Repository Manager Options]]><contextids /></topic>
+    <topic id="97" tId="777" url="repositorymenu.htm" target="right"><![CDATA[Repository Menu]]><contextids><item id="777" /></contextids></topic>
+    <topic id="98" tId="770" url="repositorypropertiesdialog.htm" target="right"><![CDATA[Repository Properties Dialog]]><contextids /></topic>
+    <topic id="99" tId="563" url="rightclickmenu2.htm" target="right"><![CDATA[Right-Click Menu]]><contextids /></topic>
+    <topic id="100" tId="769" url="rightclickmenu.htm" target="right"><![CDATA[Right-Click Menu]]><contextids /></topic>
+    <topic id="101" tId="576" url="rightclickmenu3.htm" target="right"><![CDATA[Right-Click Menu]]><contextids /></topic>
+    <topic id="102" tId="839" url="rightclickonemptyspace1.htm" target="right"><![CDATA[Right-click on Empty Space]]><contextids /></topic>
+    <topic id="103" tId="840" url="rightclickonsubpalette1.htm" target="right"><![CDATA[Right-click on Subpalette]]><contextids /></topic>
+    <topic id="104" tId="841" url="rightclickonviorcontrol1.htm" target="right"><![CDATA[Right-click on VI or Control]]><contextids /></topic>
+    <topic id="105" tId="191" url="runningtheinstaller.htm" target="right"><![CDATA[Running the Installer]]><contextids /></topic>
+    <topic id="106" tId="561" url="search2.htm" target="right"><![CDATA[Search]]><contextids><item id="561" /></contextids></topic>
+    <topic id="107" tId="920" url="search.htm" target="right"><![CDATA[Search]]><contextids /></topic>
+    <topic id="108" tId="967" url="softwarelicenseagreement.htm" target="right"><![CDATA[SOFTWARE LICENSE AGREEMENT]]><contextids /></topic>
+    <topic id="109" tId="916" url="sortcontrol.htm" target="right"><![CDATA[Sort Control]]><contextids /></topic>
+    <topic id="110" tId="844" url="sourcefilesettings.htm" target="right"><![CDATA[Source File Settings]]><contextids /></topic>
+    <topic id="111" tId="1008" url="specialconsiderationsforsomelabviewdestinations.htm" target="right"><![CDATA[Special considerations for some LabVIEW destinations]]><contextids><item id="1008" /></contextids></topic>
+    <topic id="112" tId="832" url="startinganewpackagebuildproject.htm" target="right"><![CDATA[Starting a New Package Build Project]]><contextids /></topic>
+    <topic id="113" tId="679" url="statusbar.htm" target="right"><![CDATA[Status Bar]]><contextids /></topic>
+    <topic id="114" tId="564" url="statusbar2.htm" target="right"><![CDATA[Status Bar]]><contextids /></topic>
+    <topic id="115" tId="577" url="statusbar3.htm" target="right"><![CDATA[Status Bar]]><contextids /></topic>
+    <topic id="116" tId="187" url="systemrequirements.htm" target="right"><![CDATA[System Requirements]]><contextids /></topic>
+    <topic id="117" tId="793" url="thevipackagenetwork.htm" target="right"><![CDATA[The VI Package Network]]><contextids /></topic>
+    <topic id="118" tId="969" url="thirdpartyvipackages.htm" target="right"><![CDATA[Third Party VI Packages]]><contextids /></topic>
+    <topic id="119" tId="767" url="toolbar1.htm" target="right"><![CDATA[Toolbar]]><contextids /></topic>
+    <topic id="120" tId="560" url="toolbar2.htm" target="right"><![CDATA[Toolbar]]><contextids /></topic>
+    <topic id="121" tId="678" url="toolbar.htm" target="right"><![CDATA[Toolbar]]><contextids /></topic>
+    <topic id="122" tId="573" url="toolbar3.htm" target="right"><![CDATA[Toolbar]]><contextids /></topic>
+    <topic id="123" tId="571" url="toolsmenu3.htm" target="right"><![CDATA[Tools Menu]]><contextids><item id="571" /></contextids></topic>
+    <topic id="124" tId="558" url="toolsmenu2.htm" target="right"><![CDATA[Tools Menu]]><contextids><item id="558" /></contextids></topic>
+    <topic id="125" tId="698" url="toolsmenu.htm" target="right"><![CDATA[Tools Menu]]><contextids><item id="698" /></contextids></topic>
+    <topic id="126" tId="919" url="toplists.htm" target="right"><![CDATA[Top Lists]]><contextids /></topic>
+    <topic id="127" tId="225" url="uninstallbuttonisdisabledgrayed.htm" target="right"><![CDATA[Uninstall button is disabled/grayed]]><contextids /></topic>
+    <topic id="128" tId="565" url="usingpackageconfigurationeditor.htm" target="right"><![CDATA[Using Package Configuration Editor]]><contextids /></topic>
+    <topic id="129" tId="910" url="usingthelabviewtoolsnetworkview.htm" target="right"><![CDATA[Using the LabVIEW Tools Network View]]><contextids /></topic>
+    <topic id="130" tId="676" url="usingvipackagebuilder.htm" target="right"><![CDATA[Using VI Package Builder]]><contextids /></topic>
+    <topic id="131" tId="765" url="usingvirepositorymanager.htm" target="right"><![CDATA[Using VI Repository Manager]]><contextids /></topic>
+    <topic id="132" tId="552" url="usingvipm.htm" target="right"><![CDATA[Using VIPM]]><contextids /></topic>
+    <topic id="133" tId="505" url="vipackagemanagervipm.htm" target="right"><![CDATA[VI Package Manager (VIPM)]]><contextids /></topic>
+    <topic id="134" tId="569" url="viewmenu3.htm" target="right"><![CDATA[View Menu]]><contextids><item id="569" /></contextids></topic>
+    <topic id="135" tId="556" url="viewmenu2.htm" target="right"><![CDATA[View Menu]]><contextids><item id="556" /></contextids></topic>
+    <topic id="136" tId="356" url="vipmcannotconnecttotheinternet.htm" target="right"><![CDATA[VIPM cannot connect to the Internet]]><contextids /></topic>
+    <topic id="137" tId="440" url="vipmiconforlinuxinstallation.htm" target="right"><![CDATA[VIPM Icon for Linux Installation]]><contextids><item id="440" /></contextids></topic>
+    <topic id="138" tId="949" url="vipmrepositorytheoryofoperation.htm" target="right"><![CDATA[VIPM Repository Theory of Operation]]><contextids /></topic>
+    <topic id="139" tId="788" url="whatdovipmclientsseewhenapackageisdeprecated.htm" target="right"><![CDATA[What do VIPM Clients See When a Package is deprecated?]]><contextids><item id="788" /></contextids></topic>
+    <topic id="140" tId="963" url="whatisapackage.htm" target="right"><![CDATA[What is a Package?]]><contextids /></topic>
+    <topic id="141" tId="183" url="whatsavailableinvipm.htm" target="right"><![CDATA[What's Available in VIPM]]><contextids /></topic>
+    <topic id="142" tId="960" url="wherecanigetmorehelp.htm" target="right"><![CDATA[Where can I get More Help?]]><contextids /></topic>
+    <topic id="143" tId="965" url="whydoeslabviewsometimeslaunchwheniminstallingpackages.htm" target="right"><![CDATA[Why does LabVIEW sometimes launch when I'm installing packages?]]><contextids /></topic>
+    <topic id="144" tId="966" url="whydoesntvipmcloselabviewwhenitislongerneededbythepackageinstallationprocess.htm" target="right"><![CDATA[Why doesn't VIPM close LabVIEW when it is longer needed by the package installation process?]]><contextids /></topic>
+    <topic id="145" tId="699" url="windowmenu2.htm" target="right"><![CDATA[Window Menu]]><contextids><item id="699" /></contextids></topic>
+    <topic id="146" tId="913" url="windowmenu3.htm" target="right"><![CDATA[Window Menu]]><contextids><item id="913" /></contextids></topic>
+    <topic id="147" tId="589" url="windowmenu1.htm" target="right"><![CDATA[Window Menu]]><contextids><item id="589" /></contextids></topic>
+    <topic id="148" tId="588" url="windowmenu.htm" target="right"><![CDATA[Window Menu]]><contextids><item id="588" /></contextids></topic>
+</topics>

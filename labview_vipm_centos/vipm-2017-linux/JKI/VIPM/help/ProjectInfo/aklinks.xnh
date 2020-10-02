@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<root>
+    <keywords>
+        <keyword name="about vipm">
+            <topics>
+                <topic url="aboutvipm.htm" window="right"><![CDATA[About VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="activating your version of vipm">
+            <topics>
+                <topic url="activatingyourversionofvipm.htm" window="right"><![CDATA[Activating Your Version of VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="add or edit package dependency dialog">
+            <topics>
+                <topic url="addoreditpackagedependencydialog.htm" window="right"><![CDATA[Add or Edit Package Dependency Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="add palette to library or class">
+            <topics>
+                <topic url="addpalettetolibraryorclass.htm" window="right"><![CDATA[Add Palette to Library or Class]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="advanced options - openg package mirrors">
+            <topics>
+                <topic url="advancedoptionsopengpackagemirrors.htm" window="right"><![CDATA[Advanced Options - OpenG Package Mirrors]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="appendix a: troubleshooting">
+            <topics>
+                <topic url="appendixatroubleshooting.htm" window="right"><![CDATA[Appendix A: Troubleshooting]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="appendix b: how to manually configure your labview version to allow vipm communication.">
+            <topics>
+                <topic url="appendixbhowtomanuallyconfigureyourlabviewversiontoallowvipmcommunication.htm" window="right"><![CDATA[Appendix B: How to manually configure your LabVIEW version to allow VIPM communication.]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="bsd license">
+            <topics>
+                <topic url="bsdlicense.htm" window="right"><![CDATA[BSD License]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="build information">
+            <topics>
+                <topic url="buildinformation.htm" window="right"><![CDATA[Build Information]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="checking your subscriptions for available packages">
+            <topics>
+                <topic url="checkingyoursubscriptionsforavailablepackages.htm" window="right"><![CDATA[Checking your Subscriptions for Available Packages]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="clickable logo">
+            <topics>
+                <topic url="clickablelogo.htm" window="right"><![CDATA[Clickable Logo]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="configure labview port dialog">
+            <topics>
+                <topic url="configurelabviewportdialog.htm" window="right"><![CDATA[Configure LabVIEW Port Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="copyright information">
+            <topics>
+                <topic url="copyrightinformation.htm" window="right"><![CDATA[Copyright Information]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="custom actions">
+            <topics>
+                <topic url="customactions.htm" window="right"><![CDATA[Custom Actions]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="debugging package build errors">
+            <topics>
+                <topic url="debuggingpackagebuilderrors1.htm" window="right"><![CDATA[Debugging Package Build Errors]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="define labview version dialog">
+            <topics>
+                <topic url="definelabviewversiondialog.htm" window="right"><![CDATA[Define LabVIEW Version Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="deprecating packages in the repository">
+            <topics>
+                <topic url="deprecatingpackagesintherepository.htm" window="right"><![CDATA[Deprecating Packages in the Repository]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="description">
+            <topics>
+                <topic url="description.htm" window="right"><![CDATA[Description]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="destinations">
+            <topics>
+                <topic url="destinations.htm" window="right"><![CDATA[Destinations]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="display information">
+            <topics>
+                <topic url="displayinformation.htm" window="right"><![CDATA[Display Information]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="do i need a labview run-time engine?">
+            <topics>
+                <topic url="doineedalabviewruntimeengine.htm" window="right"><![CDATA[Do I need a LabVIEW Run-Time Engine?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="drag &amp; drop">
+            <topics>
+                <topic url="dragdrop1.htm" window="right"><![CDATA[Drag & Drop]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="edit menu">
+            <topics>
+                <topic url="editmenu2.htm" window="right"><![CDATA[Edit Menu]]></topic>
+                <topic url="editmenu3.htm" window="right"><![CDATA[Edit Menu]]></topic>
+                <topic url="editmenu.htm" window="right"><![CDATA[Edit Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="edit options">
+            <topics>
+                <topic url="editoptions.htm" window="right"><![CDATA[Edit options]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="editing the palettes">
+            <topics>
+                <topic url="editingthepalettes1.htm" window="right"><![CDATA[Editing the Palettes]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="error list dialog">
+            <topics>
+                <topic url="errorlistdialog.htm" window="right"><![CDATA[Error List Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="faq - frequently asked questions">
+            <topics>
+                <topic url="faqfrequentlyaskedquestions.htm" window="right"><![CDATA[FAQ - Frequently Asked Questions]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="file menu">
+            <topics>
+                <topic url="filemenu2.htm" window="right"><![CDATA[File Menu]]></topic>
+                <topic url="filemenu3.htm" window="right"><![CDATA[File Menu]]></topic>
+                <topic url="filemenu.htm" window="right"><![CDATA[File Menu]]></topic>
+                <topic url="filemenu1.htm" window="right"><![CDATA[File Menu]]></topic>
+                <topic url="filemenu4.htm" window="right"><![CDATA[File Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="free edition">
+            <topics>
+                <topic url="freeedition.htm" window="right"><![CDATA[Free Edition]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="general options">
+            <topics>
+                <topic url="generaloptions.htm" window="right"><![CDATA[General Options]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="getting package information">
+            <topics>
+                <topic url="gettingpackageinformation.htm" window="right"><![CDATA[Getting Package Information]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="getting started">
+            <topics>
+                <topic url="gettingstarted.htm" window="right"><![CDATA[Getting Started]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="gnu lesser general public license">
+            <topics>
+                <topic url="gnulessergeneralpubliclicense.htm" window="right"><![CDATA[GNU Lesser General Public License]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="help menu">
+            <topics>
+                <topic url="helpmenu2.htm" window="right"><![CDATA[Help Menu]]></topic>
+                <topic url="helpmenu3.htm" window="right"><![CDATA[Help Menu]]></topic>
+                <topic url="helpmenu.htm" window="right"><![CDATA[Help Menu]]></topic>
+                <topic url="helpmenu1.htm" window="right"><![CDATA[Help Menu]]></topic>
+                <topic url="helpmenu4.htm" window="right"><![CDATA[Help Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="how do i configure vipm to use a proxy server?">
+            <topics>
+                <topic url="howdoiconfigurevipmtouseaproxyserver.htm" window="right"><![CDATA[How do I configure VIPM to use a proxy server?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="important terminology">
+            <topics>
+                <topic url="importantterminology.htm" window="right"><![CDATA[Important Terminology]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="incompatible packages">
+            <topics>
+                <topic url="incompatiblepackages.htm" window="right"><![CDATA[Incompatible Packages]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="install button is disabled/grayed">
+            <topics>
+                <topic url="installbuttonisdisabledgrayed.htm" window="right"><![CDATA[Install button is disabled/grayed]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="install requirements">
+            <topics>
+                <topic url="installrequirements.htm" window="right"><![CDATA[Install Requirements]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="installing one or more packages from the list">
+            <topics>
+                <topic url="installingoneormorepackagesfromthelist.htm" window="right"><![CDATA[Installing One or More Packages from the List]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="installing vipm">
+            <topics>
+                <topic url="installingvipm.htm" window="right"><![CDATA[Installing VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="installing vipm via command line (windows only)">
+            <topics>
+                <topic url="installingvipmviacommandlinewindowsonly.htm" window="right"><![CDATA[Installing VIPM via command line (Windows Only)]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="instrument driver network tool">
+            <topics>
+                <topic url="instrumentdrivernetworktool.htm" window="right"><![CDATA[Instrument Driver Network Tool]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="labview 2009-2014">
+            <topics>
+                <topic url="labview20092014.htm" window="right"><![CDATA[LabVIEW 2009-2014]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="labview 6.x">
+            <topics>
+                <topic url="labview6x.htm" window="right"><![CDATA[LabVIEW 6.x]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="labview 7.x">
+            <topics>
+                <topic url="labview7x.htm" window="right"><![CDATA[LabVIEW 7.x]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="labview 8.x">
+            <topics>
+                <topic url="labview8x.htm" window="right"><![CDATA[LabVIEW 8.x]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="labview options - version management">
+            <topics>
+                <topic url="labviewoptionsversionmanagement.htm" window="right"><![CDATA[LabVIEW Options - Version Management]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="last action results window">
+            <topics>
+                <topic url="lastactionresultswindow.htm" window="right"><![CDATA[Last Action Results Window]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="launching vipm">
+            <topics>
+                <topic url="launchingvipm.htm" window="right"><![CDATA[Launching VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="licensing &amp; activation">
+            <topics>
+                <topic url="licensingactivation.htm" window="right"><![CDATA[Licensing & Activation]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="managing packages">
+            <topics>
+                <topic url="managingpackages.htm" window="right"><![CDATA[Managing Packages]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="menu bar">
+            <topics>
+                <topic url="menubar2.htm" window="right"><![CDATA[Menu Bar]]></topic>
+                <topic url="menubar3.htm" window="right"><![CDATA[Menu Bar]]></topic>
+                <topic url="menubar.htm" window="right"><![CDATA[Menu Bar]]></topic>
+                <topic url="menubar1.htm" window="right"><![CDATA[Menu Bar]]></topic>
+                <topic url="menubar5.htm" window="right"><![CDATA[Menu Bar]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="network options">
+            <topics>
+                <topic url="networkoptions.htm" window="right"><![CDATA[Network Options]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="new features and changes">
+            <topics>
+                <topic url="newfeaturesandchanges.htm" window="right"><![CDATA[New Features and Changes]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="new package build project dialog">
+            <topics>
+                <topic url="newpackagebuildprojectdialog.htm" window="right"><![CDATA[New Package Build Project Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="no labview run-time engine error">
+            <topics>
+                <topic url="nolabviewruntimeengineerror.htm" window="right"><![CDATA[No LabVIEW run-time engine error]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="openg builder license">
+            <topics>
+                <topic url="opengbuilderlicense.htm" window="right"><![CDATA[OpenG Builder License]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="overview of vipm interface">
+            <topics>
+                <topic url="overviewofvipminterface.htm" window="right"><![CDATA[Overview of VIPM Interface]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package action confirmation window">
+            <topics>
+                <topic url="packageactionconfirmationwindow.htm" window="right"><![CDATA[Package Action Confirmation Window]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package builder options - vi package builder">
+            <topics>
+                <topic url="packagebuilderoptionsvipackagebuilder.htm" window="right"><![CDATA[Package Builder Options - VI Package Builder]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package configuration file properties dialog">
+            <topics>
+                <topic url="packageconfigurationfilepropertiesdialog.htm" window="right"><![CDATA[Package Configuration File Properties Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package dependencies">
+            <topics>
+                <topic url="packagedependencies.htm" window="right"><![CDATA[Package Dependencies]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package filename">
+            <topics>
+                <topic url="packagefilename.htm" window="right"><![CDATA[Package Filename]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package list">
+            <topics>
+                <topic url="packagelist.htm" window="right"><![CDATA[Package List]]></topic>
+                <topic url="packagelist2.htm" window="right"><![CDATA[Package list]]></topic>
+                <topic url="packagelist3.htm" window="right"><![CDATA[Package list]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="package menu">
+            <topics>
+                <topic url="packagemenu2.htm" window="right"><![CDATA[Package Menu]]></topic>
+                <topic url="packagemenu3.htm" window="right"><![CDATA[Package Menu]]></topic>
+                <topic url="packagemenu.htm" window="right"><![CDATA[Package Menu]]></topic>
+                <topic url="packagemenu1.htm" window="right"><![CDATA[Package Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="page navigation">
+            <topics>
+                <topic url="pagenavigation.htm" window="right"><![CDATA[Page Navigation]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="palette category browser dialog">
+            <topics>
+                <topic url="palettecategorybrowserdialog.htm" window="right"><![CDATA[Palette Category Browser Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="palette defaults">
+            <topics>
+                <topic url="palettedefaults.htm" window="right"><![CDATA[Palette Defaults]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="palettes">
+            <topics>
+                <topic url="palettes.htm" window="right"><![CDATA[Palettes]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="pce options - package configuration editor">
+            <topics>
+                <topic url="pceoptionspackageconfigurationeditor.htm" window="right"><![CDATA[PCE Options - Package Configuration Editor]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="pre-build check problem report window">
+            <topics>
+                <topic url="prebuildcheckproblemreportwindow1.htm" window="right"><![CDATA[Pre-Build Check Problem Report Window]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="pre/post build actions">
+            <topics>
+                <topic url="prepostbuildactions.htm" window="right"><![CDATA[Pre/Post Build Actions]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="pro edition">
+            <topics>
+                <topic url="proedition.htm" window="right"><![CDATA[Pro Edition]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="product enumeration">
+            <topics>
+                <topic url="productenumeration.htm" window="right"><![CDATA[Product Enumeration]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="product information">
+            <topics>
+                <topic url="productinformation.htm" window="right"><![CDATA[Product Information]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="relinking to updated lgpl components">
+            <topics>
+                <topic url="relinkingtoupdatedlgplcomponents.htm" window="right"><![CDATA[Relinking to Updated LGPL Components]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="repository manager options">
+            <topics>
+                <topic url="repositorymanageroptions.htm" window="right"><![CDATA[Repository Manager Options]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="repository menu">
+            <topics>
+                <topic url="repositorymenu.htm" window="right"><![CDATA[Repository Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="repository properties dialog">
+            <topics>
+                <topic url="repositorypropertiesdialog.htm" window="right"><![CDATA[Repository Properties Dialog]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="right-click menu">
+            <topics>
+                <topic url="rightclickmenu2.htm" window="right"><![CDATA[Right-Click Menu]]></topic>
+                <topic url="rightclickmenu3.htm" window="right"><![CDATA[Right-Click Menu]]></topic>
+                <topic url="rightclickmenu.htm" window="right"><![CDATA[Right-Click Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="right-click on empty space">
+            <topics>
+                <topic url="rightclickonemptyspace1.htm" window="right"><![CDATA[Right-click on Empty Space]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="right-click on subpalette">
+            <topics>
+                <topic url="rightclickonsubpalette1.htm" window="right"><![CDATA[Right-click on Subpalette]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="right-click on vi or control">
+            <topics>
+                <topic url="rightclickonviorcontrol1.htm" window="right"><![CDATA[Right-click on VI or Control]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="running the installer">
+            <topics>
+                <topic url="runningtheinstaller.htm" window="right"><![CDATA[Running the Installer]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="search">
+            <topics>
+                <topic url="search2.htm" window="right"><![CDATA[Search]]></topic>
+                <topic url="search.htm" window="right"><![CDATA[Search]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="software license agreement">
+            <topics>
+                <topic url="softwarelicenseagreement.htm" window="right"><![CDATA[SOFTWARE LICENSE AGREEMENT]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="sort control">
+            <topics>
+                <topic url="sortcontrol.htm" window="right"><![CDATA[Sort Control]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="source file settings">
+            <topics>
+                <topic url="sourcefilesettings.htm" window="right"><![CDATA[Source File Settings]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="special considerations for some labview destinations">
+            <topics>
+                <topic url="specialconsiderationsforsomelabviewdestinations.htm" window="right"><![CDATA[Special considerations for some LabVIEW destinations]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="starting a new package build project">
+            <topics>
+                <topic url="startinganewpackagebuildproject.htm" window="right"><![CDATA[Starting a New Package Build Project]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="status bar">
+            <topics>
+                <topic url="statusbar2.htm" window="right"><![CDATA[Status Bar]]></topic>
+                <topic url="statusbar3.htm" window="right"><![CDATA[Status Bar]]></topic>
+                <topic url="statusbar.htm" window="right"><![CDATA[Status Bar]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="system requirements">
+            <topics>
+                <topic url="systemrequirements.htm" window="right"><![CDATA[System Requirements]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="the vi package network">
+            <topics>
+                <topic url="thevipackagenetwork.htm" window="right"><![CDATA[The VI Package Network]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="third party vi packages">
+            <topics>
+                <topic url="thirdpartyvipackages.htm" window="right"><![CDATA[Third Party VI Packages]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="toolbar">
+            <topics>
+                <topic url="toolbar2.htm" window="right"><![CDATA[Toolbar]]></topic>
+                <topic url="toolbar3.htm" window="right"><![CDATA[Toolbar]]></topic>
+                <topic url="toolbar.htm" window="right"><![CDATA[Toolbar]]></topic>
+                <topic url="toolbar1.htm" window="right"><![CDATA[Toolbar]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="tools menu">
+            <topics>
+                <topic url="toolsmenu2.htm" window="right"><![CDATA[Tools Menu]]></topic>
+                <topic url="toolsmenu3.htm" window="right"><![CDATA[Tools Menu]]></topic>
+                <topic url="toolsmenu.htm" window="right"><![CDATA[Tools Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="top lists">
+            <topics>
+                <topic url="toplists.htm" window="right"><![CDATA[Top Lists]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="uninstall button is disabled/grayed">
+            <topics>
+                <topic url="uninstallbuttonisdisabledgrayed.htm" window="right"><![CDATA[Uninstall button is disabled/grayed]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="using package configuration editor">
+            <topics>
+                <topic url="usingpackageconfigurationeditor.htm" window="right"><![CDATA[Using Package Configuration Editor]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="using the labview tools network view">
+            <topics>
+                <topic url="usingthelabviewtoolsnetworkview.htm" window="right"><![CDATA[Using the LabVIEW Tools Network View]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="using vi package builder">
+            <topics>
+                <topic url="usingvipackagebuilder.htm" window="right"><![CDATA[Using VI Package Builder]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="using vi repository manager">
+            <topics>
+                <topic url="usingvirepositorymanager.htm" window="right"><![CDATA[Using VI Repository Manager]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="using vipm">
+            <topics>
+                <topic url="usingvipm.htm" window="right"><![CDATA[Using VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="vi package manager (vipm)">
+            <topics>
+                <topic url="vipackagemanagervipm.htm" window="right"><![CDATA[VI Package Manager (VIPM)]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="view menu">
+            <topics>
+                <topic url="viewmenu2.htm" window="right"><![CDATA[View Menu]]></topic>
+                <topic url="viewmenu3.htm" window="right"><![CDATA[View Menu]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="vipm cannot connect to the internet">
+            <topics>
+                <topic url="vipmcannotconnecttotheinternet.htm" window="right"><![CDATA[VIPM cannot connect to the Internet]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="vipm icon for linux installation">
+            <topics>
+                <topic url="vipmiconforlinuxinstallation.htm" window="right"><![CDATA[VIPM Icon for Linux Installation]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="vipm repository theory of operation">
+            <topics>
+                <topic url="vipmrepositorytheoryofoperation.htm" window="right"><![CDATA[VIPM Repository Theory of Operation]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="what do vipm clients see when a package is deprecated?">
+            <topics>
+                <topic url="whatdovipmclientsseewhenapackageisdeprecated.htm" window="right"><![CDATA[What do VIPM Clients See When a Package is deprecated?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="what is a package?">
+            <topics>
+                <topic url="whatisapackage.htm" window="right"><![CDATA[What is a Package?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="what's available in vipm">
+            <topics>
+                <topic url="whatsavailableinvipm.htm" window="right"><![CDATA[What's Available in VIPM]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="where can i get more help?">
+            <topics>
+                <topic url="wherecanigetmorehelp.htm" window="right"><![CDATA[Where can I get More Help?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="why does labview sometimes launch when i'm installing packages?">
+            <topics>
+                <topic url="whydoeslabviewsometimeslaunchwheniminstallingpackages.htm" window="right"><![CDATA[Why does LabVIEW sometimes launch when I'm installing packages?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="why doesn't vipm close labview when it is longer needed by the package installation process?">
+            <topics>
+                <topic url="whydoesntvipmcloselabviewwhenitislongerneededbythepackageinstallationprocess.htm" window="right"><![CDATA[Why doesn't VIPM close LabVIEW when it is longer needed by the package installation process?]]></topic>
+            </topics>
+        </keyword>
+        <keyword name="window menu">
+            <topics>
+                <topic url="windowmenu.htm" window="right"><![CDATA[Window Menu]]></topic>
+                <topic url="windowmenu1.htm" window="right"><![CDATA[Window Menu]]></topic>
+                <topic url="windowmenu2.htm" window="right"><![CDATA[Window Menu]]></topic>
+                <topic url="windowmenu3.htm" window="right"><![CDATA[Window Menu]]></topic>
+            </topics>
+        </keyword>
+    </keywords>
+    <groups />
+    <links />
+</root>

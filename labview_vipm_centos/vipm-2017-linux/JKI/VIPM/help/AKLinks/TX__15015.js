@@ -1,0 +1,1 @@
+d2hStoreMenuItems("TX__15015", [["rightclickmenu2.htm", "right", "Right-Click Menu"],["rightclickmenu3.htm", "right", "Right-Click Menu"],["rightclickmenu.htm", "right", "Right-Click Menu"]]);

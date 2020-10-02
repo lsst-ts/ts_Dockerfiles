@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Source File Settings</TITLE>
+<META content="text/html; charset=Windows-1252" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="Theme/nav.css"><LINK rel=stylesheet 
+type=text/css href="Theme/popupmenu.css"><LINK rel=stylesheet type=text/css 
+href="Theme/lf.css"><LINK rel=stylesheet type=text/css 
+href="LinksExt/C1H_HTML.css"><LINK rel=stylesheet type=text/css 
+href="LinksExt/VI Package Manager User Guide.css">
+<SCRIPT type=text/javascript>
+
+
+
+var _needIndentation = false;
+
+
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="linker.js">
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="special.js">
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="common.js">
+
+</SCRIPT>
+
+<meta name="Generator" content="ComponentOne Doc-To-Help v.2011.1.0.627">
+<meta name="D2HTheme" content="VIPM2010Theme v.151">
+</HEAD>
+<BODY onload=d2hOnLoadToolbar(event); 
+style="OVERFLOW: hidden; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 5px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #535353" 
+relPart="">
+<SCRIPT language=javascript>
+
+
+
+d2hTopicPreOpen();
+
+
+
+d2hTrySyncTOC();
+
+
+
+
+
+
+
+var prev = true;
+
+
+
+
+
+var next = true;
+
+
+
+if (typeof d2hInitMainThemeHandlers != "undefined")
+
+    d2hInitMainThemeHandlers(prev, next);
+
+d2hAdjustTopicBorders(document);    
+
+
+
+if (typeof d2hLoadWindows != "undefined")
+
+    d2hLoadWindows();
+
+if (typeof d2hLoadNavUrls != "undefined")
+
+    d2hLoadNavUrls();
+
+
+
+</SCRIPT>
+
+<DIV id=D2HTopicOuterBody class=d2h_outer_topic 
+style="OVERFLOW: auto; HEIGHT: 100%; WIDTH: 100%; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: white">
+<DIV id=nsbanner class=d2hNavigatorTopic>
+<DIV id=TitleRow class=d2h_main_titlerow 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">
+<DIV style="DISPLAY: none"><A id=D2HPreviousAnchor 
+href="specialconsiderationsforsomelabviewdestinations.htm"></A><A 
+id=D2HNextAnchor href="packagedependencies.htm"></A></DIV></DIV>
+<SCRIPT language=javascript>
+
+if (typeof d2hProcessTopicNavForCSH != "undefined")
+
+    d2hProcessTopicNavForCSH();
+
+</SCRIPT>
+</DIV>
+<DIV id=nstext class=d2h_main_nstext 
+style="HEIGHT: 100%; PADDING-BOTTOM: 10px; PADDING-TOP: 5px; PADDING-LEFT: 22px; PADDING-RIGHT: 10px" 
+valign="bottom">
+<DIV id=d2h_breadcrumbs class=d2h_breadcrumbs><SPAN 
+class=d2h_breadcrumbsContentsOnly>VI Package Manager (VIPM)</SPAN><SPAN 
+class=d2h_breadcrumbsLinkSeparator> &gt; </SPAN><A class=d2h_breadcrumbsNormal 
+href="usingvipackagebuilder.htm">Using VI Package Builder</A></DIV>
+<H3><A name=_Toc385809732></A><A name=_Source_File_Settings></A>Source File 
+Settings</H3>
+<P class=MsoBodyText>The source files settings page, of the <A 
+href="usingvipackagebuilder.htm">VI Package Builder</A> window, allows you to 
+have fine control of where your source files are installed, any renaming actions 
+and any password changes.</P>
+<P class=MsoBodyText style="PAGE-BREAK-AFTER: avoid; TEXT-ALIGN: center" 
+align=center><IMG src="ImagesExt/image100_123.png"></P>
+<P class=MsoCaption style="TEXT-ALIGN: center" align=center>Figure 56 - Source 
+File Settings Property Page</P>
+<P class=MsoBodyText><B>Source Tree</B>: This is a tree representation of your 
+package project source files. Click on each element in the tree to adjust the 
+settings for that item on the right side.</P>
+<P class=MsoBodyText><B>Exclude from Build</B>: This checkbox allows you to 
+exclude specific source files or folders from the package build.</P>
+<P class=MsoBodyText><B>Do Not Compile on Build</B>: When you enable this, you 
+are instructing VIPM not to treat the selected files as LabVIEW files (VIs, 
+lvlibs, etc.). When this is enabled, the following occurs:</P>
+<P class=MsoBodyText 
+style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><SPAN 
+style="FONT-FAMILY: Symbol"><SPAN 
+style="FONT-FAMILY: Verdana">•</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN>VIPM 
+will not be able to rename the file with a prefix or suffix. Since VIPM will not 
+read the linker info from the VI, it cannot update callers of the VI with the 
+new name.</P>
+<P class=MsoBodyText 
+style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><SPAN 
+style="FONT-FAMILY: Symbol"><SPAN 
+style="FONT-FAMILY: Verdana">•</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN>VIPM 
+will not be able to set the locking state of the VI or add passwords.</P>
+<P class=MsoBodyText 
+style="MARGIN-LEFT: 36pt; TEXT-INDENT: -18.75pt; tab-stops: 36.0pt"><SPAN 
+style="FONT-FAMILY: Symbol"><SPAN 
+style="FONT-FAMILY: Verdana">•</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN>VIPM 
+will not be able to fix the linker info in the VIs or libraries. This is 
+required when your source works outside of LabVIEW and you are installing under 
+LabVIEW. VIPM ensures that all the linking paths are correct. If you don’t do 
+this then when you open your installed VIs, LabVIEW will bring up the “searching 
+for missing VIs” dialog.</P>
+<P class=MsoBodyText>There are some instances where you might need this option 
+enabled for a small set of files in your package. For example, if you want to 
+package VIs that are broken. You might also use this on all the files if you’ve 
+developed your source beneath LabVIEW and the linker info is already set 
+correctly.</P>
+<P class=MsoBodyText><B>Destination: </B>Select a destination which was defined 
+in the <A href="destinations.htm">Destination Properties page</A>. This includes 
+built-in or custom destinations.</P>
+<P class=MsoBodyText style="MARGIN-LEFT: 36pt"><B>Make top level in LLB: 
+</B>This setting is only available if the destination is an LLB and the 
+selection is a VI. This will mark the VI as top-level inside the LLB. Please 
+refer to the LabVIEW documentation for more information on the significance of 
+this feature.</P>
+<P class=MsoBodyText style="MARGIN-LEFT: 36pt"><B>Use Destination of Parent 
+Folder: </B>If enabled, will use the destination setting defined in the parent 
+folder.</P>
+<DIV 
+style="BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 1pt; PADDING-TOP: 1pt; PADDING-LEFT: 4pt; MARGIN: 5pt 40.5pt 0pt 31pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 4pt">
+<P class=MsoBodyText 
+style="MARGIN-BOTTOM: 0pt; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 0pt; PADDING-TOP: 0pt; PADDING-LEFT: 0pt; BORDER-LEFT: medium none; MARGIN-TOP: 0pt; PADDING-RIGHT: 0pt"><B>Note</B>: 
+If a destination is configured as an LLB file (instead of a folder), then 
+support files (non-LabVIEW file types) will be placed next to the LLB file, not 
+inside it.</P></DIV>
+<P class=MsoBodyText><B>Password Type: </B>This allows you to specify a password 
+to apply to your LabVIEW files. VIPM will apply a password to VIs and LVLIBs. If 
+you select Random; VIPM will apply a 32 character randomly generated 
+password.</P>
+<P class=MsoBodyText style="TEXT-ALIGN: center" align=center><IMG 
+src="ImagesExt/image100_124.png"><B></B></P>
+<P class=MsoBodyText><B>Password: </B>Enter your own password in this field if 
+Password Type is set to Custom.<B></B></P>
+<P class=MsoBodyText style="MARGIN-LEFT: 36pt"><B>Use Password of Parent Folder: 
+</B>If enabled, will use the password settings defined in the parent folder.</P>
+<P class=MsoBodyText><B>Renaming Convention (Global Setting):</B> You can apply 
+a prefix or suffix to LabVIEW file types by selecting it here. The type of 
+renaming is global for all files in the project. You can either have the format 
+be a prefix or a suffix. However you can select what the prefix or suffix text 
+is and if it’s enabled or disabled, on an individual basis.</P>
+<P class=MsoBodyText><B>Enable Renaming: </B>If enabled, will apply the prefix 
+or suffix on the selected item.<B></B></P>
+<P class=MsoBodyText><B>Prefix\Suffix: </B>Enter the text you want for prefix or 
+suffix.</P>
+<P class=MsoBodyText style="MARGIN-LEFT: 36pt"><B>Use Rename Settings of Parent 
+Folder: </B>If enabled, will use the rename settings defined in the parent 
+folder.</P>
+<TABLE id=tblCustFooter class=d2h_cust cellSpacing=0 cellPadding=0 width="100%" 
+border=0>
+  <TBODY>
+  <TR class=d2h_cust>
+    <TD class=d2h_cust align=center><SPAN style="FONT-STYLE: italic"><BR>If 
+      you have any feedback or questions (including ideas for other topics you'd 
+      like to learn more about), please contact us using our </SPAN><A 
+      style="FONT-STYLE: italic" href="http://jki.net/support" 
+      target=_blank>support page</A><SPAN style="FONT-STYLE: italic">. 
+      &nbsp;We're looking forward to your feedback.</SPAN> <BR><BR>All Contents, 
+      Copyright © 2006-2014, <A href="http://jki.net" target=untitled>JKI</A>. 
+      All Rights Reserved. </TD></TR></TBODY></TABLE></DIV></DIV></BODY></HTML>

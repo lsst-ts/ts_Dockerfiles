@@ -1,0 +1,25 @@
+This Dockerfile and accompanying files are designed to create a Docker image to use for testing LSST software.
+
+It creates an image based on the CentOS base image, and installs Python36, Robot-Framework and other test related dependencies.  The user is appuser and testing should done with that account.
+
+This Dockerfile also started as a copy from ts_Dockerfiles/robot/Dockerfile. The difference is that this Dockerfile also included the necessary tools for getting Robot Framwork to work with LabVIEW. 
+
+To build this Docker image follow the steps below. 
+
+1. Copy the versions of LabVIEW that you expect to install onto the Docker container. For the examples shows below, I have two folders. These folders are named `LabVIEW2018SP1` and `LabVIEW2020`. I will use these names as examples for the commands that you can run. 
+
+2. Do `chmod 666 -R [folder]` on the folders that you placed into this directory and expect to use in your docker images. This is because otherwise you may get a permissions error from Docker being unable to access the `./INSTALL` scripts within LabVIEW or VIPM.
+
+3a. To build a CentOS7 image with LabVIEW 2018 SP1 you can use a command such as the following;
+
+docker build --build-arg CENTOS_VERSION="centos7" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos7/labview2018sp1:latest . 
+
+
+3b. To build a CentOS8 image with LabVIEW 2018 SP1 you can use a command such as the following;
+
+docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos8/labview2018sp1:latest . 
+
+3c. To build a CentOS8 image with LabVIEW 2020 you can use a command such as the following;
+
+docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2020 -t cagvm3.ctio.noao.edu:8082/centos8/labview2020:latest . 
+

@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<indexes>
+    <item name="About VIPM" id="1047">
+        <topics>
+            <topic url="aboutvipm.htm" window="right">About VIPM</topic>
+        </topics>
+    </item>
+    <item name="Activating Your Version of VIPM" id="15002">
+        <topics>
+            <topic url="activatingyourversionofvipm.htm" window="right">Activating Your Version of VIPM</topic>
+        </topics>
+    </item>
+    <item name="Add or Edit Package Dependency Dialog" id="15039">
+        <topics>
+            <topic url="addoreditpackagedependencydialog.htm" window="right">Add or Edit Package Dependency Dialog</topic>
+        </topics>
+    </item>
+    <item name="Add Palette to Library or Class" id="15029">
+        <topics>
+            <topic url="addpalettetolibraryorclass.htm" window="right">Add Palette to Library or Class</topic>
+        </topics>
+    </item>
+    <item name="Advanced Options - OpenG Package Mirrors" id="15068">
+        <topics>
+            <topic url="advancedoptionsopengpackagemirrors.htm" window="right">Advanced Options - OpenG Package Mirrors</topic>
+        </topics>
+    </item>
+    <item name="Appendix A: Troubleshooting" id="15076">
+        <topics>
+            <topic url="appendixatroubleshooting.htm" window="right">Appendix A: Troubleshooting</topic>
+        </topics>
+    </item>
+    <item name="Appendix B: How to manually configure your LabVIEW version to allow VIPM communication." id="15083">
+        <topics>
+            <topic url="appendixbhowtomanuallyconfigureyourlabviewversiontoallowvipmcommunication.htm" window="right">Appendix B: How to manually configure your LabVIEW version to allow VIPM communication.</topic>
+        </topics>
+    </item>
+    <item name="BSD License" id="15101">
+        <topics>
+            <topic url="bsdlicense.htm" window="right">BSD License</topic>
+        </topics>
+    </item>
+    <item name="Build Information" id="15023">
+        <topics>
+            <topic url="buildinformation.htm" window="right">Build Information</topic>
+        </topics>
+    </item>
+    <item name="Checking your Subscriptions for Available Packages" id="15001">
+        <topics>
+            <topic url="checkingyoursubscriptionsforavailablepackages.htm" window="right">Checking your Subscriptions for Available Packages</topic>
+        </topics>
+    </item>
+    <item name="Clickable Logo" id="15053">
+        <topics>
+            <topic url="clickablelogo.htm" window="right">Clickable Logo</topic>
+        </topics>
+    </item>
+    <item name="Configure LabVIEW Port Dialog" id="15065">
+        <topics>
+            <topic url="configurelabviewportdialog.htm" window="right">Configure LabVIEW Port Dialog</topic>
+        </topics>
+    </item>
+    <item name="Copyright Information" id="15097">
+        <topics>
+            <topic url="copyrightinformation.htm" window="right">Copyright Information</topic>
+        </topics>
+    </item>
+    <item name="Custom Actions" id="15043">
+        <topics>
+            <topic url="customactions.htm" window="right">Custom Actions</topic>
+        </topics>
+    </item>
+    <item name="Debugging Package Build Errors" id="15081">
+        <topics>
+            <topic url="debuggingpackagebuilderrors1.htm" window="right">Debugging Package Build Errors</topic>
+        </topics>
+    </item>
+    <item name="Define LabVIEW Version Dialog" id="15064">
+        <topics>
+            <topic url="definelabviewversiondialog.htm" window="right">Define LabVIEW Version Dialog</topic>
+        </topics>
+    </item>
+    <item name="Deprecating Packages in the Repository" id="15049">
+        <topics>
+            <topic url="deprecatingpackagesintherepository.htm" window="right">Deprecating Packages in the Repository</topic>
+        </topics>
+    </item>
+    <item name="Description" id="15025">
+        <topics>
+            <topic url="description.htm" window="right">Description</topic>
+        </topics>
+    </item>
+    <item name="Destinations" id="15035">
+        <topics>
+            <topic url="destinations.htm" window="right">Destinations</topic>
+        </topics>
+    </item>
+    <item name="Display Information" id="15024">
+        <topics>
+            <topic url="displayinformation.htm" window="right">Display Information</topic>
+        </topics>
+    </item>
+    <item name="Do I need a LabVIEW Run-Time Engine?" id="15091">
+        <topics>
+            <topic url="doineedalabviewruntimeengine.htm" window="right">Do I need a LabVIEW Run-Time Engine?</topic>
+        </topics>
+    </item>
+    <item name="Drag &amp; Drop" id="15030">
+        <topics>
+            <topic url="dragdrop1.htm" window="right">Drag &amp; Drop</topic>
+        </topics>
+    </item>
+    <item name="Edit Menu" id="15006">
+        <topics>
+            <topic url="editmenu2.htm" window="right">Edit Menu</topic>
+            <topic url="editmenu3.htm" window="right">Edit Menu</topic>
+            <topic url="editmenu.htm" window="right">Edit Menu</topic>
+        </topics>
+    </item>
+    <item name="Edit options" id="15060">
+        <topics>
+            <topic url="editoptions.htm" window="right">Edit options</topic>
+        </topics>
+    </item>
+    <item name="Editing the Palettes" id="15027">
+        <topics>
+            <topic url="editingthepalettes1.htm" window="right">Editing the Palettes</topic>
+        </topics>
+    </item>
+    <item name="Error List Dialog" id="15019">
+        <topics>
+            <topic url="errorlistdialog.htm" window="right">Error List Dialog</topic>
+        </topics>
+    </item>
+    <item name="FAQ - Frequently Asked Questions" id="15089">
+        <topics>
+            <topic url="faqfrequentlyaskedquestions.htm" window="right">FAQ - Frequently Asked Questions</topic>
+        </topics>
+    </item>
+    <item name="File Menu" id="15005">
+        <topics>
+            <topic url="filemenu2.htm" window="right">File Menu</topic>
+            <topic url="filemenu3.htm" window="right">File Menu</topic>
+            <topic url="filemenu.htm" window="right">File Menu</topic>
+            <topic url="filemenu1.htm" window="right">File Menu</topic>
+            <topic url="filemenu4.htm" window="right">File Menu</topic>
+        </topics>
+    </item>
+    <item name="Free Edition" id="14990">
+        <topics>
+            <topic url="freeedition.htm" window="right">Free Edition</topic>
+        </topics>
+    </item>
+    <item name="General Options" id="15061">
+        <topics>
+            <topic url="generaloptions.htm" window="right">General Options</topic>
+        </topics>
+    </item>
+    <item name="Getting Package Information" id="15071">
+        <topics>
+            <topic url="gettingpackageinformation.htm" window="right">Getting Package Information</topic>
+        </topics>
+    </item>
+    <item name="Getting Started" id="14999">
+        <topics>
+            <topic url="gettingstarted.htm" window="right">Getting Started</topic>
+        </topics>
+    </item>
+    <item name="GNU Lesser General Public License" id="15102">
+        <topics>
+            <topic url="gnulessergeneralpubliclicense.htm" window="right">GNU Lesser General Public License</topic>
+        </topics>
+    </item>
+    <item name="Help Menu" id="15011">
+        <topics>
+            <topic url="helpmenu2.htm" window="right">Help Menu</topic>
+            <topic url="helpmenu3.htm" window="right">Help Menu</topic>
+            <topic url="helpmenu.htm" window="right">Help Menu</topic>
+            <topic url="helpmenu1.htm" window="right">Help Menu</topic>
+            <topic url="helpmenu4.htm" window="right">Help Menu</topic>
+        </topics>
+    </item>
+    <item name="How do I configure VIPM to use a proxy server?" id="15093">
+        <topics>
+            <topic url="howdoiconfigurevipmtouseaproxyserver.htm" window="right">How do I configure VIPM to use a proxy server?</topic>
+        </topics>
+    </item>
+    <item name="Important Terminology" id="14992">
+        <topics>
+            <topic url="importantterminology.htm" window="right">Important Terminology</topic>
+        </topics>
+    </item>
+    <item name="Incompatible Packages" id="15042">
+        <topics>
+            <topic url="incompatiblepackages.htm" window="right">Incompatible Packages</topic>
+        </topics>
+    </item>
+    <item name="Install button is disabled/grayed" id="15079">
+        <topics>
+            <topic url="installbuttonisdisabledgrayed.htm" window="right">Install button is disabled/grayed</topic>
+        </topics>
+    </item>
+    <item name="Install Requirements" id="15041">
+        <topics>
+            <topic url="installrequirements.htm" window="right">Install Requirements</topic>
+        </topics>
+    </item>
+    <item name="Installing One or More Packages from the List" id="15072">
+        <topics>
+            <topic url="installingoneormorepackagesfromthelist.htm" window="right">Installing One or More Packages from the List</topic>
+        </topics>
+    </item>
+    <item name="Installing VIPM" id="14994">
+        <topics>
+            <topic url="installingvipm.htm" window="right">Installing VIPM</topic>
+        </topics>
+    </item>
+    <item name="Installing VIPM via command line (Windows Only)" id="14997">
+        <topics>
+            <topic url="installingvipmviacommandlinewindowsonly.htm" window="right">Installing VIPM via command line (Windows Only)</topic>
+        </topics>
+    </item>
+    <item name="Instrument Driver Network Tool" id="15059">
+        <topics>
+            <topic url="instrumentdrivernetworktool.htm" window="right">Instrument Driver Network Tool</topic>
+        </topics>
+    </item>
+    <item name="LabVIEW 2009-2014" id="15087">
+        <topics>
+            <topic url="labview20092014.htm" window="right">LabVIEW 2009-2014</topic>
+        </topics>
+    </item>
+    <item name="LabVIEW 6.x" id="15084">
+        <topics>
+            <topic url="labview6x.htm" window="right">LabVIEW 6.x</topic>
+        </topics>
+    </item>
+    <item name="LabVIEW 7.x" id="15085">
+        <topics>
+            <topic url="labview7x.htm" window="right">LabVIEW 7.x</topic>
+        </topics>
+    </item>
+    <item name="LabVIEW 8.x" id="15086">
+        <topics>
+            <topic url="labview8x.htm" window="right">LabVIEW 8.x</topic>
+        </topics>
+    </item>
+    <item name="LabVIEW Options - Version Management" id="15063">
+        <topics>
+            <topic url="labviewoptionsversionmanagement.htm" window="right">LabVIEW Options - Version Management</topic>
+        </topics>
+    </item>
+    <item name="Last Action Results Window" id="15074">
+        <topics>
+            <topic url="lastactionresultswindow.htm" window="right">Last Action Results Window</topic>
+        </topics>
+    </item>
+    <item name="Launching VIPM" id="15000">
+        <topics>
+            <topic url="launchingvipm.htm" window="right">Launching VIPM</topic>
+        </topics>
+    </item>
+    <item name="Licensing &amp; Activation" id="15040">
+        <topics>
+            <topic url="licensingactivation.htm" window="right">Licensing &amp; Activation</topic>
+        </topics>
+    </item>
+    <item name="Managing Packages" id="15070">
+        <topics>
+            <topic url="managingpackages.htm" window="right">Managing Packages</topic>
+        </topics>
+    </item>
+    <item name="Menu Bar" id="15004">
+        <topics>
+            <topic url="menubar2.htm" window="right">Menu Bar</topic>
+            <topic url="menubar3.htm" window="right">Menu Bar</topic>
+            <topic url="menubar.htm" window="right">Menu Bar</topic>
+            <topic url="menubar1.htm" window="right">Menu Bar</topic>
+            <topic url="menubar5.htm" window="right">Menu Bar</topic>
+        </topics>
+    </item>
+    <item name="Network Options" id="15062">
+        <topics>
+            <topic url="networkoptions.htm" window="right">Network Options</topic>
+        </topics>
+    </item>
+    <item name="New Features and Changes" id="15088">
+        <topics>
+            <topic url="newfeaturesandchanges.htm" window="right">New Features and Changes</topic>
+        </topics>
+    </item>
+    <item name="New Package Build Project Dialog" id="15022">
+        <topics>
+            <topic url="newpackagebuildprojectdialog.htm" window="right">New Package Build Project Dialog</topic>
+        </topics>
+    </item>
+    <item name="No LabVIEW run-time engine error" id="15077">
+        <topics>
+            <topic url="nolabviewruntimeengineerror.htm" window="right">No LabVIEW run-time engine error</topic>
+        </topics>
+    </item>
+    <item name="OpenG Builder License" id="15098">
+        <topics>
+            <topic url="opengbuilderlicense.htm" window="right">OpenG Builder License</topic>
+        </topics>
+    </item>
+    <item name="Overview of VIPM Interface" id="14993">
+        <topics>
+            <topic url="overviewofvipminterface.htm" window="right">Overview of VIPM Interface</topic>
+        </topics>
+    </item>
+    <item name="Package Action Confirmation Window" id="15073">
+        <topics>
+            <topic url="packageactionconfirmationwindow.htm" window="right">Package Action Confirmation Window</topic>
+        </topics>
+    </item>
+    <item name="Package Builder Options - VI Package Builder" id="15067">
+        <topics>
+            <topic url="packagebuilderoptionsvipackagebuilder.htm" window="right">Package Builder Options - VI Package Builder</topic>
+        </topics>
+    </item>
+    <item name="Package Configuration File Properties Dialog" id="15018">
+        <topics>
+            <topic url="packageconfigurationfilepropertiesdialog.htm" window="right">Package Configuration File Properties Dialog</topic>
+        </topics>
+    </item>
+    <item name="Package Dependencies" id="15038">
+        <topics>
+            <topic url="packagedependencies.htm" window="right">Package Dependencies</topic>
+        </topics>
+    </item>
+    <item name="Package Filename" id="15045">
+        <topics>
+            <topic url="packagefilename.htm" window="right">Package Filename</topic>
+        </topics>
+    </item>
+    <item name="Package list" id="15014">
+        <topics>
+            <topic url="packagelist.htm" window="right">Package List</topic>
+            <topic url="packagelist2.htm" window="right">Package list</topic>
+            <topic url="packagelist3.htm" window="right">Package list</topic>
+        </topics>
+    </item>
+    <item name="Package Menu" id="15008">
+        <topics>
+            <topic url="packagemenu2.htm" window="right">Package Menu</topic>
+            <topic url="packagemenu3.htm" window="right">Package Menu</topic>
+            <topic url="packagemenu.htm" window="right">Package Menu</topic>
+            <topic url="packagemenu1.htm" window="right">Package Menu</topic>
+        </topics>
+    </item>
+    <item name="Page Navigation" id="15056">
+        <topics>
+            <topic url="pagenavigation.htm" window="right">Page Navigation</topic>
+        </topics>
+    </item>
+    <item name="Palette Category Browser Dialog" id="15034">
+        <topics>
+            <topic url="palettecategorybrowserdialog.htm" window="right">Palette Category Browser Dialog</topic>
+        </topics>
+    </item>
+    <item name="Palette Defaults" id="15028">
+        <topics>
+            <topic url="palettedefaults.htm" window="right">Palette Defaults</topic>
+        </topics>
+    </item>
+    <item name="Palettes" id="15026">
+        <topics>
+            <topic url="palettes.htm" window="right">Palettes</topic>
+        </topics>
+    </item>
+    <item name="PCE Options - Package Configuration Editor" id="15066">
+        <topics>
+            <topic url="pceoptionspackageconfigurationeditor.htm" window="right">PCE Options - Package Configuration Editor</topic>
+        </topics>
+    </item>
+    <item name="Pre/Post Build Actions" id="15044">
+        <topics>
+            <topic url="prepostbuildactions.htm" window="right">Pre/Post Build Actions</topic>
+        </topics>
+    </item>
+    <item name="Pre-Build Check Problem Report Window" id="15082">
+        <topics>
+            <topic url="prebuildcheckproblemreportwindow1.htm" window="right">Pre-Build Check Problem Report Window</topic>
+        </topics>
+    </item>
+    <item name="Pro Edition" id="14991">
+        <topics>
+            <topic url="proedition.htm" window="right">Pro Edition</topic>
+        </topics>
+    </item>
+    <item name="Product Enumeration" id="15055">
+        <topics>
+            <topic url="productenumeration.htm" window="right">Product Enumeration</topic>
+        </topics>
+    </item>
+    <item name="Product Information" id="15058">
+        <topics>
+            <topic url="productinformation.htm" window="right">Product Information</topic>
+        </topics>
+    </item>
+    <item name="Relinking to Updated LGPL Components" id="15100">
+        <topics>
+            <topic url="relinkingtoupdatedlgplcomponents.htm" window="right">Relinking to Updated LGPL Components</topic>
+        </topics>
+    </item>
+    <item name="Repository Manager Options" id="15069">
+        <topics>
+            <topic url="repositorymanageroptions.htm" window="right">Repository Manager Options</topic>
+        </topics>
+    </item>
+    <item name="Repository Menu" id="15047">
+        <topics>
+            <topic url="repositorymenu.htm" window="right">Repository Menu</topic>
+        </topics>
+    </item>
+    <item name="Repository Properties Dialog" id="15048">
+        <topics>
+            <topic url="repositorypropertiesdialog.htm" window="right">Repository Properties Dialog</topic>
+        </topics>
+    </item>
+    <item name="Right-Click Menu" id="15015">
+        <topics>
+            <topic url="rightclickmenu2.htm" window="right">Right-Click Menu</topic>
+            <topic url="rightclickmenu3.htm" window="right">Right-Click Menu</topic>
+            <topic url="rightclickmenu.htm" window="right">Right-Click Menu</topic>
+        </topics>
+    </item>
+    <item name="Right-click on Empty Space" id="15031">
+        <topics>
+            <topic url="rightclickonemptyspace1.htm" window="right">Right-click on Empty Space</topic>
+        </topics>
+    </item>
+    <item name="Right-click on Subpalette" id="15032">
+        <topics>
+            <topic url="rightclickonsubpalette1.htm" window="right">Right-click on Subpalette</topic>
+        </topics>
+    </item>
+    <item name="Right-click on VI or Control" id="15033">
+        <topics>
+            <topic url="rightclickonviorcontrol1.htm" window="right">Right-click on VI or Control</topic>
+        </topics>
+    </item>
+    <item name="Running the Installer" id="14996">
+        <topics>
+            <topic url="runningtheinstaller.htm" window="right">Running the Installer</topic>
+        </topics>
+    </item>
+    <item name="Search" id="15013">
+        <topics>
+            <topic url="search2.htm" window="right">Search</topic>
+            <topic url="search.htm" window="right">Search</topic>
+        </topics>
+    </item>
+    <item name="SOFTWARE LICENSE AGREEMENT" id="15096">
+        <topics>
+            <topic url="softwarelicenseagreement.htm" window="right">SOFTWARE LICENSE AGREEMENT</topic>
+        </topics>
+    </item>
+    <item name="Sort Control" id="15054">
+        <topics>
+            <topic url="sortcontrol.htm" window="right">Sort Control</topic>
+        </topics>
+    </item>
+    <item name="Source File Settings" id="15037">
+        <topics>
+            <topic url="sourcefilesettings.htm" window="right">Source File Settings</topic>
+        </topics>
+    </item>
+    <item name="Special considerations for some LabVIEW destinations" id="15036">
+        <topics>
+            <topic url="specialconsiderationsforsomelabviewdestinations.htm" window="right">Special considerations for some LabVIEW destinations</topic>
+        </topics>
+    </item>
+    <item name="Starting a New Package Build Project" id="15021">
+        <topics>
+            <topic url="startinganewpackagebuildproject.htm" window="right">Starting a New Package Build Project</topic>
+        </topics>
+    </item>
+    <item name="Status Bar" id="15016">
+        <topics>
+            <topic url="statusbar2.htm" window="right">Status Bar</topic>
+            <topic url="statusbar3.htm" window="right">Status Bar</topic>
+            <topic url="statusbar.htm" window="right">Status Bar</topic>
+        </topics>
+    </item>
+    <item name="System Requirements" id="14995">
+        <topics>
+            <topic url="systemrequirements.htm" window="right">System Requirements</topic>
+        </topics>
+    </item>
+    <item name="The VI Package Network" id="15075">
+        <topics>
+            <topic url="thevipackagenetwork.htm" window="right">The VI Package Network</topic>
+        </topics>
+    </item>
+    <item name="Third Party VI Packages" id="15099">
+        <topics>
+            <topic url="thirdpartyvipackages.htm" window="right">Third Party VI Packages</topic>
+        </topics>
+    </item>
+    <item name="Toolbar" id="15012">
+        <topics>
+            <topic url="toolbar2.htm" window="right">Toolbar</topic>
+            <topic url="toolbar3.htm" window="right">Toolbar</topic>
+            <topic url="toolbar.htm" window="right">Toolbar</topic>
+            <topic url="toolbar1.htm" window="right">Toolbar</topic>
+        </topics>
+    </item>
+    <item name="Tools Menu" id="15009">
+        <topics>
+            <topic url="toolsmenu2.htm" window="right">Tools Menu</topic>
+            <topic url="toolsmenu3.htm" window="right">Tools Menu</topic>
+            <topic url="toolsmenu.htm" window="right">Tools Menu</topic>
+        </topics>
+    </item>
+    <item name="Top Lists" id="15057">
+        <topics>
+            <topic url="toplists.htm" window="right">Top Lists</topic>
+        </topics>
+    </item>
+    <item name="Uninstall button is disabled/grayed" id="15080">
+        <topics>
+            <topic url="uninstallbuttonisdisabledgrayed.htm" window="right">Uninstall button is disabled/grayed</topic>
+        </topics>
+    </item>
+    <item name="Using Package Configuration Editor" id="15017">
+        <topics>
+            <topic url="usingpackageconfigurationeditor.htm" window="right">Using Package Configuration Editor</topic>
+        </topics>
+    </item>
+    <item name="Using the LabVIEW Tools Network View" id="15052">
+        <topics>
+            <topic url="usingthelabviewtoolsnetworkview.htm" window="right">Using the LabVIEW Tools Network View</topic>
+        </topics>
+    </item>
+    <item name="Using VI Package Builder" id="15020">
+        <topics>
+            <topic url="usingvipackagebuilder.htm" window="right">Using VI Package Builder</topic>
+        </topics>
+    </item>
+    <item name="Using VI Repository Manager" id="15046">
+        <topics>
+            <topic url="usingvirepositorymanager.htm" window="right">Using VI Repository Manager</topic>
+        </topics>
+    </item>
+    <item name="Using VIPM" id="15003">
+        <topics>
+            <topic url="usingvipm.htm" window="right">Using VIPM</topic>
+        </topics>
+    </item>
+    <item name="VI Package Manager (VIPM)" id="14988">
+        <topics>
+            <topic url="vipackagemanagervipm.htm" window="right">VI Package Manager (VIPM)</topic>
+        </topics>
+    </item>
+    <item name="View Menu" id="15007">
+        <topics>
+            <topic url="viewmenu2.htm" window="right">View Menu</topic>
+            <topic url="viewmenu3.htm" window="right">View Menu</topic>
+        </topics>
+    </item>
+    <item name="VIPM cannot connect to the Internet" id="15078">
+        <topics>
+            <topic url="vipmcannotconnecttotheinternet.htm" window="right">VIPM cannot connect to the Internet</topic>
+        </topics>
+    </item>
+    <item name="VIPM Icon for Linux Installation" id="14998">
+        <topics>
+            <topic url="vipmiconforlinuxinstallation.htm" window="right">VIPM Icon for Linux Installation</topic>
+        </topics>
+    </item>
+    <item name="VIPM Repository Theory of Operation" id="15051">
+        <topics>
+            <topic url="vipmrepositorytheoryofoperation.htm" window="right">VIPM Repository Theory of Operation</topic>
+        </topics>
+    </item>
+    <item name="What do VIPM Clients See When a Package is deprecated?" id="15050">
+        <topics>
+            <topic url="whatdovipmclientsseewhenapackageisdeprecated.htm" window="right">What do VIPM Clients See When a Package is deprecated?</topic>
+        </topics>
+    </item>
+    <item name="What is a Package?" id="15092">
+        <topics>
+            <topic url="whatisapackage.htm" window="right">What is a Package?</topic>
+        </topics>
+    </item>
+    <item name="What's Available in VIPM" id="14989">
+        <topics>
+            <topic url="whatsavailableinvipm.htm" window="right">What's Available in VIPM</topic>
+        </topics>
+    </item>
+    <item name="Where can I get More Help?" id="15090">
+        <topics>
+            <topic url="wherecanigetmorehelp.htm" window="right">Where can I get More Help?</topic>
+        </topics>
+    </item>
+    <item name="Why does LabVIEW sometimes launch when I'm installing packages?" id="15094">
+        <topics>
+            <topic url="whydoeslabviewsometimeslaunchwheniminstallingpackages.htm" window="right">Why does LabVIEW sometimes launch when I'm installing packages?</topic>
+        </topics>
+    </item>
+    <item name="Why doesn't VIPM close LabVIEW when it is longer needed by the package installation process?" id="15095">
+        <topics>
+            <topic url="whydoesntvipmcloselabviewwhenitislongerneededbythepackageinstallationprocess.htm" window="right">Why doesn't VIPM close LabVIEW when it is longer needed by the package installation process?</topic>
+        </topics>
+    </item>
+    <item name="Window Menu" id="15010">
+        <topics>
+            <topic url="windowmenu.htm" window="right">Window Menu</topic>
+            <topic url="windowmenu1.htm" window="right">Window Menu</topic>
+            <topic url="windowmenu2.htm" window="right">Window Menu</topic>
+            <topic url="windowmenu3.htm" window="right">Window Menu</topic>
+        </topics>
+    </item>
+</indexes>

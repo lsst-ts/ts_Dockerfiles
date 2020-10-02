@@ -1,0 +1,1 @@
+d2hStoreMenuItems("TX__15016", [["statusbar2.htm", "right", "Status Bar"],["statusbar3.htm", "right", "Status Bar"],["statusbar.htm", "right", "Status Bar"]]);

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>How do I configure VIPM to use a proxy server?</TITLE>
+<META content="text/html; charset=Windows-1252" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="Theme/nav.css"><LINK rel=stylesheet 
+type=text/css href="Theme/popupmenu.css"><LINK rel=stylesheet type=text/css 
+href="Theme/lf.css"><LINK rel=stylesheet type=text/css 
+href="LinksExt/C1H_HTML.css"><LINK rel=stylesheet type=text/css 
+href="LinksExt/VI Package Manager User Guide.css">
+<SCRIPT type=text/javascript>
+
+
+
+var _needIndentation = false;
+
+
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="linker.js">
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="special.js">
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript src="common.js">
+
+</SCRIPT>
+
+<meta name="Generator" content="ComponentOne Doc-To-Help v.2011.1.0.627">
+<meta name="D2HTheme" content="VIPM2010Theme v.151">
+</HEAD>
+<BODY onload=d2hOnLoadToolbar(event); 
+style="OVERFLOW: hidden; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 5px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #535353" 
+relPart="">
+<SCRIPT language=javascript>
+
+
+
+d2hTopicPreOpen();
+
+
+
+d2hTrySyncTOC();
+
+
+
+
+
+
+
+var prev = true;
+
+
+
+
+
+var next = true;
+
+
+
+if (typeof d2hInitMainThemeHandlers != "undefined")
+
+    d2hInitMainThemeHandlers(prev, next);
+
+d2hAdjustTopicBorders(document);    
+
+
+
+if (typeof d2hLoadWindows != "undefined")
+
+    d2hLoadWindows();
+
+if (typeof d2hLoadNavUrls != "undefined")
+
+    d2hLoadNavUrls();
+
+
+
+</SCRIPT>
+
+<DIV id=D2HTopicOuterBody class=d2h_outer_topic 
+style="OVERFLOW: auto; HEIGHT: 100%; WIDTH: 100%; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: white">
+<DIV id=nsbanner class=d2hNavigatorTopic>
+<DIV id=TitleRow class=d2h_main_titlerow 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">
+<DIV style="DISPLAY: none"><A id=D2HPreviousAnchor 
+href="whatisapackage.htm"></A><A id=D2HNextAnchor 
+href="whydoeslabviewsometimeslaunchwheniminstallingpackages.htm"></A></DIV></DIV>
+<SCRIPT language=javascript>
+
+if (typeof d2hProcessTopicNavForCSH != "undefined")
+
+    d2hProcessTopicNavForCSH();
+
+</SCRIPT>
+</DIV>
+<DIV id=nstext class=d2h_main_nstext 
+style="HEIGHT: 100%; PADDING-BOTTOM: 10px; PADDING-TOP: 5px; PADDING-LEFT: 22px; PADDING-RIGHT: 10px" 
+valign="bottom">
+<DIV id=d2h_breadcrumbs class=d2h_breadcrumbs><A class=d2h_breadcrumbsNormal 
+href="faqfrequentlyaskedquestions.htm">FAQ - Frequently Asked 
+Questions</A></DIV>
+<H2><A name=_Toc385809786>How do I configure VIPM to use a proxy 
+server?</A></H2>
+<P class=MsoBodyText>VIPM will try to use your Windows system proxy settings 
+configured by your IT department. This is the default behavior and should work 
+on most Windows systems.</P>
+<P class=MsoBodyText style="PAGE-BREAK-AFTER: avoid; TEXT-ALIGN: center" 
+align=center><IMG src="ImagesExt/image100_205.png"></P>
+<P class=MsoCaption style="TEXT-ALIGN: center" align=center>Figure 1 - Internet 
+Preferences page of the VIPM Options dialog.</P>
+<P class=MsoBodyText>You can configure a custom proxy by selecting Manual Proxy 
+Settings.&nbsp; In order to do this, you will need to know the proxy server’s 
+hostname and (TCP) port, and enter this information into the <B>Internet 
+Preferences</B> page of the VIPM <B>Options</B> dialog.&nbsp; Commonly, the 
+hostname and port is specified in the format <SPAN 
+class=CodeBaseChar>servername:port</SPAN>.&nbsp; For example, this could be 
+specified in a format like those shown below:</P>
+<P class=CodeBase style="MARGIN-LEFT: 36pt">proxy1:80</P>
+<P class=CodeBase style="MARGIN-LEFT: 36pt">www.yourcompany.com:8080</P>
+<P class=CodeBase style="MARGIN-LEFT: 36pt">proxy2.yourcompany.com:80</P>
+<P class=MsoBodyText>You can find out if your network has a proxy server (and 
+what its name and port are) from your IT department.&nbsp; You can also find out 
+this information by looking at the connection settings of your web 
+browser.&nbsp; Some web browsers use an auto-configuration URL for proxy 
+setup.&nbsp; If your web browser uses an auto-configuration URL, try entering 
+this URL into your browser’s address bar and looking at the resulting 
+information.&nbsp; If you may see something like the following:</P>
+<P class=CodeBase>PROXY www.yourcompany.com:8080</P>
+<P class=MsoBodyText>You can try copying this into VIPM</P>
+<P class=MsoBodyText>Some proxy servers require a username and password. If this 
+is required you can fill this information in the options as well.</P>
+<TABLE id=tblCustFooter class=d2h_cust cellSpacing=0 cellPadding=0 width="100%" 
+border=0>
+  <TBODY>
+  <TR class=d2h_cust>
+    <TD class=d2h_cust align=center><SPAN style="FONT-STYLE: italic"><BR>If 
+      you have any feedback or questions (including ideas for other topics you'd 
+      like to learn more about), please contact us using our </SPAN><A 
+      style="FONT-STYLE: italic" href="http://jki.net/support" 
+      target=_blank>support page</A><SPAN style="FONT-STYLE: italic">. 
+      &nbsp;We're looking forward to your feedback.</SPAN> <BR><BR>All Contents, 
+      Copyright © 2006-2014, <A href="http://jki.net" target=untitled>JKI</A>. 
+      All Rights Reserved. </TD></TR></TBODY></TABLE></DIV></DIV></BODY></HTML>
