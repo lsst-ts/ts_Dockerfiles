@@ -9,7 +9,7 @@ version: "3.4"
 services:
 
   ospl-daemon1:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0013
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -27,7 +27,7 @@ services:
         ipv4_address: "141.142.238.120"
 
   ospl-daemon2:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0013
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -44,7 +44,7 @@ services:
         ipv4_address: "141.142.238.121"
 
   ospl-daemon3:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0013
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -61,7 +61,7 @@ services:
         ipv4_address: "141.142.238.122"
 
   ospl-daemon4:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0013
+    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
