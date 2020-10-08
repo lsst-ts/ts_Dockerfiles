@@ -1,1 +1,0 @@
-d2hStoreMenuItems("TX__15006", [["editmenu2.htm", "right", "Edit Menu"],["editmenu3.htm", "right", "Edit Menu"],["editmenu.htm", "right", "Edit Menu"]]);

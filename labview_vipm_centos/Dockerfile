@@ -33,7 +33,7 @@ RUN yum -y update && \
     yum -y install git which mlocate wget tigervnc-server \
            openssl-devel make gcc-c++ bzip2-devel libffi-devel \
            libXinerama libXinerama.i686 mesa-libGL mesa-libGL.i686 \
-           libstdc++ libstdc++.i686 && \
+           libstdc++ libstdc++.i686 libXft&& \
     yum clean all && \
     rm -rf /var/cache/yum
 
