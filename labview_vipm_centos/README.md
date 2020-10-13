@@ -12,17 +12,12 @@ To build this Docker image follow the steps below.
 
 3. Do `chmod 666 -R [folder]` on the folders that you placed into this directory and expect to use in your docker images. This is because otherwise you may get a permissions error from Docker being unable to access the `./INSTALL` scripts within LabVIEW or VIPM.
 
-4a. To build a CentOS7 image with LabVIEW 2018 SP1 you can use a command such as the following;
+4. The next step has allows you to create 3 possible images. These different images can be created using the commands described below.
 
-docker build --build-arg CENTOS_VERSION="centos7" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos7/labview2018sp1:latest . 
+- To build a CentOS7 image with LabVIEW 2018 SP1 you can use a command such as the following `docker build --build-arg CENTOS_VERSION="centos7" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos7/labview2018sp1:latest .`
 
+- To build a CentOS8 image with LabVIEW 2018 SP1 you can use a command such as the following `docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos8/labview2018sp1:latest .` 
 
-4b. To build a CentOS8 image with LabVIEW 2018 SP1 you can use a command such as the following;
+- To build a CentOS8 image with LabVIEW 2020 you can use a command such as the following `docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2020 -t cagvm3.ctio.noao.edu:8082/centos8/labview2020:latest .` 
 
-docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2018SP1 -t cagvm3.ctio.noao.edu:8082/centos8/labview2018sp1:latest . 
-
-4c. To build a CentOS8 image with LabVIEW 2020 you can use a command such as the following;
-
-docker build --build-arg CENTOS_VERSION="centos8" --build-arg LV_PATH=LabVIEW2020 -t cagvm3.ctio.noao.edu:8082/centos8/labview2020:latest . 
-
-5) Complete the Manual steps explained at the end of the Dockerfile.
+5. Complete the Manual steps explained at the end of the Dockerfile.
