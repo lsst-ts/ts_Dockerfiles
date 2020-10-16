@@ -1,7 +1,8 @@
 # Generic SAL configuration
 FROM centos:centos7
 
-RUN yum update -y \
+RUN yum install -y epel-release \
+  && yum update -y \
   && yum install -y git gcc gcc-c++ make openssl-devel bzip2-devel libffi-devel ncurses-libs xterm xorg-x11-fonts-misc \
   java-1.8.0-openjdk-devel maven swig tk-devel vim bash-completion bash-completion-extras wget libgphoto2-devel \
   sqlite-devel blas-devel lapack-devel libftdi libftdi-devel \
