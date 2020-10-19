@@ -3,7 +3,7 @@ FROM lsstts/develop-env:latest
 ARG M1M3GUI_BRANCH=develop
 
 USER root
-RUN source /home/saluser/.setup.sh && conda install -y -c conda-forge pyside2
+RUN source /home/saluser/.setup.sh && conda install -y -c conda-forge pyside2 asyncqt
 
 USER saluser
 
@@ -15,13 +15,10 @@ RUN git clone --branch $M1M3GUI_BRANCH https://github.com/lsst-ts/ts_m1m3support
 
 WORKDIR /home/saluser
 RUN source .setup.sh \
-    && cd repos/ts_sal \
-    && cp ../ts_xml/sal_interfaces/*.xml ../ts_xml/sal_interfaces/MTM1M3/*.xml test \
-    && cd test \
-    && salgenerator generate python MTM1M3
+    && make_idl_files.py MTM1M3 MTMount
 
 COPY startup.sh .
 
 SHELL ["/bin/bash", "-lc"]
 ENTRYPOINT [""]
-CMD ["./startup.sh"]
+CMD ["/home/saluser/startup.sh"]
