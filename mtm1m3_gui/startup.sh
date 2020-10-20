@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 if [ "$#" -eq 0 ]; then
-    cd /home/saluser/
-    source .setup_salobj.sh
-    ./repos/ts_m1m3supportgui/M1M3GUI
+    source /home/saluser/.setup_salobj.sh
+    setup ts_salobj -t current
+    ~/repos/ts_m1m3supportgui/M1M3GUI
 fi
 
 exec "$@"
