@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   atmcs-sim:
-    image: ts-dockerhub.lsst.org/atmcs_sim:c0013
+    image: ts-dockerhub.lsst.org/atmcs_sim:c0014
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
@@ -19,7 +19,7 @@ services:
         ipv4_address: "141.142.238.149"
 
   atdome-sim:
-    image: ts-dockerhub.lsst.org/atdome:c0013
+    image: ts-dockerhub.lsst.org/atdome:c0014
     container_name: atdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -37,7 +37,7 @@ services:
         ipv4_address: "141.142.238.148"
 
   atdometrajectory:
-    image: ts-dockerhub.lsst.org/atdometrajectory:c0013
+    image: ts-dockerhub.lsst.org/atdometrajectory:c0014
     container_name: atdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -54,7 +54,7 @@ services:
         ipv4_address: "141.142.238.147"
 
   atpneumatics-sim:
-    image: ts-dockerhub.lsst.org/at_pneumatics_sim:c0013
+    image: ts-dockerhub.lsst.org/at_pneumatics_sim:c0014
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -71,7 +71,7 @@ services:
         ipv4_address: "141.142.238.146"
 
   ataos:
-    image: ts-dockerhub.lsst.org/ataos:c0013
+    image: ts-dockerhub.lsst.org/ataos:c0014
     container_name: ataos
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -88,7 +88,7 @@ services:
         ipv4_address: "141.142.238.145"
 
   atptg:
-    image: ts-dockerhub.lsst.org/ptkernel:c0013
+    image: ts-dockerhub.lsst.org/ptkernel:c0014
     container_name: atptg
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -111,7 +111,7 @@ services:
         max-size: "10m"
 
   athexapod:
-    image: ts-dockerhub.lsst.org/athexapod:c0013
+    image: ts-dockerhub.lsst.org/athexapod:c0014
     container_name: athexapod
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -140,7 +140,7 @@ services:
     tty: true
 
   atspectrograph:
-    image: ts-dockerhub.lsst.org/atspec:c0013
+    image: ts-dockerhub.lsst.org/atspec:c0014
     container_name: atspectrograph
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa

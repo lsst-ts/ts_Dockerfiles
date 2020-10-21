@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   mtptg:
-    image: ts-dockerhub.lsst.org/ptkernel:c0013
+    image: ts-dockerhub.lsst.org/ptkernel:c0014
     container_name: mtptg
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -27,7 +27,7 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: ts-dockerhub.lsst.org/rotator:c0013
+    image: ts-dockerhub.lsst.org/rotator:c0014
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -45,7 +45,7 @@ services:
         ipv4_address: "141.142.238.132"
 
   mt-cam-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0013
+    image: ts-dockerhub.lsst.org/hexapod:c0014
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -63,7 +63,7 @@ services:
         ipv4_address: "141.142.238.133"
 
   mt-m2-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0013
+    image: ts-dockerhub.lsst.org/hexapod:c0014
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -81,7 +81,7 @@ services:
         ipv4_address: "141.142.238.134"
 
   mtaos:
-    image: ts-dockerhub.lsst.org/mtaos_sim:c0013
+    image: ts-dockerhub.lsst.org/mtaos_sim:c0014
     container_name: mtaos
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -98,7 +98,7 @@ services:
         ipv4_address: "141.142.238.135"
 
   m1m3:
-    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0013
+    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0014
     container_name: m1m3
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -120,7 +120,7 @@ services:
         max-size: "10m"
 
   m2:
-    image: ts-dockerhub.lsst.org/m2:c0013
+    image: ts-dockerhub.lsst.org/m2:c0014
     container_name: m2
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -137,11 +137,11 @@ services:
         ipv4_address: "141.142.238.137"
 
   mtmount:
-    image: ts-dockerhub.lsst.org/mtmount:c0013
+    image: ts-dockerhub.lsst.org/mtmount:c0014
     container_name: mtmount-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - RUN_ARG=-s
+      - RUN_ARG=--simulate
       - OSPL_INFOFILE=/tmp/ospl-info-mtmount.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtmount.log
     volumes:
@@ -155,7 +155,7 @@ services:
         ipv4_address: "141.142.238.138"
 
   mtdome:
-    image: ts-dockerhub.lsst.org/mtdome:c0013
+    image: ts-dockerhub.lsst.org/mtdome:c0014
     container_name: mtdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -173,7 +173,7 @@ services:
         ipv4_address: "141.142.238.139"
 
   mtdometrajectory:
-    image: ts-dockerhub.lsst.org/mtdometrajectory:c0013
+    image: ts-dockerhub.lsst.org/mtdometrajectory:c0014
     container_name: mtdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
