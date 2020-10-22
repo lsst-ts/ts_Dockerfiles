@@ -48,15 +48,15 @@ RUN cd /tmp \
   && git clone https://github.com/gphoto/libgphoto2.git \
   && cd libgphoto2 \
   && autoreconf --install --symlink \
-  && ./configure --prefix=/usr/local \
+  && ./configure --prefix=/opt/lsst/software/stack/conda/miniconda3-py37_4.8.2/envs/lsst-scipipe-cb4e2dc/lib \
   && make \
   && make install \
 # Copy the .pc files so pkg-config can find them later on
   && cp libgphoto2.pc /usr/share/pkgconfig \
   && cp libgphoto2_port/libgphoto2_port.pc /usr/share/pkgconfig \
-  && echo "/usr/local/lib" > /etc/ld.so.conf.d/gphoto2.conf \
-  && echo "/usr/local/lib/libgphoto2/2.5.25.1" > /etc/ld.so.conf.d/gphoto2.conf \
-  && echo "/usr/local/lib/libgphoto2_port/0.12.0" > /etc/ld.so.conf.d/gphoto2.conf \
+  && echo "/usr/local/lib" >> /etc/ld.so.conf.d/gphoto2.conf \
+  && echo "/usr/local/lib/libgphoto2/2.5.25.1" >> /etc/ld.so.conf.d/gphoto2.conf \
+  && echo "/usr/local/lib/libgphoto2_port/0.12.0" >> /etc/ld.so.conf.d/gphoto2.conf \
   && ldconfig
 
 RUN cd /tmp \
