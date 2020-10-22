@@ -4,13 +4,17 @@
       <Id>0</Id>
       <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
       <Database>
-         <Size>104857600</Size>
+         <Size>504857600</Size>
       </Database>
+      <Report verbosity="DEBUG"/>
       <Service name="ddsi2">
          <Command>ddsi2</Command>
       </Service>
       <Service name="durability">
          <Command>durability</Command>
+      </Service>
+      <Service name="networking">
+         <Command>networking</Command>
       </Service>
       <Service enabled="false" name="cmsoap">
          <Command>cmsoap</Command>
@@ -92,8 +96,16 @@
         <DeliveryQueueMaxSamples>10000</DeliveryQueueMaxSamples>
         <SquashParticipants>true</SquashParticipants>
       </Internal>
+      <Tracing>
+        <Verbosity>finer</Verbosity>
+        <OutputFile>ddsi2.log</OutputFile>
+      </Tracing>
     </DDSI2Service>
    <DurabilityService name="durability">
+      <Tracing>
+         <Verbosity>FINER</Verbosity>
+         <OutputFile>durability.log</OutputFile>
+      </Tracing>
       <!-- <ClientDurability enabled="true"/> -->
       <Network>
          <Alignment>
@@ -111,13 +123,25 @@
          <NameSpace name="defaultNamespace">
             <Partition>${LSST_DDS_PARTITION_PREFIX}*</Partition>
          </NameSpace>
-            <Policy alignee="Lazy" 
+            <Policy alignee="Initial" 
                     aligner="true" 
                     durability="Durable" 
                     masterPriority="${OSPL_MASTER_PRIORITY:-1}"
                     nameSpace="defaultNamespace"/>
       </NameSpaces>
    </DurabilityService>
+   <NetworkService name="networking">
+      <Tracing enabled="true">
+        <OutputFile>networking.log</OutputFile>
+        <Verbosity>finer</Verbosity>
+        <Categories/>
+      </Tracing>
+      <Channels>
+          <Channel enabled="false" name="aChannel" reliable="false">
+              <PortNr>53400</PortNr>
+          </Channel>
+      </Channels>
+   </NetworkService>
    <TunerService name="cmsoap">
       <Server>
          <PortNr>50000</PortNr>
