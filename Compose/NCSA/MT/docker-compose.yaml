@@ -43,6 +43,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.132"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mt-cam-hexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:c0014
@@ -61,6 +66,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.133"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mt-m2-hexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:c0014
@@ -79,6 +89,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.134"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mtaos:
     image: ts-dockerhub.lsst.org/mtaos_sim:c0014
@@ -96,6 +111,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.135"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   m1m3:
     image: ts-dockerhub.lsst.org/mtm1m3_sim:c0014
@@ -135,6 +155,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.137"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mtmount:
     image: ts-dockerhub.lsst.org/mtmount:c0014
@@ -153,6 +178,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.138"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mtdome:
     image: ts-dockerhub.lsst.org/mtdome:c0014
@@ -171,6 +201,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.139"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
   mtdometrajectory:
     image: ts-dockerhub.lsst.org/mtdometrajectory:c0014
@@ -188,6 +223,11 @@ services:
     networks:
       test-stand-network:
         ipv4_address: "141.142.238.130"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
 networks:
   default:
