@@ -13,9 +13,6 @@
         <Service name="durability">
             <Command>durability</Command>
         </Service>
-        <Service name="networking">
-            <Command>networking</Command>
-        </Service>
         <Service enabled="false" name="cmsoap">
             <Command>cmsoap</Command>
         </Service>
@@ -130,18 +127,6 @@
                   nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
-    <NetworkService name="networking">
-        <Tracing enabled="true">
-            <OutputFile>networking.log</OutputFile>
-            <Verbosity>finer</Verbosity>
-            <Categories/>
-        </Tracing>
-        <Channels>
-            <Channel enabled="false" name="aChannel" reliable="false">
-                <PortNr>53400</PortNr>
-            </Channel>
-        </Channels>
-    </NetworkService>
     <TunerService name="cmsoap">
         <Server>
             <PortNr>50000</PortNr>
