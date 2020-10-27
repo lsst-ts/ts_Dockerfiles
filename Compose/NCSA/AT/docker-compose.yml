@@ -28,7 +28,7 @@ services:
     container_name: atdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - RUN_ARG=-s
+      - RUN_ARG=--simulate
       - OSPL_INFOFILE=/tmp/ospl-info-atdome.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atdome.log
     volumes:
