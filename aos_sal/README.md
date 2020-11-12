@@ -4,56 +4,24 @@ This is the software environment for active optics system (AOS) to integrate wit
 
 ## Overview
 
-The scientific pipeline is installed with the lsst_distrib and lsst_sims packages. This Dockerfile will be removed after AOS does not need the lsst_sims anymore.
+The development environment is installed with the SAL, `lsst_distrib`, and `lsst_sims` packages.
+The beginning image of `lsstts/develop-env` has the SAL and `lsst_distrib` installed already.
+The detail of lsst packages (`lsst_distrib` and `lsst_sims`) for individual tag version is listed in [Index of /stack/src/tags](https://eups.lsst.codes/stack/src/tags/).
+If the `lsst_distrib` uses the weekly built tag such as `w_2020_28`, related tag of `lsst_sims` should be `sims_w_2020_28`.
+Notice that there is a prefix of `sims_` for `lsst_sims` and the week (e.g. `w_2020_28`) should be the same as `lsst_distrib`.
+In the build process (`docker build`), the user should assign the arguments of `IMAGE_TAG` and `SIMS_VERSION` by `--build-arg` for the tag versions of `lsstts/develop-env` and `lsst_sims`.
+For the available tag of docker image of `lsstts/develop-env` to use, please follow [lsstts/develop-env](https://hub.docker.com/r/lsstts/develop-env).
+This Dockerfile will be removed after AOS does not need the `lsst_sims` anymore.
 
 ## Tag List
 
+- w_2020_42_sal
+  - lsst_sims (tag: sims_w_2020_42)
+  - sphinxcontrib-plantuml (by pip)
+  - tcsh (by yum)
+  - SAL related packages maintained by develop-env in ts_Dockerfiles
 - w_2020_29_sal
   - lsst_sims (tag: sims_w_2020_29)
   - sphinxcontrib-plantuml (by pip)
   - csh (by yum)
   - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_22_sal
-  - lsst_sims (tag: sims_w_2020_20)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_20_sal
-  - lsst_sims (tag: sims_w_2020_20)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - csh (by yum)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_16_sal
-  - lsst_sims (tag: sims_w_2020_16)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - csh (by yum)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_15_sal
-  - lsst_sims (tag: sims_w_2020_15)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - csh (by yum)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_14_sal
-  - lsst_sims (tag: sims_w_2020_14)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - csh (by yum)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2020_06_sal
-  - lsst_sims (tag: sims_w_2020_06)
-  - ipython (by conda)
-  - scikit-image (by conda)
-  - sphinxcontrib-plantuml (by pip)
-  - csh (by yum)
-  - graphviz (by yum)
-  - SAL related packages maintained by develop-env in ts_Dockerfiles
-- w_2019_02
-    - lsst_distrib (tag: w_2019_02)
-    - lsst_sims (tag: sims_w_2019_02)
-    - ts_sal - master branch (commit: c473240)
-    - ts_xml - master branch (commit: 601b64e)
-    - ts_opensplice - master branch (commit: d0661fb) with OpenSpliceDDS v6.4.1
-    - ts_m1m3support - develop branch (commit: 27ce004)
