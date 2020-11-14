@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   mtptg:
-    image: ts-dockerhub.lsst.org/ptkernel:c0015
+    image: ts-dockerhub.lsst.org/ptkernel:${CYCLE}
     container_name: mtptg
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -27,7 +27,7 @@ services:
         max-size: "10m"
 
   mt-rotator-sim:
-    image: ts-dockerhub.lsst.org/rotator:c0015
+    image: ts-dockerhub.lsst.org/rotator:${CYCLE}
     container_name: mt-rotator-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -50,7 +50,7 @@ services:
         max-size: "10m"
 
   mt-cam-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0015
+    image: ts-dockerhub.lsst.org/hexapod:${CYCLE}
     container_name: mt-cam-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -73,7 +73,7 @@ services:
         max-size: "10m"
 
   mt-m2-hexapod-sim:
-    image: ts-dockerhub.lsst.org/hexapod:c0015
+    image: ts-dockerhub.lsst.org/hexapod:${CYCLE}
     container_name: mt-m2-hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -96,7 +96,7 @@ services:
         max-size: "10m"
 
   mtaos:
-    image: ts-dockerhub.lsst.org/mtaos_sim:c0015
+    image: ts-dockerhub.lsst.org/mtaos_sim:${CYCLE}
     container_name: mtaos
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -118,7 +118,7 @@ services:
         max-size: "10m"
 
   m1m3:
-    image: ts-dockerhub.lsst.org/mtm1m3_sim:c0015
+    image: ts-dockerhub.lsst.org/mtm1m3_sim:${CYCLE}
     container_name: m1m3
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -140,7 +140,7 @@ services:
         max-size: "10m"
 
   m2:
-    image: ts-dockerhub.lsst.org/m2:c0015
+    image: ts-dockerhub.lsst.org/m2:${CYCLE}
     container_name: m2
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -162,7 +162,7 @@ services:
         max-size: "10m"
 
   mtmount:
-    image: ts-dockerhub.lsst.org/mtmount:c0015
+    image: ts-dockerhub.lsst.org/mtmount:${CYCLE}
     container_name: mtmount-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -185,7 +185,7 @@ services:
         max-size: "10m"
 
   mtdome:
-    image: ts-dockerhub.lsst.org/mtdome:c0015
+    image: ts-dockerhub.lsst.org/mtdome:${CYCLE}
     container_name: mtdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -208,7 +208,7 @@ services:
         max-size: "10m"
 
   mtdometrajectory:
-    image: ts-dockerhub.lsst.org/mtdometrajectory:c0015
+    image: ts-dockerhub.lsst.org/mtdometrajectory:${CYCLE}
     container_name: mtdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa

@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   atmcs-sim:
-    image: ts-dockerhub.lsst.org/atmcs_sim:c0015
+    image: ts-dockerhub.lsst.org/atmcs_sim:${CYCLE}
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
@@ -24,7 +24,7 @@ services:
         max-size: "10m"
 
   atdome-sim:
-    image: ts-dockerhub.lsst.org/atdome:c0015
+    image: ts-dockerhub.lsst.org/atdome:${CYCLE}
     container_name: atdome-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -47,7 +47,7 @@ services:
         max-size: "10m"
 
   atdometrajectory:
-    image: ts-dockerhub.lsst.org/atdometrajectory:c0015
+    image: ts-dockerhub.lsst.org/atdometrajectory:${CYCLE}
     container_name: atdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -69,7 +69,7 @@ services:
         max-size: "10m"
 
   atpneumatics-sim:
-    image: ts-dockerhub.lsst.org/at_pneumatics_sim:c0015
+    image: ts-dockerhub.lsst.org/at_pneumatics_sim:${CYCLE}
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -91,7 +91,7 @@ services:
         max-size: "10m"
 
   ataos:
-    image: ts-dockerhub.lsst.org/ataos:c0015
+    image: ts-dockerhub.lsst.org/ataos:${CYCLE}
     container_name: ataos
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -113,7 +113,7 @@ services:
         max-size: "10m"
 
   atptg:
-    image: ts-dockerhub.lsst.org/ptkernel:c0015
+    image: ts-dockerhub.lsst.org/ptkernel:${CYCLE}
     container_name: atptg
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -136,7 +136,7 @@ services:
         max-size: "10m"
 
   athexapod:
-    image: ts-dockerhub.lsst.org/athexapod:c0015
+    image: ts-dockerhub.lsst.org/athexapod:${CYCLE}
     container_name: athexapod
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -170,7 +170,7 @@ services:
     tty: true
 
   atspectrograph:
-    image: ts-dockerhub.lsst.org/atspec:c0015
+    image: ts-dockerhub.lsst.org/atspec:${CYCLE}
     container_name: atspectrograph
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa

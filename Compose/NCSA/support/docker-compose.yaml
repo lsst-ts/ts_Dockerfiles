@@ -9,7 +9,7 @@ version: "3.4"
 services:
 
   ospl-daemon1:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0015
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -31,7 +31,7 @@ services:
         max-size: "10m"
 
   ospl-daemon2:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0015
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -53,7 +53,7 @@ services:
         max-size: "10m"
 
   ospl-daemon3:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0015
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -75,7 +75,7 @@ services:
         max-size: "10m"
 
   ospl-daemon4:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0015
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa

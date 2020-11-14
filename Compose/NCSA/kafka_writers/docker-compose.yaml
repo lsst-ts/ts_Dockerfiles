@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
   salkafka-auxtel:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-auxtel
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -31,7 +31,7 @@ services:
         max-size: "10m"
 
   salkafka-comcam:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-comcam
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -60,7 +60,7 @@ services:
         max-size: "10m"
 
   salkafka-m1m3:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-m1m3
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -89,7 +89,7 @@ services:
         max-size: "10m"
 
   salkafka-m2:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-m2
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -118,7 +118,7 @@ services:
         max-size: "10m"
 
   salkafka-latiss:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-latiss
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -147,7 +147,7 @@ services:
         max-size: "10m"
 
   salkafka-maintel:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-maintel
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -176,7 +176,7 @@ services:
         max-size: "10m"
 
   salkafka-mtmount:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-mtmount
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -205,7 +205,7 @@ services:
         max-size: "10m"
 
   salkafka-obssys:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-obssys
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -234,7 +234,7 @@ services:
         max-size: "10m"
 
   salkafka-test:
-    image: ts-dockerhub.lsst.org/salkafka:c0015
+    image: ts-dockerhub.lsst.org/salkafka:${CYCLE}
     container_name: salkafka-test
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
