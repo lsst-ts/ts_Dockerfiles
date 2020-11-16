@@ -6,6 +6,7 @@
         <Database>
             <Size>504857600</Size>
         </Database>
+        <Report verbosity="DEBUG"/>
         <Service name="ddsi2">
             <Command>ddsi2</Command>
         </Service>
@@ -92,8 +93,16 @@
             <DeliveryQueueMaxSamples>10000</DeliveryQueueMaxSamples>
             <SquashParticipants>true</SquashParticipants>
         </Internal>
+        <Tracing>
+            <Verbosity>finer</Verbosity>
+            <OutputFile>ddsi2.log</OutputFile>
+        </Tracing>
     </DDSI2Service>
     <DurabilityService name="durability">
+        <Tracing>
+            <Verbosity>FINER</Verbosity>
+            <OutputFile>durability.log</OutputFile>
+        </Tracing>
         <!-- <ClientDurability enabled="true"/> -->
         <Network>
             <Alignment>

@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   mtqueue:
-    image: ts-dockerhub.lsst.org/scriptqueue:c0014
+    image: ts-dockerhub.lsst.org/scriptqueue:${CYCLE}
     container_name: mtqueue
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -26,7 +26,7 @@ services:
         max-size: "10m"
 
   atqueue:
-    image: ts-dockerhub.lsst.org/scriptqueue:c0014
+    image: ts-dockerhub.lsst.org/scriptqueue:${CYCLE}
     container_name: atqueue
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -49,7 +49,7 @@ services:
         max-size: "10m"
 
   watcher:
-    image: ts-dockerhub.lsst.org/watcher:c0014
+    image: ts-dockerhub.lsst.org/watcher:${CYCLE}
     container_name: watcher
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -72,7 +72,7 @@ services:
         max-size: "10m"
 
   mtscheduler:
-    image: ts-dockerhub.lsst.org/scheduler:c0014
+    image: ts-dockerhub.lsst.org/scheduler:${CYCLE}
     container_name: mtscheduler
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -95,7 +95,7 @@ services:
         max-size: "10m"
 
   atscheduler:
-    image: ts-dockerhub.lsst.org/scheduler:c0014
+    image: ts-dockerhub.lsst.org/scheduler:${CYCLE}
     container_name: atscheduler
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa

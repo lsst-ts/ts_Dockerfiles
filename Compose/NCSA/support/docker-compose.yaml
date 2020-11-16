@@ -9,16 +9,15 @@ version: "3.4"
 services:
 
   ospl-daemon1:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - OSPL_MASTER_PRIORITY=200
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
     ipc: host
     pid: host
@@ -32,7 +31,7 @@ services:
         max-size: "10m"
 
   ospl-daemon2:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -40,7 +39,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
     ipc: host
     pid: host
@@ -54,7 +53,7 @@ services:
         max-size: "10m"
 
   ospl-daemon3:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
@@ -62,7 +61,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
     ipc: host
     pid: host
@@ -76,15 +75,16 @@ services:
         max-size: "10m"
 
   ospl-daemon4:
-    image: ts-dockerhub.lsst.org/ospl-daemon:c0014
+    image: ts-dockerhub.lsst.org/ospl-daemon:${CYCLE}
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - OSPL_MASTER_PRIORITY=201
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
     tty: true
     ipc: host
     pid: host
