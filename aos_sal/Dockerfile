@@ -1,20 +1,22 @@
 # Dockerfile to execute a base machine with all set to test active optics
 # system software
 
-FROM lsstts/develop-env:c0010
+ARG IMAGE_TAG
+FROM lsstts/develop-env:${IMAGE_TAG}
 
 LABEL author="Te-Wei Tsai <ttsai@lsst.org>"
+
+ARG SIMS_VERSION
 
 ARG LSST_USER=saluser
 ARG LSST_USER_HOME=/home/$LSST_USER
 ARG LSST_DIR=/opt/lsst/software/stack
-ARG SIMS_VERSION=sims_w_2020_29
 ARG SHEBANGTRON_URL=https://raw.githubusercontent.com/lsst/shebangtron/master/shebangtron
 
 USER root
 
 # Install the required packages
-RUN yum install -y csh \
+RUN yum install -y tcsh \
     && yum clean all \
     && rm -rf /var/cache/yum
 
