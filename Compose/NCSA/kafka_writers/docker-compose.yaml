@@ -17,7 +17,7 @@ services:
       - CSC_LIST=ATDome ATDomeTrajectory ATAOS ATPneumatics ATHexapod ATPtg ATMCS
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -46,7 +46,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -75,7 +75,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -104,7 +104,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -133,7 +133,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -162,7 +162,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -191,7 +191,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -220,7 +220,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -249,7 +249,7 @@ services:
     stdin_open: true
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host

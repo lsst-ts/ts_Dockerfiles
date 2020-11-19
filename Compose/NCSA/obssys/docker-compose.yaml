@@ -11,7 +11,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtqueue.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtqueue.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -35,7 +35,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-atqueue.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -57,7 +57,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-watcher.log
       - OSPL_ERRORFILE=/tmp/ospl-error-watcher.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -80,7 +80,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtscheduler.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtscheduler.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -103,7 +103,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-atscheduler.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atscheduler.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host

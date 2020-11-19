@@ -17,7 +17,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -39,7 +39,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -61,7 +61,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -84,7 +84,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host

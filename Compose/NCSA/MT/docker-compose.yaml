@@ -12,7 +12,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-mtptg.log
     stdin_open: true
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -35,7 +35,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtrotator.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtrotator.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -58,7 +58,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtcamhexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtcamhexapod.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -81,7 +81,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2hexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2hexapod.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -103,7 +103,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtaos.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtaos.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -125,7 +125,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -147,7 +147,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -170,7 +170,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtmount.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtmount.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -193,7 +193,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtdome.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtdome.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -215,7 +215,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtdometrajectory.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtdometrajectory.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
