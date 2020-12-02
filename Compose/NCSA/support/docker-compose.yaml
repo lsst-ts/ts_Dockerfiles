@@ -4,7 +4,7 @@ version: "3.4"
 # ospl-daemon1 - lsst-teststand-ts1.ncsa.illinois.edu
 # ospl-daemon2 - lsst-teststand-ts2.ncsa.illinois.edu
 # ospl-daemon3 - lsst-nts-ts3.ncsa.illinois.edu
-# ospl-daemon4 - lsst-l1-cl-ocs.ncsa.illinois.edu
+# ospl-daemon4 - lsst-l1-cl-ocs.ncsa.illinois.edu (master)
 
 services:
 
@@ -84,7 +84,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
+      - ${OSPL_SHMEM_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
