@@ -4,6 +4,7 @@ services:
 
   atmcs-sim:
     image: ts-dockerhub.lsst.org/atmcs_sim:${CYCLE}
+    container_name: atmcs-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
@@ -135,9 +136,9 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  athexapod:
+  athexapod-sim:
     image: ts-dockerhub.lsst.org/athexapod:${CYCLE}
-    container_name: athexapod
+    container_name: athexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - HEXAPOD_SIM_SERVICE_HOST=141.142.238.142
@@ -169,9 +170,9 @@ services:
     stdin_open: true
     tty: true
 
-  atspectrograph:
+  atspectrograph-sim:
     image: ts-dockerhub.lsst.org/atspec:${CYCLE}
-    container_name: atspectrograph
+    container_name: atspectrograph-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
