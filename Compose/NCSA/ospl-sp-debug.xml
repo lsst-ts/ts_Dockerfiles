@@ -59,7 +59,11 @@
             <ParticipantIndex>none</ParticipantIndex>
         </Discovery>
         <Internal>
-            <SquashParticipants>true</SquashParticipants>
+            <Watermarks>
+                <WhcHigh>8MB</WhcHigh>
+                <WhcAdaptive>false</WhcAdaptive>
+            </Watermarks>
+            <DeliveryQueueMaxSamples>10000</DeliveryQueueMaxSamples>
         </Internal>
         <Tracing>
             <Verbosity>finer</Verbosity>
