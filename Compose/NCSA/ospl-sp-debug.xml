@@ -64,6 +64,7 @@
                 <WhcAdaptive>false</WhcAdaptive>
             </Watermarks>
             <DeliveryQueueMaxSamples>10000</DeliveryQueueMaxSamples>
+            <ResponsivenessTimeout>${LSST_DDS_RESPONSIVENESS_TIMEOUT:-inf}</ResponsivenessTimeout>
         </Internal>
         <Tracing>
             <Verbosity>finer</Verbosity>
