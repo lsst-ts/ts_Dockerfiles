@@ -7,6 +7,7 @@ services:
     container_name: atmcs-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
     volumes:
@@ -52,6 +53,7 @@ services:
     container_name: atdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
       - OSPL_INFOFILE=/tmp/ospl-info-atdometrajectory.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atdometrajectory.log
     volumes:
