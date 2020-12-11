@@ -8,11 +8,12 @@ services:
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -53,7 +54,6 @@ services:
     container_name: atdometrajectory
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
       - OSPL_INFOFILE=/tmp/ospl-info-atdometrajectory.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atdometrajectory.log
     volumes:
@@ -76,11 +76,13 @@ services:
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-atpneumatics.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atpneumatics.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
