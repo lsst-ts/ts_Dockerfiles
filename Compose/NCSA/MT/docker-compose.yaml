@@ -122,7 +122,7 @@ services:
     container_name: mtm1m3-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
@@ -146,7 +146,7 @@ services:
     container_name: mtm2-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log

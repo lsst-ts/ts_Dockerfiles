@@ -7,7 +7,7 @@ services:
     container_name: atmcs-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
@@ -76,7 +76,7 @@ services:
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_RESPONSIVENESS_TIMEOUT=1s
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
       - OSPL_INFOFILE=/tmp/ospl-info-atpneumatics.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atpneumatics.log
