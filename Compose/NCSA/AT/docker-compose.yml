@@ -9,6 +9,7 @@ services:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
     volumes:
@@ -78,6 +79,7 @@ services:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - LSST_DDS_ALIGNEE=Lazy
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-atpneumatics.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atpneumatics.log
     volumes:
