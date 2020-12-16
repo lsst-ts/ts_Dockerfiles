@@ -13,7 +13,6 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_ALIGNEE=Lazy
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
@@ -37,7 +36,6 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_ALIGNEE=Lazy
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
@@ -61,7 +59,6 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
-      - LSST_DDS_ALIGNEE=Lazy
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
@@ -85,6 +82,8 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_ALIGNEE=Initial
+      - LSST_DDS_ALIGNER=true
       - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_MASTER_PRIORITY=201
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
