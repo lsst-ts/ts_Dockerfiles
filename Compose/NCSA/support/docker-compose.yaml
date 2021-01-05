@@ -4,7 +4,7 @@ version: "3.4"
 # ospl-daemon1 - lsst-teststand-ts1.ncsa.illinois.edu
 # ospl-daemon2 - lsst-teststand-ts2.ncsa.illinois.edu
 # ospl-daemon3 - lsst-nts-ts3.ncsa.illinois.edu
-# ospl-daemon4 - lsst-l1-cl-ocs.ncsa.illinois.edu
+# ospl-daemon4 - lsst-l1-cl-ocs.ncsa.illinois.edu (master)
 
 services:
 
@@ -13,11 +13,12 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -35,11 +36,12 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -57,11 +59,12 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -79,12 +82,15 @@ services:
     container_name: ospl-daemon
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_ALIGNEE=Initial
+      - LSST_DDS_ALIGNER=true
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
       - OSPL_MASTER_PRIORITY=201
       - OSPL_INFOFILE=/tmp/ospl-info-daemon.log
       - OSPL_ERRORFILE=/tmp/ospl-error-daemon.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ${OSPL_CONFIGURATION_FILE}:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host

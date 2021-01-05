@@ -12,7 +12,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-mtptg.log
     stdin_open: true
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -26,16 +26,16 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mt-rotator-sim:
+  mtrotator-sim:
     image: ts-dockerhub.lsst.org/rotator:${CYCLE}
-    container_name: mt-rotator-sim
+    container_name: mtrotator-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
       - OSPL_INFOFILE=/tmp/ospl-info-mtrotator.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtrotator.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -49,16 +49,16 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mt-cam-hexapod-sim:
+  mtcamhexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:${CYCLE}
-    container_name: mt-cam-hexapod-sim
+    container_name: mtcamhexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s 1
       - OSPL_INFOFILE=/tmp/ospl-info-mtcamhexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtcamhexapod.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -72,16 +72,16 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mt-m2-hexapod-sim:
+  mtm2hexapod-sim:
     image: ts-dockerhub.lsst.org/hexapod:${CYCLE}
-    container_name: mt-m2-hexapod-sim
+    container_name: mtm2hexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s 2
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2hexapod.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2hexapod.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -95,15 +95,15 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mtaos:
+  mtaos-sim:
     image: ts-dockerhub.lsst.org/mtaos_sim:${CYCLE}
-    container_name: mtaos
+    container_name: mtaos-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - OSPL_INFOFILE=/tmp/ospl-info-mtaos.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtaos.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -117,15 +117,17 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  m1m3:
+  mtm1m3-sim:
     image: ts-dockerhub.lsst.org/mtm1m3_sim:${CYCLE}
-    container_name: m1m3
+    container_name: mtm1m3-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -139,15 +141,17 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  m2:
+  mtm2-sim:
     image: ts-dockerhub.lsst.org/m2:${CYCLE}
-    container_name: m2
+    container_name: mtm2-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -161,7 +165,7 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mtmount:
+  mtmount-sim:
     image: ts-dockerhub.lsst.org/mtmount:${CYCLE}
     container_name: mtmount-sim
     environment:
@@ -170,7 +174,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtmount.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtmount.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -184,7 +188,7 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  mtdome:
+  mtdome-sim:
     image: ts-dockerhub.lsst.org/mtdome:${CYCLE}
     container_name: mtdome-sim
     environment:
@@ -193,7 +197,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtdome.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtdome.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -215,7 +219,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtdometrajectory.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtdometrajectory.log
     volumes:
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host

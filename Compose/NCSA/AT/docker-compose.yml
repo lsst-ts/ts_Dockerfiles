@@ -4,13 +4,16 @@ services:
 
   atmcs-sim:
     image: ts-dockerhub.lsst.org/atmcs_sim:${CYCLE}
+    container_name: atmcs-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-atmcs.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atmcs.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -33,7 +36,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-atdome.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -55,7 +58,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-atdometrajectory.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -73,11 +76,13 @@ services:
     container_name: atpneumatics-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
+      - LSST_DDS_RESPONSIVENESS_TIMEOUT=15s
+      - OSPL_MASTER_PRIORITY=0
       - OSPL_INFOFILE=/tmp/ospl-info-atpneumatics.log
       - OSPL_ERRORFILE=/tmp/ospl-error-atpneumatics.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -99,7 +104,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-ataos.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -122,7 +127,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-atptg.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -135,9 +140,9 @@ services:
         max-file: "5"
         max-size: "10m"
 
-  athexapod:
+  athexapod-sim:
     image: ts-dockerhub.lsst.org/athexapod:${CYCLE}
-    container_name: athexapod
+    container_name: athexapod-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - HEXAPOD_SIM_SERVICE_HOST=141.142.238.142
@@ -145,7 +150,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-athexapod.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
@@ -169,9 +174,9 @@ services:
     stdin_open: true
     tty: true
 
-  atspectrograph:
+  atspectrograph-sim:
     image: ts-dockerhub.lsst.org/atspec:${CYCLE}
-    container_name: atspectrograph
+    container_name: atspectrograph-sim
     environment:
       - LSST_DDS_PARTITION_PREFIX=ncsa
       - RUN_ARG=-s
@@ -179,7 +184,7 @@ services:
       - OSPL_ERRORFILE=/tmp/ospl-error-atspectrograph.log
     volumes:
       - /tmp/docker_tmp/:/tmp/
-      - ../ospl-6.10.4-shmem.xml:/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux/etc/config/ospl.xml
+      - ${OSPL_SHMEM_CONFIG}:${OSPL_MOUNT_POINT}
     tty: true
     ipc: host
     pid: host
