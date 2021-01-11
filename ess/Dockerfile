@@ -56,6 +56,7 @@ WORKDIR /home/ess
 
 RUN git clone https://github.com/lsst-ts/ts_ess.git \
   && git clone https://github.com/lsst-ts/ts_config_ocs.git \
+  && git clone https://github.com/lsst-ts/ts_ddsconfig.git \
   && git clone https://github.com/lsst-ts/ts_salobj.git \
   && git clone https://github.com/lsst-ts/ts_xml.git \
   && git clone https://github.com/lsst-ts/ts_sal.git \
@@ -68,7 +69,7 @@ ENV OSPL_URI=file://${OSPL_HOME}/etc/config/ospl.xml
 ENV OSPL_RELEASE=6.9.190925OSS
 ENV PATH=${OSPL_HOME}/bin:${PATH}
 ENV LD_LIBRARY_PATH=${OSPL_HOME}/lib
-ENV LSST_DDS_DOMAIN=ess
+ENV LSST_DDS_PARTITION_PFREFIX=ess
 ENV LSST_DDS_QOS=file:///home/ess/ts_idl/qos/QoS.xml
 ENV TS_SAL_ROOT=/home/ess/ts_sal
 ENV LSST_SDK_INSTALL=${TS_SAL_ROOT}
@@ -78,7 +79,7 @@ ENV SAL_WORK_DIR=${TS_SAL_ROOT}/test
 ENV PATH=${SAL_DIR}:${PATH}
 ENV TS_XML_DIR=/home/ess/ts_xml
 ENV TS_SAL_DIR=/home/ess/ts_sal
-ENV PYTHONPATH=/home/ess/ts_ess/python:/home/ess/ts_salobj/python:/home/ess/ts_sal/python:/home/ess/ts_idl/python:/home/ess/ts_xml/python
+ENV PYTHONPATH=/home/ess/ts_ess/python:/home/ess/ts_ddsconfig/python:/home/ess/ts_salobj/python:/home/ess/ts_sal/python:/home/ess/ts_idl/python:/home/ess/ts_xml/python
 ENV PATH=/home/ess/ts_ess/bin:/home/ess/ts_sal/bin:${PATH}
 
 RUN make_idl_files.py ESS
