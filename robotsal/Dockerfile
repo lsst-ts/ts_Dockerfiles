@@ -27,6 +27,12 @@ rpm-build && \
 yum clean all && \
 rm -rf /var/cache/yum
 
+ADD maven.sh /etc/profile.d/
+RUN wget -P /tmp https://mirrors.gigenet.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+RUN tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt && \
+ln -s /opt/apache-maven-3.6.3 /opt/maven && \
+source /etc/profile.d/maven.sh && mvn --version
+
 #RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
 ADD OpenSpliceDDS-6.10.4-8.el7.x86_64.rpm ${HOME}
 RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-8.el7.x86_64.rpm
@@ -42,6 +48,7 @@ ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux
 ENV LSST_DDS_DOMAIN=citest
 
 RUN echo "" >> ${HOME}/.bash_profile && \
+echo 'source /etc/profile.d/maven.sh' >> ${HOME}/.bash_profile && \
 echo 'source $LSST_SDK_INSTALL/setup.env' >> ${HOME}/.bash_profile
 
 ENV LSST_DDS_PARTITION_PREFIX=citest
