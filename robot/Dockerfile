@@ -3,25 +3,32 @@ MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
 
+USER root
+
 RUN yum -y update
+RUN yum -y groupinstall "Development Tools"
 RUN yum -y --enablerepo=extras install epel-release && \
 yum -y install git which mlocate wget \
-python37-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
+python38-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
 yum clean all && \
 rm -rf /var/cache/yum
 
-ADD Python-3.7.6.tgz ${HOME}/
-RUN cd ${HOME}/Python-3.7.6 && \
-./configure --prefix=/usr/local && \
-make && make install
-
 RUN updatedb
 
-RUN easy_install-3.7 pip && \
-python3.7 -m pip install --upgrade pip setuptools numpy && \
-python3.7 -m pip install robotframework && \
-python3.7 -m pip install astropy && \
-python3.7 -m pip install pytest
+RUN cd /tmp && \
+wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz && \
+tar xvf Python-3.8.3.tgz
+
+RUN cd /tmp/Python-3.8.3 && \
+./configure --enable-optimizations && \
+make altinstall && \
+ln /usr/local/bin/python3.8 /usr/local/bin/python3 && \
+python3 --version && pip3.8 --version
+
+RUN python3.8 -m pip install --upgrade pip setuptools numpy && \
+python3.8 -m pip install robotframework && \
+python3.8 -m pip install astropy && \
+python3.8 -m pip install pytest
 
 RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
 RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
