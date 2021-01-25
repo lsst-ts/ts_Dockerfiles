@@ -35,5 +35,3 @@ cyan='\[\033[0;36m\]'
 CYAN='\[\033[1;36m\]'
 NC='\[\033[0m\]'
 
-# Setting PATH for Python 3.7
-alias python3='python3.7'

@@ -27,8 +27,9 @@ rpm-build && \
 yum clean all && \
 rm -rf /var/cache/yum
 
-RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
-RUN yum -y install OpenSpliceDDS-6.9.0-6.x86_64.rpm
+#RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
+ADD OpenSpliceDDS-6.10.4-5.el7.x86_64.rpm ${HOME}
+RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-5.el7.x86_64.rpm
 
 USER ${USER}
 
@@ -37,10 +38,9 @@ COPY --chown=1003:1003 rpmmacros ${HOME}/.rpmmacros
 COPY --chown=0:0 rpmmacros /root/.rpmmacros
 
 ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
-ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux
-ENV PYTHON_BUILD_VERSION=3.7m
-ENV PYTHON_BUILD_LOCATION=/usr/local
-ENV LSST_DDS_DOMAIN=citest
+ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux
 
 RUN echo "" >> ${HOME}/.bash_profile && \
 echo 'source $LSST_SDK_INSTALL/setup.env' >> ${HOME}/.bash_profile
+
+ENV LSST_DDS_PARTITION_PREFIX=citest
