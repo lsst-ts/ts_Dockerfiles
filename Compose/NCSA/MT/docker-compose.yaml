@@ -127,7 +127,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtm1m3.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm1m3.log
     volumes:
-      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
+      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
@@ -151,7 +151,7 @@ services:
       - OSPL_INFOFILE=/tmp/ospl-info-mtm2.log
       - OSPL_ERRORFILE=/tmp/ospl-error-mtm2.log
     volumes:
-      - ${OSPL_SP_DEBUG_CONFIG}:${OSPL_MOUNT_POINT}
+      - ${OSPL_SP_CONFIG}:${OSPL_MOUNT_POINT}
       - /tmp/docker_tmp/:/tmp/
     tty: true
     ipc: host
