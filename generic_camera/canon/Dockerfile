@@ -13,10 +13,13 @@ RUN mkdir -p ${WORKDIR} && \
     source ${WORKDIR}/miniforge/bin/activate && \
     conda config --add channels conda-forge && \
     conda config --add channels lsstts && \
-    conda install -y cython && \
     conda install -y  python=3.8 && \
+    conda install -y cython && \
+    conda install wheel && \
+    conda install conda-verify && \
     conda install -y conda-build anaconda-client setuptools_scm && \
-    pip3 install --upgrade pip
+    pip install --upgrade pip && \
+    conda install -y pytest pytest-asyncio pytest-black black==19.10b0 pytest-flake8 asynctest
 
 RUN cd /tmp && \
     wget -q https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-arm64.tar.xz && \
@@ -30,15 +33,15 @@ RUN yum-config-manager --add-repo https://repo-nexus.lsst.org/nexus/repository/t
     export PATH=${OSPL_HOME}/bin:${PATH} && \
     export LD_LIBRARY_PATH=${OSPL_HOME}/lib && \
     source ${WORKDIR}/miniforge/bin/activate && \
-    conda install wheel && \
-    conda install -y -c lsstts numpy=1.20 && \
-    conda install -y -c lsstts ts-dds && \
-    conda install -y -c lsstts ts-idl=2.3.0 && \
-    conda install -y -c lsstts ts-salobj=6.2.2 && \
-    conda install -y -c lsstts ts-ddsconfig && \
-    conda install -y jupyterlab
+    conda install -y numpy=1.20 && \
+    conda install -y ts-dds && \
+    conda install -y ts-idl=2.3.0 && \
+    conda install -y ts-salobj=6.2.2 && \
+    conda install -y ts-ddsconfig && \
+    conda install -y jupyterlab && \
+    pip install Pillow rawpy asyncio
 
-# All-Sky camera specific configuration
+# Install All-Sky camera specific software
 RUN cd /tmp && \
     git clone https://github.com/gphoto/libgphoto2.git && \
     cd libgphoto2 && \
@@ -70,9 +73,6 @@ RUN source ${WORKDIR}/miniforge/bin/activate && \
     python setup.py build && \
     python setup.py install
 
-RUN source ${WORKDIR}/miniforge/bin/activate && \
-    pip install Pillow rawpy asyncio
-
 RUN adduser -G wheel,dialout allsky
 
 USER allsky
@@ -80,9 +80,7 @@ WORKDIR /home/allsky
 
 RUN source ${WORKDIR}/miniforge/bin/activate && \
     echo export LSST_DDS_QOS=file://$(python -c "from lsst.ts import idl; print(idl.get_qos_path())") >> ${HOME}/.bashrc && \
-    git clone https://github.com/lsst-ts/ts_GenericCamera.git && \
-    git clone https://github.com/lsst-ts/ts_config_ocs.git && \
-    git clone https://github.com/lsst-ts/ts_notebooks.git
+    git clone https://github.com/lsst-ts/ts_config_ocs.git
 
 ENV TS_CONFIG_OCS_DIR=/home/allsky/ts_config_ocs
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.9.0/HDE/aarch64.linux
@@ -91,9 +89,5 @@ ENV OSPL_RELEASE=6.9.190925OSS
 ENV PATH=${OSPL_HOME}/bin:${PATH}
 ENV LD_LIBRARY_PATH=${OSPL_HOME}/lib
 ENV LSST_DDS_PARTITION_PREFIX=GenericCamera
-ENV PYTHONPATH=/home/allsky/ts_GenericCamera/python
-ENV PATH=${PATH}:/home/allsky/ts_GenericCamera/bin
-
-RUN echo source ${WORKDIR}/miniforge/bin/activate >> ${HOME}/.bashrc
 
 ENTRYPOINT /bin/bash
