@@ -16,10 +16,10 @@ rm -rf /var/cache/yum
 RUN updatedb
 
 RUN cd /tmp && \
-wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz && \
-tar xvf Python-3.8.3.tgz
+wget https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz && \
+tar xvf Python-3.8.8.tgz
 
-RUN cd /tmp/Python-3.8.3 && \
+RUN cd /tmp/Python-3.8.8 && \
 ./configure --enable-optimizations && \
 make altinstall && \
 ln /usr/local/bin/python3.8 /usr/local/bin/python3 && \

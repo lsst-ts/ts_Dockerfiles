@@ -1,4 +1,4 @@
-FROM lsstts/robot:python38
+FROM lsstts/robot:latest
 MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
@@ -34,8 +34,8 @@ ln -s /opt/apache-maven-3.6.3 /opt/maven && \
 source /etc/profile.d/maven.sh && mvn --version
 
 #RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
-ADD OpenSpliceDDS-6.10.4-8.el7.x86_64.rpm ${HOME}
-RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-8.el7.x86_64.rpm
+ADD OpenSpliceDDS-6.10.4-9.el7.x86_64.rpm ${HOME}
+RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-9.el7.x86_64.rpm
 
 USER ${USER}
 
@@ -45,7 +45,6 @@ COPY --chown=0:0 rpmmacros /root/.rpmmacros
 
 ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
 ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux
-ENV LSST_DDS_DOMAIN=citest
 
 RUN echo "" >> ${HOME}/.bash_profile && \
 echo 'source /etc/profile.d/maven.sh' >> ${HOME}/.bash_profile && \
