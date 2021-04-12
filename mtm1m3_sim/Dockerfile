@@ -1,7 +1,7 @@
 FROM lsstts/develop-env:latest as lsstts-cpp-dev
 
 USER root
-RUN yum -y install catch-devel boost169-devel make
+RUN yum -y install catch-devel boost169-devel make readline-devel
 
 USER saluser
 
