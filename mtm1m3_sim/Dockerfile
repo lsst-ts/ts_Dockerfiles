@@ -5,11 +5,10 @@ RUN yum -y install catch-devel boost169-devel make readline-devel yaml-cpp-devel
 
 USER saluser
 
-ARG M1M3_BRANCH=develop
-ARG XML_BRANCH=$M1M3_BRANCH
+ARG XML_BRANCH=""
 
 WORKDIR /home/saluser/repos/ts_xml
-RUN git checkout $XML_BRANCH && git pull
+RUN [ -z $XML_BRANCH ] || git checkout $XML_BRANCH && git pull
 
 WORKDIR /home/saluser
 RUN source .setup.sh \
@@ -27,6 +26,7 @@ USER saluser
 
 FROM lsstts-cpp-dev
 
+ARG M1M3_BRANCH=develop
 ARG CRIOCPP_BRANCH=$M1M3_BRANCH
 ARG M1M3SUPPORT_BRANCH=$M1M3_BRANCH
 ARG M1M3THERMAL_BRANCH=$M1M3_BRANCH
