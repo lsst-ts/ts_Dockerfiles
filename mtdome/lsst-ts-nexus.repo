@@ -1,0 +1,23 @@
+[lsst-ts]
+name=LSST Telescope and Site packages - $basearch
+baseurl=https://repo-nexus.lsst.org/nexus/repository/ts_yum/releases
+enabled=1
+gpgcheck=0
+
+[lsst-ts-test]
+name=LSST Telescope and Site - $basearch - Source
+baseurl=https://repo-nexus.lsst.org/nexus/repository/ts_yum/test
+enabled=0
+gpgcheck=0
+
+[lsst-ts-daily]
+name=LSST Telescope and Site - $basearch - Daily
+baseurl=https://repo-nexus.lsst.org/nexus/repository/ts_yum/daily
+enabled=0
+gpgcheck=0
+
+[lsst-ts-bleed]
+name=LSST Telescope and Site - $basearch - Bleed
+baseurl=https://repo-nexus.lsst.org/nexus/repository/ts_yum/bleed
+enabled=0
+gpgcheck=0
