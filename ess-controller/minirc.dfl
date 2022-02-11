@@ -1,0 +1,6 @@
+pu port /dev/ttyAMA1
+pu baudrate 19200
+pu bits 8
+pu parity N
+pu stopbits 1
+pu rtscts No
