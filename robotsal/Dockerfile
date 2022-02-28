@@ -33,9 +33,8 @@ RUN tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt && \
 ln -s /opt/apache-maven-3.6.3 /opt/maven && \
 source /etc/profile.d/maven.sh && mvn --version
 
-#RUN curl -s https://repo-nexus.lsst.org/nexus/repository/ts_yum/master/OpenSpliceDDS-6.9.0-6.x86_64.rpm --output OpenSpliceDDS-6.9.0-6.x86_64.rpm
-ADD OpenSpliceDDS-6.10.4-9.el7.x86_64.rpm ${HOME}
-RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-9.el7.x86_64.rpm
+ADD OpenSpliceDDS-6.10.4-6.el7.x86_64.rpm ${HOME}
+RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-6.el7.x86_64.rpm
 
 USER ${USER}
 
