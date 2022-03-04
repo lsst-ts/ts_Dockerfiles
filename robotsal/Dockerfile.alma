@@ -1,4 +1,4 @@
-FROM lsstts/robot:latest
+FROM lsstts/robot:alma
 MAINTAINER Rob Bovill (trekkie2@gmail.com)
 ARG USER=appuser
 ARG HOME=/home/${USER}
@@ -33,8 +33,8 @@ RUN tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt && \
 ln -s /opt/apache-maven-3.6.3 /opt/maven && \
 source /etc/profile.d/maven.sh && mvn --version
 
-ADD OpenSpliceDDS-6.10.4-6.el7.x86_64.rpm ${HOME}
-RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-6.el7.x86_64.rpm
+ADD OpenSpliceDDS-6.10.4-1.el8.x86_64.rpm ${HOME}
+RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-1.el8.x86_64.rpm
 
 USER ${USER}
 

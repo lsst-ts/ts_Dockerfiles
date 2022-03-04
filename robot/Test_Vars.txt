@@ -8,8 +8,8 @@
 #-e TSS*
 
 # Specify non-critical failures
---noncritical skipped
---noncritical TSS*
+--skiponfailure skipped
+--skiponfailure TSS*
 
 # Invoke xmlstarlet in Linux
 --variable ContInt:true
