@@ -45,6 +45,25 @@ $xenomai_dir/configure --with-core=cobalt --enable-smp -enable-pshared -host=i68
 
 ## Tag List
 
+- v0.4
+  - linux-kernel: v3.18.25
+  - xenomai: v3.0.1
+  - ipipe-core: 3.18.20-x86-9.patch
+  - ethercat: hg, v1.5.2
+  - hdf5: v1.12.0
+  - googletest: v1.10.0
+  - libyaml: v0.2.5
+  - cmake
+  - glib-devel
+  - glib2-devel.x86_64
+  - libtool
+  - autoconf
+  - automake
+  - python-devel
+  - python3
+  - gcovr
+  - clang
+
 - v0.3
   - linux-kernel: v3.18.25
   - xenomai: v3.0.1
