@@ -53,7 +53,7 @@ RUN chown -R ${USER}:${USER} ${HOME}
 USER ${USER}
 
 ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
-ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.11.0/HDE/x86_64.linux
+ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4p2/HDE/x86_64.linux
 
 RUN git config --global user.email "rubinobs-tssw-worker@lsst.org" && \
 git config --global user.name "RubinObsWorker"
