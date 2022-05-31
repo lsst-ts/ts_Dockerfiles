@@ -6,7 +6,11 @@ ARG HOME=/home/${USER}
 USER root
 WORKDIR /
 
-RUN mkdir /root/.aws
+RUN mkdir /root/.aws && mkdir ${HOME}/.ssh
+ADD id_rsa.pub ${HOME}/.ssh
+ADD id_rsa ${HOME}/.ssh
+ADD ssh_config ${HOME}/.ssh/config
+ADD known_hosts ${HOME}/.ssh/known_hosts
 ADD aws_config /root/.aws/config
 ADD lv_includes.tgz /
 ADD mavenrepo69.tgz /root
@@ -14,7 +18,9 @@ ADD mavenrepo69.tgz ${HOME}
 ADD settings.xml ${HOME}/.m2
 RUN chown -R 1003:1003 ${HOME}/.m2 
 
-RUN python3.8 -m pip install awscli --upgrade
+RUN python3.8 -m pip install awscli --upgrade && \
+python3.8 -m pip install breathe javasphinx \
+sphinx sphinx_rtd_theme ltd-conveyor
 
 RUN yum -y install tk tk-devel \
 swig ncurses-libs xterm \
@@ -22,7 +28,8 @@ xorg-x11-fonts-misc \
 maven java-1.8.0-openjdk-devel \
 gnome-terminal \
 mariadb mariadb-devel \
-make gcc-c++ \
+make cmake3 gcc-c++ \
+doxygen rdfind \
 rpm-build && \
 yum clean all && \
 rm -rf /var/cache/yum
@@ -42,9 +49,14 @@ COPY --chown=1003:1003 start.sh ${HOME}/.
 COPY --chown=1003:1003 rpmmacros ${HOME}/.rpmmacros
 COPY --chown=0:0 rpmmacros /root/.rpmmacros
 
-ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
-ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4/HDE/x86_64.linux
+RUN chown -R ${USER}:${USER} ${HOME}
+USER ${USER}
 
+ENV LSST_SDK_INSTALL=$HOME/trunk/ts_sal
+ENV OSPL_HOME=/opt/OpenSpliceDDS/V6.10.4p2/HDE/x86_64.linux
+
+RUN git config --global user.email "rubinobs-tssw-worker@lsst.org" && \
+git config --global user.name "RubinObsWorker"
 RUN echo "" >> ${HOME}/.bash_profile && \
 echo 'source /etc/profile.d/maven.sh' >> ${HOME}/.bash_profile && \
 echo 'source $LSST_SDK_INSTALL/setup.env' >> ${HOME}/.bash_profile
