@@ -14,7 +14,7 @@ ADD mavenrepo69.tgz ${HOME}
 ADD settings.xml ${HOME}/.m2
 RUN chown -R 1003:1003 ${HOME}/.m2 
 
-RUN python3.8 -m pip install awscli --upgrade
+RUN python3.10 -m pip install awscli --upgrade
 
 RUN yum -y install tk tk-devel \
 swig ncurses-libs xterm \
@@ -33,8 +33,8 @@ RUN tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt && \
 ln -s /opt/apache-maven-3.6.3 /opt/maven && \
 source /etc/profile.d/maven.sh && mvn --version
 
-ADD OpenSpliceDDS-6.10.4-1.el8.x86_64.rpm ${HOME}
-RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-1.el8.x86_64.rpm
+ADD OpenSpliceDDS-6.10.4-2.el8.x86_64.rpm ${HOME}
+RUN yum -y install ${HOME}/OpenSpliceDDS-6.10.4-2.el8.x86_64.rpm
 
 USER ${USER}
 

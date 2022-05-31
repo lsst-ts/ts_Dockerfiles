@@ -12,23 +12,32 @@ chown ${USER}:docker ${HOME}
 
 RUN dnf -y update
 RUN dnf -y groupinstall "Development Tools"
-RUN dnf -y install wget
+RUN dnf -y install wget make
 
-RUN dnf -y --enablerepo=extras install epel-release && \
-dnf -y install git which mlocate \
-python38-devel openssl-devel make gcc-c++ bzip2-devel libffi-devel && \
+RUN dnf -y install git which mlocate \
+openssl-devel make gcc-c++ bzip2-devel libffi-devel zlib-devel && \
 dnf clean all && \
 rm -rf /var/cache/dnf
 
 RUN updatedb
 
-RUN python3.8 -m pip install --upgrade pip setuptools numpy && \
-python3.8 -m pip install robotframework && \
-python3.8 -m pip install astropy && \
-python3.8 -m pip install pytest
+RUN cd /tmp && \
+wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz && \
+tar xvf Python-3.10.4.tgz
 
-RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-11.el8.x86_64.rpm --output xmlstarlet-1.6.1-11.el8.x86_64.rpm
-RUN dnf -y install xmlstarlet-1.6.1-11.el8.x86_64.rpm
+RUN cd /tmp/Python-3.10.4 && \
+./configure --enable-optimizations && \
+make altinstall && \
+ln /usr/local/bin/python3.10 /usr/local/bin/python3 && \
+python3 --version && pip3.10 --version
+
+RUN python3.10 -m pip install --upgrade pip setuptools numpy && \
+python3.10 -m pip install robotframework && \
+python3.10 -m pip install astropy && \
+python3.10 -m pip install pytest
+
+RUN curl -s http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/x/xmlstarlet-1.6.1-1.el7.x86_64.rpm --output xmlstarlet-1.6.1-1.el7.x86_64.rpm
+RUN yum -y install xmlstarlet-1.6.1-1.el7.x86_64.rpm
 
 WORKDIR ${HOME}
 RUN pwd
