@@ -1,0 +1,3 @@
+This Dockerfile and accompanying files are designed to create a Docker image to use for testing LSST software.
+
+It creates an image based on the AlmaLinux base image, and installs Python36, Robot-Framework and other test related dependencies.  The user is saluser and testing should done with that account.
